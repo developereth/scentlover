@@ -49,19 +49,12 @@
         .order-btn { width: 100%; background: var(--gold); color: #000; border: none; padding: 10px; border-radius: 40px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.3s; }
         .order-btn:hover { background: var(--gold-dark); }
         .footer { background: #000; padding: 40px 20px; text-align: center; border-top: 1px solid rgba(212,168,83,0.1); }
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); backdrop-filter: blur(8px); z-index: 2000; display: flex; align-items: center; justify-content: center; visibility: hidden; opacity: 0; transition: 0.3s; }
-        .modal-overlay.active { visibility: visible; opacity: 1; }
-        .order-modal { background: #111; border-radius: 24px; padding: 30px; max-width: 400px; width: 90%; text-align: center; border: 1px solid var(--gold); }
-        .contact-option { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 14px; margin: 12px 0; border-radius: 50px; text-decoration: none; font-weight: 600; transition: 0.3s; }
-        .whatsapp-option { background: #25D366; color: #fff; }
-        .telegram-option { background: #0088cc; color: #fff; }
-        .call-option { background: var(--gold); color: #000; }
         @media (max-width: 768px) { .container { padding: 0 1rem; } .product-grid { gap: 15px; } }
     </style>
 </head>
 <body>
 
-<div class="topbar" id="topbar">
+<div class="topbar">
     <div><i class="fas fa-truck"></i> Free Delivery on Orders Over 5,000 ETB</div>
     <div><i class="fas fa-gift"></i> 2 Free Samples with Every Order</div>
 </div>
@@ -98,89 +91,61 @@
     </section>
 </div>
 
-<div id="orderModal" class="modal-overlay">
-    <div class="order-modal">
-        <h3 style="color:var(--gold); margin-bottom:15px;"><i class="fas fa-heart"></i> Order Now</h3>
-        <div id="orderProductInfo" style="margin-bottom:20px;"></div>
-        <a href="#" id="whatsappOrder" class="contact-option whatsapp-option" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-        <a href="#" id="telegramOrder" class="contact-option telegram-option" target="_blank"><i class="fab fa-telegram"></i> Telegram</a>
-        <a href="#" id="callOrder" class="contact-option call-option"><i class="fas fa-phone-alt"></i> Call</a>
-        <button class="close-modal" style="margin-top:15px; background:none; border:none; color:#999; cursor:pointer;">Close</button>
-    </div>
-</div>
-
 <footer class="footer">
     <p>&copy; 2026 Scent Lovers Perfume. All rights reserved.</p>
-    <p style="margin-top:10px;"><i class="fas fa-phone"></i> <span id="footerPhone">+251 900 000 000</span> | <i class="fab fa-telegram"></i> @<span id="footerTelegram">scentlovers</span></p>
+    <p style="margin-top:10px;"><i class="fas fa-phone"></i> +251 900 000 000 | <i class="fab fa-telegram"></i> @scentlovers</p>
 </footer>
 
 <script>
     const API_URL = 'https://scent-lovers-api.developeraddis.workers.dev';
-    let siteSettings = {};
-
+    
     async function loadWomenProducts() {
         try {
             const response = await fetch(`${API_URL}/api/products`);
             const data = await response.json();
+            
+            let products = [];
             if (data.success) {
-                let products = data.products;
-                if (typeof products === 'string') products = JSON.parse(products);
-                const womenProducts = Array.isArray(products) ? products.filter(p => p.category === 'women') : [];
-                renderProducts(womenProducts);
-                document.getElementById('productCount').textContent = `${womenProducts.length} products — from floral to oriental, find your perfect scent`;
+                if (typeof data.products === 'string') {
+                    products = JSON.parse(data.products);
+                } else {
+                    products = data.products || [];
+                }
             }
-        } catch (error) { console.error('Error:', error); }
-    }
-
-    function renderProducts(products) {
-        const grid = document.getElementById('productGrid');
-        if (products.length === 0) {
-            grid.innerHTML = '<div style="text-align: center; padding: 40px;">No women\'s products yet. Check back soon!</div>';
-            return;
+            
+            const womenProducts = products.filter(p => p.category === 'women');
+            const grid = document.getElementById('productGrid');
+            const countDiv = document.getElementById('productCount');
+            
+            countDiv.textContent = `${womenProducts.length} products — from floral to oriental, find your perfect scent`;
+            
+            if (womenProducts.length === 0) {
+                grid.innerHTML = '<div style="text-align: center; padding: 40px;">No products yet. Check back soon!</div>';
+                return;
+            }
+            
+            grid.innerHTML = womenProducts.map(product => `
+                <div class="product-card">
+                    <div class="product-card-img">
+                        <img src="${product.image || 'https://via.placeholder.com/400x300?text=Perfume'}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/400x300?text=No+Image'">
+                        ${product.tag ? `<span class="product-card-tag">${product.tag}</span>` : ''}
+                    </div>
+                    <div class="product-card-body">
+                        <div class="brand">${product.brand}</div>
+                        <h4>${product.name}</h4>
+                        <span class="price">${product.price}</span>
+                        <button class="order-btn" onclick="alert('Contact us on Telegram @scentlovers to order: ${product.brand} - ${product.name}')">
+                            <i class="fas fa-shopping-cart"></i> Order Now
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        } catch (error) {
+            console.error('Error:', error);
+            document.getElementById('productGrid').innerHTML = '<div style="text-align: center; padding: 40px; color: #e74c3c;">Error loading products.</div>';
         }
-        grid.innerHTML = products.map(product => `
-            <div class="product-card">
-                <div class="product-card-img">
-                    <img src="${product.image || 'https://via.placeholder.com/400x300?text=Perfume'}" alt="${product.name}">
-                    ${product.tag ? `<span class="product-card-tag">${product.tag}</span>` : ''}
-                </div>
-                <div class="product-card-body">
-                    <div class="brand">${product.brand}</div>
-                    <h4>${product.name}</h4>
-                    <span class="price">${product.price}</span>
-                    <button class="order-btn" onclick="openOrderModal('${product.brand}', '${product.name}', '${product.price}')">
-                        <i class="fas fa-shopping-cart"></i> Order Now
-                    </button>
-                </div>
-            </div>
-        `).join('');
     }
-
-    async function loadSettings() {
-        try {
-            const response = await fetch(`${API_URL}/api/settings`);
-            const data = await response.json();
-            if (data.success && data.settings) {
-                siteSettings = data.settings;
-                if (siteSettings.phoneNumber) document.getElementById('footerPhone').textContent = siteSettings.phoneNumber;
-                if (siteSettings.telegramUsername) document.getElementById('footerTelegram').textContent = siteSettings.telegramUsername;
-            }
-        } catch (error) { console.error('Error:', error); }
-    }
-
-    window.openOrderModal = function(brand, name, price) {
-        document.getElementById('orderProductInfo').innerHTML = `<p><strong>${brand}</strong> - ${name}</p><p style="color:var(--gold); font-size:1.2rem;">${price}</p>`;
-        const phone = siteSettings.whatsappNumber || '251900000000';
-        const telegramUser = siteSettings.telegramUsername || 'scentlovers';
-        const message = `Hello Scent Lovers! I'm interested in ordering: ${brand} - ${name} (${price})`;
-        document.getElementById('whatsappOrder').href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-        document.getElementById('telegramOrder').href = `https://t.me/${telegramUser}?text=${encodeURIComponent(message)}`;
-        document.getElementById('callOrder').href = `tel:+${phone}`;
-        document.getElementById('orderModal').classList.add('active');
-    };
-
-    document.querySelector('.close-modal')?.addEventListener('click', () => document.getElementById('orderModal').classList.remove('active'));
-
+    
     // Mobile menu
     const menuBtn = document.getElementById('mobileMenuBtn');
     const navLinks = document.getElementById('navLinks');
@@ -189,9 +154,8 @@
         menuBtn.onclick = () => { navLinks.classList.toggle('show'); navOverlay.classList.toggle('show'); };
         navOverlay.onclick = () => { navLinks.classList.remove('show'); navOverlay.classList.remove('show'); };
     }
-
+    
     loadWomenProducts();
-    loadSettings();
 </script>
 </body>
 </html>
