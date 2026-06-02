@@ -5,14 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products | Scent Lovers</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:'Inter',sans-serif;background:#0a0a0a;color:#fff}
-        nav{background:#0a0a0a;padding:15px 20px;border-bottom:2px solid #D4A853;display:flex;justify-content:space-between;align-items:center}
-        .logo{font-family:'Playfair Display',serif;font-size:1.4rem;color:#D4A853;text-decoration:none;font-weight:700}
+        nav{background:#0a0a0a;padding:12px 20px;border-bottom:2px solid #D4A853;position:sticky;top:0;z-index:1000;display:flex;justify-content:space-between;align-items:center}
+        .logo-circle{width:44px;height:44px;border-radius:50%;border:2px solid #D4A853;overflow:hidden}
+        .logo-circle img{width:100%;height:100%;object-fit:cover}
         .nav-links{display:flex;gap:20px;list-style:none}
         .nav-links a{color:#bbb;text-decoration:none;font-size:0.85rem;font-weight:500}
         .nav-links a:hover,.nav-links a.active{color:#D4A853}
+        .menu-btn{display:none;background:none;border:none;color:#D4A853;font-size:1.5rem;cursor:pointer;z-index:1001}
+        .side-nav{position:fixed;top:0;right:-280px;width:280px;height:100vh;background:#111;z-index:1002;transition:0.3s;padding:60px 30px;border-left:1px solid #333}
+        .side-nav.show{right:0}
+        .side-nav a{display:block;color:#bbb;text-decoration:none;padding:12px 0;font-size:1rem;border-bottom:1px solid #222}.side-nav a:hover{color:#D4A853}
+        .side-nav .close-btn{position:absolute;top:15px;right:20px;background:none;border:none;color:#D4A853;font-size:1.5rem;cursor:pointer}
+        .overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:1001}.overlay.show{display:block}
         .header{background:linear-gradient(rgba(0,0,0,0.9),rgba(0,0,0,0.5)),url('https://raw.githubusercontent.com/developereth/scentlover/9d390a80b750a8ac99875a258e9b9ae80bbd88ea/5d27a70d-adf9-4b1f-88a4-0452f476a385.png') center/cover;padding:50px 20px;text-align:center}
         .header h1{font-family:'Playfair Display',serif;font-size:2rem;color:#D4A853}
         .header a{color:#D4A853;text-decoration:none;font-size:0.85rem}
@@ -20,46 +28,54 @@
         .filters{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:20px}
         .filters button{padding:8px 16px;border:1px solid #D4A853;background:transparent;color:#D4A853;border-radius:20px;cursor:pointer;font-size:0.8rem;font-weight:600}
         .filters button.active{background:#D4A853;color:#000}
-        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px}
-        .card{background:#111;border-radius:10px;overflow:hidden;border:1px solid #333}
-        .card img{width:100%;height:200px;object-fit:cover}
-        .card-body{padding:12px}
+        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px}
+        .card{background:#111;border-radius:12px;overflow:hidden;border:1px solid #333;transition:0.3s}
+        .card:hover{transform:translateY(-3px);border-color:#D4A853}
+        .card img{width:100%;height:220px;object-fit:cover}
+        .card-body{padding:15px}
         .card-body .brand{color:#D4A853;font-size:0.65rem;text-transform:uppercase}
-        .card-body h3{margin:3px 0;font-size:0.9rem}
-        .price{color:#D4A853;font-weight:700;font-size:1rem;margin:5px 0}
+        .card-body h3{margin:5px 0;font-size:0.95rem}
+        .price{color:#D4A853;font-weight:700;font-size:1.1rem;margin:8px 0}
+        .stars{color:#D4A853;font-size:0.75rem;margin:5px 0}
         .btn-order{width:100%;padding:10px;background:#D4A853;color:#000;border:none;border-radius:20px;font-weight:700;cursor:pointer}
         .tag{display:inline-block;background:#D4A853;color:#000;padding:2px 8px;border-radius:10px;font-size:0.6rem;font-weight:700}
-        footer{text-align:center;padding:20px;color:#888;font-size:0.8rem;border-top:1px solid #222;margin-top:30px}
-        @media(max-width:600px){.grid{grid-template-columns:repeat(2,1fr);gap:12px}.card img{height:150px}.nav-links{display:none}}
+        .popup-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:2000;justify-content:center;align-items:center}
+        .popup-overlay.show{display:flex}
+        .popup{background:#111;padding:30px;border-radius:15px;text-align:center;border:1px solid #D4A853;max-width:350px;width:90%}
+        .popup h3{color:#D4A853;margin-bottom:20px}
+        .popup a{display:block;padding:12px;margin:8px 0;border-radius:8px;text-decoration:none;font-weight:600;color:#fff}
+        .popup .btn-telegram{background:#0088cc}.popup .btn-whatsapp{background:#25D366}
+        .popup .btn-call{background:#D4A853;color:#000}.popup .btn-close{background:#333;margin-top:15px;cursor:pointer}
+        footer{background:#000;text-align:center;padding:30px;border-top:1px solid #222;margin-top:40px}
+        footer .footer-logo{width:50px;height:50px;border-radius:50%;margin-bottom:10px}
+        footer p{color:#888;font-size:0.8rem;margin:5px 0}
+        .footer-links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin:10px 0}
+        .footer-links a{color:#888;text-decoration:none;font-size:0.8rem}.footer-links a:hover{color:#D4A853}
+        .powered{color:#666;font-size:0.7rem;margin-top:10px}.powered a{color:#888}
+        @media(max-width:768px){.nav-links{display:none}.menu-btn{display:block}.grid{grid-template-columns:repeat(2,1fr);gap:12px}.card img{height:160px}}
     </style>
 </head>
 <body>
 <nav>
-    <a href="index.html" class="logo">Scent Lovers</a>
-    <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="products.html" class="active">Products</a></li>
-        <li><a href="reviews.html">Reviews</a></li>
-        <li><a href="contact.html">Contact</a></li>
-    </ul>
+    <a href="index.html" class="logo-circle"><img src="https://raw.githubusercontent.com/developereth/scentlover/098bb6fd0c73f700834ba8fc5cb290bc519530e0/a0551549-aed4-42ad-965f-2ae979d4218e.png" alt="Scent Lovers"></a>
+    <ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="products.html" class="active">Products</a></li><li><a href="reviews.html">Reviews</a></li><li><a href="contact.html">Contact</a></li></ul>
+    <button class="menu-btn" onclick="openMenu()"><i class="fas fa-bars"></i></button>
 </nav>
+<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+<div class="side-nav" id="sideNav"><button class="close-btn" onclick="closeMenu()"><i class="fas fa-times"></i></button><a href="index.html" onclick="closeMenu()">Home</a><a href="products.html" onclick="closeMenu()">Products</a><a href="reviews.html" onclick="closeMenu()">Reviews</a><a href="contact.html" onclick="closeMenu()">Contact</a></div>
 <div class="header"><h1>Our Products</h1><p><a href="index.html">Home</a> / Products</p></div>
-<div class="container">
-    <div class="filters">
-        <button class="active" id="btnAll" onclick="filter('all')">All</button>
-        <button id="btnWomen" onclick="filter('women')">Women</button>
-        <button id="btnMen" onclick="filter('men')">Men</button>
-        <button id="btnGift" onclick="filter('gift')">Gift</button>
-        <button id="btnSale" onclick="filter('sale')">Sale</button>
-    </div>
-    <div class="grid" id="grid">Loading...</div>
-</div>
-<footer>© 2026 Scent Lovers | @scentlovers</footer>
+<div class="container"><div class="filters"><button class="active" id="btnAll" onclick="filter('all')">All</button><button id="btnWomen" onclick="filter('women')">Women</button><button id="btnMen" onclick="filter('men')">Men</button><button id="btnGift" onclick="filter('gift')">Gift</button><button id="btnSale" onclick="filter('sale')">Sale</button></div><div class="grid" id="grid">Loading...</div></div>
+<div class="popup-overlay" id="popupOverlay"><div class="popup"><h3>Order Via</h3><a href="#" class="btn-telegram" id="popupTelegram"><i class="fab fa-telegram"></i> Telegram</a><a href="#" class="btn-whatsapp" id="popupWhatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a><a href="#" class="btn-call" id="popupCall"><i class="fas fa-phone"></i> Direct Call</a><button class="btn-close" onclick="closePopup()">Cancel</button></div></div>
+<footer><img src="https://raw.githubusercontent.com/developereth/scentlover/098bb6fd0c73f700834ba8fc5cb290bc519530e0/a0551549-aed4-42ad-965f-2ae979d4218e.png" alt="Scent Lovers" class="footer-logo"><div class="footer-links"><a href="index.html">Home</a><a href="products.html">Products</a><a href="reviews.html">Reviews</a><a href="contact.html">Contact</a></div><p>© 2026 Scent Lovers. All rights reserved.</p><p class="powered">Powered by <a href="https://addispower.pages.dev" target="_blank">AddisPower</a></p></footer>
 <script>
+function openMenu(){document.getElementById('sideNav').classList.add('show');document.getElementById('overlay').classList.add('show')}
+function closeMenu(){document.getElementById('sideNav').classList.remove('show');document.getElementById('overlay').classList.remove('show')}
 var all=[],cat="all";
 fetch("https://scent-lovers-api.developeraddis.workers.dev/api/products").then(function(r){return r.json()}).then(function(d){all=d.products||[];show()});
 function filter(c){cat=c;var ids={all:"btnAll",women:"btnWomen",men:"btnMen",gift:"btnGift",sale:"btnSale"};for(var k in ids){document.getElementById(ids[k]).classList.remove("active")}document.getElementById(ids[c]).classList.add("active");show()}
-function show(){var f=cat==="all"?all:all.filter(function(p){return p.category===cat});var g=document.getElementById("grid");if(!f.length){g.innerHTML='<p style="text-align:center;color:#888;grid-column:1/-1;padding:40px">No products</p>';return}g.innerHTML=f.map(function(p){return'<div class="card"><img src="'+(p.image||"https://via.placeholder.com/400x200")+'" alt="'+p.name+'" onerror="this.src=\'https://via.placeholder.com/400x200\'"><div class="card-body"><div class="brand">'+p.brand+'</div>'+(p.tag?'<span class="tag">'+p.tag+'</span>':'')+'<h3>'+p.name+'</h3><div class="price">'+p.price+'</div><button class="btn-order" onclick="window.open(\'https://t.me/scentlovers\')">Order Now</button></div></div>'}).join("")}
+function show(){var f=cat==="all"?all:all.filter(function(p){return p.category===cat});var g=document.getElementById("grid");if(!f.length){g.innerHTML='<p style="text-align:center;color:#888;grid-column:1/-1;padding:40px">No products</p>';return}g.innerHTML=f.map(function(p){return'<div class="card"><img src="'+(p.image||"https://via.placeholder.com/400x200")+'" alt="'+p.name+'" onerror="this.src=\'https://via.placeholder.com/400x200\'"><div class="card-body"><div class="brand">'+p.brand+'</div>'+(p.tag?'<span class="tag">'+p.tag+'</span>':'')+'<h3>'+p.name+'</h3><div class="stars">★★★★★ (4.9)</div><div class="price">'+p.price+'</div><button class="btn-order" onclick="openPopup(\''+p.brand+'\',\''+p.name+'\')">Order Now</button></div></div>'}).join("")}
+function openPopup(brand,name){var m='Hi! Interested in: '+brand+' - '+name;document.getElementById('popupTelegram').href='https://t.me/scentlovers?text='+encodeURIComponent(m);document.getElementById('popupWhatsapp').href='https://wa.me/251900000000?text='+encodeURIComponent(m);document.getElementById('popupCall').href='tel:+251900000000';document.getElementById('popupOverlay').classList.add('show')}
+function closePopup(){document.getElementById('popupOverlay').classList.remove('show')}
 </script>
 </body>
 </html>
