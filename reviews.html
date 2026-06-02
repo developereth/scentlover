@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews | Scent Lovers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',sans-serif;background:#0a0a0a;color:#fff}
+        nav{background:#0a0a0a;padding:15px 20px;border-bottom:2px solid #D4A853;display:flex;justify-content:space-between;align-items:center}
+        .logo{font-family:'Playfair Display',serif;font-size:1.4rem;color:#D4A853;text-decoration:none;font-weight:700}
+        .nav-links{display:flex;gap:20px;list-style:none}
+        .nav-links a{color:#bbb;text-decoration:none;font-size:0.85rem;font-weight:500}
+        .nav-links a:hover,.nav-links a.active{color:#D4A853}
+        .header{background:linear-gradient(rgba(0,0,0,0.9),rgba(0,0,0,0.5)),url('https://raw.githubusercontent.com/developereth/scentlover/9d390a80b750a8ac99875a258e9b9ae80bbd88ea/5d27a70d-adf9-4b1f-88a4-0452f476a385.png') center/cover;padding:50px 20px;text-align:center}
+        .header h1{font-family:'Playfair Display',serif;font-size:2rem;color:#D4A853}
+        .header a{color:#D4A853;text-decoration:none;font-size:0.85rem}
+        .container{max-width:800px;margin:0 auto;padding:30px 15px}
+        .reviews{display:grid;gap:20px}
+        .review{background:#111;padding:25px;border-radius:10px;border:1px solid #222;text-align:center}
+        .review .stars{color:#D4A853;font-size:1.2rem;margin-bottom:10px}
+        .review p{color:#bbb;font-size:0.95rem;font-style:italic;margin-bottom:10px;line-height:1.5}
+        .review .name{color:#D4A853;font-weight:600}
+        .review .date{color:#888;font-size:0.75rem;margin-top:5px}
+        .rating-summary{text-align:center;margin-bottom:30px}
+        .rating-summary .big-stars{font-size:2.5rem;color:#D4A853}
+        .rating-summary p{color:#888;margin-top:5px}
+        footer{text-align:center;padding:20px;color:#888;font-size:0.8rem;border-top:1px solid #222;margin-top:30px}
+        @media(max-width:600px){.nav-links{display:none}}
+    </style>
+</head>
+<body>
+<nav>
+    <a href="index.html" class="logo">Scent Lovers</a>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="reviews.html" class="active">Reviews</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+</nav>
+<div class="header"><h1>Customer Reviews</h1><p><a href="index.html">Home</a> / Reviews</p></div>
+<div class="container">
+    <div class="rating-summary">
+        <div class="big-stars">★★★★★</div>
+        <p>4.9 out of 5 based on 150+ reviews</p>
+    </div>
+    <div class="reviews">
+        <div class="review"><div class="stars">★★★★★</div><p>"Amazing fragrance! Lasts all day and received so many compliments. Will definitely order again!"</p><div class="name">Selam A.</div><div class="date">2 weeks ago</div></div>
+        <div class="review"><div class="stars">★★★★★</div><p>"Fast delivery and the perfume is 100% authentic. The packaging was beautiful too!"</p><div class="name">Dawit T.</div><div class="date">1 month ago</div></div>
+        <div class="review"><div class="stars">★★★★★</div><p>"The gift set was perfectly packaged. My wife loved it! Great customer service."</p><div class="name">Henok M.</div><div class="date">3 weeks ago</div></div>
+        <div class="review"><div class="stars">★★★★★</div><p>"Best perfume store in Addis! Authentic products and very friendly service."</p><div class="name">Betty K.</div><div class="date">2 months ago</div></div>
+        <div class="review"><div class="stars">★★★★☆</div><p>"Great selection of fragrances. Delivery was a bit delayed but worth the wait!"</p><div class="name">Abel G.</div><div class="date">1 month ago</div></div>
+    </div>
+</div>
+<footer>© 2026 Scent Lovers | @scentlovers</footer>
+</body>
+</html>
