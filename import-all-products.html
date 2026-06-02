@@ -1,102 +1,114 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Debug Import - Scent Lovers</title>
+    <title>Import All Products</title>
     <style>
-        body { font-family: monospace; background: #0A0A0A; color: #fff; padding: 20px; }
+        body { background: #0A0A0A; color: white; font-family: monospace; padding: 20px; }
         .success { color: #27ae60; }
         .error { color: #e74c3c; }
-        .info { color: #D4A853; }
-        pre { background: #1a1a1a; padding: 10px; border-radius: 8px; overflow-x: auto; }
+        button { background: #D4A853; color: black; padding: 15px 30px; border: none; border-radius: 50px; cursor: pointer; font-size: 16px; }
     </style>
 </head>
 <body>
-    <h1>🔧 Debug Import - Test API First</h1>
-    <div id="output"></div>
-    
+    <h1>📦 Import All 35 Products</h1>
+    <button id="importBtn">Click to Import All 35 Products</button>
+    <div id="log" style="margin-top: 20px;"></div>
+
     <script>
         const API_URL = 'https://scent-lovers-api.developeraddis.workers.dev';
-        const TOKEN = btoa('scentlovers:ScentLovers2026');
         
-        function log(msg, type = 'info') {
-            const div = document.getElementById('output');
-            const color = type === 'success' ? '#27ae60' : (type === 'error' ? '#e74c3c' : '#D4A853');
-            div.innerHTML += `<div style="color: ${color}">${msg}</div>`;
+        const PRODUCTS = [
+            {"name":"Rose Elegance","brand":"Chanel","price":"8,500 ETB","category":"women","image":"https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=400","tag":"Bestseller"},
+            {"name":"Jasmine Dream","brand":"Dior","price":"9,200 ETB","category":"women","image":"https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=400"},
+            {"name":"Velvet Oud","brand":"Creed","price":"15,000 ETB","category":"women","image":"https://images.unsplash.com/photo-1541643600914-78b084683601?w=400","tag":"New"},
+            {"name":"Lily Bloom","brand":"Armani","price":"7,200 ETB","category":"women","image":"https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=400"},
+            {"name":"Cherry Blossom","brand":"Tom Ford","price":"11,500 ETB","category":"women","image":"https://images.unsplash.com/photo-1557170330-49139a15ccea?w=400"},
+            {"name":"Lavender Mist","brand":"Chanel","price":"7,800 ETB","category":"women","image":"https://images.unsplash.com/photo-1594035910387-fea47794261f?w=400"},
+            {"name":"Vanilla Orchid","brand":"Dior","price":"6,500 ETB","category":"women","image":"https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=400","tag":"Sale"},
+            {"name":"Peony Paradise","brand":"Armani","price":"8,900 ETB","category":"women","image":"https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=400"},
+            {"name":"Sandalwood Rose","brand":"Tom Ford","price":"13,000 ETB","category":"women","image":"https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?w=400"},
+            {"name":"Citrus Bloom","brand":"Creed","price":"14,200 ETB","category":"women","image":"https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?w=400"},
+            {"name":"Gardenia Touch","brand":"Chanel","price":"9,500 ETB","category":"women","image":"https://images.unsplash.com/photo-1560343090-f0409e92791a?w=400"},
+            {"name":"Midnight Woods","brand":"Tom Ford","price":"12,000 ETB","category":"men","image":"https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=400","tag":"Bestseller"},
+            {"name":"Ocean Breeze","brand":"Armani","price":"7,200 ETB","category":"men","image":"https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?w=400"},
+            {"name":"Leather & Spice","brand":"Creed","price":"14,500 ETB","category":"men","image":"https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=400","tag":"New"},
+            {"name":"Sandalwood Hero","brand":"Dior","price":"9,800 ETB","category":"men","image":"https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=400"},
+            {"name":"Citrus Storm","brand":"Chanel","price":"8,500 ETB","category":"men","image":"https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=400"},
+            {"name":"Amber Fire","brand":"Tom Ford","price":"13,200 ETB","category":"men","image":"https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?w=400"},
+            {"name":"Cedar Essence","brand":"Armani","price":"6,000 ETB","category":"men","image":"https://images.unsplash.com/photo-1594035910387-fea47794261f?w=400","tag":"Sale"},
+            {"name":"Black Pepper","brand":"Creed","price":"15,000 ETB","category":"men","image":"https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=400"},
+            {"name":"Vetiver Green","brand":"Dior","price":"10,500 ETB","category":"men","image":"https://images.unsplash.com/photo-1557170330-49139a15ccea?w=400"},
+            {"name":"Musk Legend","brand":"Tom Ford","price":"11,800 ETB","category":"men","image":"https://images.unsplash.com/photo-1560343090-f0409e92791a?w=400"},
+            {"name":"Sea Salt","brand":"Chanel","price":"8,900 ETB","category":"men","image":"https://images.unsplash.com/photo-1594035910387-fea4773a0e6e?w=400"},
+            {"name":"Oud Supreme","brand":"Creed","price":"16,500 ETB","category":"men","image":"https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=400"},
+            {"name":"Luxury Collection Box","brand":"Scent Lovers Exclusive","price":"18,500 ETB","category":"gift","image":"https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=400","tag":"Holiday Special"},
+            {"name":"His & Hers Duo","brand":"Tom Ford + Chanel","price":"22,000 ETB","category":"gift","image":"https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?w=400","tag":"Popular"},
+            {"name":"Miniature Discovery Set","brand":"Multi-Brand","price":"12,000 ETB","category":"gift","image":"https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=400"},
+            {"name":"Wedding Day Collection","brand":"Creed + Dior","price":"28,000 ETB","category":"gift","image":"https://images.unsplash.com/photo-1541643600914-78b084683601?w=400","tag":"Wedding"},
+            {"name":"Anniversary Bundle","brand":"Armani","price":"15,800 ETB","category":"gift","image":"https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=400"},
+            {"name":"Deluxe Gift Hamper","brand":"Scent Lovers Exclusive","price":"25,000 ETB","category":"gift","image":"https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=400","tag":"Premium"},
+            {"name":"Vanilla Orchid","brand":"Dior","price":"6,500 ETB","category":"sale","image":"https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=400","tag":"40% OFF"},
+            {"name":"Cedar Essence","brand":"Armani","price":"6,000 ETB","category":"sale","image":"https://images.unsplash.com/photo-1594035910387-fea47794261f?w=400","tag":"30% OFF"},
+            {"name":"Lavender Mist","brand":"Chanel","price":"5,850 ETB","category":"sale","image":"https://images.unsplash.com/photo-1541643600914-78b084683601?w=400","tag":"25% OFF"},
+            {"name":"His & Hers Duo","brand":"Tom Ford + Chanel","price":"22,000 ETB","category":"sale","image":"https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?w=400","tag":"20% OFF"},
+            {"name":"Ocean Breeze","brand":"Armani","price":"6,120 ETB","category":"sale","image":"https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=400","tag":"15% OFF"},
+            {"name":"Citrus Storm","brand":"Chanel","price":"7,650 ETB","category":"sale","image":"https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=400","tag":"10% OFF"}
+        ];
+
+        async function login() {
+            const res = await fetch(`${API_URL}/api/admin/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username: 'scentlovers', password: 'ScentLovers2026' })
+            });
+            const data = await res.json();
+            return data.token;
         }
-        
-        async function testAPI() {
-            log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-            log('🔍 TEST 1: Check if API is reachable');
+
+        async function addProduct(token, product) {
+            const res = await fetch(`${API_URL}/api/admin/products`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Admin-Auth': token
+                },
+                body: JSON.stringify(product)
+            });
+            return res.ok;
+        }
+
+        document.getElementById('importBtn').onclick = async () => {
+            const btn = document.getElementById('importBtn');
+            const logDiv = document.getElementById('log');
+            btn.disabled = true;
+            btn.textContent = 'Importing...';
             
-            try {
-                const testRes = await fetch(`${API_URL}/api/products`);
-                const testData = await testRes.json();
-                log(`✅ API is reachable! Response: ${JSON.stringify(testData).substring(0, 200)}`, 'success');
-            } catch (e) {
-                log(`❌ API not reachable: ${e.message}`, 'error');
+            logDiv.innerHTML = '🔐 Logging in...<br>';
+            const token = await login();
+            if (!token) {
+                logDiv.innerHTML += '❌ Login failed!';
+                btn.disabled = false;
                 return;
             }
+            logDiv.innerHTML += '✅ Logged in!<br>📦 Importing 35 products...<br>';
             
-            log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-            log('🔍 TEST 2: Login to get token');
-            
-            try {
-                const loginRes = await fetch(`${API_URL}/api/admin/login`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ username: 'scentlovers', password: 'ScentLovers2026' })
-                });
-                const loginData = await loginRes.json();
-                if (loginData.success) {
-                    log(`✅ Login successful! Token: ${loginData.token.substring(0, 30)}...`, 'success');
+            let success = 0;
+            for (let i = 0; i < PRODUCTS.length; i++) {
+                const result = await addProduct(token, PRODUCTS[i]);
+                if (result) {
+                    success++;
+                    logDiv.innerHTML += `✅ ${PRODUCTS[i].brand} - ${PRODUCTS[i].name}<br>`;
                 } else {
-                    log(`❌ Login failed: ${JSON.stringify(loginData)}`, 'error');
-                    return;
+                    logDiv.innerHTML += `❌ ${PRODUCTS[i].brand} - ${PRODUCTS[i].name}<br>`;
                 }
-            } catch (e) {
-                log(`❌ Login error: ${e.message}`, 'error');
-                return;
+                await new Promise(r => setTimeout(r, 100));
             }
             
-            log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-            log('🔍 TEST 3: Try adding ONE product');
-            
-            const testProduct = {
-                name: "Debug Test Product",
-                brand: "Debug Brand",
-                price: "1,000 ETB",
-                category: "women",
-                image: "https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=400"
-            };
-            
-            try {
-                const addRes = await fetch(`${API_URL}/api/admin/products`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-Admin-Auth': TOKEN
-                    },
-                    body: JSON.stringify(testProduct)
-                });
-                const addData = await addRes.json();
-                if (addData.success) {
-                    log(`✅ SUCCESS! Product added: ${testProduct.name}`, 'success');
-                    log(`📦 Response: ${JSON.stringify(addData)}`, 'info');
-                } else {
-                    log(`❌ Failed to add product: ${JSON.stringify(addData)}`, 'error');
-                }
-            } catch (e) {
-                log(`❌ Error adding product: ${e.message}`, 'error');
-            }
-            
-            log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-            log('💡 If TEST 3 failed, your Worker needs to be updated.', 'info');
-            log('📋 Make sure your Worker has the /api/admin/products endpoint.', 'info');
-        }
-        
-        testAPI();
+            logDiv.innerHTML += `<br>🎉 COMPLETE! ${success}/${PRODUCTS.length} products added.`;
+            logDiv.innerHTML += `<br>🔗 Go to: https://developereth.github.io/scentlover/admin.html`;
+            btn.disabled = false;
+            btn.textContent = '✅ Import Complete';
+        };
     </script>
 </body>
 </html>
