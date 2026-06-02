@@ -4,14 +4,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Rewards Club | Scent Lovers | Addis Ababa</title>
-    <meta name="description" content="Join the Scent Lovers Rewards Club. Earn points on every purchase, get birthday discounts, free samples, and exclusive member perks.">
+    <meta name="description" content="Join Scent Lovers Rewards Club. Earn points on every purchase, enjoy exclusive discounts, birthday gifts, and early access to new fragrances.">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --gold: #D4A853;
+            --gold-dark: #B8933F;
+            --gold-light: #F9E4B7;
+            --black: #0A0A0A;
+            --black-card: #111111;
+            --black-surface: #161616;
+            --white: #FFFFFF;
+            --gray: #999999;
+            --gray-light: #BBBBBB;
+            --gray-dark: #666666;
+            --radius-lg: 24px;
+            --shadow-gold: 0 8px 30px rgba(212,168,83,0.2);
+            --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+        }
+        body { font-family: 'Inter', sans-serif; background: var(--black); color: var(--white); line-height: 1.6; overflow-x: hidden; }
+        @keyframes shimmer { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
+        @keyframes goldPulse { 0%,100% { box-shadow: 0 0 20px rgba(212,168,83,0.15); } 50% { box-shadow: 0 0 40px rgba(212,168,83,0.3); } }
+        @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .topbar { background: #000; color: var(--gray-light); text-align: center; padding: 10px 20px; font-size: 0.78rem; display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; border-bottom: 1px solid rgba(212,168,83,0.15); }
+        .topbar i { color: var(--gold); margin: 0 5px; }
+        .nav-bar { background: rgba(10,10,10,0.97); backdrop-filter: blur(25px); border-bottom: 1px solid rgba(212,168,83,0.15); position: sticky; top: 0; z-index: 1000; padding: 0 2rem; }
+        .nav-inner { max-width: 1300px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0.85rem 0; flex-wrap: wrap; gap: 16px; }
+        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-img-custom { height: 52px; width: auto; object-fit: contain; border-radius: 12px; }
+        .logo-icon { width: 48px; height: 48px; background: var(--gold); border-radius: 50%; display: none; align-items: center; justify-content: center; font-size: 1.2rem; color: #000; animation: goldPulse 3s infinite; }
+        .logo-text { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--gold); letter-spacing: 1px; }
+        .logo-text span { display: block; font-size: 0.55rem; color: var(--gray-light); letter-spacing: 3px; font-weight: 400; }
+        .nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
+        .nav-links a { text-decoration: none; font-weight: 500; color: var(--gray-light); transition: var(--transition); font-size: 0.83rem; position: relative; padding: 5px 0; }
+        .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--gold); transition: var(--transition); }
+        .nav-links a:hover { color: var(--gold); }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-links a.active { color: var(--gold); font-weight: 600; }
+        .nav-links a.active::after { width: 100%; }
+        .nav-cta { background: var(--gold); color: #000 !important; padding: 10px 22px !important; border-radius: 50px !important; font-weight: 600 !important; box-shadow: var(--shadow-gold); }
+        .nav-cta:hover { background: var(--gold-dark) !important; transform: translateY(-2px); }
+        .mobile-menu-btn { display: none; background: var(--gold); border: none; color: #000; font-size: 22px; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; align-items: center; justify-content: center; }
+        .nav-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); backdrop-filter: blur(6px); z-index: 998; }
+        .nav-overlay.show { display: block; }
+        .nav-close-btn { display: none; position: absolute; top: 20px; right: 20px; background: none; border: 2px solid var(--gold); color: var(--gold); font-size: 24px; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; transition: var(--transition); }
+        .nav-close-btn:hover { background: var(--gold); color: #000; }
+        @media (max-width: 768px) {
+            .mobile-menu-btn { display: flex; }
+            .nav-links { position: fixed; top: 0; right: -100%; width: 80%; max-width: 320px; height: 100vh; background: var(--black-card); flex-direction: column; justify-content: center; align-items: center; gap: 28px; transition: right 0.4s cubic-bezier(0.4,0,0.2,1); z-index: 999; padding: 60px 20px; border-left: 3px solid var(--gold); }
+            .nav-links.show { right: 0; }
+            .nav-close-btn { display: flex; }
+        }
+        @media (min-width: 769px) { .nav-links { display: flex !important; } .nav-overlay { display: none !important; } }
+        .page-header { background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 100%), url('https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=1600&q=80') center/cover no-repeat; padding: 90px 20px 70px; text-align: center; position: relative; }
+        .page-header h1 { font-family: 'Playfair Display', serif; font-size: 3rem; background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: shimmer 4s linear infinite; margin-bottom: 8px; }
+        .container { max-width: 1300px; margin: 0 auto; padding: 0 2rem; }
+        .section { padding: 70px 0; }
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-label { font-size: 0.75rem; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; }
+        .section-title { font-family: 'Playfair Display', serif; font-size: 2.3rem; font-weight: 700; }
+        .section-title span { color: var(--gold); }
+        .section-line { width: 55px; height: 3px; background: var(--gold); margin: 14px auto; border-radius: 3px; }
+        .points-badge { background: linear-gradient(135deg, #1a1a1a, #0d0d0d); border-radius: 32px; padding: 40px; text-align: center; border: 1px solid rgba(212,168,83,0.2); margin-bottom: 50px; }
+        .points-badge i { font-size: 3rem; color: var(--gold); margin-bottom: 15px; }
+        .tiers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .tier-card { background: var(--black-card); border-radius: 24px; padding: 35px 25px; text-align: center; border: 1px solid rgba(212,168,83,0.15); transition: var(--transition); }
+        .tier-card:hover { border-color: var(--gold); transform: translateY(-5px); }
+        .tier-card.silver { border-top: 4px solid #C0C0C0; }
+        .tier-card.gold { border-top: 4px solid #D4A853; }
+        .tier-card.platinum { border-top: 4px solid #E5E4E2; }
+        .tier-card h3 { font-size: 1.8rem; margin-bottom: 10px; }
+        .tier-card .benefits { list-style: none; margin-top: 20px; }
+        .tier-card .benefits li { padding: 8px 0; color: var(--gray-light); font-size: 0.9rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .footer { background: #000; padding: 3rem 2rem 2rem; border-top: 1px solid rgba(212,168,83,0.1); }
+        .footer-grid { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; }
+        .footer-col h4 { color: var(--gold); margin-bottom: 15px; font-size: 1rem; }
+        .footer-col a, .footer-col p { display: block; color: var(--gray-dark); font-size: 0.8rem; text-decoration: none; margin-bottom: 8px; transition: var(--transition); }
+        .footer-col a:hover { color: var(--gold); padding-left: 4px; }
+        .footer-bottom { text-align: center; padding-top: 30px; font-size: 0.75rem; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 30px; }
+        .telegram-float { position: fixed; bottom: 25px; right: 25px; width: 55px; height: 55px; background: #0088cc; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; color: #fff; text-decoration: none; z-index: 999; animation: float 2.5s ease-in-out infinite; }
+        .telegram-float:hover { transform: scale(1.08); background: #006699; }
+        @media (max-width: 600px) { .section-title { font-size: 1.8rem; } }
+    </style>
 </head>
 <body>
 
-<div class="topbar">
+<div class="topbar" id="topbar">
     <div><i class="fas fa-truck"></i> Free Delivery on Orders Over <span>5,000 ETB</span></div>
     <div><i class="fas fa-gift"></i> <span>2 Free Samples</span> with Every Order</div>
 </div>
@@ -19,13 +101,14 @@
 <header class="nav-bar">
     <div class="nav-inner">
         <a href="index.html" class="logo">
+            <img src="https://github.com/developereth/scentlover/blob/9c50406159570c7f4fe221b5c297536b6c0168f0/logo.png?raw=true" alt="Scent Lovers Logo" class="logo-img-custom" onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='flex'">
             <div class="logo-icon">🌙</div>
             <div class="logo-text">Scent Lovers<span>PREMIUM PERFUMES</span></div>
         </a>
-        <button class="mobile-menu-btn" aria-label="Menu"><i class="fas fa-bars"></i></button>
-        <div class="nav-overlay"></div>
-        <ul class="nav-links">
-            <button class="nav-close-btn">&times;</button>
+        <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+        <div class="nav-overlay" id="navOverlay"></div>
+        <ul class="nav-links" id="navLinks">
+            <button class="nav-close-btn" id="navCloseBtn">&times;</button>
             <li><a href="index.html">Home</a></li>
             <li><a href="womens.html">Women</a></li>
             <li><a href="mens.html">Men</a></li>
@@ -39,10 +122,10 @@
     </div>
 </header>
 
-<section class="page-header" style="background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 100%), url('https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=1600&q=80') center/cover no-repeat; padding: 90px 20px 70px; text-align: center; position: relative;">
-    <div class="page-header-content" style="position: relative; z-index: 2;">
-        <h1 style="font-family: 'Playfair Display', serif; font-size: 3rem; background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: shimmer 4s linear infinite; margin-bottom: 8px;">Rewards Club</h1>
-        <div class="breadcrumb" style="color: #BBB; font-size: 0.85rem;"><a href="index.html" style="color: var(--gold); text-decoration: none;">Home</a> / Rewards Club</div>
+<section class="page-header">
+    <div class="page-header-content">
+        <h1>Rewards Club</h1>
+        <div style="color: #BBB; font-size: 0.85rem;"><a href="index.html" style="color: var(--gold); text-decoration: none;">Home</a> / Rewards & Loyalty</div>
     </div>
 </section>
 
@@ -50,75 +133,117 @@
     <section class="section">
         <div class="section-header reveal">
             <div class="section-label">Loyalty Program</div>
-            <h2 class="section-title">Join the <span>Rewards Club</span></h2>
+            <h2 class="section-title">Earn Points, <span>Get Rewards</span></h2>
             <div class="section-line"></div>
-            <p class="section-desc">Earn points on every purchase and unlock exclusive perks</p>
+            <p class="section-desc" id="rewardsDesc">Every purchase brings you closer to exclusive perks and discounts</p>
         </div>
         
-        <div class="category-grid" style="margin-bottom: 40px;">
-            <div class="category-card reveal">
-                <i class="fas fa-coins" style="color: var(--gold);"></i>
-                <h4>Earn Points</h4>
-                <p>1 Point for every 10 ETB spent. Redeem for discounts on future purchases.</p>
-            </div>
-            <div class="category-card reveal">
-                <i class="fas fa-birthday-cake" style="color: var(--gold);"></i>
-                <h4>Birthday Gift</h4>
-                <p>Get a FREE luxury fragrance sample set on your birthday month.</p>
-            </div>
-            <div class="category-card reveal">
-                <i class="fas fa-flask" style="color: var(--gold);"></i>
-                <h4>Free Samples</h4>
-                <p>Exclusive early access to new fragrance samples before anyone else.</p>
-            </div>
-            <div class="category-card reveal">
-                <i class="fas fa-tag" style="color: var(--gold);"></i>
-                <h4>Member Discounts</h4>
-                <p>Special pricing on selected items — members save more every day.</p>
-            </div>
+        <div class="points-badge reveal">
+            <i class="fas fa-crown"></i>
+            <h3 style="font-size: 1.5rem; margin-bottom: 10px;">How It Works</h3>
+            <p style="color: var(--gray-light); max-width: 600px; margin: 0 auto;">Earn 10 points for every 100 ETB spent. Redeem points for discounts, free samples, and exclusive gifts.</p>
         </div>
         
-        <!-- Tiers -->
-        <div class="reveal" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px;">
-            <div style="background: var(--black-card); border-radius: 24px; padding: 30px; text-align: center; border: 1px solid rgba(212,168,83,0.15);">
-                <i class="fas fa-star" style="font-size: 2.5rem; color: #C0C0C0; margin-bottom: 12px;"></i>
-                <h4 style="color: #C0C0C0; font-size: 1.2rem;">Silver</h4>
-                <p style="color: var(--gray-light); font-size: 0.85rem; margin: 8px 0;">0 – 5,000 Points</p>
-                <p style="color: var(--gray); font-size: 0.8rem;">Earn points on every purchase</p>
-            </div>
-            <div style="background: var(--black-card); border-radius: 24px; padding: 30px; text-align: center; border: 2px solid var(--gold);">
-                <i class="fas fa-crown" style="font-size: 2.5rem; color: var(--gold); margin-bottom: 12px;"></i>
-                <h4 style="color: var(--gold); font-size: 1.2rem;">Gold</h4>
-                <p style="color: var(--gray-light); font-size: 0.85rem; margin: 8px 0;">5,000 – 15,000 Points</p>
-                <p style="color: var(--gray); font-size: 0.8rem;">Points + Birthday Gift + Free Samples</p>
-            </div>
-            <div style="background: var(--black-card); border-radius: 24px; padding: 30px; text-align: center; border: 1px solid rgba(212,168,83,0.3);">
-                <i class="fas fa-gem" style="font-size: 2.5rem; color: #a78bfa; margin-bottom: 12px;"></i>
-                <h4 style="color: #a78bfa; font-size: 1.2rem;">Platinum</h4>
-                <p style="color: var(--gray-light); font-size: 0.85rem; margin: 8px 0;">15,000+ Points</p>
-                <p style="color: var(--gray); font-size: 0.8rem;">All perks + VIP events + 20% discount</p>
-            </div>
-        </div>
-        
-        <div class="reveal" style="text-align: center; margin-top: 50px;">
-            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #fff; margin-bottom: 16px;">Ready to Join?</h3>
-            <p style="color: var(--gray-light); margin-bottom: 24px;">Sign up is free. Start earning rewards today.</p>
-            <a href="contact.html" class="btn btn-gold"><i class="fas fa-user-plus"></i> Join the Rewards Club</a>
-        </div>
+        <div class="tiers-grid" id="tiersGrid"></div>
     </section>
 </div>
 
 <footer class="footer">
     <div class="footer-grid">
-        <div class="footer-col"><h4>Scent Lovers</h4><p>Premium perfumes for every occasion.</p></div>
+        <div class="footer-col"><h4>Scent Lovers</h4><p>Premium perfumes for every occasion. Luxury fragrances delivered to your door.</p></div>
         <div class="footer-col"><h4>Shop</h4><a href="womens.html">Women</a><a href="mens.html">Men</a><a href="gift-sets.html">Gift Sets</a><a href="offers.html">Offers</a></div>
         <div class="footer-col"><h4>Help</h4><a href="contact.html">Contact</a><a href="stores.html">Stores</a><a href="rewards.html">Rewards</a></div>
-        <div class="footer-col"><h4>Contact</h4><p><i class="fas fa-phone"></i> +251 900 000 000</p></div>
+        <div class="footer-col"><h4>Contact</h4><p><i class="fas fa-phone"></i> <span id="footerPhone">+251 900 000 000</span></p></div>
     </div>
-    <div class="footer-bottom"><p>&copy; 2026 Scent Lovers Perfume.</p></div>
+    <div class="footer-bottom" id="footerBottom"><p>&copy; 2026 Scent Lovers Perfume. All rights reserved.</p></div>
 </footer>
 
-<a href="https://t.me/scentlovers" class="telegram-float" target="_blank"><i class="fab fa-telegram"></i></a>
-<script src="js/main.js"></script>
+<a href="https://t.me/scentlovers" class="telegram-float" target="_blank" id="telegramFloat"><i class="fab fa-telegram"></i></a>
+
+<script>
+    const API_URL = 'https://scent-lovers-api.YOUR_SUBDOMAIN.workers.dev'; // REPLACE WITH YOUR WORKER URL
+    let siteSettings = {};
+    let rewardsData = {};
+
+    async function loadRewards() {
+        try {
+            const response = await fetch(`${API_URL}/api/rewards`);
+            const data = await response.json();
+            if (data.success && data.rewards) {
+                rewardsData = data.rewards;
+                renderTiers();
+                if (rewardsData.description) document.getElementById('rewardsDesc').textContent = rewardsData.description;
+            } else { loadDemoRewards(); }
+        } catch (error) { loadDemoRewards(); }
+    }
+
+    function loadDemoRewards() {
+        rewardsData = {
+            title: 'Scent Lovers Rewards',
+            description: 'Every purchase brings you closer to exclusive perks and discounts',
+            tiers: [
+                { name: 'Silver', points: '0+', benefits: ['5% off on all purchases', 'Birthday gift', 'Early access to sales'], color: 'silver' },
+                { name: 'Gold', points: '1,000+', benefits: ['10% off on all purchases', 'Free shipping', 'Exclusive previews', 'Double points events'], color: 'gold' },
+                { name: 'Platinum', points: '5,000+', benefits: ['15% off on all purchases', 'Free gift wrap', 'VIP events access', 'Personal shopper', 'Complimentary samples'], color: 'platinum' }
+            ]
+        };
+        renderTiers();
+    }
+
+    function renderTiers() {
+        const grid = document.getElementById('tiersGrid');
+        grid.innerHTML = (rewardsData.tiers || []).map(tier => `
+            <div class="tier-card ${tier.color || ''} reveal">
+                <h3 style="color: var(--gold);">${tier.name}</h3>
+                <p style="font-size: 1.2rem; font-weight: 700;">${tier.points} points</p>
+                <ul class="benefits">
+                    ${tier.benefits.map(b => `<li><i class="fas fa-check" style="color: var(--gold); margin-right: 8px;"></i> ${b}</li>`).join('')}
+                </ul>
+            </div>
+        `).join('');
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+        }, { threshold: 0.12 });
+        reveals.forEach(r => observer.observe(r));
+    }
+
+    async function loadSettings() {
+        try {
+            const response = await fetch(`${API_URL}/api/settings`);
+            const data = await response.json();
+            if (data.success && data.settings) {
+                siteSettings = data.settings;
+                if (siteSettings.phoneNumber) document.getElementById('footerPhone').textContent = siteSettings.phoneNumber;
+                if (siteSettings.footerText) document.getElementById('footerBottom').innerHTML = `<p>${siteSettings.footerText}</p>`;
+                if (siteSettings.topbarLeft && siteSettings.topbarRight) {
+                    document.getElementById('topbar').innerHTML = `
+                        <div><i class="fas fa-truck"></i> ${siteSettings.topbarLeft}</div>
+                        <div><i class="fas fa-gift"></i> ${siteSettings.topbarRight}</div>
+                    `;
+                }
+                if (siteSettings.telegramUsername) {
+                    document.getElementById('telegramFloat').href = `https://t.me/${siteSettings.telegramUsername.replace('@', '')}`;
+                }
+            }
+        } catch (error) { console.error('Error loading settings:', error); }
+    }
+
+    // Mobile navigation
+    const menuBtn = document.getElementById('mobileMenuBtn');
+    const navLinks = document.getElementById('navLinks');
+    const overlay = document.getElementById('navOverlay');
+    const closeNavBtn = document.getElementById('navCloseBtn');
+    function closeMenu() { navLinks?.classList.remove('show'); overlay?.classList.remove('show'); document.body.style.overflow = ''; }
+    function openMenu() { navLinks?.classList.add('show'); overlay?.classList.add('show'); document.body.style.overflow = 'hidden'; }
+    if (menuBtn) menuBtn.onclick = (e) => { e.stopPropagation(); navLinks.classList.contains('show') ? closeMenu() : openMenu(); };
+    if (closeNavBtn) closeNavBtn.onclick = closeMenu;
+    if (overlay) overlay.onclick = closeMenu;
+    document.querySelectorAll('.nav-links a').forEach(link => link.addEventListener('click', () => { if (window.innerWidth <= 768) closeMenu(); }));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && navLinks?.classList.contains('show')) closeMenu(); });
+
+    loadRewards();
+    loadSettings();
+</script>
 </body>
 </html>
