@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products | Scent Lovers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',sans-serif;background:#0a0a0a;color:#fff}
+        nav{background:#0a0a0a;padding:15px 20px;border-bottom:2px solid #D4A853;display:flex;justify-content:space-between;align-items:center}
+        .logo{font-family:'Playfair Display',serif;font-size:1.4rem;color:#D4A853;text-decoration:none;font-weight:700}
+        .nav-links{display:flex;gap:20px;list-style:none}
+        .nav-links a{color:#bbb;text-decoration:none;font-size:0.85rem;font-weight:500}
+        .nav-links a:hover,.nav-links a.active{color:#D4A853}
+        .header{background:linear-gradient(rgba(0,0,0,0.9),rgba(0,0,0,0.5)),url('https://raw.githubusercontent.com/developereth/scentlover/9d390a80b750a8ac99875a258e9b9ae80bbd88ea/5d27a70d-adf9-4b1f-88a4-0452f476a385.png') center/cover;padding:50px 20px;text-align:center}
+        .header h1{font-family:'Playfair Display',serif;font-size:2rem;color:#D4A853}
+        .header a{color:#D4A853;text-decoration:none;font-size:0.85rem}
+        .container{max-width:1000px;margin:0 auto;padding:20px 15px}
+        .filters{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:20px}
+        .filters button{padding:8px 16px;border:1px solid #D4A853;background:transparent;color:#D4A853;border-radius:20px;cursor:pointer;font-size:0.8rem;font-weight:600}
+        .filters button.active{background:#D4A853;color:#000}
+        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px}
+        .card{background:#111;border-radius:10px;overflow:hidden;border:1px solid #333}
+        .card img{width:100%;height:200px;object-fit:cover}
+        .card-body{padding:12px}
+        .card-body .brand{color:#D4A853;font-size:0.65rem;text-transform:uppercase}
+        .card-body h3{margin:3px 0;font-size:0.9rem}
+        .price{color:#D4A853;font-weight:700;font-size:1rem;margin:5px 0}
+        .btn-order{width:100%;padding:10px;background:#D4A853;color:#000;border:none;border-radius:20px;font-weight:700;cursor:pointer}
+        .tag{display:inline-block;background:#D4A853;color:#000;padding:2px 8px;border-radius:10px;font-size:0.6rem;font-weight:700}
+        footer{text-align:center;padding:20px;color:#888;font-size:0.8rem;border-top:1px solid #222;margin-top:30px}
+        @media(max-width:600px){.grid{grid-template-columns:repeat(2,1fr);gap:12px}.card img{height:150px}.nav-links{display:none}}
+    </style>
+</head>
+<body>
+<nav>
+    <a href="index.html" class="logo">Scent Lovers</a>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html" class="active">Products</a></li>
+        <li><a href="reviews.html">Reviews</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+</nav>
+<div class="header"><h1>Our Products</h1><p><a href="index.html">Home</a> / Products</p></div>
+<div class="container">
+    <div class="filters">
+        <button class="active" id="btnAll" onclick="filter('all')">All</button>
+        <button id="btnWomen" onclick="filter('women')">Women</button>
+        <button id="btnMen" onclick="filter('men')">Men</button>
+        <button id="btnGift" onclick="filter('gift')">Gift</button>
+        <button id="btnSale" onclick="filter('sale')">Sale</button>
+    </div>
+    <div class="grid" id="grid">Loading...</div>
+</div>
+<footer>© 2026 Scent Lovers | @scentlovers</footer>
+<script>
+var all=[],cat="all";
+fetch("https://scent-lovers-api.developeraddis.workers.dev/api/products").then(function(r){return r.json()}).then(function(d){all=d.products||[];show()});
+function filter(c){cat=c;var ids={all:"btnAll",women:"btnWomen",men:"btnMen",gift:"btnGift",sale:"btnSale"};for(var k in ids){document.getElementById(ids[k]).classList.remove("active")}document.getElementById(ids[c]).classList.add("active");show()}
+function show(){var f=cat==="all"?all:all.filter(function(p){return p.category===cat});var g=document.getElementById("grid");if(!f.length){g.innerHTML='<p style="text-align:center;color:#888;grid-column:1/-1;padding:40px">No products</p>';return}g.innerHTML=f.map(function(p){return'<div class="card"><img src="'+(p.image||"https://via.placeholder.com/400x200")+'" alt="'+p.name+'" onerror="this.src=\'https://via.placeholder.com/400x200\'"><div class="card-body"><div class="brand">'+p.brand+'</div>'+(p.tag?'<span class="tag">'+p.tag+'</span>':'')+'<h3>'+p.name+'</h3><div class="price">'+p.price+'</div><button class="btn-order" onclick="window.open(\'https://t.me/scentlovers\')">Order Now</button></div></div>'}).join("")}
+</script>
+</body>
+</html>
