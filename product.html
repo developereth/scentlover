@@ -1,83 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products | Scent Lovers</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:'Inter',sans-serif;background:#0a0a0a;color:#fff}
-        nav{background:#0a0a0a;padding:15px 20px;border-bottom:2px solid #D4A853;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
-        .logo{font-family:'Playfair Display',serif;font-size:1.4rem;color:#D4A853;text-decoration:none;font-weight:700}
-        .nav-links{display:flex;gap:20px;list-style:none}
-        .nav-links a{color:#bbb;text-decoration:none;font-weight:500;font-size:0.9rem}
-        .nav-links a:hover,.nav-links a.active{color:#D4A853}
-        .menu-btn{display:none;background:#D4A853;border:none;color:#000;width:36px;height:36px;border-radius:50%;cursor:pointer}
-        .page-header{background:linear-gradient(rgba(0,0,0,0.9),rgba(0,0,0,0.5)),url('https://raw.githubusercontent.com/developereth/scentlover/9d390a80b750a8ac99875a258e9b9ae80bbd88ea/5d27a70d-adf9-4b1f-88a4-0452f476a385.png') center/cover;padding:60px 20px;text-align:center}
-        .page-header h1{font-family:'Playfair Display',serif;font-size:2rem;color:#D4A853}
-        .page-header a{color:#D4A853;text-decoration:none}
-        .container{max-width:1100px;margin:0 auto;padding:30px 15px}
-        .filters{display:flex;gap:8px;margin-bottom:25px;flex-wrap:wrap;justify-content:center}
-        .filters button{padding:8px 18px;border:1px solid #D4A853;background:transparent;color:#D4A853;border-radius:20px;cursor:pointer;font-weight:600;font-size:0.85rem}
-        .filters button.active,.filters button:hover{background:#D4A853;color:#000}
-        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px}
-        .card{background:#111;border-radius:12px;overflow:hidden;border:1px solid #333;transition:0.3s}
-        .card:hover{transform:translateY(-3px);border-color:#D4A853}
-        .card img{width:100%;height:220px;object-fit:cover}
-        .card-body{padding:15px}
-        .card-body .brand{color:#D4A853;font-size:0.7rem;text-transform:uppercase;margin-bottom:3px}
-        .card-body h4{margin:5px 0;font-size:0.95rem}
-        .card-body .price{color:#D4A853;font-weight:700;font-size:1.1rem;margin:8px 0}
-        .btn-order{width:100%;padding:10px;background:#D4A853;color:#000;border:none;border-radius:20px;font-weight:700;cursor:pointer}
-        .tag{position:absolute;top:8px;left:8px;background:#D4A853;color:#000;padding:3px 10px;border-radius:12px;font-size:0.65rem;font-weight:700}
-        .img-wrap{position:relative}
-        footer{text-align:center;padding:20px;color:#888;border-top:1px solid #222;margin-top:30px;font-size:0.8rem}
-        .empty{text-align:center;padding:40px;color:#888;grid-column:1/-1}
-        @media(max-width:600px){.menu-btn{display:flex;align-items:center;justify-content:center}.nav-links{display:none;width:100%;flex-direction:column;gap:15px;padding:15px 0}.nav-links.show{display:flex}.grid{grid-template-columns:repeat(2,1fr);gap:12px}.card img{height:160px}}
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Products | Scent Lovers</title>
+<style>
+body{font-family:sans-serif;background:#0a0a0a;color:#fff;margin:0;padding:15px}
+h1{color:#D4A853;text-align:center}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:15px;max-width:1000px;margin:20px auto}
+.card{background:#111;border-radius:10px;overflow:hidden;border:1px solid #333}
+.card img{width:100%;height:180px;object-fit:cover}
+.card-body{padding:12px}
+.card-body h3{color:#D4A853;font-size:0.9rem;margin:0}
+.price{color:#D4A853;font-weight:bold;font-size:1.1rem;margin:5px 0}
+button{width:100%;padding:10px;background:#D4A853;color:#000;border:none;border-radius:5px;cursor:pointer;font-weight:bold}
+.filters{display:flex;gap:5px;justify-content:center;margin-bottom:15px;flex-wrap:wrap}
+.filters button{padding:8px 14px;border:1px solid #D4A853;background:transparent;color:#D4A853;border-radius:15px;cursor:pointer;font-size:0.8rem}
+.filters button.active{background:#D4A853;color:#000}
+a{color:#D4A853;text-decoration:none}
+nav{text-align:center;padding:10px;border-bottom:2px solid #D4A853;margin-bottom:20px}
+</style>
 </head>
 <body>
-<nav>
-    <a href="index.html" class="logo">Scent Lovers</a>
-    <button class="menu-btn" onclick="document.querySelector('.nav-links').classList.toggle('show')">☰</button>
-    <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="products.html" class="active">Products</a></li>
-    </ul>
-</nav>
-
-<div class="page-header">
-    <h1>Our Products</h1>
-    <p><a href="index.html">Home</a> / Products</p>
+<nav><a href="index.html" style="font-size:1.2rem;font-weight:bold">Scent Lovers</a></nav>
+<h1>Our Products</h1>
+<div class="filters">
+<button class="active" onclick="filter('all',this)">All</button>
+<button onclick="filter('women',this)">Women</button>
+<button onclick="filter('men',this)">Men</button>
+<button onclick="filter('gift',this)">Gift</button>
+<button onclick="filter('sale',this)">Sale</button>
 </div>
-
-<div class="container">
-    <div class="filters">
-        <button class="active" onclick="filter('all',this)">All</button>
-        <button onclick="filter('women',this)">Women</button>
-        <button onclick="filter('men',this)">Men</button>
-        <button onclick="filter('gift',this)">Gift</button>
-        <button onclick="filter('sale',this)">Sale</button>
-    </div>
-    <div class="grid" id="grid"><div class="empty">Loading products...</div></div>
-</div>
-
-<footer>© 2026 Scent Lovers | <span style="color:#D4A853">@scentlovers</span></footer>
-
+<div class="grid" id="grid">Loading...</div>
 <script>
-var API='https://scent-lovers-api.developeraddis.workers.dev/api/products';
-var prods=[],cat='all';
-fetch(API).then(function(r){return r.json()}).then(function(d){prods=d.products||[];render()});
-function filter(c,btn){cat=c;document.querySelectorAll('.filters button').forEach(function(b){b.classList.remove('active')});btn.classList.add('active');render()}
+var prods=[],cat="all";
+fetch("https://scent-lovers-api.developeraddis.workers.dev/api/products").then(r=>r.json()).then(d=>{prods=d.products||[];render()});
+function filter(c,btn){cat=c;document.querySelectorAll(".filters button").forEach(b=>b.classList.remove("active"));btn.classList.add("active");render()}
 function render(){
-    var f=cat==='all'?prods:prods.filter(function(p){return p.category===cat});
-    var g=document.getElementById('grid');
-    if(!f.length){g.innerHTML='<div class="empty">No products in this category</div>';return}
-    g.innerHTML=f.map(function(p){
-        return '<div class="card"><div class="img-wrap"><img src="'+(p.image||'https://via.placeholder.com/400x250')+'" alt="'+p.name+'" onerror="this.src=\'https://via.placeholder.com/400x250\'">'+(p.tag?'<span class="tag">'+p.tag+'</span>':'')+'</div><div class="card-body"><div class="brand">'+p.brand+'</div><h4>'+p.name+'</h4><div class="price">'+p.price+'</div><button class="btn-order" onclick="window.open(\'https://t.me/scentlovers?text='+encodeURIComponent('Hi! '+p.brand+' - '+p.name)+'\')">Order Now</button></div></div>';
-    }).join('');
+var f=cat==="all"?prods:prods.filter(p=>p.category===cat);
+var g=document.getElementById("grid");
+if(!f.length){g.innerHTML="<p style=text-align:center;color:#888;grid-column:1/-1>No products</p>";return}
+g.innerHTML=f.map(p=>'<div class="card"><img src="'+(p.image||"https://via.placeholder.com/400x200")+'" onerror="this.src=\'https://via.placeholder.com/400x200\'"><div class="card-body"><h3>'+p.brand+" - "+p.name+'</h3><div class="price">'+p.price+'</div><button onclick="window.open(\'https://t.me/scentlovers\')">Order Now</button></div></div>').join("")
 }
 </script>
 </body>
