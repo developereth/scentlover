@@ -9,65 +9,66 @@
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:'Inter',sans-serif;background:#0a0a0a;color:#fff}
-        .topbar{background:#000;text-align:center;padding:10px;font-size:0.75rem;border-bottom:1px solid #222;display:flex;justify-content:center;gap:30px;flex-wrap:wrap}
+        .topbar{background:#000;text-align:center;padding:10px;font-size:0.7rem;border-bottom:1px solid #222;display:flex;justify-content:center;gap:20px;flex-wrap:wrap}
         .topbar i{color:#D4A853}
-        nav{background:#0a0a0a;padding:15px 30px;border-bottom:2px solid #D4A853;position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
-        .logo{font-family:'Playfair Display',serif;font-size:1.6rem;color:#D4A853;text-decoration:none;font-weight:700}
-        .nav-links{display:flex;gap:25px;list-style:none;flex-wrap:wrap}
-        .nav-links a{color:#bbb;text-decoration:none;font-weight:500;font-size:0.9rem;transition:0.3s}
+        nav{background:#0a0a0a;padding:15px 20px;border-bottom:2px solid #D4A853;position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
+        .logo{font-family:'Playfair Display',serif;font-size:1.4rem;color:#D4A853;text-decoration:none;font-weight:700}
+        .nav-links{display:flex;gap:20px;list-style:none;flex-wrap:wrap}
+        .nav-links a{color:#bbb;text-decoration:none;font-weight:500;font-size:0.85rem;transition:0.3s}
         .nav-links a:hover,.nav-links a.active{color:#D4A853}
-        .menu-btn{display:none;background:#D4A853;border:none;color:#000;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.2rem}
-        .hero{background:linear-gradient(rgba(0,0,0,0.85),rgba(0,0,0,0.5)),url('https://raw.githubusercontent.com/developereth/scentlover/9d390a80b750a8ac99875a258e9b9ae80bbd88ea/5d27a70d-adf9-4b1f-88a4-0452f476a385.png') center/cover;padding:120px 20px;text-align:center}
-        .hero h1{font-family:'Playfair Display',serif;font-size:3rem;color:#D4A853;margin-bottom:15px}
-        .hero p{color:#bbb;font-size:1.1rem;max-width:600px;margin:0 auto 30px}
-        .hero .btn{display:inline-block;background:#D4A853;color:#000;padding:14px 35px;border-radius:50px;text-decoration:none;font-weight:700;transition:0.3s}
+        .menu-btn{display:none;background:#D4A853;border:none;color:#000;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1rem}
+        .hero{background:linear-gradient(rgba(0,0,0,0.85),rgba(0,0,0,0.5)),url('https://raw.githubusercontent.com/developereth/scentlover/9d390a80b750a8ac99875a258e9b9ae80bbd88ea/5d27a70d-adf9-4b1f-88a4-0452f476a385.png') center/cover;padding:100px 20px;text-align:center}
+        .hero h1{font-family:'Playfair Display',serif;font-size:2.5rem;color:#D4A853;margin-bottom:10px}
+        .hero p{color:#bbb;font-size:1rem;max-width:500px;margin:0 auto 25px}
+        .hero .btn{display:inline-block;background:#D4A853;color:#000;padding:12px 30px;border-radius:50px;text-decoration:none;font-weight:700;transition:0.3s}
         .hero .btn:hover{background:#b8933f}
-        .section{padding:60px 20px;max-width:1200px;margin:0 auto}
-        .section-title{font-family:'Playfair Display',serif;font-size:2rem;text-align:center;margin-bottom:10px}
+        .section{padding:40px 15px;max-width:1100px;margin:0 auto}
+        .section-title{font-family:'Playfair Display',serif;font-size:1.8rem;text-align:center;margin-bottom:5px}
         .section-title span{color:#D4A853}
-        .section-sub{text-align:center;color:#888;margin-bottom:40px}
-        .section-line{width:60px;height:3px;background:#D4A853;margin:0 auto 40px}
-        .features{display:grid;grid-template-columns:repeat(4,1fr);gap:25px;margin-bottom:40px}
-        .feature{background:#111;padding:30px 20px;text-align:center;border-radius:15px;border:1px solid #222}
-        .feature i{font-size:2.5rem;color:#D4A853;margin-bottom:15px}
-        .feature h3{font-size:1rem;margin-bottom:8px}
-        .feature p{color:#888;font-size:0.85rem}
-        .featured-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:25px}
-        .card{background:#111;border-radius:15px;overflow:hidden;border:1px solid #333;transition:0.3s}
-        .card:hover{transform:translateY(-5px);border-color:#D4A853}
-        .card img{width:100%;height:230px;object-fit:cover}
-        .card-body{padding:15px}
-        .card-body .brand{color:#D4A853;font-size:0.75rem;text-transform:uppercase}
-        .card-body h4{margin:5px 0;font-size:0.95rem}
-        .card-body .price{color:#D4A853;font-weight:700;font-size:1.1rem;margin:8px 0}
-        .card-body .btn{width:100%;padding:10px;background:#D4A853;color:#000;border:none;border-radius:25px;font-weight:700;cursor:pointer;display:block;text-align:center;text-decoration:none}
-        .tag{position:absolute;top:10px;left:10px;background:#D4A853;color:#000;padding:3px 12px;border-radius:15px;font-size:0.7rem;font-weight:700}
+        .section-sub{text-align:center;color:#888;margin-bottom:30px;font-size:0.9rem}
+        .section-line{width:50px;height:2px;background:#D4A853;margin:0 auto 30px}
+        .features{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:30px}
+        .feature{background:#111;padding:25px 15px;text-align:center;border-radius:12px;border:1px solid #222}
+        .feature i{font-size:2rem;color:#D4A853;margin-bottom:10px}
+        .feature h3{font-size:0.9rem;margin-bottom:5px}
+        .feature p{color:#888;font-size:0.75rem}
+        .featured-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px}
+        .card{background:#111;border-radius:12px;overflow:hidden;border:1px solid #333;transition:0.3s}
+        .card:hover{transform:translateY(-3px);border-color:#D4A853}
+        .card img{width:100%;height:200px;object-fit:cover}
+        .card-body{padding:12px}
+        .card-body .brand{color:#D4A853;font-size:0.65rem;text-transform:uppercase}
+        .card-body h4{margin:3px 0;font-size:0.9rem}
+        .card-body .price{color:#D4A853;font-weight:700;font-size:1rem;margin:5px 0}
+        .card-body .btn{display:block;width:100%;padding:10px;background:#D4A853;color:#000;border:none;border-radius:20px;font-weight:700;cursor:pointer;text-align:center;text-decoration:none;font-size:0.85rem}
+        .tag{position:absolute;top:8px;left:8px;background:#D4A853;color:#000;padding:2px 10px;border-radius:10px;font-size:0.6rem;font-weight:700}
         .img-wrap{position:relative}
-        .reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:25px}
-        .review{background:#111;padding:25px;border-radius:15px;border:1px solid #222;text-align:center}
-        .review .stars{color:#D4A853;font-size:1.2rem;margin-bottom:10px}
-        .review p{color:#bbb;font-size:0.9rem;margin:10px 0;font-style:italic}
-        .review .name{color:#D4A853;font-weight:600}
-        .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px}
-        .contact-info{background:#111;padding:30px;border-radius:15px;border:1px solid #222}
-        .contact-info p{margin:15px 0;color:#bbb}
-        .contact-info i{color:#D4A853;margin-right:10px;width:20px}
-        .contact-form{background:#111;padding:30px;border-radius:15px;border:1px solid #222}
-        .contact-form input,.contact-form textarea{width:100%;padding:12px;background:#1a1a1a;border:1px solid #333;border-radius:8px;color:#fff;margin-bottom:15px;font-family:'Inter',sans-serif}
-        .contact-form button{background:#D4A853;color:#000;padding:12px 30px;border:none;border-radius:8px;font-weight:700;cursor:pointer}
-        footer{background:#000;text-align:center;padding:30px;border-top:1px solid #222;margin-top:40px;color:#888}
-        .social-icons{display:flex;gap:15px;justify-content:center;margin:15px 0}
-        .social-icons a{color:#D4A853;font-size:1.2rem}
-        .social-icons a:hover{color:#fff}
+        .reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+        .review{background:#111;padding:20px;border-radius:12px;border:1px solid #222;text-align:center}
+        .review .stars{color:#D4A853;font-size:1rem;margin-bottom:8px}
+        .review p{color:#bbb;font-size:0.85rem;margin:8px 0;font-style:italic}
+        .review .name{color:#D4A853;font-weight:600;font-size:0.8rem}
+        .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+        .contact-info{background:#111;padding:25px;border-radius:12px;border:1px solid #222}
+        .contact-info h3{color:#D4A853;margin-bottom:15px}
+        .contact-info p{margin:12px 0;color:#bbb;font-size:0.9rem}
+        .contact-info i{color:#D4A853;margin-right:8px;width:18px}
+        .contact-form{background:#111;padding:25px;border-radius:12px;border:1px solid #222}
+        .contact-form h3{color:#D4A853;margin-bottom:15px}
+        .contact-form input,.contact-form textarea{width:100%;padding:12px;background:#1a1a1a;border:1px solid #333;border-radius:8px;color:#fff;margin-bottom:12px;font-family:'Inter',sans-serif;font-size:0.9rem}
+        .contact-form button{background:#D4A853;color:#000;padding:12px 25px;border:none;border-radius:8px;font-weight:700;cursor:pointer}
+        footer{background:#000;text-align:center;padding:25px;border-top:1px solid #222;margin-top:30px;color:#888;font-size:0.8rem}
+        .view-all{text-align:center;margin-top:25px}
+        .view-all a{color:#D4A853;text-decoration:none;border:1px solid #D4A853;padding:10px 25px;border-radius:25px;font-weight:600;font-size:0.9rem}
         @media(max-width:768px){
             .menu-btn{display:flex;align-items:center;justify-content:center}
-            .nav-links{display:none;width:100%;flex-direction:column;gap:15px;padding:20px 0}
+            .nav-links{display:none;width:100%;flex-direction:column;gap:12px;padding:15px 0}
             .nav-links.show{display:flex}
             .features{grid-template-columns:repeat(2,1fr)}
             .reviews{grid-template-columns:1fr}
             .contact-grid{grid-template-columns:1fr}
-            .hero h1{font-size:2rem}
-            .hero{padding:80px 20px}
+            .hero h1{font-size:1.8rem}
+            .hero{padding:70px 15px}
         }
     </style>
 </head>
@@ -75,12 +76,12 @@
 
 <div class="topbar">
     <div><i class="fas fa-truck"></i> Free Delivery Over 5,000 ETB</div>
-    <div><i class="fas fa-gift"></i> 2 Free Samples With Every Order</div>
+    <div><i class="fas fa-gift"></i> 2 Free Samples</div>
     <div><i class="fas fa-phone"></i> +251 900 000 000</div>
 </div>
 
 <nav>
-    <a href="index.html" class="logo">🛍️ Scent Lovers</a>
+    <a href="index.html" class="logo">Scent Lovers</a>
     <button class="menu-btn" onclick="document.querySelector('.nav-links').classList.toggle('show')"><i class="fas fa-bars"></i></button>
     <ul class="nav-links">
         <li><a href="index.html" class="active">Home</a></li>
@@ -92,16 +93,16 @@
 
 <section class="hero">
     <h1>Discover Your Signature Scent</h1>
-    <p>Premium fragrances for every occasion. Explore our curated collection of luxury perfumes delivered to your doorstep.</p>
-    <a href="products.html" class="btn">Shop Now ✨</a>
+    <p>Premium fragrances for every occasion. Explore our curated collection of luxury perfumes.</p>
+    <a href="products.html" class="btn">Shop Now</a>
 </section>
 
 <section class="section">
     <div class="features">
-        <div class="feature"><i class="fas fa-check-circle"></i><h3>100% Authentic</h3><p>Genuine luxury fragrances from top brands</p></div>
-        <div class="feature"><i class="fas fa-truck-fast"></i><h3>Fast Delivery</h3><p>Addis Ababa & across Ethiopia</p></div>
-        <div class="feature"><i class="fas fa-gift"></i><h3>Free Samples</h3><p>2 complimentary samples per order</p></div>
-        <div class="feature"><i class="fas fa-headset"></i><h3>24/7 Support</h3><p>Via Telegram & Phone</p></div>
+        <div class="feature"><i class="fas fa-check-circle"></i><h3>100% Authentic</h3><p>Genuine fragrances</p></div>
+        <div class="feature"><i class="fas fa-truck-fast"></i><h3>Fast Delivery</h3><p>Across Ethiopia</p></div>
+        <div class="feature"><i class="fas fa-gift"></i><h3>Free Samples</h3><p>2 per order</p></div>
+        <div class="feature"><i class="fas fa-headset"></i><h3>24/7 Support</h3><p>Via Telegram</p></div>
     </div>
 </section>
 
@@ -110,72 +111,59 @@
     <p class="section-sub">Our most popular fragrances</p>
     <div class="section-line"></div>
     <div class="featured-grid" id="featuredProducts"><p style="text-align:center;color:#888;grid-column:1/-1">Loading...</p></div>
-    <div style="text-align:center;margin-top:30px"><a href="products.html" class="btn" style="background:transparent;border:1px solid #D4A853;color:#D4A853;padding:12px 30px;border-radius:50px;text-decoration:none;font-weight:600">View All Products →</a></div>
+    <div class="view-all"><a href="products.html">View All Products →</a></div>
 </section>
 
 <section class="section" id="reviews">
     <h2 class="section-title">Customer <span>Reviews</span></h2>
-    <p class="section-sub">What our customers say about us</p>
+    <p class="section-sub">What our customers say</p>
     <div class="section-line"></div>
     <div class="reviews">
-        <div class="review"><div class="stars">⭐⭐⭐⭐⭐</div><p>"Amazing fragrance! Lasts all day and received so many compliments. Will definitely order again!"</p><div class="name">— Selam A.</div></div>
-        <div class="review"><div class="stars">⭐⭐⭐⭐⭐</div><p>"Fast delivery and the perfume is 100% authentic. The packaging was beautiful too!"</p><div class="name">— Dawit T.</div></div>
-        <div class="review"><div class="stars">⭐⭐⭐⭐⭐</div><p>"The gift set was beautifully packaged. Perfect for my wife's birthday. She loved it!"</p><div class="name">— Henok M.</div></div>
+        <div class="review"><div class="stars">⭐⭐⭐⭐⭐</div><p>"Amazing fragrance! Lasts all day and received so many compliments."</p><div class="name">— Selam A.</div></div>
+        <div class="review"><div class="stars">⭐⭐⭐⭐⭐</div><p>"Fast delivery and 100% authentic. The packaging was beautiful!"</p><div class="name">— Dawit T.</div></div>
+        <div class="review"><div class="stars">⭐⭐⭐⭐⭐</div><p>"The gift set was perfect for my wife's birthday. She loved it!"</p><div class="name">— Henok M.</div></div>
     </div>
 </section>
 
 <section class="section" id="contact">
     <h2 class="section-title">Contact <span>Us</span></h2>
-    <p class="section-sub">Get in touch with us for orders and inquiries</p>
+    <p class="section-sub">Get in touch for orders and inquiries</p>
     <div class="section-line"></div>
     <div class="contact-grid">
         <div class="contact-info">
-            <h3 style="color:#D4A853;margin-bottom:20px">Get In Touch</h3>
+            <h3>Get In Touch</h3>
             <p><i class="fas fa-phone"></i> +251 900 000 000</p>
             <p><i class="fab fa-telegram"></i> @scentlovers</p>
             <p><i class="fas fa-envelope"></i> info@scentlovers.com</p>
-            <p><i class="fas fa-map-marker-alt"></i> Bole, Addis Ababa, Ethiopia</p>
-            <p><i class="fas fa-clock"></i> Mon - Sat: 9:00 AM - 7:00 PM</p>
+            <p><i class="fas fa-map-marker-alt"></i> Bole, Addis Ababa</p>
+            <p><i class="fas fa-clock"></i> Mon - Sat: 9AM - 7PM</p>
         </div>
         <div class="contact-form">
-            <h3 style="color:#D4A853;margin-bottom:20px">Send Message</h3>
+            <h3>Send Message</h3>
             <input type="text" placeholder="Your Name">
             <input type="text" placeholder="Phone Number">
-            <textarea rows="4" placeholder="Your Message..."></textarea>
-            <button onclick="alert('Thank you! We will contact you soon.')">📩 Send Message</button>
+            <textarea rows="3" placeholder="Your Message..."></textarea>
+            <button onclick="alert('Thank you! We will contact you soon.')">Send Message</button>
         </div>
     </div>
 </section>
 
 <footer>
-    <p style="font-family:'Playfair Display',serif;font-size:1.3rem;color:#D4A853;margin-bottom:5px">Scent Lovers</p>
-    <p style="color:#888;font-size:0.85rem">Premium Perfumes & Fragrances</p>
-    <div class="social-icons">
-        <a href="https://t.me/scentlovers" target="_blank"><i class="fab fa-telegram"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-facebook"></i></a>
-        <a href="#"><i class="fab fa-tiktok"></i></a>
-    </div>
-    <p style="font-size:0.8rem;color:#666">© 2026 Scent Lovers. All rights reserved.</p>
+    <p style="font-family:'Playfair Display',serif;font-size:1.1rem;color:#D4A853;margin-bottom:5px">Scent Lovers</p>
+    <p>Premium Perfumes & Fragrances</p>
+    <p style="margin-top:8px">© 2026 Scent Lovers. All rights reserved.</p>
 </footer>
 
 <script>
-const API = 'https://scent-lovers-api.developeraddis.workers.dev/api/products';
-async function loadFeatured() {
-    try {
-        const res = await fetch(API);
-        const data = await res.json();
-        const products = (data.products || []).slice(0, 4);
-        const grid = document.getElementById('featuredProducts');
-        if(!products.length) { grid.innerHTML = '<p style="text-align:center;color:#888;grid-column:1/-1">No products yet. <a href="products.html" style="color:#D4A853">View all</a></p>'; return; }
-        grid.innerHTML = products.map(p => `
-            <div class="card"><div class="img-wrap"><img src="${p.image||'https://via.placeholder.com/400x250'}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/400x250'" loading="lazy">${p.tag?`<span class="tag">${p.tag}</span>`:''}</div>
-            <div class="card-body"><div class="brand">${p.brand}</div><h4>${p.name}</h4><div class="price">${p.price}</div>
-            <a href="products.html" class="btn">🛒 View Product</a></div></div>
-        `).join('');
-    } catch(e) { document.getElementById('featuredProducts').innerHTML = '<p style="text-align:center;color:#e74c3c;grid-column:1/-1">Error loading products</p>'; }
-}
-loadFeatured();
+var API = 'https://scent-lovers-api.developeraddis.workers.dev/api/products';
+fetch(API).then(function(r){return r.json()}).then(function(d){
+    var products = (d.products || []).slice(0, 4);
+    var grid = document.getElementById('featuredProducts');
+    if(!products.length){grid.innerHTML='<p style="text-align:center;color:#888;grid-column:1/-1">No products yet</p>';return}
+    grid.innerHTML = products.map(function(p){
+        return '<div class="card"><div class="img-wrap"><img src="'+(p.image||'https://via.placeholder.com/400x200')+'" alt="'+p.name+'" onerror="this.src=\'https://via.placeholder.com/400x200\'">'+(p.tag?'<span class="tag">'+p.tag+'</span>':'')+'</div><div class="card-body"><div class="brand">'+p.brand+'</div><h4>'+p.name+'</h4><div class="price">'+p.price+'</div><a href="products.html" class="btn">View Product</a></div></div>';
+    }).join('');
+}).catch(function(){document.getElementById('featuredProducts').innerHTML='<p style="text-align:center;color:#e74c3c;grid-column:1/-1">Error loading</p>'});
 </script>
 </body>
 </html>
