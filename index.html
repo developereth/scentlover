@@ -12,7 +12,6 @@
             --gold: #D4A853;
             --gold-dark: #B8933F;
             --gold-light: #F9E4B7;
-            --warm-glow: #FFE4B5;
             --black: #0A0A0A;
             --black-card: #111111;
             --black-surface: #161616;
@@ -36,7 +35,6 @@
             overflow-x: hidden;
         }
 
-        /* Animations */
         @keyframes scaleIn {
             from { opacity: 0; transform: scale(0.95); }
             to { opacity: 1; transform: scale(1); }
@@ -69,7 +67,6 @@
         }
         .reveal.visible { opacity: 1; transform: translateY(0); }
 
-        /* Top Bar */
         .topbar {
             background: #000;
             color: var(--gray-light);
@@ -88,7 +85,6 @@
         .topbar i { color: var(--gold); margin: 0 5px; }
         .topbar span { color: var(--gold); font-weight: 600; }
 
-        /* Navigation */
         .nav-bar {
             background: rgba(10,10,10,0.92);
             backdrop-filter: blur(20px);
@@ -162,7 +158,6 @@
         .nav-cta::after { display: none !important; }
         .nav-cta:hover { background: var(--gold-dark) !important; transform: translateY(-2px); }
 
-        /* Mobile Navigation */
         .mobile-menu-btn {
             display: none;
             background: var(--gold); border: none;
@@ -206,7 +201,6 @@
         }
         @media (min-width: 769px) { .nav-links { display: flex !important; } .nav-overlay { display: none !important; } }
 
-        /* Hero - Brighter & Warmer using specified logo image */
         .hero {
             position: relative;
             min-height: 90vh;
@@ -222,14 +216,11 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://github.com/developereth/scentlover/blob/9c50406159570c7f4fe221b5c297536b6c0168f0/logo.png?raw=true');
             background-size: cover;
-            background-position: center 25%;
-            background-repeat: no-repeat;
+            background-position: center;
             z-index: 0;
             animation: slowZoom 16s ease-out forwards;
         }
-        /* Warmer, brighter overlay with less darkness */
         .hero::before {
             content: '';
             position: absolute;
@@ -240,7 +231,6 @@
             background: linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.35) 100%);
             z-index: 1;
         }
-        /* Add warm highlight from bottom */
         .hero-warm-overlay {
             position: absolute;
             bottom: 0;
@@ -292,7 +282,6 @@
             background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: shimmer 4s linear infinite;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
         .hero-subtitle {
             font-size: 1.2rem;
@@ -300,14 +289,12 @@
             color: #FFF5E0;
             margin-bottom: 0.5rem;
             font-weight: 500;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.4);
         }
         .hero-desc {
             font-size: 1rem;
             color: #faf0e0;
             max-width: 520px;
             margin: 1rem auto 28px;
-            text-shadow: 0 1px 4px rgba(0,0,0,0.5);
             font-weight: 500;
         }
         .hero-btns {
@@ -335,7 +322,6 @@
         .btn-gold:hover {
             background: var(--gold-dark);
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(212,168,83,0.6);
         }
         .btn-outline {
             background: rgba(0,0,0,0.4);
@@ -358,7 +344,6 @@
         .section-title span { color: var(--gold); }
         .section-line { width: 55px; height: 3px; background: var(--gold); margin: 14px auto; border-radius: 3px; }
 
-        /* Product Cards */
         .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -426,7 +411,6 @@
             transform: translateY(-2px);
         }
 
-        /* Category Cards */
         .category-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -451,7 +435,6 @@
         .category-card h4 { font-size: 1rem; margin-bottom: 5px; }
         .category-card p { font-size: 0.75rem; color: var(--gray); }
 
-        /* Order Modal - WhatsApp, Telegram, Direct Call Only */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -513,7 +496,6 @@
             border-left: 3px solid var(--gold);
         }
         .product-info p { color: var(--gold-light); font-size: 0.95rem; margin: 4px 0; }
-        .product-info strong { color: var(--gold); }
         .contact-options {
             display: flex;
             flex-direction: column;
@@ -531,39 +513,13 @@
             font-weight: 600;
             font-size: 1rem;
             transition: var(--transition);
-            border: none;
-            cursor: pointer;
         }
-        .whatsapp-btn {
-            background: #25D366;
-            color: #fff;
-            box-shadow: 0 4px 15px rgba(37,211,102,0.3);
-        }
-        .whatsapp-btn:hover {
-            transform: translateY(-3px);
-            background: #20b859;
-            box-shadow: 0 8px 20px rgba(37,211,102,0.4);
-        }
-        .telegram-btn {
-            background: #0088cc;
-            color: #fff;
-            box-shadow: 0 4px 15px rgba(0,136,204,0.3);
-        }
-        .telegram-btn:hover {
-            transform: translateY(-3px);
-            background: #006699;
-            box-shadow: 0 8px 20px rgba(0,136,204,0.4);
-        }
-        .call-btn {
-            background: var(--gold);
-            color: #000;
-            box-shadow: 0 4px 15px rgba(212,168,83,0.3);
-        }
-        .call-btn:hover {
-            transform: translateY(-3px);
-            background: var(--gold-dark);
-            box-shadow: 0 8px 20px rgba(212,168,83,0.4);
-        }
+        .whatsapp-btn { background: #25D366; color: #fff; box-shadow: 0 4px 15px rgba(37,211,102,0.3); }
+        .whatsapp-btn:hover { transform: translateY(-3px); background: #20b859; }
+        .telegram-btn { background: #0088cc; color: #fff; box-shadow: 0 4px 15px rgba(0,136,204,0.3); }
+        .telegram-btn:hover { transform: translateY(-3px); background: #006699; }
+        .call-btn { background: var(--gold); color: #000; box-shadow: 0 4px 15px rgba(212,168,83,0.3); }
+        .call-btn:hover { transform: translateY(-3px); background: var(--gold-dark); }
         .contact-note {
             font-size: 0.75rem;
             color: var(--gray);
@@ -612,7 +568,7 @@
 </head>
 <body>
 
-<div class="topbar">
+<div class="topbar" id="topbar">
     <div><i class="fas fa-truck"></i> Free Delivery on Orders Over <span>5,000 ETB</span></div>
     <div><i class="fas fa-gift"></i> <span>2 Free Samples</span> with Every Order</div>
 </div>
@@ -642,13 +598,13 @@
 </header>
 
 <section class="hero">
-    <div class="hero-bg"></div>
+    <div class="hero-bg" id="heroBg" style="background-image: url('https://images.unsplash.com/photo-1594035910387-fea4773a0e6e?w=1600');"></div>
     <div class="hero-warm-overlay"></div>
     <div class="hero-content">
         <div class="hero-badge">✦ Premium Fragrances ✦</div>
-        <h1>Scent Lovers</h1>
-        <p class="hero-subtitle">Discover Your Signature Scent</p>
-        <p class="hero-desc">Explore our curated collection of luxury perfumes — from timeless classics to modern masterpieces</p>
+        <h1 id="heroTitle">Scent Lovers</h1>
+        <p class="hero-subtitle" id="heroSubtitle">Discover Your Signature Scent</p>
+        <p class="hero-desc" id="heroDesc">Explore our curated collection of luxury perfumes — from timeless classics to modern masterpieces</p>
         <div class="hero-btns">
             <a href="womens.html" class="btn btn-gold"><i class="fas fa-female"></i> Shop Women</a>
             <a href="mens.html" class="btn btn-outline"><i class="fas fa-male"></i> Shop Men</a>
@@ -680,27 +636,11 @@
             <div class="section-line"></div>
         </div>
         <div class="product-grid" id="productGrid">
-            <div class="product-card reveal" data-name="Rose Elegance" data-brand="Chanel" data-price="8,500 ETB">
-                <div class="product-card-img"><img src="https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=400&q=80" alt="Rose Elegance" loading="lazy"><span class="product-card-tag">Bestseller</span></div>
-                <div class="product-card-body"><div class="brand">Chanel</div><h4>Rose Elegance</h4><span class="price">8,500 ETB</span><button class="order-btn"><i class="fas fa-shopping-cart"></i> Order Now</button></div>
-            </div>
-            <div class="product-card reveal" data-name="Midnight Woods" data-brand="Tom Ford" data-price="12,000 ETB">
-                <div class="product-card-img"><img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=400&q=80" alt="Midnight Woods" loading="lazy"></div>
-                <div class="product-card-body"><div class="brand">Tom Ford</div><h4>Midnight Woods</h4><span class="price">12,000 ETB</span><button class="order-btn"><i class="fas fa-shopping-cart"></i> Order Now</button></div>
-            </div>
-            <div class="product-card reveal" data-name="Velvet Oud" data-brand="Creed" data-price="15,000 ETB">
-                <div class="product-card-img"><img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&q=80" alt="Velvet Oud" loading="lazy"><span class="product-card-tag">New</span></div>
-                <div class="product-card-body"><div class="brand">Creed</div><h4>Velvet Oud</h4><span class="price">15,000 ETB</span><button class="order-btn"><i class="fas fa-shopping-cart"></i> Order Now</button></div>
-            </div>
-            <div class="product-card reveal" data-name="Ocean Breeze" data-brand="Armani" data-price="7,200 ETB">
-                <div class="product-card-img"><img src="https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=400&q=80" alt="Ocean Breeze" loading="lazy"></div>
-                <div class="product-card-body"><div class="brand">Armani</div><h4>Ocean Breeze</h4><span class="price">7,200 ETB</span><button class="order-btn"><i class="fas fa-shopping-cart"></i> Order Now</button></div>
-            </div>
+            <!-- Products will load dynamically from API -->
         </div>
     </section>
 </div>
 
-<!-- Order Modal - WhatsApp, Telegram, Direct Call Only -->
 <div id="orderModal" class="modal-overlay">
     <div class="order-modal">
         <div class="modal-header">
@@ -734,90 +674,215 @@
         <div class="footer-col"><h4>Scent Lovers</h4><p>Premium perfumes for every occasion. Luxury fragrances delivered to your door.</p></div>
         <div class="footer-col"><h4>Shop</h4><a href="womens.html">Women</a><a href="mens.html">Men</a><a href="gift-sets.html">Gift Sets</a><a href="offers.html">Offers</a></div>
         <div class="footer-col"><h4>Help</h4><a href="contact.html">Contact</a><a href="stores.html">Stores</a><a href="rewards.html">Rewards</a></div>
-        <div class="footer-col"><h4>Contact</h4><p><i class="fas fa-phone"></i> +251 900 000 000</p><p><i class="fas fa-envelope"></i> scentlovers@email.com</p></div>
+        <div class="footer-col"><h4>Contact</h4><p><i class="fas fa-phone"></i> <span id="footerPhone">+251 900 000 000</span></p><p><i class="fas fa-envelope"></i> <span id="footerEmail">scentlovers@email.com</span></p></div>
     </div>
-    <div class="footer-bottom"><p>&copy; 2026 Scent Lovers Perfume. All rights reserved.</p></div>
+    <div class="footer-bottom" id="footerBottom"><p>&copy; 2026 Scent Lovers Perfume. All rights reserved.</p></div>
 </footer>
-<a href="https://t.me/scentlovers" class="telegram-float" target="_blank"><i class="fab fa-telegram"></i></a>
+
+<a href="https://t.me/scentlovers" class="telegram-float" target="_blank" id="telegramFloat"><i class="fab fa-telegram"></i></a>
 
 <script>
-    (function() {
-        // Scroll reveal
+    // ============================================
+    // SCENT LOVERS - PUBLIC SITE (DYNAMIC)
+    // ============================================
+    
+    // 👇 YOUR CLOUDFLARE WORKER URL
+    const API_URL = 'https://scent-lovers-api.developeraddis.workers.dev';
+    
+    let products = [];
+    let siteSettings = {};
+    
+    // Load all products from API
+    async function loadProducts() {
+        try {
+            const response = await fetch(`${API_URL}/api/products`);
+            const data = await response.json();
+            if (data.success && data.products.length > 0) {
+                products = data.products;
+                renderHomeProducts();
+            } else {
+                loadDemoProducts();
+            }
+        } catch (error) {
+            console.error('Error loading products:', error);
+            loadDemoProducts();
+        }
+    }
+    
+    // Demo products as fallback
+    function loadDemoProducts() {
+        products = [
+            { id: '1', name: 'Rose Elegance', brand: 'Chanel', price: '8,500 ETB', image: 'https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=400', category: 'women', tag: 'Bestseller' },
+            { id: '2', name: 'Midnight Woods', brand: 'Tom Ford', price: '12,000 ETB', image: 'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=400', category: 'men' },
+            { id: '3', name: 'Velvet Oud', brand: 'Creed', price: '15,000 ETB', image: 'https://images.unsplash.com/photo-1541643600914-78b084683601?w=400', category: 'women', tag: 'New' },
+            { id: '4', name: 'Ocean Breeze', brand: 'Armani', price: '7,200 ETB', image: 'https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=400', category: 'men' }
+        ];
+        renderHomeProducts();
+    }
+    
+    // Render products on homepage (show first 4)
+    function renderHomeProducts() {
+        const grid = document.getElementById('productGrid');
+        if (!grid) return;
+        
+        const displayProducts = products.slice(0, 4);
+        
+        grid.innerHTML = displayProducts.map(product => `
+            <div class="product-card reveal">
+                <div class="product-card-img">
+                    <img src="${product.image || 'https://via.placeholder.com/400x300?text=Perfume'}" alt="${product.name}">
+                    ${product.tag ? `<span class="product-card-tag">${product.tag}</span>` : ''}
+                </div>
+                <div class="product-card-body">
+                    <div class="brand">${product.brand}</div>
+                    <h4>${product.name}</h4>
+                    <span class="price">${product.price}</span>
+                    <button class="order-btn" onclick="openOrderModal('${product.brand}', '${product.name}', '${product.price}')">
+                        <i class="fas fa-shopping-cart"></i> Order Now
+                    </button>
+                </div>
+            </div>
+        `).join('');
+        
+        // Re-trigger reveal animations
         const reveals = document.querySelectorAll('.reveal');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
         }, { threshold: 0.12 });
         reveals.forEach(r => observer.observe(r));
-
-        // Mobile navigation
-        const menuBtn = document.getElementById('mobileMenuBtn');
-        const navLinks = document.getElementById('navLinks');
-        const overlay = document.getElementById('navOverlay');
-        const closeNavBtn = document.getElementById('navCloseBtn');
-        function closeMenu() { navLinks?.classList.remove('show'); overlay?.classList.remove('show'); document.body.style.overflow = ''; }
-        function openMenu() { navLinks?.classList.add('show'); overlay?.classList.add('show'); document.body.style.overflow = 'hidden'; }
-        if(menuBtn) menuBtn.onclick = (e) => { e.stopPropagation(); navLinks.classList.contains('show') ? closeMenu() : openMenu(); };
-        if(closeNavBtn) closeNavBtn.onclick = closeMenu;
-        if(overlay) overlay.onclick = closeMenu;
-        document.querySelectorAll('.nav-links a').forEach(link => link.addEventListener('click', () => { if(window.innerWidth <= 768) closeMenu(); }));
-        document.addEventListener('keydown', (e) => { if(e.key === 'Escape' && navLinks?.classList.contains('show')) closeMenu(); });
-
-        // Order Modal Logic
-        const modal = document.getElementById('orderModal');
-        const closeModalBtn = document.getElementById('closeModalBtn');
-        const selectedProductNameSpan = document.getElementById('selectedProductName');
-        const selectedProductPriceSpan = document.getElementById('selectedProductPrice');
-        const whatsappBtn = document.getElementById('whatsappOrderBtn');
-        const telegramBtn = document.getElementById('telegramOrderBtn');
-        const callBtn = document.getElementById('callOrderBtn');
-        
-        let currentProduct = { name: '', brand: '', price: '' };
-        
-        const PHONE_NUMBER = '251900000000';
-        const TELEGRAM_USERNAME = 'scentlovers';
-        
-        function openOrderModal(productData) {
-            currentProduct = productData;
-            const fullName = `${productData.brand} - ${productData.name}`;
-            selectedProductNameSpan.textContent = fullName;
-            selectedProductPriceSpan.textContent = productData.price;
-            
-            const whatsappMsg = `Hello Scent Lovers! I'm interested in ordering: ${fullName} (${productData.price}). Please provide details.`;
-            whatsappBtn.href = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(whatsappMsg)}`;
-            telegramBtn.href = `https://t.me/${TELEGRAM_USERNAME}?text=${encodeURIComponent(whatsappMsg)}`;
-            callBtn.href = `tel:+${PHONE_NUMBER}`;
-            
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
+    }
+    
+    // Load site settings
+    async function loadSettings() {
+        try {
+            const response = await fetch(`${API_URL}/api/settings`);
+            const data = await response.json();
+            if (data.success && data.settings) {
+                siteSettings = data.settings;
+                applySettings();
+            }
+        } catch (error) {
+            console.error('Error loading settings:', error);
+        }
+    }
+    
+    function applySettings() {
+        // Hero section
+        document.getElementById('heroTitle').textContent = siteSettings.heroTitle || 'Scent Lovers';
+        document.getElementById('heroSubtitle').textContent = siteSettings.heroSubtitle || 'Discover Your Signature Scent';
+        document.getElementById('heroDesc').textContent = siteSettings.heroDesc || 'Explore our curated collection of luxury perfumes';
+        if (siteSettings.heroBg) {
+            document.getElementById('heroBg').style.backgroundImage = `url(${siteSettings.heroBg})`;
         }
         
-        function closeModal() {
-            modal.classList.remove('active');
-            document.body.style.overflow = '';
+        // Top bar
+        const topbar = document.getElementById('topbar');
+        if (topbar && siteSettings.topbarLeft && siteSettings.topbarRight) {
+            topbar.innerHTML = `
+                <div><i class="fas fa-truck"></i> ${siteSettings.topbarLeft}</div>
+                <div><i class="fas fa-gift"></i> ${siteSettings.topbarRight}</div>
+            `;
         }
         
-        const orderBtns = document.querySelectorAll('.order-btn');
-        orderBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const productCard = btn.closest('.product-card');
-                if(productCard) {
-                    const name = productCard.querySelector('h4')?.innerText || 'Perfume';
-                    const brand = productCard.querySelector('.brand')?.innerText || 'Luxury Brand';
-                    const price = productCard.querySelector('.price')?.innerText || 'N/A';
-                    openOrderModal({ name, brand, price });
-                }
-            });
-        });
+        // Footer
+        if (siteSettings.footerText) {
+            document.getElementById('footerBottom').innerHTML = `<p>${siteSettings.footerText}</p>`;
+        }
+        if (siteSettings.phoneNumber) {
+            document.getElementById('footerPhone').textContent = siteSettings.phoneNumber;
+        }
         
-        if(closeModalBtn) closeModalBtn.onclick = closeModal;
-        modal?.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
+        // Telegram float button
+        if (siteSettings.telegramUsername) {
+            const telegramFloat = document.getElementById('telegramFloat');
+            if (telegramFloat) {
+                telegramFloat.href = `https://t.me/${siteSettings.telegramUsername.replace('@', '')}`;
+            }
+        }
+    }
+    
+    // Order modal function
+    window.openOrderModal = function(brand, name, price) {
+        document.getElementById('modalProductInfo').innerHTML = `
+            <p><strong>Selected Product:</strong> ${brand} - ${name}</p>
+            <p><strong>Price:</strong> ${price}</p>
+        `;
         
-        const currentPage = location.pathname.split('/').pop() || 'index.html';
-        document.querySelectorAll('.nav-links a:not(.nav-cta)').forEach(link => {
-            if(link.getAttribute('href') === currentPage) link.classList.add('active');
+        const phone = siteSettings.whatsappNumber || '251900000000';
+        const telegramUser = siteSettings.telegramUsername || 'scentlovers';
+        const message = `Hello Scent Lovers! I'm interested in ordering: ${brand} - ${name} (${price})`;
+        
+        document.getElementById('whatsappOrderBtn').href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+        document.getElementById('telegramOrderBtn').href = `https://t.me/${telegramUser.replace('@', '')}?text=${encodeURIComponent(message)}`;
+        document.getElementById('callOrderBtn').href = `tel:+${phone}`;
+        
+        document.getElementById('orderModal').classList.add('active');
+    };
+    
+    // Close modal
+    document.getElementById('closeModalBtn')?.addEventListener('click', () => {
+        document.getElementById('orderModal').classList.remove('active');
+    });
+    
+    document.getElementById('orderModal')?.addEventListener('click', (e) => {
+        if (e.target === document.getElementById('orderModal')) {
+            document.getElementById('orderModal').classList.remove('active');
+        }
+    });
+    
+    // Mobile navigation
+    const menuBtn = document.getElementById('mobileMenuBtn');
+    const navLinks = document.getElementById('navLinks');
+    const overlay = document.getElementById('navOverlay');
+    const closeNavBtn = document.getElementById('navCloseBtn');
+    
+    function closeMenu() { 
+        navLinks?.classList.remove('show'); 
+        overlay?.classList.remove('show'); 
+        document.body.style.overflow = ''; 
+    }
+    
+    function openMenu() { 
+        navLinks?.classList.add('show'); 
+        overlay?.classList.add('show'); 
+        document.body.style.overflow = 'hidden'; 
+    }
+    
+    if (menuBtn) {
+        menuBtn.onclick = (e) => { 
+            e.stopPropagation(); 
+            navLinks.classList.contains('show') ? closeMenu() : openMenu(); 
+        };
+    }
+    if (closeNavBtn) closeNavBtn.onclick = closeMenu;
+    if (overlay) overlay.onclick = closeMenu;
+    
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => { 
+            if (window.innerWidth <= 768) closeMenu(); 
         });
-    })();
+    });
+    
+    document.addEventListener('keydown', (e) => { 
+        if (e.key === 'Escape' && navLinks?.classList.contains('show')) closeMenu(); 
+    });
+    
+    // Active link highlight
+    const currentPage = location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('.nav-links a:not(.nav-cta)').forEach(link => {
+        if (link.getAttribute('href') === currentPage) link.classList.add('active');
+    });
+    
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    reveals.forEach(r => observer.observe(r));
+    
+    // Initialize
+    loadProducts();
+    loadSettings();
 </script>
 </body>
 </html>
