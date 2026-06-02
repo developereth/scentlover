@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head><title>Upstash Direct Test</title></head>
+<body style="background:#0a0a0a;color:white;font-family:monospace;padding:20px;">
+<h1 style="color:#D4A853;">🔍 Upstash Direct API Test</h1>
+
+<button onclick="testPing()" style="padding:10px 20px;background:#D4A853;border:none;border-radius:5px;cursor:pointer;margin:5px;">1️⃣ Ping</button>
+<button onclick="testGet()" style="padding:10px 20px;background:#D4A853;border:none;border-radius:5px;cursor:pointer;margin:5px;">2️⃣ Get Products</button>
+<button onclick="testSet()" style="padding:10px 20px;background:#D4A853;border:none;border-radius:5px;cursor:pointer;margin:5px;">3️⃣ Set Products</button>
+<button onclick="testSetSimple()" style="padding:10px 20px;background:#D4A853;border:none;border-radius:5px;cursor:pointer;margin:5px;">4️⃣ Set Simple Value</button>
+<button onclick="runAll()" style="padding:10px 20px;background:#27ae60;border:none;border-radius:5px;cursor:pointer;margin:5px;">▶️ Run All</button>
+
+<pre id="out" style="background:#111;padding:20px;margin-top:20px;border-radius:8px;white-space:pre-wrap;"></pre>
+
+<script>
+const URL = 'https://prime-urchin-106067.upstash.io';
+const TOKEN = 'box_bf03fbbd64676bbe416a3eea30aea13a300866c324dfb3133fba076443b327b4';
+const out = document.getElementById('out');
+
+function log(msg) { out.textContent += msg + '\n'; }
+
+async function testPing() {
+    log('\n📡 PING TEST:');
+    try {
+        const res = await fetch(`${URL}/ping`, {
+            headers: { 'Authorization': `Bearer ${TOKEN}` }
+        });
+        const text = await res.text();
+        log(`Status: ${res.status}`);
+        log(`Response: ${text}`);
+        log(res.ok ? '✅ PING SUCCESS' : '❌ PING FAILED');
+    } catch(e) { log(`❌ Error: ${e.message}`); }
+}
+
+async function testGet() {
+    log('\n📖 GET TEST:');
+    try {
+        const res = await fetch(`${URL}/get/products`, {
+            headers: { 'Authorization': `Bearer ${TOKEN}` }
+        });
+        const data = await res.json();
+        log(`Status: ${res.status}`);
+        log(`Response: ${JSON.stringify(data, null, 2)}`);
+        log(data.result ? '✅ GET SUCCESS' : '⚠️ No data (empty database)');
+    } catch(e) { log(`❌ Error: ${e.message}`); }
+}
+
+async function testSet() {
+    log('\n💾 SET TEST (JSON array):');
+    try {
+        const testData = JSON.stringify([{id:"1",name:"Test",brand:"Test",price:"100 ETB",category:"women"}]);
+        
+        log(`Sending body: ${testData}`);
+        
+        const res = await fetch(`${URL}/set/products`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${TOKEN}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(testData)
+        });
+        const data = await res.json();
+        log(`Status: ${res.status}`);
+        log(`Response: ${JSON.stringify(data, null, 2)}`);
+        log(data.result === 'OK' ? '✅ SET SUCCESS' : '❌ SET FAILED');
+    } catch(e) { log(`❌ Error: ${e.message}`); }
+}
+
+async function testSetSimple() {
+    log('\n💾 SET SIMPLE TEST:');
+    try {
+        const res = await fetch(`${URL}/set/testkey`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${TOKEN}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify("hello world")
+        });
+        const data = await res.json();
+        log(`Status: ${res.status}`);
+        log(`Response: ${JSON.stringify(data, null, 2)}`);
+        log(data.result === 'OK' ? '✅ SIMPLE SET SUCCESS' : '❌ SIMPLE SET FAILED');
+    } catch(e) { log(`❌ Error: ${e.message}`); }
+}
+
+async function runAll() {
+    out.textContent = '';
+    log('🔍 STARTING ALL TESTS...');
+    await testPing();
+    await testGet();
+    await testSetSimple();
+    await testSet();
+    await testGet();
+    log('\n✅ ALL TESTS COMPLETE');
+}
+</script>
+</body>
+</html>
