@@ -18,7 +18,7 @@
         .logo-text span { display: block; font-size: 0.55rem; color: var(--gray-light); letter-spacing: 3px; }
         .nav-links { display: flex; gap: 1.5rem; list-style: none; }
         .nav-links a { text-decoration: none; color: #bbb; transition: 0.3s; }
-        .nav-links a:hover { color: var(--gold); }
+        .nav-links a:hover, .nav-links a.active { color: var(--gold); }
         .mobile-menu-btn { display: none; background: var(--gold); border: none; color: #000; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; }
         @media (max-width: 768px) {
             .mobile-menu-btn { display: flex; align-items: center; justify-content: center; }
@@ -49,9 +49,10 @@
         .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 30px; }
         .product-card { background: #111; border-radius: 20px; overflow: hidden; border: 1px solid rgba(212,168,83,0.15); transition: 0.3s; }
         .product-card:hover { transform: translateY(-5px); border-color: var(--gold); }
-        .product-card-img { height: 250px; overflow: hidden; }
+        .product-card-img { height: 250px; overflow: hidden; position: relative; }
         .product-card-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
         .product-card:hover .product-card-img img { transform: scale(1.05); }
+        .product-card-tag { position: absolute; top: 12px; left: 12px; background: var(--gold); color: #000; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; }
         .product-card-body { padding: 18px; }
         .brand { font-size: 0.7rem; color: var(--gold); text-transform: uppercase; }
         .product-card-body h4 { margin: 8px 0 5px; }
@@ -64,20 +65,27 @@
         .category-card i { font-size: 2rem; color: var(--gold); margin-bottom: 15px; }
         .category-card h4 { font-size: 1rem; margin-bottom: 5px; }
         .category-card p { font-size: 0.75rem; color: #999; }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); backdrop-filter: blur(8px); z-index: 2000; display: flex; align-items: center; justify-content: center; visibility: hidden; opacity: 0; transition: 0.3s; }
+        .modal-overlay.active { visibility: visible; opacity: 1; }
+        .order-modal { background: #111; border-radius: 24px; padding: 30px; max-width: 400px; width: 90%; text-align: center; border: 1px solid var(--gold); }
+        .contact-option { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 14px; margin: 12px 0; border-radius: 50px; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .whatsapp-option { background: #25D366; color: #fff; }
+        .telegram-option { background: #0088cc; color: #fff; }
+        .call-option { background: var(--gold); color: #000; }
         .footer { background: #000; padding: 40px 20px; text-align: center; border-top: 1px solid rgba(212,168,83,0.1); }
         @media (max-width: 768px) { .container { padding: 0 1rem; } .product-grid { gap: 15px; } }
     </style>
 </head>
 <body>
 
-<div class="topbar">
-    <div><i class="fas fa-truck"></i> Free Delivery on Orders Over <span>5,000 ETB</span></div>
-    <div><i class="fas fa-gift"></i> <span>2 Free Samples</span> with Every Order</div>
+<div class="topbar" id="topbar">
+    <div><i class="fas fa-truck"></i> Free Delivery on Orders Over 5,000 ETB</div>
+    <div><i class="fas fa-gift"></i> 2 Free Samples with Every Order</div>
 </div>
 
 <header class="nav-bar">
     <div class="nav-inner">
-        <a href="#" class="logo"><div class="logo-text">Scent Lovers<span>PREMIUM PERFUMES</span></div></a>
+        <a href="index.html" class="logo"><div class="logo-text">Scent Lovers<span>PREMIUM PERFUMES</span></div></a>
         <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
         <div class="nav-overlay" id="navOverlay"></div>
         <ul class="nav-links" id="navLinks">
@@ -91,7 +99,7 @@
 </header>
 
 <section class="hero">
-    <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1594035910387-fea4773a0e6e?w=1600');"></div>
+    <div class="hero-bg" id="heroBg" style="background-image: url('https://images.unsplash.com/photo-1594035910387-fea4773a0e6e?w=1600');"></div>
     <div class="hero-content">
         <h1 id="heroTitle">Scent Lovers</h1>
         <p class="hero-subtitle" id="heroSubtitle">Discover Your Signature Scent</p>
@@ -127,18 +135,28 @@
             <div class="section-line"></div>
         </div>
         <div class="product-grid" id="productGrid">
-            <div style="text-align: center; padding: 40px; color: #999;">Loading products...</div>
+            <div style="text-align: center; padding: 40px;">Loading products...</div>
         </div>
     </section>
 </div>
 
+<div id="orderModal" class="modal-overlay">
+    <div class="order-modal">
+        <h3 style="color:var(--gold); margin-bottom:15px;"><i class="fas fa-heart"></i> Order Now</h3>
+        <div id="orderProductInfo" style="margin-bottom:20px;"></div>
+        <a href="#" id="whatsappOrder" class="contact-option whatsapp-option" target="_blank"><i class="fab fa-whatsapp"></i> Order via WhatsApp</a>
+        <a href="#" id="telegramOrder" class="contact-option telegram-option" target="_blank"><i class="fab fa-telegram"></i> Order via Telegram</a>
+        <a href="#" id="callOrder" class="contact-option call-option"><i class="fas fa-phone-alt"></i> Direct Call</a>
+        <button class="close-modal" style="margin-top:15px; background:none; border:none; color:#999; cursor:pointer;">Close</button>
+    </div>
+</div>
+
 <footer class="footer">
     <p>&copy; 2026 Scent Lovers Perfume. All rights reserved.</p>
-    <p style="margin-top:10px;"><i class="fas fa-phone"></i> +251 900 000 000 | <i class="fab fa-telegram"></i> @scentlovers</p>
+    <p style="margin-top:10px;"><i class="fas fa-phone"></i> <span id="footerPhone">+251 900 000 000</span> | <i class="fab fa-telegram"></i> @<span id="footerTelegram">scentlovers</span></p>
 </footer>
 
 <script>
-    // YOUR WORKER URL
     const API_URL = 'https://scent-lovers-api.developeraddis.workers.dev';
     let allProducts = [];
     let siteSettings = {};
@@ -147,34 +165,21 @@
         try {
             const response = await fetch(`${API_URL}/api/products`);
             const data = await response.json();
-            console.log('Products loaded:', data);
-            
-            if (data.success && data.products) {
-                // Parse products if it's a string
+            if (data.success) {
                 let products = data.products;
-                if (typeof products === 'string') {
-                    products = JSON.parse(products);
-                }
+                if (typeof products === 'string') products = JSON.parse(products);
                 allProducts = Array.isArray(products) ? products : [];
-                renderHomeProducts();
-            } else {
-                showDemoProducts();
+                renderHomepage();
             }
-        } catch (error) {
-            console.error('Error loading products:', error);
-            showDemoProducts();
-        }
+        } catch (error) { console.error('Error:', error); }
     }
 
-    function renderHomeProducts() {
+    function renderHomepage() {
         const grid = document.getElementById('productGrid');
-        if (!grid) return;
-        
-        // Show first 4 products on homepage
-        const displayProducts = allProducts.slice(0, 4);
+        const displayProducts = allProducts.slice(0, 8);
         
         if (displayProducts.length === 0) {
-            grid.innerHTML = '<div style="text-align: center; padding: 40px; color: #999;">No products yet. Check back soon!</div>';
+            grid.innerHTML = '<div style="text-align: center; padding: 40px;">No products yet. Check back soon!</div>';
             return;
         }
         
@@ -182,40 +187,13 @@
             <div class="product-card">
                 <div class="product-card-img">
                     <img src="${product.image || 'https://via.placeholder.com/400x300?text=Perfume'}" alt="${product.name}">
-                    ${product.tag ? `<span class="product-card-tag" style="position: absolute; top: 12px; left: 12px; background: var(--gold); color: #000; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem;">${product.tag}</span>` : ''}
+                    ${product.tag ? `<span class="product-card-tag">${product.tag}</span>` : ''}
                 </div>
                 <div class="product-card-body">
                     <div class="brand">${product.brand}</div>
                     <h4>${product.name}</h4>
                     <span class="price">${product.price}</span>
-                    <button class="order-btn" onclick="alert('Contact us on Telegram @scentlovers to order: ${product.brand} - ${product.name}')">
-                        <i class="fas fa-shopping-cart"></i> Order Now
-                    </button>
-                </div>
-            </div>
-        `).join('');
-    }
-
-    function showDemoProducts() {
-        const demoProducts = [
-            { brand: 'Chanel', name: 'Rose Elegance', price: '8,500 ETB', image: 'https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=400', tag: 'Bestseller' },
-            { brand: 'Tom Ford', name: 'Midnight Woods', price: '12,000 ETB', image: 'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=400' },
-            { brand: 'Creed', name: 'Velvet Oud', price: '15,000 ETB', image: 'https://images.unsplash.com/photo-1541643600914-78b084683601?w=400', tag: 'New' },
-            { brand: 'Armani', name: 'Ocean Breeze', price: '7,200 ETB', image: 'https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=400' }
-        ];
-        
-        const grid = document.getElementById('productGrid');
-        grid.innerHTML = demoProducts.map(product => `
-            <div class="product-card">
-                <div class="product-card-img">
-                    <img src="${product.image}" alt="${product.name}">
-                    ${product.tag ? `<span class="product-card-tag" style="position: absolute; top: 12px; left: 12px; background: var(--gold); color: #000; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem;">${product.tag}</span>` : ''}
-                </div>
-                <div class="product-card-body">
-                    <div class="brand">${product.brand}</div>
-                    <h4>${product.name}</h4>
-                    <span class="price">${product.price}</span>
-                    <button class="order-btn" onclick="alert('Contact us on Telegram @scentlovers to order: ${product.brand} - ${product.name}')">
+                    <button class="order-btn" onclick="openOrderModal('${product.brand}', '${product.name}', '${product.price}')">
                         <i class="fas fa-shopping-cart"></i> Order Now
                     </button>
                 </div>
@@ -228,30 +206,37 @@
             const response = await fetch(`${API_URL}/api/settings`);
             const data = await response.json();
             if (data.success && data.settings) {
-                document.getElementById('heroTitle').textContent = data.settings.heroTitle || 'Scent Lovers';
-                document.getElementById('heroSubtitle').textContent = data.settings.heroSubtitle || 'Discover Your Signature Scent';
-                document.getElementById('heroDesc').textContent = data.settings.heroDesc || '';
+                siteSettings = data.settings;
+                document.getElementById('heroTitle').textContent = siteSettings.heroTitle || 'Scent Lovers';
+                document.getElementById('heroSubtitle').textContent = siteSettings.heroSubtitle || 'Discover Your Signature Scent';
+                document.getElementById('heroDesc').textContent = siteSettings.heroDesc || '';
+                if (siteSettings.heroBg) document.getElementById('heroBg').style.backgroundImage = `url(${siteSettings.heroBg})`;
+                if (siteSettings.phoneNumber) document.getElementById('footerPhone').textContent = siteSettings.phoneNumber;
+                if (siteSettings.telegramUsername) document.getElementById('footerTelegram').textContent = siteSettings.telegramUsername;
             }
-        } catch (error) {
-            console.error('Error loading settings:', error);
-        }
+        } catch (error) { console.error('Error:', error); }
     }
+
+    window.openOrderModal = function(brand, name, price) {
+        document.getElementById('orderProductInfo').innerHTML = `<p><strong>${brand}</strong> - ${name}</p><p style="color:var(--gold); font-size:1.2rem;">${price}</p>`;
+        const phone = siteSettings.whatsappNumber || '251900000000';
+        const telegramUser = siteSettings.telegramUsername || 'scentlovers';
+        const message = `Hello Scent Lovers! I'm interested in ordering: ${brand} - ${name} (${price})`;
+        document.getElementById('whatsappOrder').href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+        document.getElementById('telegramOrder').href = `https://t.me/${telegramUser}?text=${encodeURIComponent(message)}`;
+        document.getElementById('callOrder').href = `tel:+${phone}`;
+        document.getElementById('orderModal').classList.add('active');
+    };
+
+    document.querySelector('.close-modal')?.addEventListener('click', () => document.getElementById('orderModal').classList.remove('active'));
 
     // Mobile menu
     const menuBtn = document.getElementById('mobileMenuBtn');
     const navLinks = document.getElementById('navLinks');
     const navOverlay = document.getElementById('navOverlay');
     if (menuBtn) {
-        menuBtn.onclick = () => {
-            navLinks.classList.toggle('show');
-            navOverlay.classList.toggle('show');
-        };
-    }
-    if (navOverlay) {
-        navOverlay.onclick = () => {
-            navLinks.classList.remove('show');
-            navOverlay.classList.remove('show');
-        };
+        menuBtn.onclick = () => { navLinks.classList.toggle('show'); navOverlay.classList.toggle('show'); };
+        navOverlay.onclick = () => { navLinks.classList.remove('show'); navOverlay.classList.remove('show'); };
     }
 
     loadProducts();
