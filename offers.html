@@ -2,159 +2,108 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>Perfume Offers & Sale | Scent Lovers | Addis Ababa</title>
-    <meta name="description" content="Shop perfume offers and discounts at Scent Lovers. Up to 40% off on luxury fragrances, gift sets, and exclusive deals in Addis Ababa.">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Offers | Scent Lovers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --gold: #D4A853;
-            --gold-dark: #B8933F;
-            --gold-light: #F9E4B7;
-            --black: #0A0A0A;
-            --black-card: #111111;
-            --black-surface: #161616;
-            --white: #FFFFFF;
-            --gray: #999999;
-            --gray-light: #BBBBBB;
-            --gray-dark: #666666;
-            --radius-lg: 24px;
-            --shadow-gold: 0 8px 30px rgba(212,168,83,0.2);
-            --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
-        }
-        body { font-family: 'Inter', sans-serif; background: var(--black); color: var(--white); line-height: 1.6; overflow-x: hidden; }
-        @keyframes shimmer { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
-        @keyframes goldPulse { 0%,100% { box-shadow: 0 0 20px rgba(212,168,83,0.15); } 50% { box-shadow: 0 0 40px rgba(212,168,83,0.3); } }
-        @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
-        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
-        .topbar { background: #000; color: var(--gray-light); text-align: center; padding: 10px 20px; font-size: 0.78rem; display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; border-bottom: 1px solid rgba(212,168,83,0.15); }
+        :root { --gold: #D4A853; --gold-dark: #B8933F; --black: #0A0A0A; --black-card: #111111; --gray-light: #BBBBBB; }
+        body { font-family: 'Inter', sans-serif; background: var(--black); color: white; }
+        .topbar { background: #000; text-align: center; padding: 10px; font-size: 0.75rem; border-bottom: 1px solid rgba(212,168,83,0.2); }
         .topbar i { color: var(--gold); margin: 0 5px; }
-        .nav-bar { background: rgba(10,10,10,0.97); backdrop-filter: blur(25px); border-bottom: 1px solid rgba(212,168,83,0.15); position: sticky; top: 0; z-index: 1000; padding: 0 2rem; }
-        .nav-inner { max-width: 1300px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0.85rem 0; flex-wrap: wrap; gap: 16px; }
-        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-        .logo-img-custom { height: 52px; width: auto; object-fit: contain; border-radius: 12px; }
-        .logo-icon { width: 48px; height: 48px; background: var(--gold); border-radius: 50%; display: none; align-items: center; justify-content: center; font-size: 1.2rem; color: #000; animation: goldPulse 3s infinite; }
-        .logo-text { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--gold); letter-spacing: 1px; }
-        .logo-text span { display: block; font-size: 0.55rem; color: var(--gray-light); letter-spacing: 3px; font-weight: 400; }
-        .nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
-        .nav-links a { text-decoration: none; font-weight: 500; color: var(--gray-light); transition: var(--transition); font-size: 0.83rem; position: relative; padding: 5px 0; }
-        .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--gold); transition: var(--transition); }
-        .nav-links a:hover { color: var(--gold); }
-        .nav-links a:hover::after { width: 100%; }
-        .nav-links a.active { color: var(--gold); font-weight: 600; }
-        .nav-links a.active::after { width: 100%; }
-        .nav-cta { background: var(--gold); color: #000 !important; padding: 10px 22px !important; border-radius: 50px !important; font-weight: 600 !important; box-shadow: var(--shadow-gold); }
-        .nav-cta:hover { background: var(--gold-dark) !important; transform: translateY(-2px); }
-        .mobile-menu-btn { display: none; background: var(--gold); border: none; color: #000; font-size: 22px; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; align-items: center; justify-content: center; }
-        .nav-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); backdrop-filter: blur(6px); z-index: 998; }
-        .nav-overlay.show { display: block; }
-        .nav-close-btn { display: none; position: absolute; top: 20px; right: 20px; background: none; border: 2px solid var(--gold); color: var(--gold); font-size: 24px; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; transition: var(--transition); }
-        .nav-close-btn:hover { background: var(--gold); color: #000; }
+        .nav-bar { background: rgba(10,10,10,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(212,168,83,0.2); position: sticky; top: 0; z-index: 1000; padding: 0 2rem; }
+        .nav-inner { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0.85rem 0; }
+        .logo-text { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--gold); }
+        .logo-text span { display: block; font-size: 0.55rem; color: var(--gray-light); letter-spacing: 3px; }
+        .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: #bbb; transition: 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+        .mobile-menu-btn { display: none; background: var(--gold); border: none; color: #000; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; }
         @media (max-width: 768px) {
-            .mobile-menu-btn { display: flex; }
-            .nav-links { position: fixed; top: 0; right: -100%; width: 80%; max-width: 320px; height: 100vh; background: var(--black-card); flex-direction: column; justify-content: center; align-items: center; gap: 28px; transition: right 0.4s cubic-bezier(0.4,0,0.2,1); z-index: 999; padding: 60px 20px; border-left: 3px solid var(--gold); }
+            .mobile-menu-btn { display: flex; align-items: center; justify-content: center; }
+            .nav-links { position: fixed; top: 0; right: -100%; width: 80%; max-width: 320px; height: 100vh; background: #111; flex-direction: column; justify-content: center; gap: 25px; transition: 0.3s; z-index: 999; padding: 60px 20px; }
             .nav-links.show { right: 0; }
-            .nav-close-btn { display: flex; }
+            .nav-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 998; }
+            .nav-overlay.show { display: block; }
         }
-        @media (min-width: 769px) { .nav-links { display: flex !important; } .nav-overlay { display: none !important; } }
-        .page-header { background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 100%), url('https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=1600&q=80') center/cover no-repeat; padding: 90px 20px 70px; text-align: center; position: relative; }
-        .page-header h1 { font-family: 'Playfair Display', serif; font-size: 3rem; background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: shimmer 4s linear infinite; margin-bottom: 8px; }
+        .page-header { background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 100%), url('https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=1600&q=80') center/cover no-repeat; padding: 90px 20px 70px; text-align: center; }
+        .page-header h1 { font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--gold); margin-bottom: 8px; }
+        .flash-sale { background: linear-gradient(135deg, #b33a2a, #8b1d10); border-radius: 24px; padding: 30px; text-align: center; margin-top: -30px; margin-bottom: 30px; position: relative; z-index: 10; }
+        .flash-sale h3 { font-size: 1.8rem; color: #fff; margin-bottom: 6px; }
         .container { max-width: 1300px; margin: 0 auto; padding: 0 2rem; }
-        .section { padding: 70px 0; }
+        .section { padding: 60px 0; }
         .section-header { text-align: center; margin-bottom: 50px; }
-        .section-label { font-size: 0.75rem; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; }
-        .section-title { font-family: 'Playfair Display', serif; font-size: 2.3rem; font-weight: 700; }
+        .section-title { font-family: 'Playfair Display', serif; font-size: 2.3rem; }
         .section-title span { color: var(--gold); }
-        .section-line { width: 55px; height: 3px; background: var(--gold); margin: 14px auto; border-radius: 3px; }
-        .flash-sale-banner { background: linear-gradient(135deg, #b33a2a, #8b1d10); border-radius: 24px; padding: 30px; text-align: center; margin-top: -30px; margin-bottom: 30px; position: relative; z-index: 10; box-shadow: 0 20px 40px rgba(179,58,42,0.3); }
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 28px; margin-top: 20px; }
-        .product-card { background: var(--black-card); border-radius: var(--radius-lg); overflow: hidden; border: 1px solid rgba(212,168,83,0.15); transition: var(--transition); }
-        .product-card:hover { border-color: var(--gold); transform: translateY(-6px); box-shadow: var(--shadow-gold); }
+        .section-line { width: 60px; height: 3px; background: var(--gold); margin: 15px auto; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 30px; }
+        .product-card { background: #111; border-radius: 20px; overflow: hidden; border: 1px solid rgba(212,168,83,0.15); transition: 0.3s; }
+        .product-card:hover { transform: translateY(-5px); border-color: var(--gold); }
         .product-card-img { height: 250px; overflow: hidden; position: relative; }
-        .product-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .product-card-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
         .product-card:hover .product-card-img img { transform: scale(1.05); }
         .product-card-tag { position: absolute; top: 12px; left: 12px; background: #b33a2a; color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; }
         .product-card-body { padding: 18px; }
-        .brand { font-size: 0.7rem; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; }
-        .product-card-body h4 { font-size: 1rem; margin: 6px 0 4px; font-weight: 600; }
-        .price { font-size: 1.2rem; font-weight: 700; color: #b33a2a; margin: 8px 0; display: block; }
-        .old-price { text-decoration: line-through; color: var(--gray); font-size: 0.85rem; margin-left: 8px; }
-        .order-btn { width: 100%; background: var(--gold); color: #000; border: none; padding: 10px; border-radius: 40px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: var(--transition); margin-top: 10px; }
-        .order-btn:hover { background: var(--gold-dark); transform: translateY(-2px); }
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.96); backdrop-filter: blur(8px); z-index: 2000; display: flex; align-items: center; justify-content: center; visibility: hidden; opacity: 0; transition: all 0.3s ease; }
+        .brand { font-size: 0.7rem; color: var(--gold); text-transform: uppercase; }
+        .product-card-body h4 { margin: 8px 0 5px; }
+        .price { font-size: 1.2rem; font-weight: 700; color: #b33a2a; display: block; margin: 10px 0; }
+        .old-price { text-decoration: line-through; color: #999; font-size: 0.85rem; margin-left: 8px; }
+        .order-btn { width: 100%; background: var(--gold); color: #000; border: none; padding: 10px; border-radius: 40px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.3s; }
+        .order-btn:hover { background: var(--gold-dark); }
+        .footer { background: #000; padding: 40px 20px; text-align: center; border-top: 1px solid rgba(212,168,83,0.1); }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); backdrop-filter: blur(8px); z-index: 2000; display: flex; align-items: center; justify-content: center; visibility: hidden; opacity: 0; transition: 0.3s; }
         .modal-overlay.active { visibility: visible; opacity: 1; }
-        .order-modal { background: var(--black-card); border-radius: 32px; max-width: 480px; width: 90%; padding: 35px 30px; border: 1px solid var(--gold); text-align: center; }
+        .order-modal { background: #111; border-radius: 24px; padding: 30px; max-width: 400px; width: 90%; text-align: center; border: 1px solid var(--gold); }
         .contact-option { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 14px; margin: 12px 0; border-radius: 50px; text-decoration: none; font-weight: 600; transition: 0.3s; }
         .whatsapp-option { background: #25D366; color: #fff; }
         .telegram-option { background: #0088cc; color: #fff; }
         .call-option { background: var(--gold); color: #000; }
-        .footer { background: #000; padding: 3rem 2rem 2rem; border-top: 1px solid rgba(212,168,83,0.1); }
-        .footer-grid { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; }
-        .footer-col h4 { color: var(--gold); margin-bottom: 15px; font-size: 1rem; }
-        .footer-col a, .footer-col p { display: block; color: var(--gray-dark); font-size: 0.8rem; text-decoration: none; margin-bottom: 8px; transition: var(--transition); }
-        .footer-col a:hover { color: var(--gold); padding-left: 4px; }
-        .footer-bottom { text-align: center; padding-top: 30px; font-size: 0.75rem; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 30px; }
-        .telegram-float { position: fixed; bottom: 25px; right: 25px; width: 55px; height: 55px; background: #0088cc; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; color: #fff; text-decoration: none; z-index: 999; animation: float 2.5s ease-in-out infinite; }
-        .telegram-float:hover { transform: scale(1.08); background: #006699; }
-        @media (max-width: 600px) { .section-title { font-size: 1.8rem; } .product-grid { gap: 16px; } }
+        @media (max-width: 768px) { .container { padding: 0 1rem; } .product-grid { gap: 15px; } }
     </style>
 </head>
 <body>
 
 <div class="topbar" id="topbar">
-    <div><i class="fas fa-truck"></i> Free Delivery on Orders Over <span>5,000 ETB</span></div>
-    <div><i class="fas fa-gift"></i> <span>2 Free Samples</span> with Every Order</div>
+    <div><i class="fas fa-truck"></i> Free Delivery on Orders Over 5,000 ETB</div>
+    <div><i class="fas fa-gift"></i> 2 Free Samples with Every Order</div>
 </div>
 
 <header class="nav-bar">
     <div class="nav-inner">
-        <a href="index.html" class="logo">
-            <img src="https://github.com/developereth/scentlover/blob/9c50406159570c7f4fe221b5c297536b6c0168f0/logo.png?raw=true" alt="Scent Lovers Logo" class="logo-img-custom" onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='flex'">
-            <div class="logo-icon">🌙</div>
-            <div class="logo-text">Scent Lovers<span>PREMIUM PERFUMES</span></div>
-        </a>
+        <a href="index.html" class="logo"><div class="logo-text">Scent Lovers<span>PREMIUM PERFUMES</span></div></a>
         <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
         <div class="nav-overlay" id="navOverlay"></div>
         <ul class="nav-links" id="navLinks">
-            <button class="nav-close-btn" id="navCloseBtn">&times;</button>
             <li><a href="index.html">Home</a></li>
             <li><a href="womens.html">Women</a></li>
             <li><a href="mens.html">Men</a></li>
             <li><a href="gift-sets.html">Gift Sets</a></li>
             <li><a href="offers.html" class="active">Offers</a></li>
-            <li><a href="rewards.html">Rewards</a></li>
-            <li><a href="stores.html">Stores</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="offers.html" class="nav-cta">Shop Sale</a></li>
         </ul>
     </div>
 </header>
 
 <section class="page-header">
-    <div class="page-header-content">
-        <h1>Special Offers</h1>
-        <div style="color: #BBB; font-size: 0.85rem;"><a href="index.html" style="color: var(--gold); text-decoration: none;">Home</a> / Offers & Sale</div>
-    </div>
+    <h1>Special Offers</h1>
+    <div style="color: #BBB;"><a href="index.html" style="color: var(--gold);">Home</a> / Offers</div>
 </section>
 
 <div class="container">
-    <div class="flash-sale-banner" id="flashSaleBanner" style="display: none;">
+    <div class="flash-sale" id="flashSaleBanner">
         <i class="fas fa-clock" style="font-size: 2rem; color: #fff; margin-bottom: 10px;"></i>
-        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #fff; margin-bottom: 6px;" id="flashSaleTitle">🔥 Flash Sale — Ends Sunday!</h3>
-        <p style="color: rgba(255,255,255,0.9);" id="flashSaleDesc">Up to <strong>40% OFF</strong> on selected luxury fragrances. Limited stock available.</p>
+        <h3>🔥 Flash Sale — Ends Sunday!</h3>
+        <p>Up to <strong>40% OFF</strong> on selected luxury fragrances. Limited stock available.</p>
     </div>
 </div>
 
 <div class="container">
     <section class="section">
-        <div class="section-header reveal">
-            <div class="section-label">Limited Time</div>
+        <div class="section-header">
+            <div style="color:var(--gold); font-size:0.75rem;">Limited Time</div>
             <h2 class="section-title">Discounted <span>Fragrances</span></h2>
             <div class="section-line"></div>
-            <p class="section-desc" id="productCount">Grab these deals before they're gone — premium scents at unbeatable prices</p>
+            <p id="productCount">Loading deals...</p>
         </div>
         <div class="product-grid" id="productGrid"></div>
     </section>
@@ -162,80 +111,60 @@
 
 <div id="orderModal" class="modal-overlay">
     <div class="order-modal">
-        <h3 style="color: var(--gold); margin-bottom: 15px;"><i class="fas fa-heart"></i> Order Now</h3>
-        <div id="modalProductInfo" style="margin-bottom: 20px;"></div>
-        <a href="#" id="whatsappOrder" class="contact-option whatsapp-option" target="_blank"><i class="fab fa-whatsapp"></i> Order via WhatsApp</a>
-        <a href="#" id="telegramOrder" class="contact-option telegram-option" target="_blank"><i class="fab fa-telegram"></i> Order via Telegram</a>
-        <a href="#" id="callOrder" class="contact-option call-option"><i class="fas fa-phone-alt"></i> Direct Call</a>
-        <button class="close-modal" style="margin-top:15px; background:none; border:none; color: #999; cursor: pointer;">Close</button>
+        <h3 style="color:var(--gold); margin-bottom:15px;"><i class="fas fa-heart"></i> Order Now</h3>
+        <div id="orderProductInfo" style="margin-bottom:20px;"></div>
+        <a href="#" id="whatsappOrder" class="contact-option whatsapp-option" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        <a href="#" id="telegramOrder" class="contact-option telegram-option" target="_blank"><i class="fab fa-telegram"></i> Telegram</a>
+        <a href="#" id="callOrder" class="contact-option call-option"><i class="fas fa-phone-alt"></i> Call</a>
+        <button class="close-modal" style="margin-top:15px; background:none; border:none; color:#999; cursor:pointer;">Close</button>
     </div>
 </div>
 
 <footer class="footer">
-    <div class="footer-grid">
-        <div class="footer-col"><h4>Scent Lovers</h4><p>Premium perfumes for every occasion. Luxury fragrances delivered to your door.</p></div>
-        <div class="footer-col"><h4>Shop</h4><a href="womens.html">Women</a><a href="mens.html">Men</a><a href="gift-sets.html">Gift Sets</a><a href="offers.html">Offers</a></div>
-        <div class="footer-col"><h4>Help</h4><a href="contact.html">Contact</a><a href="stores.html">Stores</a><a href="rewards.html">Rewards</a></div>
-        <div class="footer-col"><h4>Contact</h4><p><i class="fas fa-phone"></i> <span id="footerPhone">+251 900 000 000</span></p></div>
-    </div>
-    <div class="footer-bottom" id="footerBottom"><p>&copy; 2026 Scent Lovers Perfume. All rights reserved.</p></div>
+    <p>&copy; 2026 Scent Lovers Perfume. All rights reserved.</p>
+    <p style="margin-top:10px;"><i class="fas fa-phone"></i> <span id="footerPhone">+251 900 000 000</span> | <i class="fab fa-telegram"></i> @<span id="footerTelegram">scentlovers</span></p>
 </footer>
 
-<a href="https://t.me/scentlovers" class="telegram-float" target="_blank" id="telegramFloat"><i class="fab fa-telegram"></i></a>
-
 <script>
-    const API_URL = 'https://scent-lovers-api.YOUR_SUBDOMAIN.workers.dev'; // REPLACE WITH YOUR WORKER URL
-    let allProducts = [];
+    const API_URL = 'https://scent-lovers-api.developeraddis.workers.dev';
     let siteSettings = {};
-    let pageContent = {};
 
-    async function loadProducts() {
+    async function loadSaleProducts() {
         try {
             const response = await fetch(`${API_URL}/api/products`);
             const data = await response.json();
             if (data.success) {
-                allProducts = data.products.filter(p => p.category === 'sale' || p.tag === 'Sale');
-                renderProducts();
-            } else { loadDemoProducts(); }
-        } catch (error) { loadDemoProducts(); }
+                let products = data.products;
+                if (typeof products === 'string') products = JSON.parse(products);
+                const saleProducts = Array.isArray(products) ? products.filter(p => p.category === 'sale') : [];
+                renderProducts(saleProducts);
+                document.getElementById('productCount').textContent = `${saleProducts.length} deals — grab them before they're gone!`;
+            }
+        } catch (error) { console.error('Error:', error); }
     }
 
-    function loadDemoProducts() {
-        allProducts = [
-            { id: '1', name: 'Vanilla Orchid', brand: 'Dior', price: '6,500 ETB', oldPrice: '8,000 ETB', image: 'https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=400', category: 'sale', tag: '40% OFF' },
-            { id: '2', name: 'Cedar Essence', brand: 'Armani', price: '6,000 ETB', oldPrice: '8,500 ETB', image: 'https://images.unsplash.com/photo-1594035910387-fea47794261f?w=400', category: 'sale', tag: '30% OFF' },
-            { id: '3', name: 'Lavender Mist', brand: 'Chanel', price: '5,850 ETB', oldPrice: '7,800 ETB', image: 'https://images.unsplash.com/photo-1541643600914-78b084683601?w=400', category: 'sale', tag: '25% OFF' },
-            { id: '4', name: 'His & Hers Duo', brand: 'Tom Ford + Chanel', price: '22,000 ETB', oldPrice: '28,000 ETB', image: 'https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?w=400', category: 'sale', tag: '20% OFF' },
-            { id: '5', name: 'Ocean Breeze', brand: 'Armani', price: '6,120 ETB', oldPrice: '7,200 ETB', image: 'https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=400', category: 'sale', tag: '15% OFF' },
-            { id: '6', name: 'Citrus Storm', brand: 'Chanel', price: '7,650 ETB', oldPrice: '8,500 ETB', image: 'https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=400', category: 'sale', tag: '10% OFF' }
-        ];
-        renderProducts();
-    }
-
-    function renderProducts() {
+    function renderProducts(products) {
         const grid = document.getElementById('productGrid');
-        grid.innerHTML = allProducts.map(product => `
-            <div class="product-card reveal">
+        if (products.length === 0) {
+            grid.innerHTML = '<div style="text-align: center; padding: 40px;">No offers available. Check back soon!</div>';
+            return;
+        }
+        grid.innerHTML = products.map(product => `
+            <div class="product-card">
                 <div class="product-card-img">
-                    <img src="${product.image}" alt="${product.name}">
+                    <img src="${product.image || 'https://via.placeholder.com/400x300?text=Sale'}" alt="${product.name}">
                     ${product.tag ? `<span class="product-card-tag">${product.tag}</span>` : ''}
                 </div>
                 <div class="product-card-body">
                     <div class="brand">${product.brand}</div>
                     <h4>${product.name}</h4>
                     <span class="price">${product.price}</span>
-                    ${product.oldPrice ? `<span class="old-price">${product.oldPrice}</span>` : ''}
                     <button class="order-btn" onclick="openOrderModal('${product.brand}', '${product.name}', '${product.price}')">
                         <i class="fas fa-shopping-cart"></i> Order Now
                     </button>
                 </div>
             </div>
         `).join('');
-        const reveals = document.querySelectorAll('.reveal');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-        }, { threshold: 0.12 });
-        reveals.forEach(r => observer.observe(r));
     }
 
     async function loadSettings() {
@@ -245,66 +174,34 @@
             if (data.success && data.settings) {
                 siteSettings = data.settings;
                 if (siteSettings.phoneNumber) document.getElementById('footerPhone').textContent = siteSettings.phoneNumber;
-                if (siteSettings.footerText) document.getElementById('footerBottom').innerHTML = `<p>${siteSettings.footerText}</p>`;
-                if (siteSettings.topbarLeft && siteSettings.topbarRight) {
-                    document.getElementById('topbar').innerHTML = `
-                        <div><i class="fas fa-truck"></i> ${siteSettings.topbarLeft}</div>
-                        <div><i class="fas fa-gift"></i> ${siteSettings.topbarRight}</div>
-                    `;
-                }
-                if (siteSettings.telegramUsername) {
-                    document.getElementById('telegramFloat').href = `https://t.me/${siteSettings.telegramUsername.replace('@', '')}`;
-                }
+                if (siteSettings.telegramUsername) document.getElementById('footerTelegram').textContent = siteSettings.telegramUsername;
             }
-        } catch (error) { console.error('Error loading settings:', error); }
-    }
-
-    async function loadPageContent() {
-        try {
-            const response = await fetch(`${API_URL}/api/page-content`);
-            const data = await response.json();
-            if (data.success && data.content) {
-                pageContent = data.content;
-                if (pageContent.flashSaleActive === 'yes') {
-                    document.getElementById('flashSaleBanner').style.display = 'block';
-                    document.getElementById('flashSaleTitle').textContent = pageContent.flashSaleTitle || '🔥 Flash Sale — Ends Sunday!';
-                    document.getElementById('flashSaleDesc').innerHTML = `Up to <strong>${pageContent.flashSaleDiscount || '40'}% OFF</strong> on selected luxury fragrances. Limited stock available. Ends ${pageContent.flashSaleEnd || 'Sunday'}.`;
-                } else {
-                    document.getElementById('flashSaleBanner').style.display = 'none';
-                }
-            }
-        } catch (error) { console.error('Error loading page content:', error); }
+        } catch (error) { console.error('Error:', error); }
     }
 
     window.openOrderModal = function(brand, name, price) {
-        document.getElementById('modalProductInfo').innerHTML = `<p><strong>${brand}</strong> - ${name}</p><p style="color:var(--gold); font-size:1.2rem;">${price}</p>`;
+        document.getElementById('orderProductInfo').innerHTML = `<p><strong>${brand}</strong> - ${name}</p><p style="color:var(--gold); font-size:1.2rem;">${price}</p>`;
         const phone = siteSettings.whatsappNumber || '251900000000';
         const telegramUser = siteSettings.telegramUsername || 'scentlovers';
         const message = `Hello Scent Lovers! I'm interested in ordering: ${brand} - ${name} (${price})`;
         document.getElementById('whatsappOrder').href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-        document.getElementById('telegramOrder').href = `https://t.me/${telegramUser.replace('@', '')}?text=${encodeURIComponent(message)}`;
+        document.getElementById('telegramOrder').href = `https://t.me/${telegramUser}?text=${encodeURIComponent(message)}`;
         document.getElementById('callOrder').href = `tel:+${phone}`;
         document.getElementById('orderModal').classList.add('active');
     };
 
     document.querySelector('.close-modal')?.addEventListener('click', () => document.getElementById('orderModal').classList.remove('active'));
 
-    // Mobile navigation
     const menuBtn = document.getElementById('mobileMenuBtn');
     const navLinks = document.getElementById('navLinks');
-    const overlay = document.getElementById('navOverlay');
-    const closeNavBtn = document.getElementById('navCloseBtn');
-    function closeMenu() { navLinks?.classList.remove('show'); overlay?.classList.remove('show'); document.body.style.overflow = ''; }
-    function openMenu() { navLinks?.classList.add('show'); overlay?.classList.add('show'); document.body.style.overflow = 'hidden'; }
-    if (menuBtn) menuBtn.onclick = (e) => { e.stopPropagation(); navLinks.classList.contains('show') ? closeMenu() : openMenu(); };
-    if (closeNavBtn) closeNavBtn.onclick = closeMenu;
-    if (overlay) overlay.onclick = closeMenu;
-    document.querySelectorAll('.nav-links a').forEach(link => link.addEventListener('click', () => { if (window.innerWidth <= 768) closeMenu(); }));
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && navLinks?.classList.contains('show')) closeMenu(); });
+    const navOverlay = document.getElementById('navOverlay');
+    if (menuBtn) {
+        menuBtn.onclick = () => { navLinks.classList.toggle('show'); navOverlay.classList.toggle('show'); };
+        navOverlay.onclick = () => { navLinks.classList.remove('show'); navOverlay.classList.remove('show'); };
+    }
 
-    loadProducts();
+    loadSaleProducts();
     loadSettings();
-    loadPageContent();
 </script>
 </body>
 </html>
