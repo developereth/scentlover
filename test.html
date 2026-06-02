@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head><title>Add Test Products</title></head>
+<body style="background:#0a0a0a;color:white;font-family:monospace;padding:20px;">
+<h1 style="color:#D4A853;">🧪 Add Test Products</h1>
+<button onclick="addProducts()" style="padding:15px 30px;background:#D4A853;border:none;border-radius:8px;font-weight:bold;cursor:pointer;font-size:16px;">➕ Add 4 Test Products</button>
+<button onclick="checkProducts()" style="padding:15px 30px;background:#27ae60;border:none;border-radius:8px;font-weight:bold;cursor:pointer;font-size:16px;margin-left:10px;">📋 Check Products</button>
+<button onclick="clearProducts()" style="padding:15px 30px;background:#c0392b;border:none;border-radius:8px;font-weight:bold;cursor:pointer;font-size:16px;margin-left:10px;">🗑️ Clear All</button>
+<pre id="out" style="background:#111;padding:20px;margin-top:20px;border-radius:8px;white-space:pre-wrap;"></pre>
+
+<script>
+const API = 'https://scent-lovers-api.developeraddis.workers.dev';
+const AUTH = btoa('scentlovers:ScentLovers2026');
+const out = document.getElementById('out');
+
+async function addProducts() {
+    out.textContent = 'Adding test products...\n\n';
+    
+    const products = [
+        {
+            name: 'Rose Elegance',
+            brand: 'Chanel',
+            price: '4500 ETB',
+            category: 'women',
+            image: 'https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&q=80',
+            description: 'A timeless floral fragrance for the modern woman',
+            tag: 'Bestseller'
+        },
+        {
+            name: 'Ocean Breeze',
+            brand: 'Dior',
+            price: '5200 ETB',
+            category: 'men',
+            image: 'https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=400&q=80',
+            description: 'Fresh aquatic scent for the confident man',
+            tag: 'New'
+        },
+        {
+            name: 'Luxury Gift Set',
+            brand: 'Versace',
+            price: '8500 ETB',
+            category: 'gift',
+            image: 'https://images.unsplash.com/photo-1594035910387-fea47794261f?w=400&q=80',
+            description: 'Complete fragrance collection in an elegant box',
+            tag: 'Premium'
+        },
+        {
+            name: 'Summer Nights',
+            brand: 'Gucci',
+            price: '3200 ETB',
+            category: 'sale',
+            image: 'https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=400&q=80',
+            description: 'Light and refreshing summer fragrance - 30% OFF',
+            tag: 'Sale'
+        }
+    ];
+    
+    for (const product of products) {
+        try {
+            const res = await fetch(`${API}/api/admin/products`, {
+                method: 'POST',
+                headers: {'Content-Type':'application/json','X-Admin-Auth':AUTH},
+                body: JSON.stringify(product)
+            });
+            const data = await res.json();
+            out.textContent += data.success ? `✅ Added: ${product.brand} - ${product.name}\n` : `❌ Failed: ${JSON.stringify(data)}\n`;
+        } catch(e) {
+            out.textContent += `❌ Error: ${e.message}\n`;
+        }
+    }
+    
+    out.textContent += '\n✅ Done! Click "Check Products" to verify.';
+}
+
+async function checkProducts() {
+    out.textContent = 'Loading products...\n\n';
+    try {
+        const res = await fetch(`${API}/api/products`);
+        const data = await res.json();
+        out.textContent += `Total products: ${data.count}\n\n`;
+        out.textContent += JSON.stringify(data, null, 2);
+    } catch(e) {
+        out.textContent += `Error: ${e.message}`;
+    }
+}
+
+async function clearProducts() {
+    if (!confirm('Delete ALL products?')) return;
+    out.textContent = 'Loading products to delete...\n';
+    try {
+        const res = await fetch(`${API}/api/products`);
+        const data = await res.json();
+        const products = data.products || [];
+        
+        for (const p of products) {
+            await fetch(`${API}/api/admin/products/${p.id}`, {
+                method: 'DELETE',
+                headers: {'X-Admin-Auth':AUTH}
+            });
+            out.textContent += `🗑️ Deleted: ${p.name}\n`;
+        }
+        out.textContent += '\n✅ All products deleted.';
+    } catch(e) {
+        out.textContent += `Error: ${e.message}`;
+    }
+}
+</script>
+</body>
+</html>
