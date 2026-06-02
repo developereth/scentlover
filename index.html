@@ -3,23 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scent Lovers | Premium Fragrances</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>Scent Lovers | Premium Perfumes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { --gold: #D4A853; --gold-dark: #B8933F; --black: #0A0A0A; --black-card: #111111; --gray-light: #BBBBBB; }
+        :root { --gold: #D4A853; --gold-dark: #B8933F; --black: #0A0A0A; }
         body { font-family: 'Inter', sans-serif; background: var(--black); color: white; }
-        .topbar { background: #000; text-align: center; padding: 10px; font-size: 0.75rem; border-bottom: 1px solid rgba(212,168,83,0.2); }
-        .topbar i { color: var(--gold); margin: 0 5px; }
+        
+        .topbar { background: #000; text-align: center; padding: 10px; font-size: 0.75rem; border-bottom: 1px solid rgba(212,168,83,0.2); display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
+        .topbar i { color: var(--gold); }
+        
         .nav-bar { background: rgba(10,10,10,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(212,168,83,0.2); position: sticky; top: 0; z-index: 1000; padding: 0 2rem; }
         .nav-inner { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0.85rem 0; }
-        .logo-text { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--gold); }
-        .logo-text span { display: block; font-size: 0.55rem; color: var(--gray-light); letter-spacing: 3px; }
+        .logo-text { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--gold); text-decoration: none; }
+        .logo-text span { display: block; font-size: 0.55rem; color: #BBB; letter-spacing: 3px; }
         .nav-links { display: flex; gap: 1.5rem; list-style: none; }
-        .nav-links a { text-decoration: none; color: #bbb; transition: 0.3s; }
+        .nav-links a { text-decoration: none; color: #bbb; transition: 0.3s; font-size: 0.9rem; }
         .nav-links a:hover, .nav-links a.active { color: var(--gold); }
-        .mobile-menu-btn { display: none; background: var(--gold); border: none; color: #000; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; }
+        .mobile-menu-btn { display: none; background: var(--gold); border: none; color: #000; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; }
+        
         @media (max-width: 768px) {
             .mobile-menu-btn { display: flex; align-items: center; justify-content: center; }
             .nav-links { position: fixed; top: 0; right: -100%; width: 80%; max-width: 320px; height: 100vh; background: #111; flex-direction: column; justify-content: center; gap: 25px; transition: 0.3s; z-index: 999; padding: 60px 20px; }
@@ -27,58 +30,58 @@
             .nav-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 998; }
             .nav-overlay.show { display: block; }
         }
-        .hero { position: relative; min-height: 85vh; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; }
-        .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; z-index: 0; animation: slowZoom 14s ease-out forwards; }
-        @keyframes slowZoom { from { transform: scale(1); } to { transform: scale(1.08); } }
-        .hero::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.25) 100%); z-index: 1; }
-        .hero::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 150px; background: linear-gradient(0deg, var(--black) 0%, transparent 100%); z-index: 1; }
-        .hero-content { position: relative; z-index: 2; padding: 2rem; }
-        .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 7vw, 5rem); color: var(--gold); margin-bottom: 1rem; }
-        .hero-subtitle { font-size: 1.2rem; color: var(--gold); margin-bottom: 1rem; }
-        .hero-desc { color: #ccc; max-width: 500px; margin: 0 auto 2rem; }
-        .btn { padding: 12px 28px; border-radius: 50px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s; font-weight: 600; }
-        .btn-gold { background: var(--gold); color: #000; }
-        .btn-gold:hover { background: var(--gold-dark); transform: translateY(-2px); }
-        .btn-outline { border: 1px solid var(--gold); color: var(--gold); }
+        
+        .hero { background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 100%), url('https://images.unsplash.com/photo-1541643600914-78b084683601?w=1600&q=80') center/cover no-repeat; padding: 120px 20px 100px; text-align: center; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; color: var(--gold); margin-bottom: 15px; }
+        .hero p { color: #BBB; font-size: 1.1rem; max-width: 600px; margin: 0 auto 30px; }
+        .hero-btn { display: inline-block; background: var(--gold); color: #000; padding: 14px 35px; border-radius: 50px; text-decoration: none; font-weight: 700; transition: 0.3s; }
+        .hero-btn:hover { background: var(--gold-dark); }
+        
         .container { max-width: 1300px; margin: 0 auto; padding: 0 2rem; }
         .section { padding: 60px 0; }
         .section-header { text-align: center; margin-bottom: 50px; }
         .section-title { font-family: 'Playfair Display', serif; font-size: 2.3rem; }
         .section-title span { color: var(--gold); }
         .section-line { width: 60px; height: 3px; background: var(--gold); margin: 15px auto; }
+        
+        .categories { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 40px; }
+        .cat-card { background: #111; padding: 30px; text-align: center; border-radius: 15px; text-decoration: none; color: white; border: 1px solid rgba(212,168,83,0.15); transition: 0.3s; }
+        .cat-card:hover { border-color: var(--gold); transform: translateY(-5px); }
+        .cat-card i { font-size: 2.5rem; color: var(--gold); margin-bottom: 15px; }
+        .cat-card h3 { font-size: 1.1rem; margin-bottom: 5px; }
+        .cat-card p { font-size: 0.8rem; color: #888; }
+        
+        @media (max-width: 768px) { .categories { grid-template-columns: repeat(2, 1fr); } }
+        
         .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 30px; }
         .product-card { background: #111; border-radius: 20px; overflow: hidden; border: 1px solid rgba(212,168,83,0.15); transition: 0.3s; }
         .product-card:hover { transform: translateY(-5px); border-color: var(--gold); }
-        .product-card-img { height: 250px; overflow: hidden; position: relative; }
+        .product-card-img { height: 250px; overflow: hidden; position: relative; background: #1a1a1a; }
         .product-card-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
         .product-card:hover .product-card-img img { transform: scale(1.05); }
         .product-card-tag { position: absolute; top: 12px; left: 12px; background: var(--gold); color: #000; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; }
         .product-card-body { padding: 18px; }
-        .brand { font-size: 0.7rem; color: var(--gold); text-transform: uppercase; }
-        .product-card-body h4 { margin: 8px 0 5px; }
+        .brand { font-size: 0.7rem; color: var(--gold); text-transform: uppercase; margin-bottom: 5px; }
+        .product-card-body h4 { margin: 5px 0; font-size: 0.95rem; }
         .price { font-size: 1.2rem; font-weight: 700; color: var(--gold); display: block; margin: 10px 0; }
         .order-btn { width: 100%; background: var(--gold); color: #000; border: none; padding: 10px; border-radius: 40px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.3s; }
         .order-btn:hover { background: var(--gold-dark); }
-        .category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; }
-        .category-card { background: #111; border-radius: 20px; padding: 30px 20px; text-align: center; border: 1px solid rgba(212,168,83,0.1); transition: 0.3s; text-decoration: none; color: #fff; }
-        .category-card:hover { border-color: var(--gold); transform: translateY(-5px); }
-        .category-card i { font-size: 2rem; color: var(--gold); margin-bottom: 15px; }
-        .category-card h4 { font-size: 1rem; margin-bottom: 5px; }
-        .category-card p { font-size: 0.75rem; color: #999; }
-        .footer { background: #000; padding: 40px 20px; text-align: center; border-top: 1px solid rgba(212,168,83,0.1); }
-        @media (max-width: 768px) { .container { padding: 0 1rem; } .product-grid { gap: 15px; } }
+        
+        .footer { background: #000; padding: 40px 20px; text-align: center; border-top: 1px solid rgba(212,168,83,0.1); margin-top: 40px; color: #888; }
+        
+        @media (max-width: 768px) { .product-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; } .hero h1 { font-size: 2rem; } }
     </style>
 </head>
 <body>
 
 <div class="topbar">
-    <div><i class="fas fa-truck"></i> Free Delivery on Orders Over 5,000 ETB</div>
+    <div><i class="fas fa-truck"></i> Free Delivery Over 5,000 ETB</div>
     <div><i class="fas fa-gift"></i> 2 Free Samples with Every Order</div>
 </div>
 
 <header class="nav-bar">
     <div class="nav-inner">
-        <a href="index.html" class="logo"><div class="logo-text">Scent Lovers<span>PREMIUM PERFUMES</span></div></a>
+        <a href="index.html" class="logo-text">Scent Lovers<span>PREMIUM PERFUMES</span></a>
         <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
         <div class="nav-overlay" id="navOverlay"></div>
         <ul class="nav-links" id="navLinks">
@@ -92,40 +95,48 @@
 </header>
 
 <section class="hero">
-    <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1594035910387-fea4773a0e6e?w=1600');"></div>
-    <div class="hero-content">
-        <h1>Scent Lovers</h1>
-        <p class="hero-subtitle">Discover Your Signature Scent</p>
-        <p class="hero-desc">Explore our curated collection of luxury perfumes — from timeless classics to modern masterpieces</p>
-        <div class="hero-btns">
-            <a href="womens.html" class="btn btn-gold"><i class="fas fa-female"></i> Shop Women</a>
-            <a href="mens.html" class="btn btn-outline"><i class="fas fa-male"></i> Shop Men</a>
-        </div>
-    </div>
+    <h1>Discover Your Signature Scent</h1>
+    <p>Premium fragrances for every occasion. Explore our curated collection of luxury perfumes.</p>
+    <a href="#products" class="hero-btn">Shop Now ✨</a>
 </section>
 
 <div class="container">
     <section class="section">
         <div class="section-header">
-            <div style="color:var(--gold); font-size:0.75rem; letter-spacing:2px;">Explore</div>
-            <h2 class="section-title">Shop by <span>Category</span></h2>
+            <div style="color:var(--gold);font-size:0.75rem;letter-spacing:2px;">SHOP BY CATEGORY</div>
+            <h2 class="section-title">Our <span>Collections</span></h2>
             <div class="section-line"></div>
         </div>
-        <div class="category-grid">
-            <a href="womens.html" class="category-card"><i class="fas fa-female"></i><h4>Women's Perfumes</h4><p>Floral, Oriental, Fresh</p></a>
-            <a href="mens.html" class="category-card"><i class="fas fa-male"></i><h4>Men's Colognes</h4><p>Woody, Aquatic, Spicy</p></a>
-            <a href="gift-sets.html" class="category-card"><i class="fas fa-gift"></i><h4>Gift Sets</h4><p>Perfect for gifting</p></a>
-            <a href="offers.html" class="category-card"><i class="fas fa-tag"></i><h4>Special Offers</h4><p>Up to 40% off</p></a>
+        <div class="categories">
+            <a href="womens.html" class="cat-card">
+                <i class="fas fa-female"></i>
+                <h3>Women's Perfumes</h3>
+                <p>Elegant & Floral</p>
+            </a>
+            <a href="mens.html" class="cat-card">
+                <i class="fas fa-male"></i>
+                <h3>Men's Colognes</h3>
+                <p>Bold & Fresh</p>
+            </a>
+            <a href="gift-sets.html" class="cat-card">
+                <i class="fas fa-gift"></i>
+                <h3>Gift Sets</h3>
+                <p>Perfect Presents</p>
+            </a>
+            <a href="offers.html" class="cat-card">
+                <i class="fas fa-tag"></i>
+                <h3>Special Offers</h3>
+                <p>Great Deals</p>
+            </a>
         </div>
     </section>
-</div>
 
-<div class="container">
-    <section class="section">
+    <section class="section" id="products">
         <div class="section-header">
-            <div style="color:var(--gold); font-size:0.75rem;">You Might Like</div>
-            <h2 class="section-title">Recommended <span>For You</span></h2>
+            <div style="color:var(--gold);font-size:0.75rem;letter-spacing:2px;">FEATURED PRODUCTS</div>
+            <h2 class="section-title">All <span>Fragrances</span></h2>
             <div class="section-line"></div>
+            <p id="productCount" style="color:#888;margin-top:10px;">Loading...</p>
         </div>
         <div class="product-grid" id="productGrid"></div>
     </section>
@@ -137,62 +148,51 @@
 </footer>
 
 <script>
-    const API_URL = 'https://scent-lovers-api.developeraddis.workers.dev';
+const API_URL = 'https://scent-lovers-api.developeraddis.workers.dev';
+
+async function loadProducts() {
+    const grid = document.getElementById('productGrid');
+    const countEl = document.getElementById('productCount');
+    grid.innerHTML = '<div style="text-align:center;padding:60px;grid-column:1/-1;"><div style="font-size:40px;">⏳</div><div style="color:#D4A853;">Loading...</div></div>';
     
-    async function loadProducts() {
-        try {
-            const response = await fetch(`${API_URL}/api/products`);
-            const data = await response.json();
-            console.log('API Response:', data);
-            
-            let products = [];
-            if (data.success) {
-                if (typeof data.products === 'string') {
-                    products = JSON.parse(data.products);
-                } else {
-                    products = data.products || [];
-                }
-            }
-            
-            const grid = document.getElementById('productGrid');
-            if (products.length === 0) {
-                grid.innerHTML = '<div style="text-align: center; padding: 40px; color: #999;">No products yet. Check back soon!</div>';
-                return;
-            }
-            
-            const displayProducts = products.slice(0, 8);
-            grid.innerHTML = displayProducts.map(product => `
-                <div class="product-card">
-                    <div class="product-card-img">
-                        <img src="${product.image || 'https://via.placeholder.com/400x300?text=Perfume'}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/400x300?text=No+Image'">
-                        ${product.tag ? `<span class="product-card-tag">${product.tag}</span>` : ''}
-                    </div>
-                    <div class="product-card-body">
-                        <div class="brand">${product.brand}</div>
-                        <h4>${product.name}</h4>
-                        <span class="price">${product.price}</span>
-                        <button class="order-btn" onclick="alert('Contact us on Telegram @scentlovers to order: ${product.brand} - ${product.name}')">
-                            <i class="fas fa-shopping-cart"></i> Order Now
-                        </button>
-                    </div>
-                </div>
-            `).join('');
-        } catch (error) {
-            console.error('Error:', error);
-            document.getElementById('productGrid').innerHTML = '<div style="text-align: center; padding: 40px; color: #e74c3c;">Error loading products. Please try again.</div>';
+    try {
+        const res = await fetch(`${API_URL}/api/products`);
+        const data = await res.json();
+        const products = Array.isArray(data.products) ? data.products : [];
+        
+        countEl.textContent = `${products.length} premium fragrances available`;
+        
+        if (products.length === 0) {
+            grid.innerHTML = '<div style="text-align:center;padding:40px;grid-column:1/-1;color:#888;">No products yet. Check back soon!</div>';
+            return;
         }
+        
+        grid.innerHTML = products.map(p => `
+            <div class="product-card">
+                <div class="product-card-img">
+                    <img src="${p.image || 'https://via.placeholder.com/400x300'}" alt="${esc(p.name)}" onerror="this.src='https://via.placeholder.com/400x300'" loading="lazy">
+                    ${p.tag ? `<span class="product-card-tag">${esc(p.tag)}</span>` : ''}
+                </div>
+                <div class="product-card-body">
+                    <div class="brand">${esc(p.brand)}</div>
+                    <h4>${esc(p.name)}</h4>
+                    <span class="price">${esc(p.price)}</span>
+                    <button class="order-btn" onclick="order('${esc(p.brand)}', '${esc(p.name)}')"><i class="fas fa-shopping-cart"></i> Order Now</button>
+                </div>
+            </div>
+        `).join('');
+    } catch(e) {
+        grid.innerHTML = '<div style="text-align:center;padding:40px;grid-column:1/-1;color:#e74c3c;">Error loading products.</div>';
     }
-    
-    // Mobile menu
-    const menuBtn = document.getElementById('mobileMenuBtn');
-    const navLinks = document.getElementById('navLinks');
-    const navOverlay = document.getElementById('navOverlay');
-    if (menuBtn) {
-        menuBtn.onclick = () => { navLinks.classList.toggle('show'); navOverlay.classList.toggle('show'); };
-        navOverlay.onclick = () => { navLinks.classList.remove('show'); navOverlay.classList.remove('show'); };
-    }
-    
-    loadProducts();
+}
+
+function esc(s) { const d=document.createElement('div'); d.textContent=s||''; return d.innerHTML; }
+function order(brand, name) { window.open(`https://t.me/scentlovers?text=${encodeURIComponent('Hi! Interested in: '+brand+' - '+name)}`, '_blank'); }
+
+const btn=document.getElementById('mobileMenuBtn'), nav=document.getElementById('navLinks'), overlay=document.getElementById('navOverlay');
+if(btn){btn.onclick=()=>{nav.classList.toggle('show');overlay.classList.toggle('show');};overlay.onclick=()=>{nav.classList.remove('show');overlay.classList.remove('show');};}
+
+loadProducts();
 </script>
 </body>
 </html>
