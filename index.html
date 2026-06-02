@@ -3,16 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>Scent Lovers Perfume | Premium Fragrances | Addis Ababa</title>
+    <title>Scent Lovers | Luxury Perfumes & Fragrances | Addis Ababa</title>
     <meta name="description" content="Scent Lovers Perfume - Discover premium fragrances for women and men. Shop luxury perfumes, gift sets, and exclusive offers in Addis Ababa.">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
             --gold: #D4A853;
             --gold-dark: #B8933F;
             --gold-light: #F9E4B7;
-            --warm-glow: #FFE4B5;
+            --gold-soft: rgba(212,168,83,0.15);
             --black: #0A0A0A;
             --black-card: #111111;
             --black-surface: #161616;
@@ -20,58 +26,48 @@
             --gray: #999999;
             --gray-light: #BBBBBB;
             --gray-dark: #666666;
-            --radius-lg: 24px;
-            --shadow-gold: 0 8px 30px rgba(212,168,83,0.2);
-            --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+            --radius-sm: 12px;
+            --radius-md: 20px;
+            --radius-lg: 28px;
+            --shadow-gold: 0 12px 35px rgba(212,168,83,0.12);
+            --shadow-gold-strong: 0 15px 40px rgba(212,168,83,0.2);
+            --transition: 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Inter', sans-serif;
             background: var(--black);
             color: var(--white);
-            line-height: 1.6;
+            line-height: 1.5;
             overflow-x: hidden;
         }
 
-        /* Animations */
-        @keyframes scaleIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        @keyframes shimmer {
-            0% { background-position: 0% center; }
-            100% { background-position: 200% center; }
-        }
-        @keyframes goldPulse {
-            0%,100% { box-shadow: 0 0 20px rgba(212,168,83,0.15); }
-            50% { box-shadow: 0 0 40px rgba(212,168,83,0.3); }
-        }
-        @keyframes float {
-            0%,100% { transform: translateY(0); }
-            50% { transform: translateY(-12px); }
-        }
-        @keyframes slowZoom {
-            from { transform: scale(1); }
-            to { transform: scale(1.08); }
-        }
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
+        /* Smooth reveal animations */
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
+            transform: translateY(35px);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Premium Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--black-surface);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 10px;
+        }
 
         /* Top Bar */
         .topbar {
-            background: #000;
+            background: #050505;
             color: var(--gray-light);
             text-align: center;
             padding: 10px 20px;
@@ -80,33 +76,30 @@
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 20px;
-            border-bottom: 1px solid rgba(212,168,83,0.15);
-            position: relative;
-            z-index: 10;
+            gap: 32px;
+            border-bottom: 1px solid rgba(212,168,83,0.2);
+            letter-spacing: 0.3px;
         }
-        .topbar i { color: var(--gold); margin: 0 5px; }
-        .topbar span { color: var(--gold); font-weight: 600; }
+        .topbar i { color: var(--gold); margin-right: 6px; }
+        .topbar span { color: var(--gold); font-weight: 700; }
 
         /* Navigation */
         .nav-bar {
-            background: rgba(10,10,10,0.92);
+            background: rgba(10,10,10,0.94);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(212,168,83,0.2);
+            border-bottom: 1px solid rgba(212,168,83,0.18);
             position: sticky;
             top: 0;
             z-index: 1000;
             padding: 0 2rem;
         }
         .nav-inner {
-            max-width: 1300px;
+            max-width: 1400px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.85rem 0;
-            flex-wrap: wrap;
-            gap: 16px;
+            padding: 0.9rem 0;
         }
         .logo {
             display: flex;
@@ -115,101 +108,138 @@
             text-decoration: none;
         }
         .logo-img-custom {
-            height: 52px;
+            height: 50px;
             width: auto;
             object-fit: contain;
-            border-radius: 12px;
-        }
-        .logo-icon {
-            width: 48px; height: 48px;
-            background: var(--gold);
-            border-radius: 50%;
-            display: none; align-items: center; justify-content: center;
-            font-size: 1.2rem; color: #000;
-            animation: goldPulse 3s infinite;
+            filter: drop-shadow(0 2px 8px rgba(212,168,83,0.2));
+            transition: var(--transition);
         }
         .logo-text {
             font-family: 'Playfair Display', serif;
-            font-size: 1.5rem; font-weight: 700;
-            color: var(--gold); letter-spacing: 1px;
+            font-size: 1.55rem;
+            font-weight: 800;
+            color: var(--gold);
+            letter-spacing: -0.3px;
+            line-height: 1.2;
         }
         .logo-text span {
-            display: block; font-size: 0.55rem;
-            color: var(--gray-light); letter-spacing: 3px; font-weight: 400;
+            display: block;
+            font-size: 0.6rem;
+            letter-spacing: 2.5px;
+            color: var(--gray-light);
+            font-weight: 400;
         }
         .nav-links {
-            display: flex; gap: 1.5rem; list-style: none; align-items: center;
+            display: flex;
+            gap: 1.8rem;
+            list-style: none;
+            align-items: center;
         }
         .nav-links a {
-            text-decoration: none; font-weight: 500;
-            color: var(--gray-light); transition: var(--transition);
-            font-size: 0.83rem; position: relative; padding: 5px 0;
+            text-decoration: none;
+            font-weight: 500;
+            color: var(--gray-light);
+            transition: var(--transition);
+            font-size: 0.85rem;
+            position: relative;
+            padding: 6px 0;
         }
         .nav-links a::after {
-            content: ''; position: absolute; bottom: 0; left: 0;
-            width: 0; height: 2px; background: var(--gold);
-            transition: var(--transition);
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: 0.25s ease;
+            border-radius: 2px;
         }
         .nav-links a:hover { color: var(--gold); }
         .nav-links a:hover::after { width: 100%; }
         .nav-links a.active { color: var(--gold); font-weight: 600; }
         .nav-links a.active::after { width: 100%; }
         .nav-cta {
-            background: var(--gold); color: #000 !important;
-            padding: 10px 22px !important; border-radius: 50px !important;
-            font-weight: 600 !important;
+            background: var(--gold);
+            color: #000 !important;
+            padding: 8px 24px !important;
+            border-radius: 100px !important;
+            font-weight: 700 !important;
+            box-shadow: 0 4px 12px rgba(212,168,83,0.3);
         }
         .nav-cta::after { display: none !important; }
-        .nav-cta:hover { background: var(--gold-dark) !important; transform: translateY(-2px); }
+        .nav-cta:hover { background: var(--gold-dark) !important; transform: translateY(-2px); color: #000 !important; }
 
         /* Mobile Navigation */
         .mobile-menu-btn {
             display: none;
-            background: var(--gold); border: none;
-            color: #000; font-size: 22px;
-            width: 44px; height: 44px; border-radius: 50%;
-            cursor: pointer; z-index: 1002;
-            align-items: center; justify-content: center;
+            background: var(--gold);
+            border: none;
+            color: #000;
+            font-size: 22px;
+            width: 44px;
+            height: 44px;
+            border-radius: 60px;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
         }
         .nav-overlay {
             display: none;
-            position: fixed; top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.92);
-            backdrop-filter: blur(6px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.88);
+            backdrop-filter: blur(8px);
             z-index: 998;
         }
-        .nav-overlay.show { display: block; }
         .nav-close-btn {
             display: none;
-            position: absolute; top: 20px; right: 20px;
-            background: none; border: 2px solid var(--gold);
-            color: var(--gold); font-size: 24px;
-            width: 44px; height: 44px; border-radius: 50%;
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: rgba(212,168,83,0.1);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            font-size: 26px;
+            width: 48px;
+            height: 48px;
+            border-radius: 60px;
             cursor: pointer;
             transition: var(--transition);
         }
-        .nav-close-btn:hover { background: var(--gold); color: #000; }
-        @media (max-width: 768px) {
+        @media (max-width: 880px) {
             .mobile-menu-btn { display: flex; }
             .nav-links {
-                position: fixed; top: 0; right: -100%;
-                width: 80%; max-width: 320px; height: 100vh;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 340px;
+                height: 100vh;
                 background: var(--black-card);
-                flex-direction: column; justify-content: center; align-items: center;
-                gap: 28px; transition: right 0.4s cubic-bezier(0.4,0,0.2,1);
-                z-index: 999; padding: 60px 20px;
-                border-left: 3px solid var(--gold);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 32px;
+                transition: 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+                z-index: 999;
+                padding: 70px 20px;
+                border-left: 2px solid var(--gold);
+                backdrop-filter: blur(10px);
             }
             .nav-links.show { right: 0; }
             .nav-close-btn { display: flex; }
         }
-        @media (min-width: 769px) { .nav-links { display: flex !important; } .nav-overlay { display: none !important; } }
+        @media (min-width: 881px) { .nav-links { display: flex !important; } .nav-overlay { display: none !important; } }
 
-        /* Hero - Brighter & Warmer using specified logo image */
+        /* Hero Section - polished bright & warm */
         .hero {
             position: relative;
-            min-height: 90vh;
+            min-height: 92vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -222,14 +252,17 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://github.com/developereth/scentlover/blob/9c50406159570c7f4fe221b5c297536b6c0168f0/logo.png?raw=true');
+            background-image: url('https://images.unsplash.com/photo-1594035910387-fea4773a0e6e?w=1600&q=85');
             background-size: cover;
             background-position: center 25%;
             background-repeat: no-repeat;
             z-index: 0;
-            animation: slowZoom 16s ease-out forwards;
+            animation: slowZoom 18s ease-out forwards;
         }
-        /* Warmer, brighter overlay with less darkness */
+        @keyframes slowZoom {
+            from { transform: scale(1); }
+            to { transform: scale(1.08); }
+        }
         .hero::before {
             content: '';
             position: absolute;
@@ -237,17 +270,16 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.35) 100%);
+            background: linear-gradient(125deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.2) 45%, rgba(0,0,0,0.4) 100%);
             z-index: 1;
         }
-        /* Add warm highlight from bottom */
         .hero-warm-overlay {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 50%;
-            background: linear-gradient(0deg, rgba(212,168,83,0.15) 0%, transparent 70%);
+            height: 45%;
+            background: linear-gradient(0deg, rgba(212,168,83,0.2) 0%, transparent 80%);
             z-index: 1;
             pointer-events: none;
         }
@@ -264,153 +296,219 @@
         .hero-content {
             position: relative;
             z-index: 3;
-            animation: scaleIn 0.8s ease forwards;
+            animation: fadeScaleIn 0.9s ease forwards;
             padding: 2rem;
-            max-width: 900px;
+            max-width: 920px;
+        }
+        @keyframes fadeScaleIn {
+            from { opacity: 0; transform: scale(0.96); }
+            to { opacity: 1; transform: scale(1); }
         }
         .hero-badge {
             display: inline-block;
             background: rgba(212,168,83,0.9);
-            color: #000;
-            padding: 8px 24px;
-            border-radius: 50px;
+            color: #0a0a0a;
+            padding: 6px 20px;
+            border-radius: 60px;
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             letter-spacing: 2px;
             margin-bottom: 24px;
             backdrop-filter: blur(4px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
         .hero h1 {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(3.2rem, 8vw, 5.8rem);
-            letter-spacing: 3px;
+            font-size: clamp(3rem, 8vw, 5.6rem);
+            letter-spacing: 2px;
             margin-bottom: 0.8rem;
-            background: linear-gradient(135deg, #FFF3C9 0%, var(--gold) 30%, #FFE8A0 60%, var(--gold) 100%);
+            background: linear-gradient(135deg, #FFF5E0 0%, var(--gold) 35%, #FFE8B0 65%, var(--gold) 100%);
             background-size: 200% auto;
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: shimmer 4s linear infinite;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            animation: shimmer 4.5s linear infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
         }
         .hero-subtitle {
             font-size: 1.2rem;
             letter-spacing: 5px;
-            color: #FFF5E0;
-            margin-bottom: 0.5rem;
+            color: #FFF2DF;
+            margin-bottom: 0.6rem;
             font-weight: 500;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
         .hero-desc {
             font-size: 1rem;
-            color: #faf0e0;
-            max-width: 520px;
-            margin: 1rem auto 28px;
-            text-shadow: 0 1px 4px rgba(0,0,0,0.5);
-            font-weight: 500;
+            color: #FAF0E0;
+            max-width: 540px;
+            margin: 1.2rem auto 2rem;
+            text-shadow: 0 1px 5px rgba(0,0,0,0.4);
+            font-weight: 450;
+            line-height: 1.6;
         }
         .hero-btns {
             display: flex;
-            gap: 16px;
+            gap: 18px;
             justify-content: center;
             flex-wrap: wrap;
         }
         .btn {
-            padding: 13px 32px;
-            border-radius: 50px;
+            padding: 12px 32px;
+            border-radius: 100px;
             font-weight: 600;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            transition: var(--transition);
+            transition: all 0.25s ease;
             font-size: 0.95rem;
+            letter-spacing: 0.3px;
         }
         .btn-gold {
             background: var(--gold);
             color: #000;
-            box-shadow: 0 6px 20px rgba(212,168,83,0.5);
+            box-shadow: 0 6px 18px rgba(212,168,83,0.4);
         }
         .btn-gold:hover {
             background: var(--gold-dark);
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(212,168,83,0.6);
+            box-shadow: 0 12px 28px rgba(212,168,83,0.5);
         }
         .btn-outline {
-            background: rgba(0,0,0,0.4);
+            background: rgba(0,0,0,0.45);
             backdrop-filter: blur(6px);
             color: #fff;
-            border: 1px solid rgba(255,255,255,0.5);
+            border: 1px solid rgba(255,215,140,0.7);
         }
         .btn-outline:hover {
             border-color: var(--gold);
-            color: var(--gold);
+            color: var(--gold-light);
             background: rgba(0,0,0,0.6);
             transform: translateY(-3px);
         }
 
-        .container { max-width: 1300px; margin: 0 auto; padding: 0 2rem; }
-        .section { padding: 70px 0; }
-        .section-header { text-align: center; margin-bottom: 50px; }
-        .section-label { font-size: 0.75rem; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; }
-        .section-title { font-family: 'Playfair Display', serif; font-size: 2.3rem; font-weight: 700; }
-        .section-title span { color: var(--gold); }
-        .section-line { width: 55px; height: 3px; background: var(--gold); margin: 14px auto; border-radius: 3px; }
+        /* Container & Sections */
+        .container {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .section {
+            padding: 70px 0 60px;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+        .section-label {
+            font-size: 0.75rem;
+            color: var(--gold);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            margin-top: 8px;
+        }
+        .section-title span {
+            color: var(--gold);
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 4px;
+        }
+        .section-line {
+            width: 65px;
+            height: 3px;
+            background: var(--gold);
+            margin: 18px auto 0;
+            border-radius: 4px;
+        }
 
-        /* Product Cards */
+        /* Product Cards - refined */
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 28px;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 32px;
             margin-top: 20px;
         }
         .product-card {
             background: var(--black-card);
-            border-radius: var(--radius-lg);
+            border-radius: 28px;
             overflow: hidden;
-            border: 1px solid rgba(212,168,83,0.15);
+            border: 1px solid rgba(212,168,83,0.12);
             transition: var(--transition);
+            backdrop-filter: blur(2px);
         }
         .product-card:hover {
             border-color: var(--gold);
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-gold);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-gold-strong);
         }
         .product-card-img {
-            height: 250px;
+            height: 270px;
             overflow: hidden;
             position: relative;
+            background: #0e0e0e;
         }
         .product-card-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
-        .product-card:hover .product-card-img img { transform: scale(1.05); }
+        .product-card:hover .product-card-img img {
+            transform: scale(1.06);
+        }
         .product-card-tag {
             position: absolute;
-            top: 12px;
-            left: 12px;
+            top: 14px;
+            left: 14px;
             background: var(--gold);
             color: #000;
-            padding: 4px 12px;
-            border-radius: 20px;
+            padding: 4px 14px;
+            border-radius: 40px;
             font-size: 0.7rem;
-            font-weight: 700;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            z-index: 2;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
-        .product-card-body { padding: 18px; }
-        .brand { font-size: 0.7rem; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; }
-        .product-card-body h4 { font-size: 1rem; margin: 6px 0 4px; font-weight: 600; }
-        .price { font-size: 1.2rem; font-weight: 700; color: var(--gold); margin: 8px 0; display: block; }
+        .product-card-body {
+            padding: 20px 18px 22px;
+        }
+        .brand {
+            font-size: 0.7rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+        }
+        .product-card-body h4 {
+            font-size: 1.1rem;
+            margin: 8px 0 4px;
+            font-weight: 600;
+        }
+        .price {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--gold);
+            margin: 8px 0 12px;
+            display: inline-block;
+            letter-spacing: -0.2px;
+        }
         .order-btn {
             width: 100%;
             background: var(--gold);
             color: #000;
             border: none;
-            padding: 10px;
-            border-radius: 40px;
+            padding: 12px 8px;
+            border-radius: 60px;
             font-weight: 700;
             cursor: pointer;
             display: flex;
@@ -418,24 +516,25 @@
             justify-content: center;
             gap: 8px;
             transition: var(--transition);
-            margin-top: 10px;
-            font-family: 'Inter', sans-serif;
+            margin-top: 8px;
+            font-size: 0.9rem;
         }
         .order-btn:hover {
             background: var(--gold-dark);
             transform: translateY(-2px);
+            gap: 12px;
         }
 
-        /* Category Cards */
+        /* Category Cards - elevated */
         .category-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 24px;
         }
         .category-card {
-            background: var(--black-card);
-            border-radius: var(--radius-lg);
-            padding: 28px 16px;
+            background: linear-gradient(145deg, #131313, #0e0e0e);
+            border-radius: 28px;
+            padding: 32px 18px;
             text-align: center;
             border: 1px solid rgba(212,168,83,0.1);
             transition: var(--transition);
@@ -444,14 +543,26 @@
         }
         .category-card:hover {
             border-color: var(--gold);
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-gold);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.5);
+            background: #181818;
         }
-        .category-card i { font-size: 2rem; color: var(--gold); margin-bottom: 12px; }
-        .category-card h4 { font-size: 1rem; margin-bottom: 5px; }
-        .category-card p { font-size: 0.75rem; color: var(--gray); }
+        .category-card i {
+            font-size: 2.3rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+        .category-card h4 {
+            font-size: 1.05rem;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+        .category-card p {
+            font-size: 0.75rem;
+            color: var(--gray);
+        }
 
-        /* Order Modal - WhatsApp, Telegram, Direct Call Only */
+        /* Order Modal - refined */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -459,28 +570,28 @@
             width: 100%;
             height: 100%;
             background: rgba(0,0,0,0.96);
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(12px);
             z-index: 2000;
             display: flex;
             align-items: center;
             justify-content: center;
             visibility: hidden;
             opacity: 0;
-            transition: all 0.3s ease;
+            transition: 0.3s ease;
         }
         .modal-overlay.active {
             visibility: visible;
             opacity: 1;
         }
         .order-modal {
-            background: var(--black-card);
-            border-radius: 32px;
-            max-width: 480px;
+            background: #111111ee;
+            backdrop-filter: blur(8px);
+            border-radius: 40px;
+            max-width: 500px;
             width: 90%;
-            padding: 35px 30px;
+            padding: 32px 28px;
             border: 1px solid var(--gold);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.7);
-            animation: slideUp 0.3s ease forwards;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
             text-align: center;
         }
         .modal-header {
@@ -489,12 +600,12 @@
             align-items: center;
             margin-bottom: 20px;
             border-bottom: 1px solid rgba(212,168,83,0.3);
-            padding-bottom: 15px;
+            padding-bottom: 14px;
         }
         .modal-header h3 {
             font-family: 'Playfair Display', serif;
             color: var(--gold);
-            font-size: 1.6rem;
+            font-size: 1.65rem;
         }
         .close-modal {
             background: none;
@@ -506,18 +617,16 @@
         }
         .close-modal:hover { color: var(--gold); transform: rotate(90deg); }
         .product-info {
-            background: rgba(212,168,83,0.12);
-            padding: 14px;
-            border-radius: 20px;
-            margin-bottom: 25px;
-            border-left: 3px solid var(--gold);
+            background: rgba(212,168,83,0.1);
+            padding: 16px;
+            border-radius: 24px;
+            margin-bottom: 28px;
+            border-left: 4px solid var(--gold);
         }
-        .product-info p { color: var(--gold-light); font-size: 0.95rem; margin: 4px 0; }
-        .product-info strong { color: var(--gold); }
         .contact-options {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 14px;
             margin: 20px 0;
         }
         .contact-btn {
@@ -525,95 +634,69 @@
             align-items: center;
             justify-content: center;
             gap: 12px;
-            padding: 14px 20px;
-            border-radius: 50px;
+            padding: 14px 16px;
+            border-radius: 100px;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 1rem;
             transition: var(--transition);
-            border: none;
-            cursor: pointer;
         }
-        .whatsapp-btn {
-            background: #25D366;
-            color: #fff;
-            box-shadow: 0 4px 15px rgba(37,211,102,0.3);
-        }
-        .whatsapp-btn:hover {
-            transform: translateY(-3px);
-            background: #20b859;
-            box-shadow: 0 8px 20px rgba(37,211,102,0.4);
-        }
-        .telegram-btn {
-            background: #0088cc;
-            color: #fff;
-            box-shadow: 0 4px 15px rgba(0,136,204,0.3);
-        }
-        .telegram-btn:hover {
-            transform: translateY(-3px);
-            background: #006699;
-            box-shadow: 0 8px 20px rgba(0,136,204,0.4);
-        }
-        .call-btn {
-            background: var(--gold);
-            color: #000;
-            box-shadow: 0 4px 15px rgba(212,168,83,0.3);
-        }
-        .call-btn:hover {
-            transform: translateY(-3px);
-            background: var(--gold-dark);
-            box-shadow: 0 8px 20px rgba(212,168,83,0.4);
-        }
+        .whatsapp-btn { background: #25D366; color: #fff; box-shadow: 0 4px 12px rgba(37,211,102,0.3); }
+        .whatsapp-btn:hover { transform: translateY(-3px); background: #1da15a; }
+        .telegram-btn { background: #0088cc; color: #fff; box-shadow: 0 4px 12px rgba(0,136,204,0.3); }
+        .telegram-btn:hover { transform: translateY(-3px); background: #006bb3; }
+        .call-btn { background: var(--gold); color: #000; box-shadow: 0 4px 12px rgba(212,168,83,0.3); }
+        .call-btn:hover { transform: translateY(-3px); background: var(--gold-dark); }
         .contact-note {
             font-size: 0.75rem;
             color: var(--gray);
-            margin-top: 20px;
-            padding-top: 15px;
+            margin-top: 22px;
+            padding-top: 14px;
             border-top: 1px solid rgba(255,255,255,0.1);
         }
-        .contact-note i { color: var(--gold); margin-right: 4px; }
 
+        /* Footer */
         .footer {
-            background: #000;
+            background: #020202;
             padding: 3rem 2rem 2rem;
-            border-top: 1px solid rgba(212,168,83,0.1);
+            border-top: 1px solid rgba(212,168,83,0.12);
+            margin-top: 20px;
         }
         .footer-grid {
             max-width: 1300px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 40px;
         }
-        .footer-col h4 { color: var(--gold); margin-bottom: 15px; font-size: 1rem; }
-        .footer-col a, .footer-col p { display: block; color: var(--gray-dark); font-size: 0.8rem; text-decoration: none; margin-bottom: 8px; transition: var(--transition); }
-        .footer-col a:hover { color: var(--gold); padding-left: 4px; }
-        .footer-bottom { text-align: center; padding-top: 30px; font-size: 0.75rem; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 30px; }
-        
+        .footer-col h4 { color: var(--gold); margin-bottom: 16px; font-size: 1rem; letter-spacing: 1px; }
+        .footer-col a, .footer-col p { display: block; color: var(--gray-dark); font-size: 0.82rem; text-decoration: none; margin-bottom: 10px; transition: 0.2s; }
+        .footer-col a:hover { color: var(--gold); padding-left: 5px; }
+        .footer-bottom { text-align: center; padding-top: 30px; font-size: 0.75rem; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 35px; }
         .telegram-float {
             position: fixed; bottom: 25px; right: 25px;
-            width: 55px; height: 55px;
-            background: #0088cc; border-radius: 50%;
+            width: 56px; height: 56px;
+            background: #0088cc; border-radius: 60px;
             display: flex; align-items: center; justify-content: center;
             font-size: 28px; color: #fff; text-decoration: none;
             z-index: 999;
-            animation: float 2.5s ease-in-out infinite;
+            box-shadow: 0 5px 18px rgba(0,136,204,0.4);
+            transition: var(--transition);
         }
-        .telegram-float:hover { transform: scale(1.08); background: #006699; }
-        
-        @media (max-width: 600px) {
-            .section-title { font-size: 1.8rem; }
-            .product-grid { gap: 16px; }
-            .hero-subtitle { font-size: 0.9rem; letter-spacing: 2px; }
-            .order-modal { padding: 25px 20px; }
-            .contact-btn { padding: 12px 16px; font-size: 0.9rem; }
+        .telegram-float:hover { transform: scale(1.08); background: #006bb3; }
+
+        @media (max-width: 640px) {
+            .container { padding: 0 1.2rem; }
+            .product-grid { gap: 18px; }
+            .section-title { font-size: 1.9rem; }
+            .hero-subtitle { font-size: 0.9rem; letter-spacing: 2.5px; }
         }
     </style>
 </head>
 <body>
 
 <div class="topbar">
-    <div><i class="fas fa-truck"></i> Free Delivery on Orders Over <span>5,000 ETB</span></div>
+    <div><i class="fas fa-truck-fast"></i> Free Delivery on Orders Over <span>5,000 ETB</span></div>
     <div><i class="fas fa-gift"></i> <span>2 Free Samples</span> with Every Order</div>
 </div>
 
@@ -621,10 +704,10 @@
     <div class="nav-inner">
         <a href="index.html" class="logo">
             <img src="https://github.com/developereth/scentlover/blob/9c50406159570c7f4fe221b5c297536b6c0168f0/logo.png?raw=true" alt="Scent Lovers Logo" class="logo-img-custom" onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='flex'">
-            <div class="logo-icon">🌙</div>
+            <div class="logo-icon" style="display: none;">✨</div>
             <div class="logo-text">Scent Lovers<span>PREMIUM PERFUMES</span></div>
         </a>
-        <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu"><i class="fas fa-bars"></i></button>
         <div class="nav-overlay" id="navOverlay"></div>
         <ul class="nav-links" id="navLinks">
             <button class="nav-close-btn" id="navCloseBtn">&times;</button>
@@ -645,10 +728,10 @@
     <div class="hero-bg"></div>
     <div class="hero-warm-overlay"></div>
     <div class="hero-content">
-        <div class="hero-badge">✦ Premium Fragrances ✦</div>
+        <div class="hero-badge">✦ LIMITED EDITION ✦</div>
         <h1>Scent Lovers</h1>
         <p class="hero-subtitle">Discover Your Signature Scent</p>
-        <p class="hero-desc">Explore our curated collection of luxury perfumes — from timeless classics to modern masterpieces</p>
+        <p class="hero-desc">Explore our curated collection of luxury perfumes — from timeless classics to modern masterpieces. Find your essence.</p>
         <div class="hero-btns">
             <a href="womens.html" class="btn btn-gold"><i class="fas fa-female"></i> Shop Women</a>
             <a href="mens.html" class="btn btn-outline"><i class="fas fa-male"></i> Shop Men</a>
@@ -664,8 +747,8 @@
             <div class="section-line"></div>
         </div>
         <div class="category-grid">
-            <a href="womens.html" class="category-card reveal"><i class="fas fa-female"></i><h4>Women's Perfumes</h4><p>Floral, Oriental, Fresh</p></a>
-            <a href="mens.html" class="category-card reveal"><i class="fas fa-male"></i><h4>Men's Colognes</h4><p>Woody, Aquatic, Spicy</p></a>
+            <a href="womens.html" class="category-card reveal"><i class="fas fa-female"></i><h4>Women's Perfumes</h4><p>Floral · Oriental · Fresh</p></a>
+            <a href="mens.html" class="category-card reveal"><i class="fas fa-male"></i><h4>Men's Colognes</h4><p>Woody · Aquatic · Spicy</p></a>
             <a href="gift-sets.html" class="category-card reveal"><i class="fas fa-gift"></i><h4>Gift Sets</h4><p>Perfect for every occasion</p></a>
             <a href="offers.html" class="category-card reveal"><i class="fas fa-tag"></i><h4>Special Offers</h4><p>Up to 40% off</p></a>
         </div>
@@ -681,73 +764,70 @@
         </div>
         <div class="product-grid" id="productGrid">
             <div class="product-card reveal" data-name="Rose Elegance" data-brand="Chanel" data-price="8,500 ETB">
-                <div class="product-card-img"><img src="https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=400&q=80" alt="Rose Elegance" loading="lazy"><span class="product-card-tag">Bestseller</span></div>
+                <div class="product-card-img"><img src="https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=500&q=85" alt="Rose Elegance" loading="lazy"><span class="product-card-tag">Bestseller</span></div>
                 <div class="product-card-body"><div class="brand">Chanel</div><h4>Rose Elegance</h4><span class="price">8,500 ETB</span><button class="order-btn"><i class="fas fa-shopping-cart"></i> Order Now</button></div>
             </div>
             <div class="product-card reveal" data-name="Midnight Woods" data-brand="Tom Ford" data-price="12,000 ETB">
-                <div class="product-card-img"><img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=400&q=80" alt="Midnight Woods" loading="lazy"></div>
+                <div class="product-card-img"><img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=500&q=85" alt="Midnight Woods" loading="lazy"></div>
                 <div class="product-card-body"><div class="brand">Tom Ford</div><h4>Midnight Woods</h4><span class="price">12,000 ETB</span><button class="order-btn"><i class="fas fa-shopping-cart"></i> Order Now</button></div>
             </div>
             <div class="product-card reveal" data-name="Velvet Oud" data-brand="Creed" data-price="15,000 ETB">
-                <div class="product-card-img"><img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&q=80" alt="Velvet Oud" loading="lazy"><span class="product-card-tag">New</span></div>
+                <div class="product-card-img"><img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=500&q=85" alt="Velvet Oud" loading="lazy"><span class="product-card-tag">New</span></div>
                 <div class="product-card-body"><div class="brand">Creed</div><h4>Velvet Oud</h4><span class="price">15,000 ETB</span><button class="order-btn"><i class="fas fa-shopping-cart"></i> Order Now</button></div>
             </div>
             <div class="product-card reveal" data-name="Ocean Breeze" data-brand="Armani" data-price="7,200 ETB">
-                <div class="product-card-img"><img src="https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=400&q=80" alt="Ocean Breeze" loading="lazy"></div>
+                <div class="product-card-img"><img src="https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=500&q=85" alt="Ocean Breeze" loading="lazy"></div>
                 <div class="product-card-body"><div class="brand">Armani</div><h4>Ocean Breeze</h4><span class="price">7,200 ETB</span><button class="order-btn"><i class="fas fa-shopping-cart"></i> Order Now</button></div>
             </div>
         </div>
     </section>
 </div>
 
-<!-- Order Modal - WhatsApp, Telegram, Direct Call Only -->
+<!-- Order Modal -->
 <div id="orderModal" class="modal-overlay">
     <div class="order-modal">
         <div class="modal-header">
-            <h3><i class="fas fa-heart" style="color: var(--gold);"></i> Order Now</h3>
+            <h3><i class="fas fa-heart" style="color: var(--gold);"></i> Reserve Your Scent</h3>
             <button class="close-modal" id="closeModalBtn">&times;</button>
         </div>
         <div id="modalProductInfo" class="product-info">
             <p><strong>Selected Product:</strong> <span id="selectedProductName">-</span></p>
             <p><strong>Price:</strong> <span id="selectedProductPrice">-</span></p>
         </div>
-        <p style="margin-bottom: 12px; font-size: 0.85rem; color: var(--gray-light);">Contact us directly to place your order:</p>
+        <p style="margin-bottom: 10px; font-size: 0.85rem; color: var(--gray-light);">✨ Connect with us directly to order</p>
         <div class="contact-options">
-            <a href="#" id="whatsappOrderBtn" class="contact-btn whatsapp-btn" target="_blank">
-                <i class="fab fa-whatsapp" style="font-size: 1.5rem;"></i> Order via WhatsApp
-            </a>
-            <a href="#" id="telegramOrderBtn" class="contact-btn telegram-btn" target="_blank">
-                <i class="fab fa-telegram" style="font-size: 1.5rem;"></i> Order via Telegram
-            </a>
-            <a href="#" id="callOrderBtn" class="contact-btn call-btn">
-                <i class="fas fa-phone-alt" style="font-size: 1.3rem;"></i> Direct Call
-            </a>
+            <a href="#" id="whatsappOrderBtn" class="contact-btn whatsapp-btn" target="_blank"><i class="fab fa-whatsapp" style="font-size: 1.4rem;"></i> WhatsApp Order</a>
+            <a href="#" id="telegramOrderBtn" class="contact-btn telegram-btn" target="_blank"><i class="fab fa-telegram" style="font-size: 1.4rem;"></i> Telegram Order</a>
+            <a href="#" id="callOrderBtn" class="contact-btn call-btn"><i class="fas fa-phone-alt"></i> Call to Order</a>
         </div>
-        <div class="contact-note">
-            <i class="fas fa-clock"></i> Response within minutes | <i class="fas fa-truck"></i> Free delivery on orders over 5,000 ETB
-        </div>
+        <div class="contact-note"><i class="fas fa-shield-alt"></i> Fast response & secure delivery</div>
     </div>
 </div>
 
 <footer class="footer">
     <div class="footer-grid">
-        <div class="footer-col"><h4>Scent Lovers</h4><p>Premium perfumes for every occasion. Luxury fragrances delivered to your door.</p></div>
+        <div class="footer-col"><h4>Scent Lovers</h4><p>Luxury perfumes for the refined soul. Authentic fragrances delivered with care.</p></div>
         <div class="footer-col"><h4>Shop</h4><a href="womens.html">Women</a><a href="mens.html">Men</a><a href="gift-sets.html">Gift Sets</a><a href="offers.html">Offers</a></div>
-        <div class="footer-col"><h4>Help</h4><a href="contact.html">Contact</a><a href="stores.html">Stores</a><a href="rewards.html">Rewards</a></div>
-        <div class="footer-col"><h4>Contact</h4><p><i class="fas fa-phone"></i> +251 900 000 000</p><p><i class="fas fa-envelope"></i> scentlovers@email.com</p></div>
+        <div class="footer-col"><h4>Support</h4><a href="contact.html">Contact</a><a href="stores.html">Stores</a><a href="rewards.html">Rewards</a></div>
+        <div class="footer-col"><h4>Connect</h4><p><i class="fas fa-phone-alt"></i> +251 900 000 000</p><p><i class="fab fa-telegram"></i> @scentlovers</p></div>
     </div>
-    <div class="footer-bottom"><p>&copy; 2026 Scent Lovers Perfume. All rights reserved.</p></div>
+    <div class="footer-bottom"><p>&copy; 2026 Scent Lovers Perfume. All rights reserved. Ethiopian luxury essence.</p></div>
 </footer>
-<a href="https://t.me/scentlovers" class="telegram-float" target="_blank"><i class="fab fa-telegram"></i></a>
+<a href="https://t.me/scentlovers" class="telegram-float" target="_blank" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
 
 <script>
     (function() {
-        // Scroll reveal
-        const reveals = document.querySelectorAll('.reveal');
+        // Scroll reveal (Intersection Observer)
+        const revealElements = document.querySelectorAll('.reveal');
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-        }, { threshold: 0.12 });
-        reveals.forEach(r => observer.observe(r));
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+        revealElements.forEach(el => observer.observe(el));
 
         // Mobile navigation
         const menuBtn = document.getElementById('mobileMenuBtn');
@@ -756,13 +836,13 @@
         const closeNavBtn = document.getElementById('navCloseBtn');
         function closeMenu() { navLinks?.classList.remove('show'); overlay?.classList.remove('show'); document.body.style.overflow = ''; }
         function openMenu() { navLinks?.classList.add('show'); overlay?.classList.add('show'); document.body.style.overflow = 'hidden'; }
-        if(menuBtn) menuBtn.onclick = (e) => { e.stopPropagation(); navLinks.classList.contains('show') ? closeMenu() : openMenu(); };
-        if(closeNavBtn) closeNavBtn.onclick = closeMenu;
-        if(overlay) overlay.onclick = closeMenu;
-        document.querySelectorAll('.nav-links a').forEach(link => link.addEventListener('click', () => { if(window.innerWidth <= 768) closeMenu(); }));
-        document.addEventListener('keydown', (e) => { if(e.key === 'Escape' && navLinks?.classList.contains('show')) closeMenu(); });
+        if (menuBtn) menuBtn.onclick = (e) => { e.stopPropagation(); navLinks.classList.contains('show') ? closeMenu() : openMenu(); };
+        if (closeNavBtn) closeNavBtn.onclick = closeMenu;
+        if (overlay) overlay.onclick = closeMenu;
+        document.querySelectorAll('.nav-links a').forEach(link => link.addEventListener('click', () => { if (window.innerWidth <= 880) closeMenu(); }));
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && navLinks?.classList.contains('show')) closeMenu(); });
 
-        // Order Modal Logic
+        // Order Modal Logic (WhatsApp, Telegram, Call)
         const modal = document.getElementById('orderModal');
         const closeModalBtn = document.getElementById('closeModalBtn');
         const selectedProductNameSpan = document.getElementById('selectedProductName');
@@ -771,22 +851,17 @@
         const telegramBtn = document.getElementById('telegramOrderBtn');
         const callBtn = document.getElementById('callOrderBtn');
         
-        let currentProduct = { name: '', brand: '', price: '' };
-        
         const PHONE_NUMBER = '251900000000';
         const TELEGRAM_USERNAME = 'scentlovers';
         
         function openOrderModal(productData) {
-            currentProduct = productData;
             const fullName = `${productData.brand} - ${productData.name}`;
             selectedProductNameSpan.textContent = fullName;
             selectedProductPriceSpan.textContent = productData.price;
-            
-            const whatsappMsg = `Hello Scent Lovers! I'm interested in ordering: ${fullName} (${productData.price}). Please provide details.`;
+            const whatsappMsg = `Hello Scent Lovers! I'm interested in ordering: ${fullName} (${productData.price}). Please assist.`;
             whatsappBtn.href = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(whatsappMsg)}`;
             telegramBtn.href = `https://t.me/${TELEGRAM_USERNAME}?text=${encodeURIComponent(whatsappMsg)}`;
             callBtn.href = `tel:+${PHONE_NUMBER}`;
-            
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -801,7 +876,7 @@
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 const productCard = btn.closest('.product-card');
-                if(productCard) {
+                if (productCard) {
                     const name = productCard.querySelector('h4')?.innerText || 'Perfume';
                     const brand = productCard.querySelector('.brand')?.innerText || 'Luxury Brand';
                     const price = productCard.querySelector('.price')?.innerText || 'N/A';
@@ -810,12 +885,13 @@
             });
         });
         
-        if(closeModalBtn) closeModalBtn.onclick = closeModal;
-        modal?.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
+        if (closeModalBtn) closeModalBtn.onclick = closeModal;
+        modal?.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
         
+        // Active link highlight based on current page
         const currentPage = location.pathname.split('/').pop() || 'index.html';
         document.querySelectorAll('.nav-links a:not(.nav-cta)').forEach(link => {
-            if(link.getAttribute('href') === currentPage) link.classList.add('active');
+            if (link.getAttribute('href') === currentPage) link.classList.add('active');
         });
     })();
 </script>
