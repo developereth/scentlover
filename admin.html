@@ -5,85 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Manager | Scent Lovers</title>
     <style>
-        :root { --gold: #D4A853; --dark: #1a1a1a; --green: #2D8A4E; }
+        :root { --gold: #D4A853; }
         body { font-family: 'Segoe UI', sans-serif; background: #0A0A0A; padding: 20px; color: white; }
         .container { max-width: 1200px; margin: 0 auto; }
-        .panel { background: #111; padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.3); margin-bottom: 30px; border: 1px solid rgba(212,168,83,0.2); }
+        .panel { background: #111; padding: 30px; border-radius: 15px; margin-bottom: 30px; border: 1px solid rgba(212,168,83,0.2); }
         h2 { border-bottom: 2px solid var(--gold); padding-bottom: 10px; margin-bottom: 20px; color: var(--gold); }
         .form-group { margin-bottom: 20px; }
         label { display: block; margin-bottom: 8px; font-weight: bold; color: #bbb; }
-        input, textarea, select { width: 100%; padding: 12px; border: 1px solid #333; border-radius: 8px; background: #1a1a1a; color: white; font-size: 1rem; }
-        
-        .upload-area { border: 2px dashed var(--gold); border-radius: 10px; padding: 30px; text-align: center; cursor: pointer; transition: all 0.3s; background: #1a1a1a; }
-        .upload-area:hover { border-color: #a88a4d; background: #222; }
-        .preview-img { max-width: 100%; max-height: 200px; border-radius: 8px; margin-top: 15px; display: none; }
+        input, textarea, select { width: 100%; padding: 12px; border: 1px solid #333; border-radius: 8px; background: #1a1a1a; color: white; }
+        .upload-area { border: 2px dashed var(--gold); border-radius: 10px; padding: 30px; text-align: center; cursor: pointer; background: #1a1a1a; }
+        .preview-img { max-width: 200px; margin-top: 15px; display: none; border-radius: 8px; }
         .preview-img.show { display: block; }
-        
-        button { padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; margin: 3px; transition: all 0.2s; }
+        button { padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; margin: 3px; }
         .btn-primary { background: var(--gold); color: black; }
         .btn-danger { background: #c0392b; color: white; }
         .btn-edit { background: #3498db; color: white; }
         .btn-save { background: #27ae60; color: white; }
         .btn-cancel { background: #95a5a6; color: white; }
-        .btn-toggle { background: #f39c12; color: white; }
-        
-        .search-box { margin-bottom: 20px; }
-        .search-box input { width: 100%; padding: 14px; border: 2px solid var(--gold); border-radius: 25px; }
-        
-        .product-item { background: #1a1a1a; padding: 20px; margin: 15px 0; border-radius: 10px; display: flex; gap: 20px; align-items: flex-start; border: 1px solid #333; }
-        .product-item img { width: 100px; height: 100px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
+        .product-item { background: #1a1a1a; padding: 15px; margin: 15px 0; border-radius: 10px; display: flex; gap: 15px; align-items: flex-start; border: 1px solid #333; }
+        .product-item img { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; }
         .item-info { flex: 1; }
-        .item-info h3 { margin: 0 0 5px; color: var(--gold); }
-        .item-info p { color: #bbb; font-size: 0.9rem; }
-        .item-price { color: var(--gold); font-weight: bold; font-size: 1.1rem; }
-        .item-meta { font-size: 0.8rem; color: #666; }
-        .item-actions { display: flex; gap: 5px; flex-wrap: wrap; }
-        
-        .edit-fields { display: none; margin-top: 10px; }
+        .item-info h3 { color: var(--gold); margin: 0 0 5px; }
+        .item-price { color: var(--gold); font-weight: bold; }
+        .edit-fields { display: none; margin-top: 15px; }
         .editing .edit-fields { display: block; }
         .editing .view-fields { display: none; }
-        
         .status { padding: 12px; margin: 15px 0; border-radius: 8px; display: none; }
         .status.success { background: #27ae60; color: white; display: block; }
         .status.error { background: #c0392b; color: white; display: block; }
-        .hidden { display: none !important; }
-        .no-results { text-align: center; color: #999; padding: 30px; }
-        
-        .category-filter { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
-        .cat-btn { background: #333; color: white; padding: 8px 16px; border-radius: 25px; cursor: pointer; }
+        .hidden { display: none; }
+        .cat-btn { background: #333; padding: 8px 16px; border-radius: 25px; cursor: pointer; display: inline-block; margin: 5px; }
         .cat-btn.active { background: var(--gold); color: black; }
-        
-        @media (max-width: 700px) { .product-item { flex-direction: column; } .product-item img { width: 100%; height: 150px; } }
+        .search-box input { width: 100%; padding: 12px; border: 2px solid var(--gold); border-radius: 25px; margin-bottom: 20px; }
     </style>
 </head>
 <body>
 <div class="container">
-    <!-- LOGIN PANEL -->
     <div class="panel" id="loginPanel">
         <h2>🔐 Admin Login</h2>
-        <div class="form-group"><input type="password" id="password" placeholder="Enter admin password"></div>
+        <input type="password" id="password" placeholder="Enter admin password">
         <button class="btn-primary" onclick="login()">Access Product Manager</button>
     </div>
     
-    <!-- ADMIN PANEL -->
     <div class="panel hidden" id="adminPanel">
         <h2>➕ Add New Product</h2>
         
         <div class="form-group">
             <label>📸 Product Image</label>
-            <div class="upload-area" id="uploadArea" onclick="document.getElementById('imageInput').click()">
+            <div class="upload-area" onclick="document.getElementById('imageInput').click()">
                 <div style="font-size:40px;">📷</div>
                 <div>Click to upload product photo</div>
-                <small>JPG, PNG or WEBP</small>
             </div>
             <input type="file" id="imageInput" accept="image/*" style="display:none" onchange="handleImage(event)">
             <img id="preview" class="preview-img" alt="Preview">
-            <div class="upload-status" id="uploadStatus"></div>
+            <div id="uploadStatus" style="font-size:0.8rem; margin-top:5px;"></div>
         </div>
         
-        <div class="form-group"><label>📝 Product Name *</label><input type="text" id="productName" placeholder="e.g., Rose Elegance"></div>
-        <div class="form-group"><label>🏷️ Brand *</label><input type="text" id="productBrand" placeholder="e.g., Chanel"></div>
-        <div class="form-group"><label>💰 Price (ETB) *</label><input type="number" id="productPrice" placeholder="0.00" step="0.01"></div>
+        <div class="form-group"><label>📝 Product Name</label><input type="text" id="productName" placeholder="e.g., Rose Elegance"></div>
+        <div class="form-group"><label>🏷️ Brand</label><input type="text" id="productBrand" placeholder="e.g., Chanel"></div>
+        <div class="form-group"><label>💰 Price (ETB)</label><input type="number" id="productPrice" placeholder="0.00" step="0.01"></div>
         <div class="form-group"><label>📂 Category</label>
             <select id="productCategory">
                 <option value="women">👩 Women's Perfumes</option>
@@ -92,129 +72,69 @@
                 <option value="sale">🔥 Sale / Offers</option>
             </select>
         </div>
-        <div class="form-group"><label>📋 Description</label><textarea id="productDesc" rows="3" placeholder="Describe the fragrance..."></textarea></div>
-        <div class="form-group"><label>🏷️ Tag (Bestseller, New, Sale)</label><input type="text" id="productTag" placeholder="Optional"></div>
-        <button class="btn-primary" onclick="addProduct()">✅ Add to Store</button>
+        <div class="form-group"><label>📋 Description</label><textarea id="productDesc" rows="2"></textarea></div>
+        <div class="form-group"><label>🏷️ Tag (Bestseller, New, Sale)</label><input type="text" id="productTag"></div>
+        <button class="btn-primary" onclick="addProduct()">✅ Add Product</button>
         <div id="statusMsg" class="status"></div>
         
         <h2 style="margin-top:40px;">📋 All Products</h2>
-        <div class="search-box"><input type="text" id="searchInput" placeholder="🔍 Search by name or brand..." oninput="filterProducts()"></div>
-        <div class="category-filter" id="categoryFilter"></div>
+        <div class="search-box"><input type="text" id="searchInput" placeholder="🔍 Search..." oninput="filterProducts()"></div>
+        <div id="categoryFilter"></div>
         <div id="productsList"></div>
-        <div id="noResults" class="no-results hidden">No products found.</div>
+        <div id="noResults" class="hidden" style="text-align:center; padding:30px; color:#999;">No products found</div>
     </div>
 </div>
 
 <script>
-    // ============ CONFIGURATION ============
+    // ============ YOUR CREDENTIALS ============
     const API_URL = 'https://scent-lovers-api.developeraddis.workers.dev';
-    const CLOUDINARY_CLOUD = 'dm6rwo1ox';
-    const CLOUDINARY_PRESET = 'scent_lovers_preset';
+    const CLOUD_NAME = 'dm6rwo1ox';
+    const UPLOAD_PRESET = 'scent_lovers_preset';
+    const ADMIN_PASS = 'ScentLovers2026';
     
-    let adminPass = '';
-    let newImageUrl = '';
-    let editImageUrls = {};
+    let authToken = null;
     let allProducts = [];
     let currentFilter = 'all';
-    let currentSearch = '';
+    let newImageUrl = '';
+    let editImageUrls = {};
     
     // ============ LOGIN ============
     async function login() {
         const pass = document.getElementById('password').value;
-        try {
-            const res = await fetch(`${API_URL}/api/admin/login`, { 
-                method: 'POST', 
-                headers: {'Content-Type': 'application/json'}, 
-                body: JSON.stringify({ username: 'scentlovers', password: pass }) 
-            });
-            const data = await res.json();
-            if (data.success) { 
-                adminPass = pass; 
-                document.getElementById('loginPanel').classList.add('hidden'); 
-                document.getElementById('adminPanel').classList.remove('hidden'); 
-                loadAllProducts(); 
-            } else { alert('Invalid password'); }
-        } catch(e) { alert('Login failed. Check connection.'); }
+        if (pass !== ADMIN_PASS) { alert('Wrong password'); return; }
+        authToken = btoa(`scentlovers:${pass}`);
+        document.getElementById('loginPanel').classList.add('hidden');
+        document.getElementById('adminPanel').classList.remove('hidden');
+        await loadProducts();
     }
     
-    // ============ IMAGE UPLOAD ============
-    function handleImage(e) {
-        const file = e.target.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = ev => { 
-            document.getElementById('preview').src = ev.target.result; 
-            document.getElementById('preview').classList.add('show'); 
-            document.getElementById('uploadArea').classList.add('has-image'); 
-        };
-        reader.readAsDataURL(file);
-        uploadNewImage(file);
-    }
-    
-    async function uploadNewImage(file) {
-        const status = document.getElementById('uploadStatus');
-        status.textContent = '⏳ Uploading...'; 
-        status.style.color = '#D4A853';
-        
-        const fd = new FormData(); 
-        fd.append('file', file); 
-        fd.append('upload_preset', CLOUDINARY_PRESET);
-        
-        try {
-            const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/image/upload`, { method: 'POST', body: fd });
-            const data = await res.json();
-            if (data.secure_url) { 
-                newImageUrl = data.secure_url; 
-                status.textContent = '✅ Ready!'; 
-                status.style.color = '#4CAF50'; 
-            } else { 
-                status.textContent = '❌ Failed'; 
-                status.style.color = 'red'; 
-            }
-        } catch(e) { 
-            status.textContent = '❌ Error'; 
-            status.style.color = 'red'; 
-        }
-    }
-    
-    // ============ LOAD PRODUCTS ============
-    async function loadAllProducts() {
+    // ============ LOAD PRODUCTS (FIXED PARSING) ============
+    async function loadProducts() {
         try {
             const res = await fetch(`${API_URL}/api/products`);
             const data = await res.json();
+            console.log('API Response:', data);
+            
             if (data.success) {
-                let products = data.products;
-                if (typeof products === 'string') products = JSON.parse(products);
-                allProducts = Array.isArray(products) ? products : [];
-                renderProductsList();
-                buildCategoryFilter();
+                // FIX: Parse if string, otherwise use as is
+                if (typeof data.products === 'string') {
+                    allProducts = JSON.parse(data.products);
+                } else {
+                    allProducts = data.products || [];
+                }
+                console.log('Parsed products:', allProducts);
+                renderProducts();
+                renderCategoryFilter();
             }
-        } catch(e) { console.error('Failed to load products'); }
+        } catch(e) { console.error('Load error:', e); showStatus('Error loading products', 'error'); }
     }
     
-    function buildCategoryFilter() {
-        const cats = ['all', 'women', 'men', 'gift', 'sale'];
-        const catNames = { all: 'All', women: '👩 Women', men: '👨 Men', gift: '🎁 Gift', sale: '🔥 Sale' };
-        const container = document.getElementById('categoryFilter');
-        container.innerHTML = cats.map(cat => `<button class="cat-btn ${currentFilter === cat ? 'active' : ''}" onclick="filterByCategory('${cat}')">${catNames[cat]}</button>`).join('');
-    }
-    
-    function filterByCategory(cat) {
-        currentFilter = cat;
-        document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
-        event.target.classList.add('active');
-        renderProductsList();
-    }
-    
-    function filterProducts() {
-        currentSearch = document.getElementById('searchInput').value.toLowerCase();
-        renderProductsList();
-    }
-    
-    function renderProductsList() {
+    // ============ RENDER PRODUCTS ============
+    function renderProducts() {
         let filtered = [...allProducts];
         if (currentFilter !== 'all') filtered = filtered.filter(p => p.category === currentFilter);
-        if (currentSearch) filtered = filtered.filter(p => p.name.toLowerCase().includes(currentSearch) || p.brand.toLowerCase().includes(currentSearch));
+        const search = document.getElementById('searchInput')?.value.toLowerCase() || '';
+        if (search) filtered = filtered.filter(p => p.name.toLowerCase().includes(search) || p.brand.toLowerCase().includes(search));
         
         const container = document.getElementById('productsList');
         const noResults = document.getElementById('noResults');
@@ -226,174 +146,192 @@
         }
         noResults.classList.add('hidden');
         
-        container.innerHTML = filtered.map(product => `
-            <div class="product-item" id="product-${product.id}">
-                <img src="${product.image}" id="thumb-${product.id}" onerror="this.src='https://via.placeholder.com/100x100?text=No+Image'" alt="${product.name}">
+        container.innerHTML = filtered.map(p => `
+            <div class="product-item" id="product-${p.id}">
+                <img src="${p.image || 'https://via.placeholder.com/80x80?text=No+Image'}" onerror="this.src='https://via.placeholder.com/80x80'">
                 <div class="item-info">
                     <div class="view-fields">
-                        <h3>${product.brand} - ${product.name}</h3>
-                        <p>${product.description || ''}</p>
-                        <span class="item-price">${product.price} ETB</span>
-                        <br><span class="item-meta">${product.category} | ${product.tag ? '🏷️ ' + product.tag : ''}</span>
+                        <h3>${escapeHtml(p.brand)} - ${escapeHtml(p.name)}</h3>
+                        <span class="item-price">${p.price}</span>
+                        <div style="font-size:0.8rem; color:#888;">${p.category} ${p.tag ? '| ' + p.tag : ''}</div>
                     </div>
                     <div class="edit-fields">
-                        <label>📸 New Image (optional)</label>
-                        <input type="file" id="editFile-${product.id}" accept="image/*" onchange="handleEditImage(event, '${product.id}')">
-                        <div class="upload-status" id="editUploadStatus-${product.id}"></div>
-                        <label>Name</label>
-                        <input type="text" id="editName-${product.id}" value="${product.name}">
-                        <label>Brand</label>
-                        <input type="text" id="editBrand-${product.id}" value="${product.brand}">
-                        <label>Price (ETB)</label>
-                        <input type="number" id="editPrice-${product.id}" value="${product.price.replace(' ETB', '')}" step="0.01">
-                        <label>Description</label>
-                        <textarea id="editDesc-${product.id}" rows="2">${product.description || ''}</textarea>
+                        <label>New Image</label>
+                        <input type="file" id="editFile-${p.id}" accept="image/*" onchange="handleEditImage(event, '${p.id}')">
+                        <div id="editStatus-${p.id}" style="font-size:0.7rem;"></div>
+                        <label>Name</label><input type="text" id="editName-${p.id}" value="${escapeHtml(p.name)}">
+                        <label>Brand</label><input type="text" id="editBrand-${p.id}" value="${escapeHtml(p.brand)}">
+                        <label>Price</label><input type="number" id="editPrice-${p.id}" value="${p.price.replace(' ETB', '')}">
                         <label>Category</label>
-                        <select id="editCat-${product.id}">
-                            <option value="women" ${product.category==='women'?'selected':''}>Women</option>
-                            <option value="men" ${product.category==='men'?'selected':''}>Men</option>
-                            <option value="gift" ${product.category==='gift'?'selected':''}>Gift Sets</option>
-                            <option value="sale" ${product.category==='sale'?'selected':''}>Sale</option>
+                        <select id="editCat-${p.id}">
+                            <option value="women" ${p.category==='women'?'selected':''}>Women</option>
+                            <option value="men" ${p.category==='men'?'selected':''}>Men</option>
+                            <option value="gift" ${p.category==='gift'?'selected':''}>Gift</option>
+                            <option value="sale" ${p.category==='sale'?'selected':''}>Sale</option>
                         </select>
-                        <label>Tag</label>
-                        <input type="text" id="editTag-${product.id}" value="${product.tag || ''}">
-                        <input type="hidden" id="editImage-${product.id}" value="${product.image}">
+                        <label>Tag</label><input type="text" id="editTag-${p.id}" value="${p.tag || ''}">
+                        <input type="hidden" id="editImage-${p.id}" value="${p.image || ''}">
                     </div>
                 </div>
-                <div class="item-actions">
-                    <button class="btn-edit" id="editBtn-${product.id}" onclick="startEdit('${product.id}')">✏️ Edit</button>
-                    <button class="btn-save hidden" id="saveBtn-${product.id}" onclick="saveEdit('${product.id}')">💾 Save</button>
-                    <button class="btn-cancel hidden" id="cancelBtn-${product.id}" onclick="cancelEdit('${product.id}')">Cancel</button>
-                    <button class="btn-danger" onclick="deleteProduct('${product.id}')">🗑️ Delete</button>
+                <div>
+                    <button class="btn-edit" onclick="startEdit('${p.id}')">✏️ Edit</button>
+                    <button class="btn-save hidden" id="saveBtn-${p.id}" onclick="saveEdit('${p.id}')">💾 Save</button>
+                    <button class="btn-cancel hidden" id="cancelBtn-${p.id}" onclick="cancelEdit('${p.id}')">Cancel</button>
+                    <button class="btn-danger" onclick="deleteProduct('${p.id}')">🗑️ Delete</button>
                 </div>
             </div>
         `).join('');
     }
     
-    // ============ EDIT PRODUCT ============
-    function startEdit(id) {
-        const itemDiv = document.getElementById('product-' + id);
-        itemDiv.classList.add('editing');
-        document.getElementById('editBtn-' + id).classList.add('hidden');
-        document.getElementById('saveBtn-' + id).classList.remove('hidden');
-        document.getElementById('cancelBtn-' + id).classList.remove('hidden');
+    function escapeHtml(str) { if (!str) return ''; return str.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'})[m]); }
+    
+    function renderCategoryFilter() {
+        const cats = ['all', 'women', 'men', 'gift', 'sale'];
+        const names = { all:'All', women:'👩 Women', men:'👨 Men', gift:'🎁 Gift', sale:'🔥 Sale' };
+        document.getElementById('categoryFilter').innerHTML = cats.map(c => `<button class="cat-btn ${currentFilter===c?'active':''}" onclick="setFilter('${c}')">${names[c]}</button>`).join('');
     }
     
-    function cancelEdit(id) {
-        const itemDiv = document.getElementById('product-' + id);
-        itemDiv.classList.remove('editing');
-        document.getElementById('editBtn-' + id).classList.remove('hidden');
-        document.getElementById('saveBtn-' + id).classList.add('hidden');
-        document.getElementById('cancelBtn-' + id).classList.add('hidden');
-        delete editImageUrls[id];
-        loadAllProducts();
-    }
+    function setFilter(cat) { currentFilter = cat; renderProducts(); }
+    function filterProducts() { renderProducts(); }
     
-    async function handleEditImage(event, productId) {
-        const file = event.target.files[0];
+    // ============ IMAGE UPLOAD ============
+    async function handleImage(e) {
+        const file = e.target.files[0];
         if (!file) return;
+        const reader = new FileReader();
+        reader.onload = ev => { document.getElementById('preview').src = ev.target.result; document.getElementById('preview').classList.add('show'); };
+        reader.readAsDataURL(file);
         
-        const statusEl = document.getElementById('editUploadStatus-' + productId);
-        statusEl.textContent = '⏳ Uploading...';
-        
+        document.getElementById('uploadStatus').textContent = '⏳ Uploading...';
         const fd = new FormData();
         fd.append('file', file);
-        fd.append('upload_preset', CLOUDINARY_PRESET);
+        fd.append('upload_preset', UPLOAD_PRESET);
         
         try {
-            const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/image/upload`, { method: 'POST', body: fd });
+            const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, { method: 'POST', body: fd });
             const data = await res.json();
             if (data.secure_url) {
-                editImageUrls[productId] = data.secure_url;
-                document.getElementById('editImage-' + productId).value = data.secure_url;
-                document.getElementById('thumb-' + productId).src = data.secure_url;
-                statusEl.textContent = '✅ New image ready!';
-                statusEl.style.color = '#4CAF50';
-            } else {
-                statusEl.textContent = '❌ Upload failed';
-                statusEl.style.color = 'red';
-            }
-        } catch(e) {
-            statusEl.textContent = '❌ Error';
-            statusEl.style.color = 'red';
-        }
+                newImageUrl = data.secure_url;
+                document.getElementById('uploadStatus').textContent = '✅ Ready';
+            } else { document.getElementById('uploadStatus').textContent = '❌ Failed'; }
+        } catch(e) { document.getElementById('uploadStatus').textContent = '❌ Error'; }
     }
     
-    async function saveEdit(id) {
-        const name = document.getElementById('editName-' + id).value.trim();
-        const brand = document.getElementById('editBrand-' + id).value.trim();
-        const price = document.getElementById('editPrice-' + id).value;
-        const description = document.getElementById('editDesc-' + id).value.trim();
-        const category = document.getElementById('editCat-' + id).value;
-        const tag = document.getElementById('editTag-' + id).value.trim();
-        const image = editImageUrls[id] || document.getElementById('editImage-' + id).value;
-        
-        if (!name || !brand || !price) return showStatus('❌ Name, brand and price required', 'error');
+    async function handleEditImage(event, id) {
+        const file = event.target.files[0];
+        if (!file) return;
+        document.getElementById('editStatus-' + id).textContent = '⏳ Uploading...';
+        const fd = new FormData();
+        fd.append('file', file);
+        fd.append('upload_preset', UPLOAD_PRESET);
         
         try {
-            const res = await fetch(`${API_URL}/api/admin/products/${id}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json', 'X-Admin-Auth': btoa(`scentlovers:${adminPass}`) },
-                body: JSON.stringify({ name, brand, price: price + ' ETB', description, category, image, tag })
-            });
+            const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, { method: 'POST', body: fd });
             const data = await res.json();
-            if (data.success) {
-                showStatus('✅ Product updated!', 'success');
-                delete editImageUrls[id];
-                loadAllProducts();
-            } else { showStatus('❌ Update failed', 'error'); }
-        } catch(e) { showStatus('❌ Update failed', 'error'); }
+            if (data.secure_url) {
+                editImageUrls[id] = data.secure_url;
+                document.getElementById('editImage-' + id).value = data.secure_url;
+                document.getElementById('editStatus-' + id).textContent = '✅ Ready';
+            } else { document.getElementById('editStatus-' + id).textContent = '❌ Failed'; }
+        } catch(e) { document.getElementById('editStatus-' + id).textContent = '❌ Error'; }
     }
     
     // ============ ADD PRODUCT ============
     async function addProduct() {
         const name = document.getElementById('productName').value.trim();
         const brand = document.getElementById('productBrand').value.trim();
-        const price = document.getElementById('productPrice').value.trim();
-        if (!name || !brand || !price) return showStatus('❌ Name, brand and price required', 'error');
-        if (!newImageUrl) return showStatus('❌ Upload a product image first', 'error');
+        const price = document.getElementById('productPrice').value;
+        if (!name || !brand || !price) { showStatus('❌ Name, brand and price required', 'error'); return; }
+        if (!newImageUrl) { showStatus('❌ Upload an image first', 'error'); return; }
+        
+        const product = {
+            name, brand, price: price + ' ETB',
+            category: document.getElementById('productCategory').value,
+            description: document.getElementById('productDesc').value,
+            image: newImageUrl,
+            tag: document.getElementById('productTag').value
+        };
         
         try {
-            const res = await fetch(`${API_URL}/api/admin/products`, { 
-                method: 'POST', 
-                headers: { 'Content-Type': 'application/json', 'X-Admin-Auth': btoa(`scentlovers:${adminPass}`) }, 
-                body: JSON.stringify({ 
-                    name, brand, price: price + ' ETB', 
-                    category: document.getElementById('productCategory').value, 
-                    description: document.getElementById('productDesc').value, 
-                    image: newImageUrl, 
-                    tag: document.getElementById('productTag').value 
-                }) 
+            const res = await fetch(`${API_URL}/api/admin/products`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'X-Admin-Auth': authToken },
+                body: JSON.stringify(product)
             });
             const data = await res.json();
-            if (data.success) { 
-                showStatus('✅ Product added!', 'success'); 
-                ['productName','productBrand','productPrice','productDesc','productTag'].forEach(id => document.getElementById(id).value = ''); 
-                document.getElementById('preview').classList.remove('show'); 
-                document.getElementById('uploadStatus').textContent = ''; 
-                newImageUrl = ''; 
+            if (data.success) {
+                showStatus('✅ Product added!', 'success');
+                document.getElementById('productName').value = '';
+                document.getElementById('productBrand').value = '';
+                document.getElementById('productPrice').value = '';
+                document.getElementById('productDesc').value = '';
+                document.getElementById('productTag').value = '';
+                document.getElementById('preview').classList.remove('show');
+                newImageUrl = '';
                 document.getElementById('imageInput').value = '';
-                loadAllProducts(); 
-            } else { showStatus('❌ Error adding product', 'error'); }
-        } catch(e) { showStatus('❌ Network error', 'error'); }
+                document.getElementById('uploadStatus').textContent = '';
+                await loadProducts();
+            } else { showStatus('❌ Failed to add', 'error'); }
+        } catch(e) { showStatus('❌ Error: ' + e.message, 'error'); }
+    }
+    
+    // ============ EDIT PRODUCT ============
+    function startEdit(id) {
+        document.getElementById(`product-${id}`).classList.add('editing');
+        document.getElementById(`editBtn-${id}`).classList.add('hidden');
+        document.getElementById(`saveBtn-${id}`).classList.remove('hidden');
+        document.getElementById(`cancelBtn-${id}`).classList.remove('hidden');
+    }
+    
+    function cancelEdit(id) {
+        document.getElementById(`product-${id}`).classList.remove('editing');
+        document.getElementById(`editBtn-${id}`).classList.remove('hidden');
+        document.getElementById(`saveBtn-${id}`).classList.add('hidden');
+        document.getElementById(`cancelBtn-${id}`).classList.add('hidden');
+        delete editImageUrls[id];
+        loadProducts();
+    }
+    
+    async function saveEdit(id) {
+        const name = document.getElementById(`editName-${id}`).value.trim();
+        const brand = document.getElementById(`editBrand-${id}`).value.trim();
+        const price = document.getElementById(`editPrice-${id}`).value;
+        const category = document.getElementById(`editCat-${id}`).value;
+        const tag = document.getElementById(`editTag-${id}`).value;
+        const image = editImageUrls[id] || document.getElementById(`editImage-${id}`).value;
+        
+        if (!name || !brand || !price) { showStatus('Name, brand and price required', 'error'); return; }
+        
+        try {
+            const res = await fetch(`${API_URL}/api/admin/products/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json', 'X-Admin-Auth': authToken },
+                body: JSON.stringify({ name, brand, price: price + ' ETB', category, image, tag })
+            });
+            const data = await res.json();
+            if (data.success) {
+                showStatus('✅ Product updated!', 'success');
+                delete editImageUrls[id];
+                await loadProducts();
+            } else { showStatus('❌ Update failed', 'error'); }
+        } catch(e) { showStatus('❌ Error: ' + e.message, 'error'); }
     }
     
     // ============ DELETE PRODUCT ============
-    async function deleteProduct(id) { 
-        if (!confirm('Delete this product permanently?')) return; 
-        await fetch(`${API_URL}/api/admin/products/${id}`, { 
-            method: 'DELETE', 
-            headers: { 'X-Admin-Auth': btoa(`scentlovers:${adminPass}`) } 
-        }); 
-        showStatus('🗑️ Product deleted', 'success');
-        loadAllProducts(); 
+    async function deleteProduct(id) {
+        if (!confirm('Delete permanently?')) return;
+        try {
+            await fetch(`${API_URL}/api/admin/products/${id}`, { method: 'DELETE', headers: { 'X-Admin-Auth': authToken } });
+            showStatus('✅ Product deleted', 'success');
+            await loadProducts();
+        } catch(e) { showStatus('❌ Delete failed', 'error'); }
     }
     
-    function showStatus(msg, type) { 
-        const el = document.getElementById('statusMsg'); 
-        el.textContent = msg; 
-        el.className = `status ${type}`; 
-        setTimeout(() => el.className = 'status', 4000); 
+    function showStatus(msg, type) {
+        const el = document.getElementById('statusMsg');
+        el.textContent = msg;
+        el.className = `status ${type}`;
+        setTimeout(() => el.className = 'status', 3000);
     }
 </script>
 </body>
