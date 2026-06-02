@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scent Lovers | Premium Perfumes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',sans-serif;background:#0a0a0a;color:#fff}
+        .topbar{background:#000;text-align:center;padding:8px;font-size:0.7rem;border-bottom:1px solid #222}
+        .topbar span{color:#D4A853;margin:0 15px}
+        nav{background:#0a0a0a;padding:15px 20px;border-bottom:2px solid #D4A853;position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center}
+        .logo{font-family:'Playfair Display',serif;font-size:1.4rem;color:#D4A853;text-decoration:none;font-weight:700}
+        .nav-links{display:flex;gap:20px;list-style:none}
+        .nav-links a{color:#bbb;text-decoration:none;font-size:0.85rem;font-weight:500}
+        .nav-links a:hover,.nav-links a.active{color:#D4A853}
+        .hero{background:linear-gradient(rgba(0,0,0,0.85),rgba(0,0,0,0.5)),url('https://raw.githubusercontent.com/developereth/scentlover/9d390a80b750a8ac99875a258e9b9ae80bbd88ea/5d27a70d-adf9-4b1f-88a4-0452f476a385.png') center/cover;padding:100px 20px;text-align:center}
+        .hero h1{font-family:'Playfair Display',serif;font-size:2.5rem;color:#D4A853;margin-bottom:10px}
+        .hero p{color:#bbb;margin-bottom:25px;font-size:1rem}
+        .hero a{display:inline-block;background:#D4A853;color:#000;padding:12px 30px;border-radius:50px;text-decoration:none;font-weight:700}
+        .section{padding:40px 20px;max-width:1000px;margin:0 auto}
+        .section-title{font-family:'Playfair Display',serif;font-size:1.8rem;text-align:center;margin-bottom:5px}
+        .section-title span{color:#D4A853}
+        .section-sub{text-align:center;color:#888;margin-bottom:25px;font-size:0.9rem}
+        .features{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:30px}
+        .feature{background:#111;padding:25px 15px;text-align:center;border-radius:10px;border:1px solid #222}
+        .feature i{font-size:2rem;color:#D4A853;margin-bottom:10px}
+        .feature h3{font-size:0.9rem;margin-bottom:5px}
+        .feature p{color:#888;font-size:0.75rem}
+        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px}
+        .card{background:#111;border-radius:10px;overflow:hidden;border:1px solid #333}
+        .card img{width:100%;height:200px;object-fit:cover}
+        .card-body{padding:12px}
+        .card-body .brand{color:#D4A853;font-size:0.65rem;text-transform:uppercase}
+        .card-body h4{margin:3px 0;font-size:0.9rem}
+        .card-body .price{color:#D4A853;font-weight:700;font-size:1rem;margin:5px 0}
+        .card-body a{display:block;text-align:center;padding:8px;background:#D4A853;color:#000;border-radius:20px;text-decoration:none;font-weight:700;font-size:0.85rem}
+        .tag{position:absolute;top:8px;left:8px;background:#D4A853;color:#000;padding:2px 8px;border-radius:10px;font-size:0.6rem;font-weight:700}
+        .img-wrap{position:relative}
+        .view-all{text-align:center;margin-top:20px}
+        .view-all a{color:#D4A853;text-decoration:none;border:1px solid #D4A853;padding:10px 25px;border-radius:25px;font-weight:600;font-size:0.9rem}
+        footer{background:#000;text-align:center;padding:25px;border-top:1px solid #222;margin-top:30px;color:#888;font-size:0.8rem}
+        @media(max-width:600px){.features{grid-template-columns:repeat(2,1fr)}.hero h1{font-size:1.8rem}.nav-links{display:none}}
+    </style>
+</head>
+<body>
+<div class="topbar">
+    <span>Free Delivery Over 5,000 ETB</span>
+    <span>2 Free Samples</span>
+    <span>+251 900 000 000</span>
+</div>
+<nav>
+    <a href="index.html" class="logo">Scent Lovers</a>
+    <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="reviews.html">Reviews</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+</nav>
+<div class="hero">
+    <h1>Discover Your Signature Scent</h1>
+    <p>Premium fragrances for every occasion</p>
+    <a href="products.html">Shop Now</a>
+</div>
+<div class="section">
+    <div class="features">
+        <div class="feature"><i class="fas fa-check-circle"></i><h3>100% Authentic</h3><p>Genuine fragrances</p></div>
+        <div class="feature"><i class="fas fa-truck-fast"></i><h3>Fast Delivery</h3><p>Across Ethiopia</p></div>
+        <div class="feature"><i class="fas fa-gift"></i><h3>Free Samples</h3><p>2 per order</p></div>
+        <div class="feature"><i class="fas fa-headset"></i><h3>24/7 Support</h3><p>Via Telegram</p></div>
+    </div>
+</div>
+<div class="section">
+    <h2 class="section-title">Featured <span>Products</span></h2>
+    <p class="section-sub">Our most popular fragrances</p>
+    <div class="grid" id="products">Loading...</div>
+    <div class="view-all"><a href="products.html">View All Products →</a></div>
+</div>
+<footer>
+    <p style="color:#D4A853;font-size:1rem;margin-bottom:5px">Scent Lovers</p>
+    <p>© 2026 Scent Lovers. All rights reserved.</p>
+</footer>
+<script>
+fetch('https://scent-lovers-api.developeraddis.workers.dev/api/products').then(function(r){return r.json()}).then(function(d){
+    var p=(d.products||[]).slice(0,4);
+    var g=document.getElementById('products');
+    if(!p.length){g.innerHTML='<p style="text-align:center;color:#888;grid-column:1/-1">No products yet</p>';return}
+    g.innerHTML=p.map(function(x){return'<div class="card"><div class="img-wrap"><img src="'+(x.image||'https://via.placeholder.com/400x200')+'" alt="'+x.name+'">'+(x.tag?'<span class="tag">'+x.tag+'</span>':'')+'</div><div class="card-body"><div class="brand">'+x.brand+'</div><h4>'+x.name+'</h4><div class="price">'+x.price+'</div><a href="products.html">View</a></div></div>'}).join('');
+});
+</script>
+</body>
+</html>
