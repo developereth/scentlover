@@ -92,4 +92,23 @@ function createProductCard(product) {
                 <div class="brand">${brand}</div>
                 <h4>${name}</h4>
                 <span class="price">${price}</span>
-                <button class
+                <button class="order-btn" onclick="orderProduct('${brand}', '${name}')">
+                    <i class="fas fa-shopping-cart"></i> Order Now
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+function escapeHtml(str) {
+    if (!str) return '';
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+}
+
+function orderProduct(brand, name) {
+    const message = `Hi! I'm interested in: ${brand} - ${name}`;
+    const telegramUrl = `https://t.me/scentlovers?text=${encodeURIComponent(message)}`;
+    window.open(telegramUrl, '_blank');
+}
