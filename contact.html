@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Scent Lovers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',sans-serif;background:#0a0a0a;color:#fff}
+        nav{background:#0a0a0a;padding:15px 20px;border-bottom:2px solid #D4A853;display:flex;justify-content:space-between;align-items:center}
+        .logo{font-family:'Playfair Display',serif;font-size:1.4rem;color:#D4A853;text-decoration:none;font-weight:700}
+        .nav-links{display:flex;gap:20px;list-style:none}
+        .nav-links a{color:#bbb;text-decoration:none;font-size:0.85rem;font-weight:500}
+        .nav-links a:hover,.nav-links a.active{color:#D4A853}
+        .header{background:linear-gradient(rgba(0,0,0,0.9),rgba(0,0,0,0.5)),url('https://raw.githubusercontent.com/developereth/scentlover/9d390a80b750a8ac99875a258e9b9ae80bbd88ea/5d27a70d-adf9-4b1f-88a4-0452f476a385.png') center/cover;padding:50px 20px;text-align:center}
+        .header h1{font-family:'Playfair Display',serif;font-size:2rem;color:#D4A853}
+        .header a{color:#D4A853;text-decoration:none;font-size:0.85rem}
+        .container{max-width:900px;margin:0 auto;padding:30px 15px}
+        .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:25px}
+        .contact-info{background:#111;padding:30px;border-radius:10px;border:1px solid #222}
+        .contact-info h3{color:#D4A853;margin-bottom:20px;font-size:1.2rem}
+        .contact-info p{margin:15px 0;color:#bbb;font-size:0.95rem}
+        .contact-info i{color:#D4A853;margin-right:10px;width:20px;text-align:center}
+        .contact-info .social{margin-top:20px;display:flex;gap:15px}
+        .contact-info .social a{color:#D4A853;font-size:1.3rem}
+        .contact-form{background:#111;padding:30px;border-radius:10px;border:1px solid #222}
+        .contact-form h3{color:#D4A853;margin-bottom:20px;font-size:1.2rem}
+        .contact-form input,.contact-form textarea{width:100%;padding:12px;background:#1a1a1a;border:1px solid #333;border-radius:6px;color:#fff;margin-bottom:15px;font-family:inherit;font-size:0.9rem}
+        .contact-form input:focus,.contact-form textarea:focus{outline:none;border-color:#D4A853}
+        .contact-form button{background:#D4A853;color:#000;padding:12px 30px;border:none;border-radius:6px;font-weight:700;cursor:pointer;font-size:0.9rem}
+        footer{text-align:center;padding:20px;color:#888;font-size:0.8rem;border-top:1px solid #222;margin-top:30px}
+        @media(max-width:600px){.contact-grid{grid-template-columns:1fr}.nav-links{display:none}}
+    </style>
+</head>
+<body>
+<nav>
+    <a href="index.html" class="logo">Scent Lovers</a>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="reviews.html">Reviews</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+</nav>
+<div class="header"><h1>Contact Us</h1><p><a href="index.html">Home</a> / Contact</p></div>
+<div class="container">
+    <div class="contact-grid">
+        <div class="contact-info">
+            <h3>Get In Touch</h3>
+            <p><i class="fas fa-phone"></i> +251 900 000 000</p>
+            <p><i class="fab fa-telegram"></i> @scentlovers</p>
+            <p><i class="fas fa-envelope"></i> info@scentlovers.com</p>
+            <p><i class="fas fa-map-marker-alt"></i> Bole, Addis Ababa, Ethiopia</p>
+            <p><i class="fas fa-clock"></i> Mon - Sat: 9:00 AM - 7:00 PM</p>
+            <div class="social">
+                <a href="https://t.me/scentlovers"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+            </div>
+        </div>
+        <div class="contact-form">
+            <h3>Send Message</h3>
+            <input type="text" placeholder="Your Name">
+            <input type="text" placeholder="Phone Number">
+            <input type="text" placeholder="Subject">
+            <textarea rows="4" placeholder="Your Message..."></textarea>
+            <button onclick="alert('Thank you! We will contact you soon.')">Send Message</button>
+        </div>
+    </div>
+</div>
+<footer>© 2026 Scent Lovers | @scentlovers</footer>
+</body>
+</html>
