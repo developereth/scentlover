@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quick Test - Add One Product</title>
+    <style>
+        body { background: #0A0A0A; color: white; font-family: monospace; padding: 20px; }
+        .success { color: #27ae60; }
+        .error { color: #e74c3c; }
+        button { background: #D4A853; color: #000; border: none; padding: 12px 24px; border-radius: 50px; cursor: pointer; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>Quick Test - Add One Product</h1>
+    <button id="addBtn">Add Test Product</button>
+    <button id="checkBtn">Check Products</button>
+    <div id="result"></div>
+
+    <script>
+        const API_URL = 'https://scent-lovers-api.developeraddis.workers.dev';
+        const TOKEN = btoa('scentlovers:ScentLovers2026');
+
+        function log(msg, type) {
+            const div = document.getElementById('result');
+            const color = type === 'success' ? '#27ae60' : (type === 'error' ? '#e74c3c' : '#D4A853');
+            div.innerHTML += `<div style="color: ${color}; margin: 5px 0;">${msg}</div>`;
+        }
+
+        document.getElementById('addBtn').onclick = async () => {
+            log('Adding product...', 'info');
+            
+            const product = {
+                name: "Quick Test Perfume",
+                brand: "Test Brand",
+                price: "1,000 ETB",
+                category: "women",
+                image: "https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=400"
+            };
+            
+            const response = await fetch(`${API_URL}/api/admin/products`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Admin-Auth': TOKEN
+                },
+                body: JSON.stringify(product)
+            });
+            const data = await response.json();
+            
+            if (data.success) {
+                log(`✅ Product added! ID: ${data.product.id}`, 'success');
+            } else {
+                log(`❌ Failed: ${JSON.stringify(data)}`, 'error');
+            }
+        };
+        
+        document.getElementById('checkBtn').onclick = async () => {
+            log('Checking products...', 'info');
+            const response = await fetch(`${API_URL}/api/products`);
+            const data = await response.json();
+            let products = data.products;
+            if (typeof products === 'string') products = JSON.parse(products);
+            log(`📦 Found ${products.length} products in database`, products.length > 0 ? 'success' : 'error');
+            if (products.length > 0) {
+                products.forEach(p => {
+                    log(`   - ${p.brand} ${p.name} (${p.category})`, 'info');
+                });
+            }
+        };
+    </script>
+</body>
+</html>
