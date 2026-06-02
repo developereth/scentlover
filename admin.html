@@ -3,442 +3,327 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Manager | Scent Lovers</title>
+    <title>Admin Dashboard | Scent Lovers</title>
     <style>
-        :root { --gold: #D4A853; --red: #e74c3c; --green: #27ae60; --blue: #3498db; }
-        * { box-sizing: border-box; }
-        body { font-family: 'Segoe UI', sans-serif; background: #0A0A0A; padding: 20px; color: white; margin: 0; }
-        .container { max-width: 1100px; margin: 0 auto; }
-        .panel { background: #111; padding: 30px; border-radius: 15px; margin-bottom: 30px; border: 1px solid rgba(212,168,83,0.2); }
-        h2 { border-bottom: 2px solid var(--gold); padding-bottom: 10px; margin: 0 0 20px 0; color: var(--gold); display: flex; align-items: center; gap: 10px; }
-        .form-group { margin-bottom: 18px; }
-        label { display: block; margin-bottom: 6px; font-weight: 600; color: #bbb; font-size: 0.9rem; }
-        input, textarea, select { width: 100%; padding: 12px; border: 1px solid #333; border-radius: 8px; background: #1a1a1a; color: white; font-family: inherit; font-size: 0.95rem; }
-        input:focus, textarea:focus, select:focus { outline: none; border-color: var(--gold); }
-        .upload-area { border: 2px dashed var(--gold); border-radius: 10px; padding: 30px; text-align: center; cursor: pointer; background: #1a1a1a; transition: 0.3s; }
-        .upload-area:hover { border-color: #fff; background: #222; }
-        .preview-img { max-width: 200px; margin-top: 15px; display: none; border-radius: 8px; }
-        .preview-img.show { display: block; }
-        button { padding: 11px 22px; border: none; border-radius: 8px; cursor: pointer; font-weight: 700; margin: 3px; font-size: 0.85rem; transition: 0.3s; }
-        .btn-primary { background: var(--gold); color: black; }
-        .btn-primary:hover { background: #c49540; }
-        .btn-danger { background: #c0392b; color: white; }
-        .btn-danger:hover { background: #e74c3c; }
-        .btn-edit { background: var(--blue); color: white; }
-        .btn-save { background: var(--green); color: white; }
-        .btn-cancel { background: #95a5a6; color: white; }
-        .btn-outline { background: transparent; border: 1px solid var(--gold); color: var(--gold); }
-        .product-item { background: #1a1a1a; padding: 20px; margin: 12px 0; border-radius: 10px; display: flex; gap: 20px; align-items: flex-start; border: 1px solid #333; transition: 0.3s; }
-        .product-item:hover { border-color: #555; }
-        .product-item img { width: 90px; height: 90px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
-        .item-info { flex: 1; min-width: 0; }
-        .item-info h3 { color: var(--gold); margin: 0 0 5px; font-size: 1.05rem; }
-        .item-price { color: var(--gold); font-weight: 700; font-size: 1.1rem; }
-        .item-meta { color: #888; font-size: 0.8rem; margin: 4px 0; }
-        .item-meta span { background: #222; padding: 2px 8px; border-radius: 12px; margin-right: 5px; }
-        .edit-fields { display: none; margin-top: 15px; padding-top: 15px; border-top: 1px solid #333; }
-        .editing .edit-fields { display: block; }
-        .editing .view-fields { display: none; }
-        .edit-fields input, .edit-fields textarea, .edit-fields select { margin-bottom: 10px; }
-        .status { padding: 12px 20px; margin: 15px 0; border-radius: 8px; display: none; text-align: center; font-weight: 600; }
-        .status.success { background: var(--green); color: white; display: block; }
-        .status.error { background: var(--red); color: white; display: block; }
-        .status.info { background: var(--blue); color: white; display: block; }
-        .hidden { display: none !important; }
-        .row { display: flex; gap: 20px; }
-        .row > div { flex: 1; }
-        .badge { background: var(--gold); color: black; padding: 3px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; }
-        .toolbar { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; }
-        .toolbar input { flex: 1; min-width: 200px; }
-        .toolbar select { width: auto; min-width: 150px; }
-        .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 25px; }
-        .stat-card { background: #1a1a1a; padding: 15px; border-radius: 10px; text-align: center; border: 1px solid #333; }
-        .stat-card .num { font-size: 2rem; font-weight: 800; color: var(--gold); }
-        .stat-card .lbl { font-size: 0.75rem; color: #888; margin-top: 5px; }
-        @media (max-width: 768px) {
-            .row { flex-direction: column; }
-            .product-item { flex-direction: column; }
-            .stats { grid-template-columns: repeat(2, 1fr); }
-            .toolbar { flex-direction: column; }
-            .toolbar input, .toolbar select { width: 100%; }
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Segoe UI',sans-serif;background:#0a0a0a;color:#fff;padding:20px}
+        .container{max-width:1000px;margin:0 auto}
+        h1{color:#D4A853;margin-bottom:25px;font-size:1.8rem;text-align:center}
+        
+        .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:25px}
+        .stat{background:#111;padding:20px;border-radius:10px;text-align:center;border:1px solid #333}
+        .stat .num{font-size:2rem;font-weight:800;color:#D4A853}
+        .stat .lbl{font-size:0.75rem;color:#888;margin-top:5px}
+        
+        .card{background:#111;padding:25px;border-radius:12px;margin-bottom:25px;border:1px solid #333}
+        h2{color:#D4A853;margin-bottom:18px;font-size:1.2rem}
+        .row{display:flex;gap:12px;margin-bottom:12px}
+        .row>*{flex:1}
+        input,select,textarea{width:100%;padding:12px;background:#1a1a1a;border:1px solid #333;border-radius:8px;color:#fff;font-size:0.95rem;margin-bottom:12px}
+        input:focus,select:focus,textarea:focus{outline:none;border-color:#D4A853}
+        button{padding:12px 24px;border:none;border-radius:8px;cursor:pointer;font-weight:bold;font-size:0.9rem;transition:0.3s}
+        .btn-gold{background:#D4A853;color:#000}
+        .btn-gold:hover{background:#b8933f}
+        .btn-red{background:#c0392b;color:#fff}
+        .btn-red:hover{background:#e74c3c}
+        .btn-blue{background:#3498db;color:#fff}
+        .btn-green{background:#27ae60;color:#fff}
+        .btn-outline{background:transparent;border:1px solid #D4A853;color:#D4A853}
+        
+        .msg{padding:12px;margin:10px 0;border-radius:8px;display:none;text-align:center;font-weight:600}
+        .msg.success{background:#27ae60;display:block}
+        .msg.error{background:#c0392b;display:block}
+        
+        .product-row{display:flex;align-items:center;gap:15px;padding:15px;background:#1a1a1a;border-radius:8px;margin-bottom:10px;border:1px solid #333}
+        .product-row img{width:60px;height:60px;object-fit:cover;border-radius:8px;flex-shrink:0}
+        .product-row .info{flex:1;min-width:0}
+        .product-row .info h3{color:#D4A853;margin-bottom:3px;font-size:0.95rem}
+        .product-row .info p{color:#888;font-size:0.8rem}
+        .product-row .actions{display:flex;gap:8px;flex-shrink:0}
+        
+        .edit-form{display:none;background:#1a1a1a;padding:20px;border-radius:8px;margin:10px 0 20px 0;border:1px solid #D4A853}
+        .edit-form.show{display:block}
+        
+        .search-box{width:100%;padding:12px 20px;background:#1a1a1a;border:2px solid #D4A853;border-radius:25px;color:#fff;font-size:0.95rem;margin-bottom:20px}
+        
+        @media(max-width:768px){
+            .stats{grid-template-columns:repeat(2,1fr)}
+            .product-row{flex-wrap:wrap}
+            .product-row .actions{width:100%;justify-content:flex-end}
+            .row{flex-direction:column}
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <!-- Login Panel -->
-    <div class="panel" id="loginPanel">
-        <h2>🔐 Admin Login</h2>
-        <div class="form-group">
-            <label>Password</label>
-            <input type="password" id="password" placeholder="Enter admin password" onkeypress="if(event.key==='Enter')login()">
-        </div>
-        <button class="btn-primary" onclick="login()">🔓 Access Product Manager</button>
-        <div id="loginStatus" class="status"></div>
+    <h1>🛍️ Scent Lovers Admin</h1>
+    
+    <!-- Stats -->
+    <div class="stats">
+        <div class="stat"><div class="num" id="statAll">0</div><div class="lbl">Total Products</div></div>
+        <div class="stat"><div class="num" id="statWomen">0</div><div class="lbl">👩 Women</div></div>
+        <div class="stat"><div class="num" id="statMen">0</div><div class="lbl">👨 Men</div></div>
+        <div class="stat"><div class="num" id="statSale">0</div><div class="lbl">Gift + Sale</div></div>
     </div>
     
-    <!-- Admin Panel -->
-    <div class="panel hidden" id="adminPanel">
-        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
-            <h2 style="margin:0;border:none;">📦 Product Manager</h2>
-            <button class="btn-outline" onclick="logout()">🚪 Logout</button>
-        </div>
-        
-        <!-- Stats -->
-        <div class="stats" id="statsRow" style="margin-top:20px;">
-            <div class="stat-card"><div class="num" id="statAll">0</div><div class="lbl">Total Products</div></div>
-            <div class="stat-card"><div class="num" id="statWomen">0</div><div class="lbl">👩 Women</div></div>
-            <div class="stat-card"><div class="num" id="statMen">0</div><div class="lbl">👨 Men</div></div>
-            <div class="stat-card"><div class="num" id="statOther">0</div><div class="lbl">Gift + Sale</div></div>
-        </div>
-        
-        <!-- Add Product Form -->
-        <h2 style="margin-top:10px;">➕ Add New Product</h2>
-        
-        <div class="form-group">
-            <label>📸 Product Image</label>
-            <div class="upload-area" onclick="document.getElementById('imageInput').click()">
-                <div style="font-size:40px;">📷</div>
-                <div>Click to upload product photo</div>
-                <div style="font-size:0.75rem;color:#888;">JPG, PNG, or WEBP</div>
-            </div>
-            <input type="file" id="imageInput" accept="image/*" style="display:none" onchange="handleImage(event)">
-            <img id="preview" class="preview-img" alt="Preview">
-            <div id="uploadStatus" style="font-size:0.8rem;margin-top:5px;"></div>
-        </div>
-        
+    <!-- Add Product Form -->
+    <div class="card">
+        <h2>➕ Add New Product</h2>
         <div class="row">
-            <div class="form-group"><label>📝 Product Name *</label><input type="text" id="productName" placeholder="e.g., Rose Elegance"></div>
-            <div class="form-group"><label>🏷️ Brand *</label><input type="text" id="productBrand" placeholder="e.g., Chanel"></div>
+            <input type="text" id="name" placeholder="Product Name *">
+            <input type="text" id="brand" placeholder="Brand *">
         </div>
-        
         <div class="row">
-            <div class="form-group"><label>💰 Price (ETB) *</label><input type="text" id="productPrice" placeholder="e.g., 4500"></div>
-            <div class="form-group"><label>📂 Category *</label>
-                <select id="productCategory">
-                    <option value="women">👩 Women's Perfumes</option>
-                    <option value="men">👨 Men's Colognes</option>
-                    <option value="gift">🎁 Gift Sets</option>
-                    <option value="sale">🔥 Sale / Offers</option>
-                </select>
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="form-group"><label>📋 Description</label><textarea id="productDesc" rows="2" placeholder="Brief description..."></textarea></div>
-            <div class="form-group"><label>🏷️ Tag</label><input type="text" id="productTag" placeholder="Bestseller, New, Sale, etc."></div>
-        </div>
-        
-        <button class="btn-primary" onclick="addProduct()">✅ Add Product</button>
-        <div id="statusMsg" class="status"></div>
-        
-        <!-- Product List -->
-        <h2 style="margin-top:30px;">📋 All Products <span class="badge" id="productCountBadge">0</span></h2>
-        
-        <div class="toolbar">
-            <input type="text" id="searchInput" placeholder="🔍 Search products..." oninput="renderProducts()">
-            <select id="filterCategory" onchange="renderProducts()">
-                <option value="all">All Categories</option>
-                <option value="women">👩 Women</option>
-                <option value="men">👨 Men</option>
+            <input type="text" id="price" placeholder="Price (e.g. 4500 ETB) *">
+            <select id="category">
+                <option value="women">👩 Women's Perfumes</option>
+                <option value="men">👨 Men's Colognes</option>
                 <option value="gift">🎁 Gift Sets</option>
-                <option value="sale">🔥 Sale</option>
+                <option value="sale">🔥 Sale / Offers</option>
             </select>
         </div>
+        <input type="text" id="image" placeholder="Image URL (Cloudinary or image link)">
+        <div class="row">
+            <input type="text" id="tag" placeholder="Tag: Bestseller, New, Sale...">
+            <input type="text" id="desc" placeholder="Description (optional)">
+        </div>
+        <button class="btn-gold" onclick="addProduct()">✅ Add Product</button>
+        <div id="msg" class="msg"></div>
+    </div>
+    
+    <!-- Product List -->
+    <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+            <h2 style="margin:0">📋 All Products</h2>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                <button class="btn-outline" onclick="filterProducts('all')">All</button>
+                <button class="btn-outline" onclick="filterProducts('women')">Women</button>
+                <button class="btn-outline" onclick="filterProducts('men')">Men</button>
+                <button class="btn-outline" onclick="filterProducts('gift')">Gift</button>
+                <button class="btn-outline" onclick="filterProducts('sale')">Sale</button>
+            </div>
+        </div>
+        <input type="text" class="search-box" placeholder="🔍 Search products..." oninput="searchProducts()" id="searchInput">
         
-        <div id="productsList">
-            <div style="text-align:center;padding:40px;color:#888;">Loading products...</div>
+        <div id="editForm" class="edit-form">
+            <h3 style="color:#D4A853;margin-bottom:15px;">✏️ Edit Product</h3>
+            <input type="hidden" id="editId">
+            <div class="row">
+                <input type="text" id="editName" placeholder="Product Name">
+                <input type="text" id="editBrand" placeholder="Brand">
+            </div>
+            <div class="row">
+                <input type="text" id="editPrice" placeholder="Price">
+                <select id="editCategory">
+                    <option value="women">Women</option>
+                    <option value="men">Men</option>
+                    <option value="gift">Gift Sets</option>
+                    <option value="sale">Sale</option>
+                </select>
+            </div>
+            <input type="text" id="editImage" placeholder="Image URL">
+            <div class="row">
+                <input type="text" id="editTag" placeholder="Tag">
+                <input type="text" id="editDesc" placeholder="Description">
+            </div>
+            <button class="btn-green" onclick="saveEdit()">💾 Save Changes</button>
+            <button class="btn-red" onclick="cancelEdit()">Cancel</button>
+        </div>
+        
+        <div id="productList">
+            <p style="text-align:center;color:#888;padding:30px;">Loading products...</p>
         </div>
     </div>
 </div>
 
 <script>
-    // ============ CONFIGURATION ============
-    const API_URL = 'https://scent-lovers-api.developeraddis.workers.dev';
-    const CLOUD_NAME = 'dm6rwo1ox';
-    const UPLOAD_PRESET = 'scent_lovers_preset';
-    const ADMIN_PASS = 'ScentLovers2026';
-    
-    let authToken = null;
-    let allProducts = [];
-    let newImageUrl = '';
-    let editImageUrls = {};
-    
-    // ============ LOGIN / LOGOUT ============
-    async function login() {
-        const pass = document.getElementById('password').value;
-        if (pass !== ADMIN_PASS) {
-            document.getElementById('loginStatus').textContent = '❌ Wrong password';
-            document.getElementById('loginStatus').className = 'status error';
-            return;
-        }
-        authToken = btoa(`scentlovers:${pass}`);
-        document.getElementById('loginPanel').classList.add('hidden');
-        document.getElementById('adminPanel').classList.remove('hidden');
-        await loadProducts();
+const API = 'https://scent-lovers-api.developeraddis.workers.dev/api/products';
+let allProducts = [];
+let currentFilter = 'all';
+
+async function loadProducts() {
+    try {
+        const res = await fetch(API);
+        const data = await res.json();
+        allProducts = data.products || [];
+        updateStats();
+        renderProducts();
+    } catch(e) {
+        document.getElementById('productList').innerHTML = '<p style="text-align:center;color:#e74c3c;padding:30px;">Error loading products</p>';
     }
+}
+
+function updateStats() {
+    document.getElementById('statAll').textContent = allProducts.length;
+    document.getElementById('statWomen').textContent = allProducts.filter(p => p.category === 'women').length;
+    document.getElementById('statMen').textContent = allProducts.filter(p => p.category === 'men').length;
+    document.getElementById('statSale').textContent = allProducts.filter(p => p.category === 'gift' || p.category === 'sale').length;
+}
+
+function renderProducts() {
+    const search = (document.getElementById('searchInput')?.value || '').toLowerCase();
+    let filtered = allProducts;
     
-    function logout() {
-        authToken = null;
-        allProducts = [];
-        document.getElementById('adminPanel').classList.add('hidden');
-        document.getElementById('loginPanel').classList.remove('hidden');
-        document.getElementById('password').value = '';
-        document.getElementById('loginStatus').className = 'status';
+    if (currentFilter !== 'all') {
+        filtered = filtered.filter(p => p.category === currentFilter);
     }
-    
-    // ============ LOAD PRODUCTS ============
-    async function loadProducts() {
-        try {
-            const res = await fetch(`${API_URL}/api/products`);
-            const data = await res.json();
-            
-            if (data.success && Array.isArray(data.products)) {
-                allProducts = data.products;
-                updateStats();
-                renderProducts();
-            } else {
-                showStatus('Error loading products', 'error');
-            }
-        } catch(e) {
-            showStatus('Connection error: ' + e.message, 'error');
-        }
-    }
-    
-    function updateStats() {
-        document.getElementById('statAll').textContent = allProducts.length;
-        document.getElementById('statWomen').textContent = allProducts.filter(p => p.category === 'women').length;
-        document.getElementById('statMen').textContent = allProducts.filter(p => p.category === 'men').length;
-        document.getElementById('statOther').textContent = allProducts.filter(p => p.category === 'gift' || p.category === 'sale').length;
-        document.getElementById('productCountBadge').textContent = allProducts.length;
-    }
-    
-    // ============ RENDER PRODUCTS ============
-    function renderProducts() {
-        const container = document.getElementById('productsList');
-        const search = document.getElementById('searchInput')?.value.toLowerCase() || '';
-        const filterCat = document.getElementById('filterCategory')?.value || 'all';
-        
-        let filtered = [...allProducts];
-        if (filterCat !== 'all') filtered = filtered.filter(p => p.category === filterCat);
-        if (search) filtered = filtered.filter(p => 
-            (p.name || '').toLowerCase().includes(search) || 
-            (p.brand || '').toLowerCase().includes(search)
+    if (search) {
+        filtered = filtered.filter(p => 
+            p.name.toLowerCase().includes(search) || 
+            p.brand.toLowerCase().includes(search)
         );
-        
-        if (filtered.length === 0) {
-            container.innerHTML = '<div style="text-align:center;padding:40px;color:#888;"><div style="font-size:48px;">📦</div><p>No products found</p></div>';
-            return;
-        }
-        
-        container.innerHTML = filtered.map(p => `
-            <div class="product-item" id="product-${p.id}">
-                <img src="${p.image || 'https://via.placeholder.com/90x90?text=No+Image'}" 
-                     alt="${esc(p.name)}" 
-                     onerror="this.src='https://via.placeholder.com/90x90?text=No+Image'"
-                     loading="lazy">
-                <div class="item-info">
-                    <div class="view-fields">
-                        <h3>${esc(p.brand)} - ${esc(p.name)}</h3>
-                        <div class="item-price">${esc(p.price)}</div>
-                        <div class="item-meta">
-                            <span>📂 ${esc(p.category)}</span>
-                            ${p.tag ? `<span>🏷️ ${esc(p.tag)}</span>` : ''}
-                            <span>🕐 ${p.createdAt ? new Date(p.createdAt).toLocaleDateString() : 'N/A'}</span>
-                        </div>
-                        ${p.description ? `<div class="item-meta">📝 ${esc(p.description)}</div>` : ''}
-                    </div>
-                    <div class="edit-fields">
-                        <label>New Image (optional)</label>
-                        <input type="file" id="editFile-${p.id}" accept="image/*" onchange="handleEditImage(event, '${p.id}')">
-                        <div id="editStatus-${p.id}" style="font-size:0.75rem;margin:5px 0;"></div>
-                        <label>Name</label><input type="text" id="editName-${p.id}" value="${esc(p.name)}">
-                        <label>Brand</label><input type="text" id="editBrand-${p.id}" value="${esc(p.brand)}">
-                        <label>Price</label><input type="text" id="editPrice-${p.id}" value="${(p.price || '').replace(' ETB', '')}">
-                        <label>Category</label>
-                        <select id="editCat-${p.id}">
-                            <option value="women" ${p.category==='women'?'selected':''}>Women</option>
-                            <option value="men" ${p.category==='men'?'selected':''}>Men</option>
-                            <option value="gift" ${p.category==='gift'?'selected':''}>Gift Sets</option>
-                            <option value="sale" ${p.category==='sale'?'selected':''}>Sale/Offers</option>
-                        </select>
-                        <label>Description</label><textarea id="editDesc-${p.id}" rows="2">${esc(p.description || '')}</textarea>
-                        <label>Tag</label><input type="text" id="editTag-${p.id}" value="${esc(p.tag || '')}">
-                        <input type="hidden" id="editImage-${p.id}" value="${p.image || ''}">
-                    </div>
-                </div>
-                <div style="display:flex;flex-direction:column;gap:5px;min-width:85px;flex-shrink:0;">
-                    <button class="btn-edit" id="editBtn-${p.id}" onclick="startEdit('${p.id}')">✏️</button>
-                    <button class="btn-save hidden" id="saveBtn-${p.id}" onclick="saveEdit('${p.id}')">💾</button>
-                    <button class="btn-cancel hidden" id="cancelBtn-${p.id}" onclick="cancelEdit('${p.id}')">↩️</button>
-                    <button class="btn-danger" onclick="deleteProduct('${p.id}')">🗑️</button>
-                </div>
+    }
+    
+    const container = document.getElementById('productList');
+    
+    if (filtered.length === 0) {
+        container.innerHTML = '<p style="text-align:center;color:#888;padding:30px;">No products found</p>';
+        return;
+    }
+    
+    container.innerHTML = filtered.map(p => `
+        <div class="product-row">
+            <img src="${p.image || 'https://via.placeholder.com/60'}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/60'">
+            <div class="info">
+                <h3>${p.brand} - ${p.name}</h3>
+                <p>💰 ${p.price} | 📂 ${p.category} | 🏷️ ${p.tag || 'No tag'} | 🕐 ${new Date(p.created_at).toLocaleDateString()}</p>
             </div>
-        `).join('');
+            <div class="actions">
+                <button class="btn-blue" onclick="editProduct(${p.id})">✏️</button>
+                <button class="btn-red" onclick="deleteProduct(${p.id})">🗑️</button>
+            </div>
+        </div>
+    `).join('');
+}
+
+function filterProducts(cat) {
+    currentFilter = cat;
+    renderProducts();
+}
+
+function searchProducts() {
+    renderProducts();
+}
+
+async function addProduct() {
+    const name = document.getElementById('name').value.trim();
+    const brand = document.getElementById('brand').value.trim();
+    const price = document.getElementById('price').value.trim();
+    const category = document.getElementById('category').value;
+    const image = document.getElementById('image').value.trim();
+    const tag = document.getElementById('tag').value.trim();
+    const description = document.getElementById('desc').value.trim();
+    
+    if (!name || !brand || !price) {
+        showMsg('❌ Name, Brand, and Price are required', 'error');
+        return;
     }
     
-    function esc(str) {
-        if (!str) return '';
-        const div = document.createElement('div');
-        div.textContent = str;
-        return div.innerHTML;
-    }
-    
-    // ============ IMAGE UPLOAD ============
-    async function uploadImage(file, statusElId) {
-        const statusEl = document.getElementById(statusElId);
-        if (statusEl) { statusEl.textContent = '⏳ Uploading...'; statusEl.style.color = '#D4A853'; }
+    try {
+        const res = await fetch(API, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                name, brand,
+                price: price.includes('ETB') ? price : price + ' ETB',
+                category, image, tag, description
+            })
+        });
+        const data = await res.json();
         
-        const fd = new FormData();
-        fd.append('file', file);
-        fd.append('upload_preset', UPLOAD_PRESET);
-        
-        try {
-            const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, {
-                method: 'POST', body: fd
-            });
-            const data = await res.json();
-            if (data.secure_url) {
-                if (statusEl) { statusEl.textContent = '✅ Ready!'; statusEl.style.color = '#27ae60'; }
-                return data.secure_url;
-            } else {
-                if (statusEl) { statusEl.textContent = '❌ Failed'; statusEl.style.color = '#e74c3c'; }
-                return null;
-            }
-        } catch(e) {
-            if (statusEl) { statusEl.textContent = '❌ Error'; statusEl.style.color = '#e74c3c'; }
-            return null;
+        if (data.success) {
+            showMsg('✅ Product added successfully!', 'success');
+            ['name','brand','price','image','tag','desc'].forEach(id => document.getElementById(id).value = '');
+            loadProducts();
+        } else {
+            showMsg('❌ Failed to add product', 'error');
         }
+    } catch(e) {
+        showMsg('❌ Connection error', 'error');
+    }
+}
+
+function editProduct(id) {
+    const product = allProducts.find(p => p.id === id);
+    if (!product) return;
+    
+    document.getElementById('editId').value = product.id;
+    document.getElementById('editName').value = product.name;
+    document.getElementById('editBrand').value = product.brand;
+    document.getElementById('editPrice').value = product.price.replace(' ETB', '');
+    document.getElementById('editCategory').value = product.category;
+    document.getElementById('editImage').value = product.image || '';
+    document.getElementById('editTag').value = product.tag || '';
+    document.getElementById('editDesc').value = product.description || '';
+    
+    document.getElementById('editForm').classList.add('show');
+    document.getElementById('editForm').scrollIntoView({ behavior: 'smooth' });
+}
+
+function cancelEdit() {
+    document.getElementById('editForm').classList.remove('show');
+}
+
+async function saveEdit() {
+    const id = document.getElementById('editId').value;
+    const product = {
+        name: document.getElementById('editName').value.trim(),
+        brand: document.getElementById('editBrand').value.trim(),
+        price: document.getElementById('editPrice').value.trim(),
+        category: document.getElementById('editCategory').value,
+        image: document.getElementById('editImage').value.trim(),
+        tag: document.getElementById('editTag').value.trim(),
+        description: document.getElementById('editDesc').value.trim()
+    };
+    
+    if (!product.name || !product.brand || !product.price) {
+        showMsg('❌ Name, Brand, and Price are required', 'error');
+        return;
     }
     
-    async function handleImage(e) {
-        const file = e.target.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = ev => { document.getElementById('preview').src = ev.target.result; document.getElementById('preview').classList.add('show'); };
-        reader.readAsDataURL(file);
-        const url = await uploadImage(file, 'uploadStatus');
-        if (url) newImageUrl = url;
-    }
+    product.price = product.price.includes('ETB') ? product.price : product.price + ' ETB';
     
-    async function handleEditImage(event, id) {
-        const file = event.target.files[0];
-        if (!file) return;
-        const url = await uploadImage(file, `editStatus-${id}`);
-        if (url) {
-            editImageUrls[id] = url;
-            document.getElementById(`editImage-${id}`).value = url;
+    try {
+        const res = await fetch(`${API}/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(product)
+        });
+        const data = await res.json();
+        
+        if (data.success) {
+            showMsg('✅ Product updated!', 'success');
+            cancelEdit();
+            loadProducts();
+        } else {
+            showMsg('❌ Failed to update', 'error');
         }
+    } catch(e) {
+        showMsg('❌ Connection error', 'error');
     }
+}
+
+async function deleteProduct(id) {
+    if (!confirm('Are you sure you want to delete this product?')) return;
     
-    // ============ ADD PRODUCT ============
-    async function addProduct() {
-        const name = document.getElementById('productName').value.trim();
-        const brand = document.getElementById('productBrand').value.trim();
-        const price = document.getElementById('productPrice').value.trim();
-        
-        if (!name || !brand || !price) { showStatus('❌ Name, brand & price required', 'error'); return; }
-        if (!newImageUrl) { showStatus('❌ Upload an image first', 'error'); return; }
-        
-        const product = {
-            name, brand,
-            price: price.includes('ETB') ? price : price + ' ETB',
-            category: document.getElementById('productCategory').value,
-            description: document.getElementById('productDesc').value.trim(),
-            image: newImageUrl,
-            tag: document.getElementById('productTag').value.trim()
-        };
-        
-        try {
-            const res = await fetch(`${API_URL}/api/admin/products`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'X-Admin-Auth': authToken },
-                body: JSON.stringify(product)
-            });
-            const data = await res.json();
-            if (data.success) {
-                showStatus('✅ Product added!', 'success');
-                ['productName','productBrand','productPrice','productDesc','productTag'].forEach(id => document.getElementById(id).value = '');
-                document.getElementById('preview').classList.remove('show');
-                newImageUrl = '';
-                document.getElementById('imageInput').value = '';
-                document.getElementById('uploadStatus').textContent = '';
-                await loadProducts();
-            } else {
-                showStatus('❌ Failed: ' + (data.error || 'Unknown error'), 'error');
-            }
-        } catch(e) { showStatus('❌ Error: ' + e.message, 'error'); }
-    }
-    
-    // ============ EDIT PRODUCT ============
-    function startEdit(id) {
-        document.getElementById(`product-${id}`).classList.add('editing');
-        document.getElementById(`editBtn-${id}`).classList.add('hidden');
-        document.getElementById(`saveBtn-${id}`).classList.remove('hidden');
-        document.getElementById(`cancelBtn-${id}`).classList.remove('hidden');
-    }
-    
-    function cancelEdit(id) {
-        document.getElementById(`product-${id}`).classList.remove('editing');
-        document.getElementById(`editBtn-${id}`).classList.remove('hidden');
-        document.getElementById(`saveBtn-${id}`).classList.add('hidden');
-        document.getElementById(`cancelBtn-${id}`).classList.add('hidden');
-        delete editImageUrls[id];
+    try {
+        await fetch(`${API}/${id}`, { method: 'DELETE' });
+        showMsg('✅ Product deleted', 'success');
         loadProducts();
+    } catch(e) {
+        showMsg('❌ Error deleting', 'error');
     }
-    
-    async function saveEdit(id) {
-        const name = document.getElementById(`editName-${id}`).value.trim();
-        const brand = document.getElementById(`editBrand-${id}`).value.trim();
-        const price = document.getElementById(`editPrice-${id}`).value.trim();
-        const category = document.getElementById(`editCat-${id}`).value;
-        const description = document.getElementById(`editDesc-${id}`).value.trim();
-        const tag = document.getElementById(`editTag-${id}`).value.trim();
-        const image = editImageUrls[id] || document.getElementById(`editImage-${id}`).value;
-        
-        if (!name || !brand || !price) { showStatus('❌ Name, brand & price required', 'error'); return; }
-        
-        try {
-            const res = await fetch(`${API_URL}/api/admin/products/${id}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json', 'X-Admin-Auth': authToken },
-                body: JSON.stringify({ name, brand, price: price.includes('ETB') ? price : price + ' ETB', category, description, image, tag })
-            });
-            const data = await res.json();
-            if (data.success) {
-                showStatus('✅ Product updated!', 'success');
-                delete editImageUrls[id];
-                await loadProducts();
-            } else {
-                showStatus('❌ Failed: ' + (data.error || ''), 'error');
-            }
-        } catch(e) { showStatus('❌ Error: ' + e.message, 'error'); }
-    }
-    
-    // ============ DELETE PRODUCT ============
-    async function deleteProduct(id) {
-        if (!confirm('Delete this product permanently?')) return;
-        try {
-            const res = await fetch(`${API_URL}/api/admin/products/${id}`, {
-                method: 'DELETE',
-                headers: { 'X-Admin-Auth': authToken }
-            });
-            const data = await res.json();
-            if (data.success) {
-                showStatus('✅ Product deleted', 'success');
-                await loadProducts();
-            } else {
-                showStatus('❌ Failed: ' + (data.error || ''), 'error');
-            }
-        } catch(e) { showStatus('❌ Error: ' + e.message, 'error'); }
-    }
-    
-    function showStatus(msg, type) {
-        const el = document.getElementById('statusMsg');
-        el.textContent = msg;
-        el.className = `status ${type}`;
-        setTimeout(() => { el.className = 'status'; }, 4000);
-    }
+}
+
+function showMsg(text, type) {
+    const msg = document.getElementById('msg');
+    msg.textContent = text;
+    msg.className = `msg ${type}`;
+    setTimeout(() => { msg.className = 'msg'; }, 3000);
+}
+
+// Load on page open
+loadProducts();
 </script>
 </body>
 </html>
