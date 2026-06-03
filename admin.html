@@ -23,7 +23,7 @@
         input,select,textarea{width:100%;padding:12px;background:#1a1a1a;border:1px solid #333;border-radius:8px;color:#fff;font-size:0.95rem;margin-bottom:12px;font-family:inherit}
         button{padding:12px 24px;border:none;border-radius:8px;cursor:pointer;font-weight:bold}
         .btn-gold{background:#D4A853;color:#000}.btn-red{background:#c0392b;color:#fff}.btn-blue{background:#3498db;color:#fff}.btn-green{background:#27ae60;color:#fff}
-        .upload-box{border:2px dashed #D4A853;padding:20px;text-align:center;border-radius:10px;cursor:pointer;margin-bottom:12px}
+        .upload-box{border:2px dashed #D4A853;padding:20px;text-align:center;border-radius:10px;cursor:pointer;margin-bottom:8px}
         .upload-box:hover{background:#1a1a1a}
         .preview-row{display:flex;gap:15px;margin-bottom:12px}
         .preview-row img{width:100px;height:100px;object-fit:cover;border-radius:8px;display:none;flex:1}
@@ -51,19 +51,19 @@
 <div class="tab-content show" id="tab-products">
 
 <div class="card"><h2>➕ Add Product</h2>
-<div class="row"><div class="upload-box" onclick="document.getElementById('f1').click()"><div style="font-size:28px">📷</div><div style="font-size:0.75rem;color:#888">Image 1 *</div></div><div class="upload-box" onclick="document.getElementById('f2').click()"><div style="font-size:28px">📷</div><div style="font-size:0.75rem;color:#888">Image 2</div></div></div>
-<input type="file" id="f1" accept="image/*" style="display:none" onchange="uploadAdd(1)"><input type="file" id="f2" accept="image/*" style="display:none" onchange="uploadAdd(2)">
+<div class="row"><div class="upload-box" onclick="document.getElementById('f1').click()"><div style="font-size:28px">📷</div><div style="font-size:0.7rem;color:#888">Image 1 *</div></div><div class="upload-box" onclick="document.getElementById('f2').click()"><div style="font-size:28px">📷</div><div style="font-size:0.7rem;color:#888">Image 2</div></div></div>
+<input type="file" id="f1" accept="image/*" style="display:none" onchange="addImageUpload(1)"><input type="file" id="f2" accept="image/*" style="display:none" onchange="addImageUpload(2)">
 <div class="preview-row"><img id="pv1"><img id="pv2"></div><div class="status-row"><div id="st1"></div><div id="st2"></div></div>
 <input type="hidden" id="u1"><input type="hidden" id="u2">
 <div class="row"><input type="text" id="name" placeholder="Product Name *"><input type="text" id="brand" placeholder="Brand *"></div>
-<div class="row"><input type="text" id="price" placeholder="Price (e.g. 4500 ETB) *"><select id="category"><option value="women">👩 Women</option><option value="men">👨 Men</option><option value="gift">🎁 Gift</option><option value="sale">🔥 Sale</option></select></div>
+<div class="row"><input type="text" id="price" placeholder="Price *"><select id="category"><option value="women">👩 Women</option><option value="men">👨 Men</option><option value="gift">🎁 Gift</option><option value="sale">🔥 Sale</option></select></div>
 <div class="row"><input type="text" id="tag" placeholder="Tag"><input type="text" id="desc" placeholder="Description"></div>
 <button class="btn-gold" onclick="addProduct()">✅ Add Product</button><div id="msg" class="msg"></div>
 </div>
 
 <div class="edit-form" id="editForm"><h2>✏️ Edit Product</h2><input type="hidden" id="editId">
-<div class="row"><div class="upload-box" onclick="document.getElementById('ef1').click()"><div style="font-size:28px">📷</div><div style="font-size:0.75rem;color:#888">Change Image 1</div></div><div class="upload-box" onclick="document.getElementById('ef2').click()"><div style="font-size:28px">📷</div><div style="font-size:0.75rem;color:#888">Change Image 2</div></div></div>
-<input type="file" id="ef1" accept="image/*" style="display:none" onchange="uploadEdit(1)"><input type="file" id="ef2" accept="image/*" style="display:none" onchange="uploadEdit(2)">
+<div class="row"><div class="upload-box" onclick="document.getElementById('ef1').click()"><div style="font-size:28px">📷</div><div style="font-size:0.7rem;color:#888">Change Image 1</div></div><div class="upload-box" onclick="document.getElementById('ef2').click()"><div style="font-size:28px">📷</div><div style="font-size:0.7rem;color:#888">Change Image 2</div></div></div>
+<input type="file" id="ef1" accept="image/*" style="display:none" onchange="editImageUpload(1)"><input type="file" id="ef2" accept="image/*" style="display:none" onchange="editImageUpload(2)">
 <div class="preview-row"><img id="ep1"><img id="ep2"></div><div class="status-row"><div id="es1"></div><div id="es2"></div></div>
 <input type="hidden" id="eu1"><input type="hidden" id="eu2">
 <div class="row"><input type="text" id="en" placeholder="Name"><input type="text" id="eb" placeholder="Brand"></div>
@@ -77,8 +77,8 @@
 <!-- BLOG TAB -->
 <div class="tab-content" id="tab-blog">
 <div class="card"><h2>➕ Add Blog Post</h2>
-<div class="upload-box" onclick="document.getElementById('bf').click()"><div style="font-size:28px">📷</div><div style="font-size:0.75rem;color:#888">Upload Image</div></div>
-<input type="file" id="bf" accept="image/*" style="display:none" onchange="uploadBlog()">
+<div class="upload-box" onclick="document.getElementById('bf').click()"><div style="font-size:28px">📷</div><div style="font-size:0.7rem;color:#888">Upload Image</div></div>
+<input type="file" id="bf" accept="image/*" style="display:none" onchange="blogImageUpload()">
 <div style="text-align:center;margin-bottom:12px"><img id="bpv" style="max-width:200px;max-height:150px;object-fit:cover;border-radius:8px;display:none"></div>
 <div id="bst" style="text-align:center;font-size:0.75rem;margin-bottom:12px"></div><input type="hidden" id="bu">
 <input type="text" id="bt" placeholder="Post Title *"><textarea id="bc" rows="5" placeholder="Post Content *"></textarea>
@@ -96,20 +96,41 @@ function login(){if(document.getElementById('pw').value===PW){document.getElemen
 function logout(){document.getElementById('panel').classList.add('hidden');document.getElementById('loginScreen').classList.remove('hidden')}
 function switchTab(t){document.querySelectorAll('.tabs button').forEach(function(b){b.classList.remove('active')});event.target.classList.add('active');document.querySelectorAll('.tab-content').forEach(function(t){t.classList.remove('show')});document.getElementById('tab-'+t).classList.add('show')}
 
-// UPLOAD
-async function cloudUpload(file,pvId,stId,uId){
-    var s=document.getElementById(stId);s.textContent='Uploading...';s.style.color='#D4A853';
+// ============ UPLOAD FUNCTIONS ============
+async function uploadToCloudinary(file,previewId,statusId,hiddenInputId){
+    var s=document.getElementById(statusId);s.textContent='Uploading...';s.style.color='#D4A853';
     var fd=new FormData();fd.append('file',file);fd.append('upload_preset',PR);
-    var r=await fetch('https://api.cloudinary.com/v1_1/'+C+'/image/upload',{method:'POST',body:fd});
-    var d=await r.json();
-    if(d.secure_url){document.getElementById(uId).value=d.secure_url;document.getElementById(pvId).src=d.secure_url;document.getElementById(pvId).style.display='block';s.textContent='✅ Ready';s.style.color='#27ae60'}
-    else{s.textContent='❌ Failed';s.style.color='#e74c3c'}
+    try{
+        var r=await fetch('https://api.cloudinary.com/v1_1/'+C+'/image/upload',{method:'POST',body:fd});
+        var d=await r.json();
+        if(d.secure_url){
+            document.getElementById(hiddenInputId).value=d.secure_url;
+            document.getElementById(previewId).src=d.secure_url;
+            document.getElementById(previewId).style.display='block';
+            s.textContent='✅ Ready';s.style.color='#27ae60';
+        }else{s.textContent='❌ Failed';s.style.color='#e74c3c'}
+    }catch(e){s.textContent='❌ Error';s.style.color='#e74c3c'}
 }
-function uploadAdd(n){var f=document.getElementById('f'+n).files[0];if(f)cloudUpload(f,'pv'+n,'st'+n,'u'+n)}
-function uploadEdit(n){var f=document.getElementById('ef'+n).files[0];if(f)cloudUpload(f,'ep'+n,'es'+n,'eu'+n)}
-function uploadBlog(){var f=document.getElementById('bf').files[0];if(f)cloudUpload(f,'bpv','bst','bu')}
 
-// PRODUCTS
+// ADD product image upload
+function addImageUpload(num){
+    var f=document.getElementById('f'+num).files[0];
+    if(f)uploadToCloudinary(f,'pv'+num,'st'+num,'u'+num);
+}
+
+// EDIT product image upload  
+function editImageUpload(num){
+    var f=document.getElementById('ef'+num).files[0];
+    if(f)uploadToCloudinary(f,'ep'+num,'es'+num,'eu'+num);
+}
+
+// BLOG image upload
+function blogImageUpload(){
+    var f=document.getElementById('bf').files[0];
+    if(f)uploadToCloudinary(f,'bpv','bst','bu');
+}
+
+// ============ PRODUCTS ============
 async function loadProducts(){var r=await fetch(A+'/products');var d=await r.json();prods=d.products||[];renderProducts()}
 function renderProducts(){var s=(document.getElementById('sp')?.value||'').toLowerCase();var f=s?prods.filter(function(p){return p.name.toLowerCase().includes(s)||p.brand.toLowerCase().includes(s)}):prods;var c=document.getElementById('pList');if(!f.length){c.innerHTML='<p style="text-align:center;color:#888;padding:30px">No products</p>';return}c.innerHTML=f.map(function(p){return'<div class="item-row"><img src="'+(p.image||'https://via.placeholder.com/50')+'" onerror="this.src=\'https://via.placeholder.com/50\'"><div class="info"><h3>'+p.brand+' - '+p.name+'</h3><p>'+p.price+' | '+p.category+' | '+(p.tag||'')+'</p></div><button class="btn-blue" onclick="editProduct('+p.id+')" style="margin-right:5px">✏️</button><button class="btn-red" onclick="deleteProduct('+p.id+')">🗑️</button></div>'}).join('')}
 
@@ -143,17 +164,15 @@ async function saveEdit(){
     if(!name||!brand||!price){alert('Please fill Name, Brand, and Price');return}
     price=price.includes('ETB')?price:price+' ETB';
     var body={name:name,brand:brand,price:price,category:category,image:image,image2:image2,tag:tag,description:desc};
-    console.log('Saving:',id,body);
     var r=await fetch(A+'/products/'+id,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
     var d=await r.json();
-    console.log('Response:',d);
     if(d.success){showMsg('msg','✅ Product updated!','success');cancelEdit();loadProducts()}else{showMsg('msg','❌ Failed: '+(d.error||'Unknown'),'error')}
 }
 
 async function deleteProduct(id){if(!confirm('Delete this product?'))return;await fetch(A+'/products/'+id,{method:'DELETE'});loadProducts()}
 function showMsg(id,t,type){var m=document.getElementById(id);m.textContent=t;m.className='msg '+type;setTimeout(function(){m.className='msg'},3000)}
 
-// BLOG
+// ============ BLOG ============
 async function loadBlog(){var r=await fetch(A+'/blog');var d=await r.json();posts=d.posts||[];renderBlog()}
 function renderBlog(){var c=document.getElementById('bList');if(!posts.length){c.innerHTML='<p style="text-align:center;color:#888;padding:30px">No posts</p>';return}c.innerHTML=posts.map(function(p){return'<div class="item-row">'+(p.image?'<img src="'+p.image+'" onerror="this.src=\'https://via.placeholder.com/50\'">':'')+'<div class="info"><h3>'+p.title+'</h3><p>'+(p.category||'General')+' | '+new Date(p.created_at).toLocaleDateString()+'</p></div><button class="btn-red" onclick="deleteBlog('+p.id+')">🗑️</button></div>'}).join('')}
 async function addBlog(){var t=document.getElementById('bt').value.trim(),c=document.getElementById('bc').value.trim(),i=document.getElementById('bu').value;if(!t||!c){showMsg('bmsg','❌ Fill title and content','error');return}await fetch(A+'/blog',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:t,content:c,image:i,category:document.getElementById('bcat').value})});showMsg('bmsg','✅ Post added!','success');['bt','bc','bcat'].forEach(function(id){document.getElementById(id).value=''});document.getElementById('bu').value='';document.getElementById('bpv').style.display='none';document.getElementById('bst').textContent='';document.getElementById('bf').value='';loadBlog()}
