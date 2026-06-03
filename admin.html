@@ -23,12 +23,15 @@
         input,select,textarea{width:100%;padding:12px;background:#1a1a1a;border:1px solid #333;border-radius:8px;color:#fff;font-size:0.95rem;margin-bottom:12px;font-family:inherit}
         button{padding:12px 24px;border:none;border-radius:8px;cursor:pointer;font-weight:bold}
         .btn-gold{background:#D4A853;color:#000}.btn-red{background:#c0392b;color:#fff}.btn-blue{background:#3498db;color:#fff}.btn-green{background:#27ae60;color:#fff}
+        
         .upload-row{display:flex;gap:15px;margin-bottom:12px}
         .upload-box{flex:1;border:2px dashed #D4A853;padding:20px;text-align:center;border-radius:10px;cursor:pointer}
         .upload-box:hover{background:#1a1a1a}
         .upload-box .icon{font-size:30px;margin-bottom:5px}.upload-box .label{font-size:0.75rem;color:#888}
         .preview-row{display:flex;gap:15px;margin-bottom:12px}
         .preview-row img{width:100px;height:100px;object-fit:cover;border-radius:8px;display:none;flex:1}
+        .blog-preview{text-align:center;margin-bottom:12px}
+        .blog-preview img{max-width:200px;max-height:150px;object-fit:cover;border-radius:8px;display:none}
         .status-row{display:flex;gap:15px;margin-bottom:12px;font-size:0.75rem}.status-row div{flex:1;text-align:center}
         .msg{padding:12px;margin:10px 0;border-radius:8px;display:none;text-align:center;font-weight:600}
         .msg.success{background:#27ae60;display:block}.msg.error{background:#c0392b;display:block}
@@ -81,9 +84,14 @@
 <!-- BLOG TAB -->
 <div class="tab-content" id="tab-blog">
 <div class="card"><h2>➕ Add Blog Post</h2>
+<div class="upload-box" onclick="document.getElementById('bf').click()" style="margin-bottom:12px"><div class="icon">📷</div><div class="label">Upload Blog Image (Optional)</div></div>
+<input type="file" id="bf" accept="image/*" style="display:none" onchange="bup()">
+<div class="blog-preview"><img id="bpv"></div>
+<div id="bst" style="text-align:center;font-size:0.75rem;margin-bottom:12px"></div>
+<input type="hidden" id="bu">
 <input type="text" id="bt" placeholder="Post Title *">
 <textarea id="bc" rows="5" placeholder="Post Content *"></textarea>
-<div class="row"><input type="text" id="bi" placeholder="Image URL"><input type="text" id="bcat" placeholder="Category"></div>
+<input type="text" id="bcat" placeholder="Category (News, Tips, etc.)">
 <button class="btn-gold" onclick="addB()">✅ Add Post</button><div id="bmsg" class="msg"></div>
 </div>
 <div class="card"><h2>📋 Blog Posts</h2><div id="bList">Loading...</div></div>
@@ -96,15 +104,18 @@ function login(){if(document.getElementById('pw').value===PW){document.getElemen
 function logout(){document.getElementById('panel').classList.add('hidden');document.getElementById('loginScreen').classList.remove('hidden');document.getElementById('pw').value=''}
 function switchTab(t){document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('show'));document.getElementById('tab-'+t).classList.add('show')}
 
+// IMAGE UPLOAD
 async function uploadImg(file,pvId,stId,uId){var s=document.getElementById(stId);s.textContent='Uploading...';s.style.color='#D4A853';var fd=new FormData();fd.append('file',file);fd.append('upload_preset',P);var r=await fetch('https://api.cloudinary.com/v1_1/'+C+'/image/upload',{method:'POST',body:fd});var d=await r.json();if(d.secure_url){document.getElementById(uId).value=d.secure_url;document.getElementById(pvId).src=d.secure_url;document.getElementById(pvId).style.display='block';s.textContent='✅ Ready';s.style.color='#27ae60'}else{s.textContent='❌ Failed';s.style.color='#e74c3c'}}
 function up(n){var f=document.getElementById('f'+n).files[0];if(f)uploadImg(f,'pv'+n,'st'+n,'u'+n)}
 function eup(n){var f=document.getElementById('ef'+n).files[0];if(f)uploadImg(f,'ep'+n,'es'+n,'eu'+n)}
 
+// BLOG IMAGE UPLOAD
+function bup(){var f=document.getElementById('bf').files[0];if(f)uploadImg(f,'bpv','bst','bu')}
+
+// PRODUCTS
 async function loadP(){var r=await fetch(A+'/products');var d=await r.json();prods=d.products||[];rP()}
 function rP(){var s=(document.getElementById('sp')?.value||'').toLowerCase();var f=s?prods.filter(p=>p.name.toLowerCase().includes(s)||p.brand.toLowerCase().includes(s)):prods;var c=document.getElementById('pList');if(!f.length){c.innerHTML='<p style="text-align:center;color:#888;padding:30px">No products</p>';return}c.innerHTML=f.map(p=>'<div class="item-row"><div class="item-images">'+(p.image?'<img src="'+p.image+'" onerror="this.src=\'https://via.placeholder.com/35\'">':'')+(p.image2?'<img src="'+p.image2+'" onerror="this.src=\'https://via.placeholder.com/35\'">':'')+'</div><div class="info"><h3>'+p.brand+' - '+p.name+'</h3><p>'+p.price+' | '+p.category+' | '+(p.tag||'')+'</p></div><button class="btn-blue" onclick="editP('+p.id+')" style="margin-right:5px">✏️</button><button class="btn-red" onclick="delP('+p.id+')">🗑️</button></div>').join('')}
-
 async function addP(){var n=document.getElementById('name').value.trim(),b=document.getElementById('brand').value.trim(),pr=document.getElementById('price').value.trim(),cat=document.getElementById('category').value,i1=document.getElementById('u1').value,i2=document.getElementById('u2').value;if(!n||!b||!pr){msgP('❌ Fill required fields','error');return}if(!i1){msgP('❌ Upload Image 1','error');return}await fetch(A+'/products',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:n,brand:b,price:pr.includes('ETB')?pr:pr+' ETB',category:cat,image:i1,image2:i2,tag:document.getElementById('tag').value,description:document.getElementById('desc').value})});msgP('✅ Added!','success');['name','brand','price','tag','desc'].forEach(id=>document.getElementById(id).value='');document.getElementById('u1').value='';document.getElementById('u2').value='';document.getElementById('pv1').style.display='none';document.getElementById('pv2').style.display='none';document.getElementById('st1').textContent='';document.getElementById('st2').textContent='';document.getElementById('f1').value='';document.getElementById('f2').value='';loadP()}
-
 function editP(id){var p=prods.find(x=>x.id==id);if(!p)return;document.getElementById('editId').value=p.id;document.getElementById('en').value=p.name;document.getElementById('eb').value=p.brand;document.getElementById('ep').value=p.price.replace(' ETB','');document.getElementById('ec').value=p.category;document.getElementById('et').value=p.tag||'';document.getElementById('ed').value=p.description||'';document.getElementById('eu1').value=p.image||'';document.getElementById('eu2').value=p.image2||'';if(p.image){document.getElementById('ep1').src=p.image;document.getElementById('ep1').style.display='block'}else{document.getElementById('ep1').style.display='none'}if(p.image2){document.getElementById('ep2').src=p.image2;document.getElementById('ep2').style.display='block'}else{document.getElementById('ep2').style.display='none'}document.getElementById('es1').textContent='';document.getElementById('es2').textContent='';document.getElementById('ef1').value='';document.getElementById('ef2').value='';document.getElementById('editForm').classList.add('show');document.getElementById('editForm').scrollIntoView({behavior:'smooth'})}
 function cancelE(){document.getElementById('editForm').classList.remove('show')}
 async function saveE(){var id=document.getElementById('editId').value;var p={name:document.getElementById('en').value,brand:document.getElementById('eb').value,price:document.getElementById('ep').value,category:document.getElementById('ec').value,image:document.getElementById('eu1').value,image2:document.getElementById('eu2').value,tag:document.getElementById('et').value,description:document.getElementById('ed').value};p.price=p.price.includes('ETB')?p.price:p.price+' ETB';await fetch(A+'/products/'+id,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(p)});msgP('✅ Updated!','success');cancelE();loadP()}
@@ -113,8 +124,8 @@ function msgP(t,type){var m=document.getElementById('msg');m.textContent=t;m.cla
 
 // BLOG
 async function loadB(){var r=await fetch(A+'/blog');var d=await r.json();posts=d.posts||[];rB()}
-function rB(){var c=document.getElementById('bList');if(!posts.length){c.innerHTML='<p style="text-align:center;color:#888;padding:30px">No posts</p>';return}c.innerHTML=posts.map(p=>'<div class="item-row"><div class="info"><h3>'+p.title+'</h3><p>'+(p.category||'General')+' | '+new Date(p.created_at).toLocaleDateString()+'</p></div><button class="btn-red" onclick="delB('+p.id+')">🗑️</button></div>').join('')}
-async function addB(){var t=document.getElementById('bt').value.trim(),c=document.getElementById('bc').value.trim();if(!t||!c){msgB('❌ Fill required fields','error');return}await fetch(A+'/blog',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:t,content:c,image:document.getElementById('bi').value,category:document.getElementById('bcat').value})});msgB('✅ Post added!','success');['bt','bc','bi','bcat'].forEach(id=>document.getElementById(id).value='');loadB()}
+function rB(){var c=document.getElementById('bList');if(!posts.length){c.innerHTML='<p style="text-align:center;color:#888;padding:30px">No posts</p>';return}c.innerHTML=posts.map(p=>'<div class="item-row">'+(p.image?'<img src="'+p.image+'" onerror="this.src=\'https://via.placeholder.com/50\'">':'')+'<div class="info"><h3>'+p.title+'</h3><p>'+(p.category||'General')+' | '+new Date(p.created_at).toLocaleDateString()+'</p></div><button class="btn-red" onclick="delB('+p.id+')">🗑️</button></div>').join('')}
+async function addB(){var t=document.getElementById('bt').value.trim(),c=document.getElementById('bc').value.trim(),i=document.getElementById('bu').value;if(!t||!c){msgB('❌ Fill title and content','error');return}await fetch(A+'/blog',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:t,content:c,image:i,category:document.getElementById('bcat').value})});msgB('✅ Post added!','success');['bt','bc','bcat'].forEach(id=>document.getElementById(id).value='');document.getElementById('bu').value='';document.getElementById('bpv').style.display='none';document.getElementById('bst').textContent='';document.getElementById('bf').value='';loadB()}
 async function delB(id){if(!confirm('Delete?'))return;await fetch(A+'/blog/'+id,{method:'DELETE'});loadB()}
 function msgB(t,type){var m=document.getElementById('bmsg');m.textContent=t;m.className='msg '+type;setTimeout(function(){m.className='msg'},3000)}
 
