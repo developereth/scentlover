@@ -14,16 +14,15 @@
         .logo-circle{width:44px;height:44px;border-radius:50%;border:2px solid var(--gold);overflow:hidden;flex-shrink:0}
         .logo-circle img{width:100%;height:100%;object-fit:cover}
         .nav-links{display:flex;gap:20px;list-style:none}
-        .nav-links a{color:#bbb;text-decoration:none;font-size:0.85rem;font-weight:500}
+        .nav-links a{color:#bbb;text-decoration:none;font-size:0.85rem}
         .nav-links a:hover,.nav-links a.active{color:var(--gold)}
-        .menu-btn{display:none;background:none;border:none;color:var(--gold);font-size:1.5rem;cursor:pointer;z-index:1001}
-        .side-nav{position:fixed;top:0;right:-280px;width:280px;height:100vh;background:#111;z-index:1002;transition:0.3s;padding:60px 30px;border-left:1px solid #333}
-        .side-nav.show{right:0}
-        .side-nav a{display:block;color:#bbb;text-decoration:none;padding:12px 0;font-size:1rem;border-bottom:1px solid #222}.side-nav a:hover{color:var(--gold)}
+        .menu-btn{display:none;background:none;border:none;color:var(--gold);font-size:1.5rem;cursor:pointer}
+        .side-nav{position:fixed;top:0;right:-280px;width:280px;height:100vh;background:#111;z-index:1002;transition:0.3s;padding:60px 30px}
+        .side-nav.show{right:0}.side-nav a{display:block;color:#bbb;padding:12px 0;border-bottom:1px solid #222;text-decoration:none}
         .side-nav .close-btn{position:absolute;top:15px;right:20px;background:none;border:none;color:var(--gold);font-size:1.5rem;cursor:pointer}
         .overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:1001}.overlay.show{display:block}
         .header{background:linear-gradient(rgba(0,0,0,0.9),rgba(0,0,0,0.5)),url('https://raw.githubusercontent.com/developereth/scentlover/9d390a80b750a8ac99875a258e9b9ae80bbd88ea/5d27a70d-adf9-4b1f-88a4-0452f476a385.png') center/cover;padding:50px 20px;text-align:center}
-        .header h1{font-family:'Playfair Display',serif;font-size:2rem;color:var(--gold)}.header a{color:var(--gold);text-decoration:none}
+        .header h1{font-family:'Playfair Display',serif;font-size:2rem;color:var(--gold)}.header a{color:var(--gold)}
         .container{max-width:1000px;margin:0 auto;padding:20px 15px}
         .filters{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:20px}
         .filters button{padding:8px 16px;border:1px solid var(--gold);background:transparent;color:var(--gold);border-radius:20px;cursor:pointer;font-size:0.8rem;font-weight:600}
@@ -33,11 +32,12 @@
         .card{background:#111;border-radius:12px;overflow:hidden;border:1px solid #333;transition:0.3s}
         .card:hover{transform:translateY(-3px);border-color:var(--gold)}
         
-        /* SIDE BY SIDE FLAT IMAGES - NO GAP */
-        .card-images{display:flex;width:100%;height:200px;cursor:pointer;position:relative;overflow:hidden}
-        .card-images img{flex:1;width:50%;height:100%;object-fit:cover;transition:0.3s}
-        .card-images:hover img{opacity:0.9}
-        .card-images .single-img{flex:1;width:100%}
+        /* ONE SEAMLESS IMAGE */
+        .card-img{position:relative;width:100%;height:220px;cursor:pointer;overflow:hidden;display:flex}
+        .card-img img{height:100%;object-fit:cover}
+        .card-img img:first-child{width:50%}
+        .card-img img:last-child{width:50%}
+        .card-img img.only-one{width:100%}
         .tag{position:absolute;top:10px;left:10px;background:var(--gold);color:#000;padding:3px 10px;border-radius:12px;font-size:0.65rem;font-weight:700;z-index:10}
         
         .card-body{padding:15px}
@@ -55,21 +55,12 @@
         .popup .btn-telegram{background:#0088cc}.popup .btn-whatsapp{background:#25D366}
         .popup .btn-call{background:var(--gold);color:#000}.popup .btn-close{background:#333;margin-top:15px;cursor:pointer}
         
-        /* IMAGE LIGHTBOX */
-        .lightbox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);z-index:3000;justify-content:center;align-items:center;flex-direction:column}
-        .lightbox.show{display:flex}
-        .lightbox .close{position:absolute;top:20px;right:30px;color:#fff;font-size:2rem;cursor:pointer;z-index:3001}
-        .lightbox .lightbox-images{display:flex;width:90%;max-width:900px;height:70vh;gap:0}
-        .lightbox .lightbox-images img{flex:1;width:50%;height:100%;object-fit:contain}
-        .lightbox .nav-buttons{display:flex;gap:20px;margin-top:20px}
-        .lightbox .nav-buttons button{background:var(--gold);color:#000;border:none;padding:10px 25px;border-radius:20px;cursor:pointer;font-weight:bold}
-        
         footer{background:#000;text-align:center;padding:30px;border-top:1px solid #222;margin-top:40px}
         footer .footer-logo{width:50px;height:50px;border-radius:50%;margin-bottom:10px}
         footer p{color:#888;font-size:0.8rem;margin:5px 0}
         .footer-links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin:10px 0}.footer-links a{color:#888;text-decoration:none;font-size:0.8rem}
         .powered{color:#666;font-size:0.7rem;margin-top:10px}.powered a{color:#888}
-        @media(max-width:768px){.nav-links{display:none}.menu-btn{display:block}.grid{grid-template-columns:repeat(2,1fr);gap:12px}.card-images{height:150px}}
+        @media(max-width:768px){.nav-links{display:none}.menu-btn{display:block}.grid{grid-template-columns:repeat(2,1fr);gap:12px}.card-img{height:150px}}
     </style>
 </head>
 <body>
@@ -94,20 +85,6 @@
     <div class="grid" id="grid">Loading...</div>
 </div>
 
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox" onclick="closeLightbox()">
-    <span class="close">&times;</span>
-    <div class="lightbox-images">
-        <img id="lightboxImg1" src="" alt="Image 1">
-        <img id="lightboxImg2" src="" alt="Image 2">
-    </div>
-    <div class="nav-buttons">
-        <button onclick="event.stopPropagation();prevLightbox()">◀ Prev</button>
-        <button onclick="event.stopPropagation();nextLightbox()">Next ▶</button>
-    </div>
-</div>
-
-<!-- ORDER POPUP -->
 <div class="popup-overlay" id="popupOverlay">
     <div class="popup"><h3>Order Via</h3><a href="#" class="btn-telegram" id="popupTelegram"><i class="fab fa-telegram"></i> Telegram</a><a href="#" class="btn-whatsapp" id="popupWhatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a><a href="#" class="btn-call" id="popupCall"><i class="fas fa-phone"></i> Direct Call</a><button class="btn-close" onclick="closePopup()">Cancel</button></div>
 </div>
@@ -123,23 +100,24 @@
 function openMenu(){document.getElementById('sideNav').classList.add('show');document.getElementById('overlay').classList.add('show')}
 function closeMenu(){document.getElementById('sideNav').classList.remove('show');document.getElementById('overlay').classList.remove('show')}
 
-var all=[],cat="all",lightboxProducts=[],lightboxIndex=0;
+var all=[],cat="all";
 
-fetch("https://scent-lovers-api.developeraddis.workers.dev/api/products").then(r=>r.json()).then(d=>{all=d.products||[];lightboxProducts=all;show()});
+fetch("https://scent-lovers-api.developeraddis.workers.dev/api/products").then(function(r){return r.json()}).then(function(d){all=d.products||[];show()});
 
 function filter(c){cat=c;var ids={all:"btnAll",women:"btnWomen",men:"btnMen",gift:"btnGift",sale:"btnSale"};for(var k in ids)document.getElementById(ids[k]).classList.remove("active");document.getElementById(ids[c]).classList.add("active");show()}
 
 function show(){
-    var f=cat==="all"?all:all.filter(p=>p.category===cat);
-    lightboxProducts=f;
+    var f=cat==="all"?all:all.filter(function(p){return p.category===cat});
     var g=document.getElementById("grid");
     if(!f.length){g.innerHTML='<p style="text-align:center;color:#888;grid-column:1/-1;padding:40px">No products</p>';return}
-    g.innerHTML=f.map(function(p,i){
-        var hasSecondImage=p.image2 && p.image2!=='';
+    g.innerHTML=f.map(function(p){
+        var hasTwo=(p.image2&&p.image2!==''&&p.image2!==null);
+        var img1=p.image||'https://via.placeholder.com/400x200';
+        var img2=hasTwo?p.image2:img1;
         return'<div class="card">'+
-            '<div class="card-images" onclick="openLightbox('+i+')">'+
-                '<img src="'+(p.image||'https://via.placeholder.com/400x200')+'" alt="'+p.name+'" onerror="this.src=\'https://via.placeholder.com/400x200\'"'+(hasSecondImage?'':' class="single-img"')+'>'+
-                (hasSecondImage?'<img src="'+p.image2+'" alt="'+p.name+'" onerror="this.src=\'https://via.placeholder.com/400x200\'">':'')+
+            '<div class="card-img" onclick="window.open(\''+(hasTwo?img2:img1)+'\')">'+
+                '<img src="'+img1+'" alt="'+p.name+'" onerror="this.src=\'https://via.placeholder.com/400x200\'"'+(hasTwo?'':' class="only-one"')+'>'+
+                (hasTwo?'<img src="'+img2+'" alt="'+p.name+'" onerror="this.src=\'https://via.placeholder.com/400x200\'">':'')+
                 (p.tag?'<span class="tag">'+p.tag+'</span>':'')+
             '</div>'+
             '<div class="card-body"><div class="brand">'+p.brand+'</div><h3>'+p.name+'</h3><div class="stars">★★★★★ (4.9)</div><div class="price">'+p.price+'</div>'+
@@ -147,19 +125,6 @@ function show(){
     }).join("");
 }
 
-// LIGHTBOX
-function openLightbox(index){
-    lightboxIndex=index;
-    var p=lightboxProducts[index];
-    document.getElementById('lightboxImg1').src=p.image||'https://via.placeholder.com/400x200';
-    document.getElementById('lightboxImg2').src=(p.image2&&p.image2!=='')?p.image2:(p.image||'https://via.placeholder.com/400x200');
-    document.getElementById('lightbox').classList.add('show');
-}
-function closeLightbox(){document.getElementById('lightbox').classList.remove('show')}
-function prevLightbox(){lightboxIndex=(lightboxIndex-1+lightboxProducts.length)%lightboxProducts.length;var p=lightboxProducts[lightboxIndex];document.getElementById('lightboxImg1').src=p.image||'https://via.placeholder.com/400x200';document.getElementById('lightboxImg2').src=(p.image2&&p.image2!=='')?p.image2:(p.image||'https://via.placeholder.com/400x200')}
-function nextLightbox(){lightboxIndex=(lightboxIndex+1)%lightboxProducts.length;var p=lightboxProducts[lightboxIndex];document.getElementById('lightboxImg1').src=p.image||'https://via.placeholder.com/400x200';document.getElementById('lightboxImg2').src=(p.image2&&p.image2!=='')?p.image2:(p.image||'https://via.placeholder.com/400x200')}
-
-// ORDER POPUP
 function openPopup(brand,name){var m='Hi! Interested in: '+brand+' - '+name;document.getElementById('popupTelegram').href='https://t.me/scentlovers?text='+encodeURIComponent(m);document.getElementById('popupWhatsapp').href='https://wa.me/251900000000?text='+encodeURIComponent(m);document.getElementById('popupCall').href='tel:+251900000000';document.getElementById('popupOverlay').classList.add('show')}
 function closePopup(){document.getElementById('popupOverlay').classList.remove('show')}
 </script>
