@@ -4,116 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog | Scent Lovers</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
-        :root{--gold:#D4A853;--dark:#0a0a0a}
-        body{font-family:'Inter',sans-serif;background:var(--dark);color:#fff}
-        nav{background:var(--dark);padding:12px 20px;border-bottom:2px solid var(--gold);position:sticky;top:0;z-index:1000;display:flex;justify-content:space-between;align-items:center}
-        .logo-circle{width:44px;height:44px;border-radius:50%;border:2px solid var(--gold);overflow:hidden}
+        :root{--gold:#D4A853}
+        body{font-family:'Inter',sans-serif;background:#0a0a0a;color:#fff}
+        nav{background:#0a0a0a;padding:12px 20px;border-bottom:2px solid var(--gold);position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center}
+        .logo-circle{width:40px;height:40px;border-radius:50%;border:2px solid var(--gold);overflow:hidden}
         .logo-circle img{width:100%;height:100%;object-fit:cover}
-        .nav-links{display:flex;gap:20px;list-style:none}
-        .nav-links a{color:#bbb;text-decoration:none;font-size:0.85rem}.nav-links a:hover,.nav-links a.active{color:var(--gold)}
+        .nav-links{display:flex;gap:18px;list-style:none}
+        .nav-links a{color:#bbb;text-decoration:none;font-size:0.8rem}.nav-links a:hover,.nav-links a.active{color:var(--gold)}
         .menu-btn{display:none;background:none;border:none;color:var(--gold);font-size:1.5rem;cursor:pointer}
-        .side-nav{position:fixed;top:0;right:-280px;width:280px;height:100vh;background:#111;z-index:1002;transition:0.3s;padding:60px 30px}
-        .side-nav.show{right:0}.side-nav a{display:block;color:#bbb;padding:12px 0;border-bottom:1px solid #222;text-decoration:none}
-        .side-nav .close-btn{position:absolute;top:15px;right:20px;background:none;border:none;color:var(--gold);font-size:1.5rem;cursor:pointer}
-        .overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:1001}.overlay.show{display:block}
-        
-        .header{background:linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.4)),url('https://raw.githubusercontent.com/developereth/scentlover/f56253dc632d9dcd5f854a94f4ebfe759acf3b1f/1d5a26a7-04e4-4ca0-84d9-f3150d3ddec6.png') center/cover;padding:70px 20px;text-align:center}
-        .header h1{font-family:'Playfair Display',serif;font-size:2.5rem;color:var(--gold);margin-bottom:5px}
-        .header p{color:#ccc}.header a{color:var(--gold);text-decoration:none}
-        
-        .container{max-width:800px;margin:0 auto;padding:30px 15px}
-        
-        .post{background:#111;border-radius:15px;overflow:hidden;border:1px solid #333;margin-bottom:30px;transition:0.3s}
-        .post:hover{border-color:var(--gold)}
-        .post-img{position:relative;width:100%;max-height:400px;overflow:hidden;cursor:pointer}
-        .post-img img{width:100%;height:100%;max-height:400px;object-fit:contain;background:#000;display:block}
-        .post-img .img-overlay{position:absolute;top:10px;right:10px;background:rgba(0,0,0,0.7);color:#fff;padding:5px 10px;border-radius:15px;font-size:0.7rem;cursor:pointer}
-        .post-body{padding:25px}
-        .post-body .category{display:inline-block;background:var(--gold);color:#000;padding:4px 12px;border-radius:15px;font-size:0.7rem;font-weight:700;margin-bottom:10px;text-transform:uppercase}
-        .post-body h2{font-size:1.4rem;margin-bottom:12px;color:var(--gold);font-family:'Playfair Display',serif;line-height:1.4}
-        .post-body .content{color:#bbb;line-height:1.8;font-size:0.95rem;margin-bottom:20px}
-        .post-body .meta{color:#666;font-size:0.8rem;margin-bottom:20px;display:flex;gap:20px;flex-wrap:wrap}
-        .post-body .meta i{color:var(--gold);margin-right:5px}
-        
-        .post-actions{display:flex;gap:10px;flex-wrap:wrap}
-        .btn-learn{background:#ff0050;color:#fff;padding:10px 20px;border:none;border-radius:25px;cursor:pointer;font-weight:700;text-decoration:none;font-size:0.85rem;display:inline-flex;align-items:center;gap:6px}
-        .btn-learn:hover{background:#cc0040}
-        .btn-share{background:transparent;color:var(--gold);padding:10px 20px;border:1px solid var(--gold);border-radius:25px;cursor:pointer;font-weight:700;font-size:0.85rem;display:inline-flex;align-items:center;gap:6px}
-        .btn-share:hover{background:var(--gold);color:#000}
-        
-        .lightbox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);z-index:3000;justify-content:center;align-items:center}
-        .lightbox.show{display:flex}
-        .lightbox img{max-width:95%;max-height:90%;object-fit:contain;border-radius:8px}
+        .side-nav{position:fixed;top:0;right:-260px;width:260px;height:100vh;background:#111;z-index:200;transition:0.3s;padding:50px 25px}
+        .side-nav.show{right:0}.side-nav a{display:block;color:#bbb;padding:10px 0;border-bottom:1px solid #222;text-decoration:none}
+        .side-nav .close-btn{position:absolute;top:12px;right:18px;background:none;border:none;color:var(--gold);font-size:1.3rem;cursor:pointer}
+        .overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:199}.overlay.show{display:block}
+        .header{background:linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.4)),url('https://raw.githubusercontent.com/developereth/scentlover/f56253dc632d9dcd5f854a94f4ebfe759acf3b1f/1d5a26a7-04e4-4ca0-84d9-f3150d3ddec6.png') center/cover;padding:50px 20px;text-align:center}
+        .header h1{font-family:'Playfair Display',serif;font-size:2rem;color:var(--gold)}.header a{color:var(--gold)}
+        .container{max-width:800px;margin:0 auto;padding:20px 15px}
+        .post{background:#111;border-radius:10px;overflow:hidden;border:1px solid #333;margin-bottom:20px}
+        .post img{width:100%;max-height:300px;object-fit:contain;background:#000;display:block;cursor:pointer}
+        .post-body{padding:18px}
+        .post-body .category{display:inline-block;background:var(--gold);color:#000;padding:3px 10px;border-radius:12px;font-size:0.65rem;font-weight:700;margin-bottom:8px}
+        .post-body h2{font-size:1.2rem;margin-bottom:8px;color:var(--gold);font-family:'Playfair Display',serif}
+        .post-body .content{color:#bbb;line-height:1.6;font-size:0.85rem;margin-bottom:15px}
+        .post-body .meta{color:#666;font-size:0.7rem;margin-bottom:15px}
+        .post-actions{display:flex;gap:8px}
+        .btn-learn{background:#ff0050;color:#fff;padding:8px 16px;border:none;border-radius:18px;cursor:pointer;font-weight:700;text-decoration:none;font-size:0.75rem}
+        .btn-share{background:transparent;color:var(--gold);padding:8px 16px;border:1px solid var(--gold);border-radius:18px;cursor:pointer;font-weight:700;font-size:0.75rem}
+        .lightbox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);z-index:400;justify-content:center;align-items:center}
+        .lightbox.show{display:flex}.lightbox img{max-width:95%;max-height:90%;object-fit:contain}
         .lightbox .close-lightbox{position:absolute;top:20px;right:30px;color:#fff;font-size:2rem;cursor:pointer}
-        
-        .share-popup{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:2500;justify-content:center;align-items:center}
-        .share-popup.show{display:flex}
-        .share-box{background:#111;padding:25px;border-radius:15px;text-align:center;border:1px solid var(--gold);max-width:350px;width:90%}
-        .share-box h3{color:var(--gold);margin-bottom:20px}
-        .share-box button,.share-box a{display:block;width:100%;padding:12px;margin:8px 0;border:none;border-radius:8px;cursor:pointer;font-weight:600;color:#fff;text-decoration:none;font-size:0.9rem;text-align:center}
-        .share-box .btn-copy{background:#333}.share-box .btn-telegram{background:#0088cc}.share-box .btn-whatsapp{background:#25D366}
-        .share-box .btn-close{background:#c0392b;margin-top:10px}
-        
-        .empty{text-align:center;padding:60px;color:#888}
-        footer{background:#000;text-align:center;padding:30px;border-top:1px solid #222;margin-top:40px}
-        footer .footer-logo{width:50px;height:50px;border-radius:50%;margin-bottom:10px}
-        footer p{color:#888;font-size:0.8rem;margin:5px 0}
-        .footer-links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin:10px 0}.footer-links a{color:#888;text-decoration:none;font-size:0.8rem}
-        .powered{color:#666;font-size:0.7rem;margin-top:10px}.powered a{color:#888}
-        @media(max-width:768px){.nav-links{display:none}.menu-btn{display:block}.post-img{max-height:250px}.post-body h2{font-size:1.2rem}}
+        .share-popup{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:350;justify-content:center;align-items:center}
+        .share-popup.show{display:flex}.share-box{background:#111;padding:20px;border-radius:10px;text-align:center;border:1px solid var(--gold);max-width:300px;width:90%}
+        .share-box h3{color:var(--gold);margin-bottom:15px}.share-box button,.share-box a{display:block;width:100%;padding:10px;margin:5px 0;border:none;border-radius:8px;cursor:pointer;font-weight:600;color:#fff;text-decoration:none;font-size:0.8rem;text-align:center}
+        .share-box .btn-copy{background:#333}.share-box .btn-telegram{background:#0088cc}.share-box .btn-whatsapp{background:#25D366}.share-box .btn-close{background:#c0392b;margin-top:8px}
+        footer{background:#000;text-align:center;padding:25px;border-top:1px solid #222;margin-top:30px;color:#888;font-size:0.75rem}
+        .footer-links{display:flex;gap:15px;justify-content:center;flex-wrap:wrap;margin:8px 0}.footer-links a{color:#888;text-decoration:none;font-size:0.75rem}
+        .powered{color:#666;font-size:0.65rem;margin-top:8px}.powered a{color:#888}
+        @media(max-width:768px){.nav-links{display:none}.menu-btn{display:block}.post img{max-height:200px}}
     </style>
 </head>
 <body>
-<nav><a href="index.html" class="logo-circle"><img src="https://raw.githubusercontent.com/developereth/scentlover/040d02a395d6acceca94cf0f4f05ef43e170ab21/Jun%202%2C%202026%2C%2001_05_29%20PM.png" alt="Scent Lovers"></a><ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="products.html">Products</a></li><li><a href="blog.html" class="active">Blog</a></li><li><a href="reviews.html">Reviews</a></li><li><a href="contact.html">Contact</a></li></ul><button class="menu-btn" onclick="openMenu()"><i class="fas fa-bars"></i></button></nav>
+<nav><a href="index.html" class="logo-circle"><img src="https://raw.githubusercontent.com/developereth/scentlover/040d02a395d6acceca94cf0f4f05ef43e170ab21/Jun%202%2C%202026%2C%2001_05_29%20PM.png" alt="SL"></a><ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="products.html">Products</a></li><li><a href="blog.html" class="active">Blog</a></li><li><a href="reviews.html">Reviews</a></li><li><a href="contact.html">Contact</a></li></ul><button class="menu-btn" onclick="openMenu()"><i class="fas fa-bars"></i></button></nav>
 <div class="overlay" id="overlay" onclick="closeMenu()"></div>
 <div class="side-nav" id="sideNav"><button class="close-btn" onclick="closeMenu()"><i class="fas fa-times"></i></button><a href="index.html">Home</a><a href="products.html">Products</a><a href="blog.html">Blog</a><a href="reviews.html">Reviews</a><a href="contact.html">Contact</a></div>
-
 <div class="header"><h1>Our Blog</h1><p><a href="index.html">Home</a> / Blog</p></div>
-
-<div class="container"><div id="posts"><div class="empty">Loading posts...</div></div></div>
-
-<div class="lightbox" id="lightbox" onclick="closeLightbox()"><span class="close-lightbox">&times;</span><img id="lightboxImg" src="" alt="Full Image"></div>
-
-<div class="share-popup" id="sharePopup">
-    <div class="share-box"><h3>📤 Share Post</h3><button class="btn-copy" onclick="copyLink()"><i class="fas fa-copy"></i> Copy Link</button><a href="#" class="btn-telegram" id="shareTelegram"><i class="fab fa-telegram"></i> Share on Telegram</a><a href="#" class="btn-whatsapp" id="shareWhatsapp"><i class="fab fa-whatsapp"></i> Share on WhatsApp</a><button class="btn-close" onclick="closeShare()">Cancel</button></div>
-</div>
-
-<footer><img src="https://raw.githubusercontent.com/developereth/scentlover/040d02a395d6acceca94cf0f4f05ef43e170ab21/Jun%202%2C%202026%2C%2001_05_29%20PM.png" alt="Scent Lovers" class="footer-logo"><div class="footer-links"><a href="index.html">Home</a><a href="products.html">Products</a><a href="blog.html">Blog</a><a href="reviews.html">Reviews</a><a href="contact.html">Contact</a></div><p>© 2026 Scent Lovers. All rights reserved.</p><p class="powered">Powered by <a href="https://addispower.pages.dev" target="_blank">AddisPower</a></p></footer>
-
+<div class="container"><div id="posts">Loading...</div></div>
+<div class="lightbox" id="lightbox" onclick="closeLightbox()"><span class="close-lightbox">&times;</span><img id="lightboxImg" src=""></div>
+<div class="share-popup" id="sharePopup"><div class="share-box"><h3>📤 Share</h3><button class="btn-copy" onclick="copyLink()">Copy Link</button><a href="#" class="btn-telegram" id="shareTelegram">Telegram</a><a href="#" class="btn-whatsapp" id="shareWhatsapp">WhatsApp</a><button class="btn-close" onclick="closeShare()">Cancel</button></div></div>
+<footer><div class="footer-links"><a href="index.html">Home</a><a href="products.html">Products</a><a href="blog.html">Blog</a><a href="reviews.html">Reviews</a><a href="contact.html">Contact</a></div><p>© 2026 Scent Lovers.</p><p class="powered">Powered by <a href="https://addispower.pages.dev">AddisPower</a></p></footer>
 <script>
 function openMenu(){document.getElementById('sideNav').classList.add('show');document.getElementById('overlay').classList.add('show')}
 function closeMenu(){document.getElementById('sideNav').classList.remove('show');document.getElementById('overlay').classList.remove('show')}
-function openLightbox(src){document.getElementById('lightboxImg').src=src;document.getElementById('lightbox').classList.add('show')}
+function openLightbox(s){document.getElementById('lightboxImg').src=s;document.getElementById('lightbox').classList.add('show')}
 function closeLightbox(){document.getElementById('lightbox').classList.remove('show')}
-
-var currentShareUrl='';
-function openShare(title,url){currentShareUrl=url||window.location.href;document.getElementById('shareTelegram').href='https://t.me/share/url?url='+encodeURIComponent(currentShareUrl)+'&text='+encodeURIComponent(title);document.getElementById('shareWhatsapp').href='https://wa.me/?text='+encodeURIComponent(title+' - '+currentShareUrl);document.getElementById('sharePopup').classList.add('show')}
+var curl='';function openShare(t,u){curl=u||location.href;document.getElementById('shareTelegram').href='https://t.me/share/url?url='+encodeURIComponent(curl)+'&text='+encodeURIComponent(t);document.getElementById('shareWhatsapp').href='https://wa.me/?text='+encodeURIComponent(t+' - '+curl);document.getElementById('sharePopup').classList.add('show')}
 function closeShare(){document.getElementById('sharePopup').classList.remove('show')}
-function copyLink(){navigator.clipboard.writeText(currentShareUrl);alert('✅ Link copied!')}
-
-var A='https://scent-lovers-api.developeraddis.workers.dev/api';
-fetch(A+'/blog').then(function(r){return r.json()}).then(function(d){
-    var posts=d.posts||[];
-    var g=document.getElementById('posts');
-    if(!posts.length){g.innerHTML='<div class="empty"><i class="fas fa-pen" style="font-size:3rem;color:#D4A853;display:block;margin-bottom:15px"></i><h3 style="color:#D4A853">Coming Soon</h3><p>Our first blog post is on its way!</p></div>';return}
-    g.innerHTML=posts.map(function(p,i){
-        return'<div class="post">'+
-            (p.image?'<div class="post-img" onclick="openLightbox(\''+p.image+'\')"><img src="'+p.image+'" alt="'+p.title+'" onerror="this.src=\'https://via.placeholder.com/800x400\'"><span class="img-overlay"><i class="fas fa-expand"></i> View</span></div>':'')+
-            '<div class="post-body">'+
-            '<span class="category">'+(p.category||'General')+'</span>'+
-            '<h2>'+p.title+'</h2>'+
-            '<p class="content">'+p.content+'</p>'+
-            '<div class="meta"><span><i class="fas fa-user"></i> '+p.author+'</span><span><i class="fas fa-calendar"></i> '+new Date(p.created_at).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})+'</span></div>'+
-            '<div class="post-actions">'+
-            '<a href="https://www.tiktok.com/@scentlovers19" target="_blank" class="btn-learn"><i class="fab fa-tiktok"></i> Learn More</a>'+
-            '<button class="btn-share" onclick="openShare(\''+p.title+'\',\''+window.location.href+'\')"><i class="fas fa-share-alt"></i> Share</button>'+
-            '</div></div></div>';
-    }).join('');
-}).catch(function(){document.getElementById('posts').innerHTML='<div class="empty"><p style="color:#e74c3c">Error loading posts.</p></div>'});
+function copyLink(){navigator.clipboard.writeText(curl);alert('✅ Copied!')}
+fetch('https://scent-lovers-api.developeraddis.workers.dev/api/blog').then(r=>r.json()).then(d=>{var p=d.posts||[],g=document.getElementById('posts');if(!p.length){g.innerHTML='<p style="text-align:center;color:#888;padding:40px">Coming Soon</p>'}else{g.innerHTML=p.map(x=>'<div class="post">'+(x.image?'<img src="'+x.image+'" alt="'+x.title+'" onclick="openLightbox(\''+x.image+'\')" loading="lazy">':'')+'<div class="post-body"><span class="category">'+(x.category||'General')+'</span><h2>'+x.title+'</h2><p class="content">'+x.content+'</p><div class="meta">'+new Date(x.created_at).toLocaleDateString()+'</div><div class="post-actions"><a href="https://www.tiktok.com/@scentlovers19" target="_blank" class="btn-learn">Learn More</a><button class="btn-share" onclick="openShare(\''+x.title+'\',\''+location.href+'\')">Share</button></div></div></div>').join('')}});
 </script>
 </body>
 </html>
