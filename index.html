@@ -29,10 +29,10 @@
         .section-title{font-family:'Playfair Display',serif;font-size:1.6rem;text-align:center}.section-title span{color:var(--gold)}
         .section-sub{text-align:center;color:#888;margin-bottom:20px;font-size:0.85rem}
         
-        /* Two images as one */
         .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:15px}
-        .card{background:#111;border-radius:10px;overflow:hidden;border:1px solid #333}
-        .card-img{position:relative;width:100%;height:180px;cursor:pointer;overflow:hidden;display:flex}
+        .card{background:#111;border-radius:10px;overflow:hidden;border:1px solid #333;cursor:pointer;transition:0.3s}
+        .card:hover{transform:translateY(-3px);border-color:var(--gold)}
+        .card-img{position:relative;width:100%;height:180px;overflow:hidden;display:flex}
         .card-img img{height:100%;object-fit:cover}
         .card-img img:first-child{width:50%}.card-img img:last-child{width:50%}
         .card-img img.only-one{width:100%}
@@ -41,7 +41,7 @@
         .card-body h4{margin:4px 0;font-size:0.85rem}.card-body .price{color:var(--gold);font-weight:700;font-size:1rem}
         .card-body .btn-order{width:100%;padding:8px;background:var(--gold);color:#000;border:none;border-radius:18px;font-weight:700;cursor:pointer;margin-top:8px;font-size:0.8rem}
         
-        /* Custom Spice Section */
+        /* SPICE SECTION */
         .spice-section{background:linear-gradient(135deg,#1a1a0a,#0a0a0a);border:1px solid var(--gold);border-radius:15px;padding:30px 20px;text-align:center;margin-top:30px}
         .spice-section h3{font-family:'Playfair Display',serif;color:var(--gold);font-size:1.4rem;margin-bottom:10px}
         .spice-section p{color:#bbb;font-size:0.9rem;line-height:1.6;max-width:600px;margin:0 auto 20px}
@@ -52,6 +52,26 @@
         .spice-feat p{font-size:0.75rem;color:#888}
         
         .view-all{text-align:center;margin-top:20px}.view-all a{color:var(--gold);text-decoration:none;border:1px solid var(--gold);padding:8px 20px;border-radius:20px}
+        
+        /* DETAIL POPUP */
+        .detail-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:500;overflow-y:auto}
+        .detail-overlay.show{display:block}
+        .detail-popup{background:#111;max-width:600px;margin:30px auto;border-radius:15px;border:1px solid var(--gold);overflow:hidden}
+        .detail-images{display:flex;width:100%;height:350px}
+        .detail-images img{flex:1;width:50%;height:100%;object-fit:cover}
+        .detail-images img.only-one{width:100%}
+        .detail-body{padding:25px}
+        .detail-body .brand{color:var(--gold);font-size:0.7rem;text-transform:uppercase;margin-bottom:5px}
+        .detail-body h2{font-size:1.4rem;color:var(--gold);font-family:'Playfair Display',serif;margin-bottom:8px}
+        .detail-body .price{color:var(--gold);font-weight:700;font-size:1.4rem;margin:10px 0}
+        .detail-body .desc{color:#bbb;line-height:1.6;margin:10px 0;font-size:0.9rem}
+        .detail-body .meta{display:flex;gap:15px;flex-wrap:wrap;margin:10px 0;color:#888;font-size:0.8rem}
+        .detail-body .meta span{background:#1a1a1a;padding:4px 10px;border-radius:12px}
+        .detail-close{position:sticky;top:10px;float:right;margin:15px;background:var(--gold);color:#000;border:none;width:40px;height:40px;border-radius:50%;font-size:1.2rem;cursor:pointer;z-index:10}
+        .detail-actions{display:flex;gap:10px;margin-top:20px}
+        .detail-actions a{flex:1;padding:12px;border-radius:25px;text-align:center;text-decoration:none;font-weight:700;color:#fff;font-size:0.85rem}
+        .detail-actions .btn-tg{background:#0088cc}.detail-actions .btn-wa{background:#25D366}.detail-actions .btn-call{background:var(--gold);color:#000}
+        
         .popup-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:300;justify-content:center;align-items:center}
         .popup-overlay.show{display:flex}.popup{background:#111;padding:25px;border-radius:12px;text-align:center;border:1px solid var(--gold);max-width:300px;width:90%}
         .popup h3{color:var(--gold);margin-bottom:15px}.popup a{display:block;padding:10px;margin:6px 0;border-radius:8px;text-decoration:none;font-weight:600;color:#fff}
@@ -59,7 +79,7 @@
         footer{background:#000;text-align:center;padding:25px;border-top:1px solid #222;margin-top:30px;color:#888;font-size:0.75rem}
         .footer-links{display:flex;gap:15px;justify-content:center;flex-wrap:wrap;margin:8px 0}.footer-links a{color:#888;text-decoration:none;font-size:0.75rem}
         .powered{color:#666;font-size:0.65rem;margin-top:8px}.powered a{color:#888}
-        @media(max-width:768px){.nav-links{display:none}.menu-btn{display:block}.hero h1{font-size:1.8rem}.grid{grid-template-columns:repeat(2,1fr);gap:10px}.card-img{height:140px}.spice-features{grid-template-columns:1fr}}
+        @media(max-width:768px){.nav-links{display:none}.menu-btn{display:block}.hero h1{font-size:1.8rem}.grid{grid-template-columns:1fr;gap:12px}.card-img{height:250px}.spice-features{grid-template-columns:1fr}.detail-images{height:250px}}
     </style>
 </head>
 <body>
@@ -93,7 +113,7 @@
 <div class="section">
     <div class="spice-section">
         <h3 data-en="✨ Your Custom Spice ✨" data-am="✨ የእርስዎ ልዩ ቅመም ✨">✨ Your Custom Spice ✨</h3>
-        <p data-en="We create custom perfume blends tailored to your personality. Choose your favorite notes and we'll craft a unique fragrance just for you." data-am="እኛ እርስዎን የሚገልጽ ልዩ ሽቶ እንቀላቅላለን። የሚወዱትን ሽቶ ይምረጡ እና ለእርስዎ ብቻ የሆነ ልዩ ሽቶ እንሰራለን።">We create custom perfume blends tailored to your personality. Choose your favorite notes and we'll craft a unique fragrance just for you.</p>
+        <p data-en="We create custom perfume blends tailored to your personality. Choose your favorite notes and we'll craft a unique fragrance just for you." data-am="እኛ እርስዎን የሚገልጽ ልዩ ሽቶ እንቀላቅላለን።">We create custom perfume blends tailored to your personality.</p>
         <div class="spice-features">
             <div class="spice-feat"><i class="fas fa-flask"></i><h4 data-en="Custom Blend" data-am="ልዩ ቅልቅል">Custom Blend</h4><p data-en="Your unique scent" data-am="የእርስዎ ልዩ ሽቶ">Your unique scent</p></div>
             <div class="spice-feat"><i class="fas fa-leaf"></i><h4 data-en="Natural Oils" data-am="ተፈጥሯዊ ዘይቶች">Natural Oils</h4><p data-en="Premium ingredients" data-am="ምርጥ ቅመሞች">Premium ingredients</p></div>
@@ -102,31 +122,51 @@
     </div>
 </div>
 
-<div class="popup-overlay" id="popupOverlay"><div class="popup"><h3 data-en="Order Via" data-am="ያዙዙበት">Order Via</h3><a href="#" class="btn-telegram" id="popupTelegram"><i class="fab fa-telegram"></i> Telegram</a><a href="#" class="btn-whatsapp" id="popupWhatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a><a href="#" class="btn-call" id="popupCall"><i class="fas fa-phone"></i> Direct Call</a><button class="btn-close" onclick="closePopup()">Cancel</button></div></div>
-<footer><div class="footer-links"><a href="index.html">Home</a><a href="products.html">Products</a><a href="blog.html">Blog</a><a href="reviews.html">Reviews</a><a href="contact.html">Contact</a></div><p>© 2026 Scent Lovers. All rights reserved.</p><p class="powered">Powered by <a href="https://addispower.pages.dev">AddisPower</a></p></footer>
+<!-- DETAIL POPUP -->
+<div class="detail-overlay" id="detailOverlay" onclick="closeDetail(event)">
+    <button class="detail-close" onclick="closeDetail()">&times;</button>
+    <div class="detail-popup" onclick="event.stopPropagation()">
+        <div class="detail-images" id="detailImages"></div>
+        <div class="detail-body" id="detailBody"></div>
+    </div>
+</div>
+
+<div class="popup-overlay" id="popupOverlay"><div class="popup"><h3>Order Via</h3><a href="#" class="btn-telegram" id="popupTelegram"><i class="fab fa-telegram"></i> Telegram</a><a href="#" class="btn-whatsapp" id="popupWhatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a><a href="#" class="btn-call" id="popupCall"><i class="fas fa-phone"></i> Direct Call</a><button class="btn-close" onclick="closePopup()">Cancel</button></div></div>
+<footer><div class="footer-links"><a href="index.html">Home</a><a href="products.html">Products</a><a href="blog.html">Blog</a><a href="reviews.html">Reviews</a><a href="contact.html">Contact</a></div><p>© 2026 Scent Lovers.</p><p class="powered">Powered by <a href="https://addispower.pages.dev">AddisPower</a></p></footer>
 
 <script>
-var lang='en';
+var lang='en',all=[];
 function toggleLang(){
     lang=lang==='en'?'am':'en';
     document.getElementById('langBtn').textContent=lang==='en'?'አማርኛ':'English';
     document.querySelectorAll('[data-en][data-am]').forEach(el=>{
-        if(el.tagName==='A'||el.tagName==='BUTTON')el.textContent=el.getAttribute('data-'+lang);
-        else if(el.tagName==='SPAN')el.textContent=el.getAttribute('data-'+lang);
-        else{var txt=el.getAttribute('data-'+lang);if(el.children.length===0)el.textContent=txt}
+        if(el.tagName==='SPAN')el.textContent=el.getAttribute('data-'+lang);
+        else if(!el.children.length)el.textContent=el.getAttribute('data-'+lang);
     });
 }
 function openMenu(){document.getElementById('sideNav').classList.add('show');document.getElementById('overlay').classList.add('show')}
 function closeMenu(){document.getElementById('sideNav').classList.remove('show');document.getElementById('overlay').classList.remove('show')}
+
+// DETAIL POPUP
+function openDetail(id){
+    var p=all.find(x=>x.id==id);if(!p)return;
+    var h=(p.image2&&p.image2!==''&&p.image2!=='null'),i1=p.image||'https://via.placeholder.com/400x200',i2=h?p.image2:i1;
+    document.getElementById('detailImages').innerHTML='<img src="'+i1+'" alt="'+p.name+'" onerror="this.src=\'https://via.placeholder.com/400x200\'"'+(h?'':' class="only-one"')+'>'+(h?'<img src="'+i2+'" alt="'+p.name+'" onerror="this.src=\'https://via.placeholder.com/400x200\'">':'');
+    document.getElementById('detailBody').innerHTML='<div class="brand">'+p.brand+'</div><h2>'+p.name+'</h2><div class="price">'+p.price+'</div>'+(p.description?'<p class="desc">'+p.description+'</p>':'')+'<div class="meta"><span>📂 '+p.category+'</span>'+(p.tag?'<span>🏷️ '+p.tag+'</span>':'')+'<span>⭐ 4.9</span></div><div class="detail-actions"><a href="https://t.me/Scent19?text='+encodeURIComponent('Hi! '+p.brand+' - '+p.name)+'" class="btn-tg"><i class="fab fa-telegram"></i> Telegram</a><a href="https://wa.me/251910813869?text='+encodeURIComponent('Hi! '+p.brand+' - '+p.name)+'" class="btn-wa"><i class="fab fa-whatsapp"></i> WhatsApp</a><a href="tel:+251910813869" class="btn-call"><i class="fas fa-phone"></i> Call</a></div>';
+    document.getElementById('detailOverlay').classList.add('show');document.body.style.overflow='hidden';
+}
+function closeDetail(e){if(e&&e.target!==document.getElementById('detailOverlay'))return;document.getElementById('detailOverlay').classList.remove('show');document.body.style.overflow=''}
+
 function openPopup(b,n){var m='Hi! Interested in: '+b+' - '+n;document.getElementById('popupTelegram').href='https://t.me/Scent19?text='+encodeURIComponent(m);document.getElementById('popupWhatsapp').href='https://wa.me/251910813869?text='+encodeURIComponent(m);document.getElementById('popupCall').href='tel:+251910813869';document.getElementById('popupOverlay').classList.add('show')}
 function closePopup(){document.getElementById('popupOverlay').classList.remove('show')}
 
 fetch('https://scent-lovers-api.developeraddis.workers.dev/api/products').then(r=>r.json()).then(d=>{
-    var p=(d.products||[]).slice(0,4),g=document.getElementById('products');
+    all=d.products||[];
+    var p=all.slice(0,4),g=document.getElementById('products');
     if(!p.length){g.innerHTML='<p style="text-align:center;color:#888;grid-column:1/-1">No products</p>'}else{
     g.innerHTML=p.map(x=>{
         var h=(x.image2&&x.image2!==''&&x.image2!=='null'),i1=x.image||'https://via.placeholder.com/400x200',i2=h?x.image2:i1;
-        return'<div class="card"><div class="card-img" onclick="window.open(\''+(h?i2:i1)+'\')"><img src="'+i1+'" alt="'+x.name+'" loading="lazy" onerror="this.src=\'https://via.placeholder.com/400x200\'"'+(h?'':' class="only-one"')+'>'+(h?'<img src="'+i2+'" alt="'+x.name+'" loading="lazy" onerror="this.src=\'https://via.placeholder.com/400x200\'">':'')+(x.tag?'<span class="tag">'+x.tag+'</span>':'')+'</div><div class="card-body"><div class="brand">'+x.brand+'</div><h4>'+x.name+'</h4><div class="price">'+x.price+'</div><button class="btn-order" onclick="event.stopPropagation();openPopup(\''+x.brand+'\',\''+x.name+'\')">Order Now</button></div></div>'
+        return'<div class="card" onclick="openDetail(\''+x.id+'\')"><div class="card-img"><img src="'+i1+'" alt="'+x.name+'" loading="lazy" onerror="this.src=\'https://via.placeholder.com/400x200\'"'+(h?'':' class="only-one"')+'>'+(h?'<img src="'+i2+'" alt="'+x.name+'" loading="lazy" onerror="this.src=\'https://via.placeholder.com/400x200\'">':'')+(x.tag?'<span class="tag">'+x.tag+'</span>':'')+'</div><div class="card-body"><div class="brand">'+x.brand+'</div><h4>'+x.name+'</h4><div class="price">'+x.price+'</div><button class="btn-order" onclick="event.stopPropagation();openPopup(\''+x.brand+'\',\''+x.name+'\')">Order Now</button></div></div>'
     }).join('')}
 });
 </script>
