@@ -7,13 +7,13 @@
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:'Segoe UI',sans-serif;background:#0a0a0a;color:#fff;padding:20px}
-        .container{max-width:900px;margin:0 auto}
+        .container{max-width:1000px;margin:0 auto}
         .login-box{background:#111;padding:40px;border-radius:15px;max-width:400px;margin:100px auto;text-align:center;border:1px solid #333}
         .login-box h2{color:#D4A853;margin-bottom:20px}
         .login-box input{width:100%;padding:14px;background:#1a1a1a;border:1px solid #333;border-radius:8px;color:#fff;font-size:1rem;text-align:center;margin-bottom:15px}
         .hidden{display:none!important}
         h1{color:#D4A853;margin-bottom:20px;font-size:1.8rem;text-align:center}
-        .tabs{display:flex;gap:5px;margin-bottom:25px;justify-content:center}
+        .tabs{display:flex;gap:5px;margin-bottom:25px;justify-content:center;flex-wrap:wrap}
         .tabs button{padding:10px 20px;border:1px solid #D4A853;background:transparent;color:#D4A853;border-radius:8px;cursor:pointer;font-weight:600}
         .tabs button.active{background:#D4A853;color:#000}
         .tab-content{display:none}.tab-content.show{display:block}
@@ -23,15 +23,29 @@
         input,select,textarea{width:100%;padding:12px;background:#1a1a1a;border:1px solid #333;border-radius:8px;color:#fff;font-size:0.95rem;margin-bottom:12px;font-family:inherit}
         button{padding:12px 24px;border:none;border-radius:8px;cursor:pointer;font-weight:bold}
         .btn-gold{background:#D4A853;color:#000}.btn-red{background:#c0392b;color:#fff}.btn-blue{background:#3498db;color:#fff}.btn-green{background:#27ae60;color:#fff}
-        .upload-box{border:2px dashed #D4A853;padding:25px;text-align:center;border-radius:10px;cursor:pointer;margin-bottom:12px}
-        #preview{max-width:200px;display:none;margin:10px auto;border-radius:8px}
+        
+        .upload-row{display:flex;gap:15px;margin-bottom:12px}
+        .upload-box{flex:1;border:2px dashed #D4A853;padding:20px;text-align:center;border-radius:10px;cursor:pointer;transition:0.3s}
+        .upload-box:hover{background:#1a1a1a;border-color:#fff}
+        .upload-box .icon{font-size:30px;margin-bottom:5px}
+        .upload-box .label{font-size:0.75rem;color:#888}
+        .preview-row{display:flex;gap:15px;margin-bottom:12px}
+        .preview-row img{width:100px;height:100px;object-fit:cover;border-radius:8px;display:none}
+        .status-row{display:flex;gap:15px;margin-bottom:12px;font-size:0.75rem}
+        .status-row div{flex:1;text-align:center}
+        
         .msg{padding:12px;margin:10px 0;border-radius:8px;display:none;text-align:center;font-weight:600}
         .msg.success{background:#27ae60;display:block}.msg.error{background:#c0392b;display:block}
         .item-row{display:flex;align-items:center;gap:15px;padding:12px;background:#1a1a1a;border-radius:8px;margin-bottom:8px;border:1px solid #333}
         .item-row img{width:50px;height:50px;object-fit:cover;border-radius:6px}
         .item-row .info{flex:1}.item-row .info h3{color:#D4A853;font-size:0.9rem}.item-row .info p{color:#888;font-size:0.75rem}
+        .item-images{display:flex;gap:5px}
+        .item-images img{width:40px;height:40px;object-fit:cover;border-radius:4px}
         .search-box{width:100%;padding:12px;background:#1a1a1a;border:2px solid #D4A853;border-radius:25px;color:#fff;margin-bottom:15px}
-        @media(max-width:600px){.row{flex-direction:column}}
+        
+        .edit-form{display:none;background:#1a1a1a;padding:20px;border-radius:8px;margin:10px 0;border:1px solid #D4A853}
+        .edit-form.show{display:block}
+        @media(max-width:768px){.upload-row{flex-direction:column}.preview-row{flex-direction:column}.row{flex-direction:column}}
     </style>
 </head>
 <body>
@@ -39,7 +53,7 @@
     <div id="loginScreen" class="login-box"><h2>Admin Login</h2><input type="password" id="pw" placeholder="Password" onkeypress="if(event.key==='Enter')login()"><button class="btn-gold" onclick="login()">Access</button><p id="loginErr" style="color:#e74c3c;margin-top:10px;display:none">Wrong password</p></div>
     
     <div id="panel" class="hidden">
-        <h1>Scent Lovers Admin</h1>
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px"><h1 style="margin:0">Scent Lovers Admin</h1><button class="btn-red" onclick="logout()" style="padding:8px 16px">Logout</button></div>
         
         <div class="tabs">
             <button class="active" onclick="switchTab('products')">🛍️ Products</button>
@@ -49,19 +63,80 @@
         <!-- PRODUCTS TAB -->
         <div class="tab-content show" id="tab-products">
             <div class="card">
-                <h2>Add Product</h2>
-                <div class="upload-box" onclick="document.getElementById('fileInput').click()"><div style="font-size:40px">📷</div><div>Click to Upload Image</div></div>
-                <input type="file" id="fileInput" accept="image/*" style="display:none" onchange="uploadNew()">
-                <img id="preview"><div id="upStatus"></div><input type="hidden" id="imgUrl">
-                <div class="row"><input type="text" id="name" placeholder="Name *"><input type="text" id="brand" placeholder="Brand *"></div>
-                <div class="row"><input type="text" id="price" placeholder="Price *"><select id="category"><option value="women">Women</option><option value="men">Men</option><option value="gift">Gift</option><option value="sale">Sale</option></select></div>
-                <div class="row"><input type="text" id="tag" placeholder="Tag"><input type="text" id="desc" placeholder="Description"></div>
-                <button class="btn-gold" onclick="addProduct()">Add Product</button>
+                <h2>➕ Add Product</h2>
+                
+                <div class="upload-row">
+                    <div class="upload-box" onclick="document.getElementById('fileInput1').click()">
+                        <div class="icon">📷</div><div class="label">Image 1 (Main) *</div>
+                    </div>
+                    <div class="upload-box" onclick="document.getElementById('fileInput2').click()">
+                        <div class="icon">📷</div><div class="label">Image 2 (Optional)</div>
+                    </div>
+                </div>
+                <input type="file" id="fileInput1" accept="image/*" style="display:none" onchange="uploadImage(1)">
+                <input type="file" id="fileInput2" accept="image/*" style="display:none" onchange="uploadImage(2)">
+                
+                <div class="preview-row">
+                    <img id="preview1" alt="Preview 1">
+                    <img id="preview2" alt="Preview 2">
+                </div>
+                <div class="status-row">
+                    <div id="status1"></div>
+                    <div id="status2"></div>
+                </div>
+                
+                <input type="hidden" id="imgUrl1">
+                <input type="hidden" id="imgUrl2">
+                
+                <div class="row"><input type="text" id="name" placeholder="Product Name *"><input type="text" id="brand" placeholder="Brand *"></div>
+                <div class="row"><input type="text" id="price" placeholder="Price (e.g. 4500 ETB) *">
+                    <select id="category"><option value="women">Women</option><option value="men">Men</option><option value="gift">Gift</option><option value="sale">Sale</option></select>
+                </div>
+                <div class="row"><input type="text" id="tag" placeholder="Tag: Bestseller, New..."><input type="text" id="desc" placeholder="Description"></div>
+                <button class="btn-gold" onclick="addProduct()">✅ Add Product</button>
                 <div id="msg" class="msg"></div>
             </div>
+            
+            <!-- Edit Form -->
+            <div class="edit-form" id="editForm">
+                <h2>✏️ Edit Product</h2>
+                <input type="hidden" id="editId">
+                
+                <div class="upload-row">
+                    <div class="upload-box" onclick="document.getElementById('editFile1').click()">
+                        <div class="icon">📷</div><div class="label">Change Image 1</div>
+                    </div>
+                    <div class="upload-box" onclick="document.getElementById('editFile2').click()">
+                        <div class="icon">📷</div><div class="label">Change Image 2</div>
+                    </div>
+                </div>
+                <input type="file" id="editFile1" accept="image/*" style="display:none" onchange="uploadEditImage(1)">
+                <input type="file" id="editFile2" accept="image/*" style="display:none" onchange="uploadEditImage(2)">
+                
+                <div class="preview-row">
+                    <img id="editPreview1" alt="Preview 1">
+                    <img id="editPreview2" alt="Preview 2">
+                </div>
+                <div class="status-row">
+                    <div id="editStatus1"></div>
+                    <div id="editStatus2"></div>
+                </div>
+                
+                <input type="hidden" id="editImgUrl1">
+                <input type="hidden" id="editImgUrl2">
+                
+                <div class="row"><input type="text" id="editName" placeholder="Name"><input type="text" id="editBrand" placeholder="Brand"></div>
+                <div class="row"><input type="text" id="editPrice" placeholder="Price">
+                    <select id="editCategory"><option value="women">Women</option><option value="men">Men</option><option value="gift">Gift</option><option value="sale">Sale</option></select>
+                </div>
+                <div class="row"><input type="text" id="editTag" placeholder="Tag"><input type="text" id="editDesc" placeholder="Description"></div>
+                <button class="btn-green" onclick="saveEdit()">💾 Save Changes</button>
+                <button class="btn-red" onclick="cancelEdit()">Cancel</button>
+            </div>
+            
             <div class="card">
-                <h2>Products</h2>
-                <input type="text" class="search-box" placeholder="Search..." id="searchProd" oninput="renderProducts()">
+                <h2>📋 Products</h2>
+                <input type="text" class="search-box" placeholder="Search products..." id="searchProd" oninput="renderProducts()">
                 <div id="productList">Loading...</div>
             </div>
         </div>
@@ -69,15 +144,15 @@
         <!-- BLOG TAB -->
         <div class="tab-content" id="tab-blog">
             <div class="card">
-                <h2>Add Blog Post</h2>
+                <h2>➕ Add Blog Post</h2>
                 <input type="text" id="blogTitle" placeholder="Post Title *">
                 <textarea id="blogContent" rows="5" placeholder="Post Content *"></textarea>
-                <div class="row"><input type="text" id="blogImage" placeholder="Image URL"><input type="text" id="blogCategory" placeholder="Category (Tips, News, etc.)"></div>
-                <button class="btn-gold" onclick="addBlog()">Add Post</button>
+                <div class="row"><input type="text" id="blogImage" placeholder="Image URL"><input type="text" id="blogCategory" placeholder="Category"></div>
+                <button class="btn-gold" onclick="addBlog()">✅ Add Post</button>
                 <div id="blogMsg" class="msg"></div>
             </div>
             <div class="card">
-                <h2>Blog Posts</h2>
+                <h2>📋 Blog Posts</h2>
                 <div id="blogList">Loading...</div>
             </div>
         </div>
@@ -90,6 +165,7 @@ var CLD='dm6rwo1ox',PRESET='scent_lovers_preset',PASS='ScentLovers2026';
 var products=[],posts=[];
 
 function login(){if(document.getElementById('pw').value===PASS){document.getElementById('loginScreen').classList.add('hidden');document.getElementById('panel').classList.remove('hidden');loadAll()}else{document.getElementById('loginErr').style.display='block'}}
+function logout(){document.getElementById('panel').classList.add('hidden');document.getElementById('loginScreen').classList.remove('hidden');document.getElementById('pw').value=''}
 
 function switchTab(tab){
     document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
@@ -98,9 +174,32 @@ function switchTab(tab){
     document.getElementById('tab-'+tab).classList.add('show');
 }
 
-// ============ PRODUCTS ============
-async function uploadNew(){var f=document.getElementById('fileInput').files[0];if(!f)return;var s=document.getElementById('upStatus');s.textContent='Uploading...';var fd=new FormData();fd.append('file',f);fd.append('upload_preset',PRESET);var r=await fetch('https://api.cloudinary.com/v1_1/'+CLD+'/image/upload',{method:'POST',body:fd});var d=await r.json();if(d.secure_url){document.getElementById('imgUrl').value=d.secure_url;document.getElementById('preview').src=d.secure_url;document.getElementById('preview').style.display='block';s.textContent='Ready'}else{s.textContent='Failed'}}
+// ============ IMAGE UPLOAD ============
+async function uploadToCloudinary(file, previewId, statusId, urlInputId){
+    var s=document.getElementById(statusId);s.textContent='Uploading...';s.style.color='#D4A853';
+    var fd=new FormData();fd.append('file',file);fd.append('upload_preset',PRESET);
+    try{
+        var r=await fetch('https://api.cloudinary.com/v1_1/'+CLD+'/image/upload',{method:'POST',body:fd});
+        var d=await r.json();
+        if(d.secure_url){
+            document.getElementById(urlInputId).value=d.secure_url;
+            document.getElementById(previewId).src=d.secure_url;
+            document.getElementById(previewId).style.display='block';
+            s.textContent='✅ Ready';s.style.color='#27ae60';
+        }else{s.textContent='❌ Failed';s.style.color='#e74c3c'}
+    }catch(e){s.textContent='❌ Error';s.style.color='#e74c3c'}
+}
 
+function uploadImage(num){
+    var f=document.getElementById('fileInput'+num).files[0];
+    if(f)uploadToCloudinary(f,'preview'+num,'status'+num,'imgUrl'+num);
+}
+function uploadEditImage(num){
+    var f=document.getElementById('editFile'+num).files[0];
+    if(f)uploadToCloudinary(f,'editPreview'+num,'editStatus'+num,'editImgUrl'+num);
+}
+
+// ============ PRODUCTS ============
 async function loadProducts(){
     var r=await fetch(API+'/products');var d=await r.json();products=d.products||[];renderProducts();
 }
@@ -109,31 +208,58 @@ function renderProducts(){
     var f=s?products.filter(p=>p.name.toLowerCase().includes(s)||p.brand.toLowerCase().includes(s)):products;
     var c=document.getElementById('productList');
     if(!f.length){c.innerHTML='<p style="text-align:center;color:#888;padding:30px">No products</p>';return}
-    c.innerHTML=f.map(p=>'<div class="item-row"><img src="'+(p.image||'https://via.placeholder.com/50')+'" onerror="this.src=\'https://via.placeholder.com/50\'"><div class="info"><h3>'+p.brand+' - '+p.name+'</h3><p>'+p.price+' | '+p.category+'</p></div><button class="btn-red" onclick="delProduct('+p.id+')">Delete</button></div>').join('')
+    c.innerHTML=f.map(p=>'<div class="item-row"><div class="item-images">'+(p.image?'<img src="'+p.image+'" onerror="this.src=\'https://via.placeholder.com/40\'">':'')+(p.image2?'<img src="'+p.image2+'" onerror="this.src=\'https://via.placeholder.com/40\'">':'')+'</div><div class="info"><h3>'+p.brand+' - '+p.name+'</h3><p>'+p.price+' | '+p.category+'</p></div><button class="btn-blue" onclick="editProduct('+p.id+')" style="margin-right:5px">✏️</button><button class="btn-red" onclick="delProduct('+p.id+')">🗑️</button></div>').join('')
 }
 
 async function addProduct(){
-    var n=document.getElementById('name').value.trim(),b=document.getElementById('brand').value.trim(),pr=document.getElementById('price').value.trim(),cat=document.getElementById('category').value,img=document.getElementById('imgUrl').value;
-    if(!n||!b||!pr){msgP('Fill required fields','error');return}if(!img){msgP('Upload image','error');return}
-    await fetch(API+'/products',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:n,brand:b,price:pr.includes('ETB')?pr:pr+' ETB',category:cat,image:img,tag:document.getElementById('tag').value,description:document.getElementById('desc').value})});
-    msgP('Added!','success');['name','brand','price','tag','desc'].forEach(id=>document.getElementById(id).value='');document.getElementById('preview').style.display='none';document.getElementById('imgUrl').value='';document.getElementById('fileInput').value='';loadProducts();
+    var n=document.getElementById('name').value.trim(),b=document.getElementById('brand').value.trim(),pr=document.getElementById('price').value.trim(),cat=document.getElementById('category').value;
+    var img1=document.getElementById('imgUrl1').value,img2=document.getElementById('imgUrl2').value;
+    if(!n||!b||!pr){msgP('Fill required fields','error');return}if(!img1){msgP('Upload at least Image 1','error');return}
+    await fetch(API+'/products',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:n,brand:b,price:pr.includes('ETB')?pr:pr+' ETB',category:cat,image:img1,image2:img2,tag:document.getElementById('tag').value,description:document.getElementById('desc').value})});
+    msgP('✅ Added!','success');
+    ['name','brand','price','tag','desc'].forEach(id=>document.getElementById(id).value='');
+    document.getElementById('imgUrl1').value='';document.getElementById('imgUrl2').value='';
+    document.getElementById('preview1').style.display='none';document.getElementById('preview2').style.display='none';
+    document.getElementById('status1').textContent='';document.getElementById('status2').textContent='';
+    document.getElementById('fileInput1').value='';document.getElementById('fileInput2').value='';
+    loadProducts();
+}
+
+function editProduct(id){
+    var p=products.find(x=>x.id==id);if(!p)return;
+    document.getElementById('editId').value=p.id;
+    document.getElementById('editName').value=p.name;
+    document.getElementById('editBrand').value=p.brand;
+    document.getElementById('editPrice').value=p.price.replace(' ETB','');
+    document.getElementById('editCategory').value=p.category;
+    document.getElementById('editTag').value=p.tag||'';
+    document.getElementById('editDesc').value=p.description||'';
+    document.getElementById('editImgUrl1').value=p.image||'';
+    document.getElementById('editImgUrl2').value=p.image2||'';
+    if(p.image){document.getElementById('editPreview1').src=p.image;document.getElementById('editPreview1').style.display='block'}else{document.getElementById('editPreview1').style.display='none'}
+    if(p.image2){document.getElementById('editPreview2').src=p.image2;document.getElementById('editPreview2').style.display='block'}else{document.getElementById('editPreview2').style.display='none'}
+    document.getElementById('editStatus1').textContent='';document.getElementById('editStatus2').textContent='';
+    document.getElementById('editFile1').value='';document.getElementById('editFile2').value='';
+    document.getElementById('editForm').classList.add('show');
+    document.getElementById('editForm').scrollIntoView({behavior:'smooth'});
+}
+function cancelEdit(){document.getElementById('editForm').classList.remove('show')}
+
+async function saveEdit(){
+    var id=document.getElementById('editId').value;
+    var p={name:document.getElementById('editName').value,brand:document.getElementById('editBrand').value,price:document.getElementById('editPrice').value,category:document.getElementById('editCategory').value,image:document.getElementById('editImgUrl1').value,image2:document.getElementById('editImgUrl2').value,tag:document.getElementById('editTag').value,description:document.getElementById('editDesc').value};
+    if(!p.name||!p.brand||!p.price){msgP('Fill required fields','error');return}
+    p.price=p.price.includes('ETB')?p.price:p.price+' ETB';
+    await fetch(API+'/products/'+id,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(p)});
+    msgP('✅ Updated!','success');cancelEdit();loadProducts();
 }
 async function delProduct(id){if(!confirm('Delete?'))return;await fetch(API+'/products/'+id,{method:'DELETE'});loadProducts()}
 function msgP(t,type){var m=document.getElementById('msg');m.textContent=t;m.className='msg '+type;setTimeout(()=>m.className='msg',3000)}
 
 // ============ BLOG ============
 async function loadBlog(){var r=await fetch(API+'/blog');var d=await r.json();posts=d.posts||[];renderBlog()}
-function renderBlog(){
-    var c=document.getElementById('blogList');
-    if(!posts.length){c.innerHTML='<p style="text-align:center;color:#888;padding:30px">No posts</p>';return}
-    c.innerHTML=posts.map(p=>'<div class="item-row"><div class="info"><h3>'+p.title+'</h3><p>'+(p.category||'General')+' | '+new Date(p.created_at).toLocaleDateString()+'</p></div><button class="btn-red" onclick="delBlog('+p.id+')">Delete</button></div>').join('')
-}
-async function addBlog(){
-    var t=document.getElementById('blogTitle').value.trim(),c=document.getElementById('blogContent').value.trim();
-    if(!t||!c){msgB('Fill required fields','error');return}
-    await fetch(API+'/blog',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:t,content:c,image:document.getElementById('blogImage').value,category:document.getElementById('blogCategory').value})});
-    msgB('Added!','success');['blogTitle','blogContent','blogImage','blogCategory'].forEach(id=>document.getElementById(id).value='');loadBlog();
-}
+function renderBlog(){var c=document.getElementById('blogList');if(!posts.length){c.innerHTML='<p style="text-align:center;color:#888;padding:30px">No posts</p>';return}c.innerHTML=posts.map(p=>'<div class="item-row"><div class="info"><h3>'+p.title+'</h3><p>'+(p.category||'General')+' | '+new Date(p.created_at).toLocaleDateString()+'</p></div><button class="btn-red" onclick="delBlog('+p.id+')">🗑️</button></div>').join('')}
+async function addBlog(){var t=document.getElementById('blogTitle').value.trim(),c=document.getElementById('blogContent').value.trim();if(!t||!c){msgB('Fill required fields','error');return}await fetch(API+'/blog',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:t,content:c,image:document.getElementById('blogImage').value,category:document.getElementById('blogCategory').value})});msgB('✅ Added!','success');['blogTitle','blogContent','blogImage','blogCategory'].forEach(id=>document.getElementById(id).value='');loadBlog()}
 async function delBlog(id){if(!confirm('Delete?'))return;await fetch(API+'/blog/'+id,{method:'DELETE'});loadBlog()}
 function msgB(t,type){var m=document.getElementById('blogMsg');m.textContent=t;m.className='msg '+type;setTimeout(()=>m.className='msg',3000)}
 
