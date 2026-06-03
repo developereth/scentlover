@@ -3,7 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products | Scent Lovers</title>
+    <title>Products | Scent Lovers - Premium Perfumes</title>
+    
+    <!-- SEO -->
+    <meta name="description" content="Browse our collection of premium perfumes and fragrances. 100% authentic luxury scents for men and women. Fast delivery across Ethiopia.">
+    <meta name="keywords" content="perfume, fragrance, scent, luxury perfume, Addis Ababa, Ethiopia, Scent Lovers, cologne, gift set">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Products | Scent Lovers - Premium Perfumes">
+    <meta property="og:description" content="Browse our collection of premium perfumes. 100% authentic luxury scents.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/developereth/scentlover/f56253dc632d9dcd5f854a94f4ebfe759acf3b1f/1d5a26a7-04e4-4ca0-84d9-f3150d3ddec6.png">
+    <meta name="twitter:card" content="summary_large_image">
+    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -23,49 +33,42 @@
         .header{background:linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.4)),url('https://raw.githubusercontent.com/developereth/scentlover/f56253dc632d9dcd5f854a94f4ebfe759acf3b1f/1d5a26a7-04e4-4ca0-84d9-f3150d3ddec6.png') center/cover;padding:45px 20px;text-align:center}
         .header h1{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--gold)}.header a{color:var(--gold)}
         .container{max-width:1000px;margin:0 auto;padding:20px 15px}
-        
         .search-row{display:flex;gap:10px;margin-bottom:15px;align-items:center}
         .search-box{flex:1;padding:12px 20px;background:#1a1a1a;border:2px solid var(--gold);border-radius:25px;color:#fff;font-size:0.9rem}
-        .search-box::placeholder{color:#666}
         .search-clear{background:var(--gold);color:#000;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1rem;display:none}
         .search-clear.show{display:flex;align-items:center;justify-content:center}
         .results-count{text-align:center;color:#888;font-size:0.8rem;margin-bottom:10px}
-        
         .filters{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:15px}
         .filters button{padding:6px 14px;border:1px solid var(--gold);background:transparent;color:var(--gold);border-radius:18px;cursor:pointer;font-size:0.75rem;font-weight:600}
         .filters button.active{background:var(--gold);color:#000}
-        
         .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:15px}
         .card{background:#111;border-radius:10px;overflow:hidden;border:1px solid #333;cursor:pointer;transition:0.3s}
         .card:hover{transform:translateY(-3px);border-color:var(--gold)}
         .card-img{position:relative;width:100%;height:200px;overflow:hidden;display:flex}
-        .card-img img{height:100%;object-fit:cover}
-        .card-img img:first-child{width:50%}.card-img img:last-child{width:50%}
-        .card-img img.only-one{width:100%}
+        .card-img img{height:100%;object-fit:cover}.card-img img:first-child{width:50%}.card-img img:last-child{width:50%}.card-img img.only-one{width:100%}
         .tag{position:absolute;top:8px;left:8px;background:var(--gold);color:#000;padding:2px 8px;border-radius:10px;font-size:0.6rem;font-weight:700;z-index:10}
+        .sale-badge{position:absolute;top:8px;right:8px;background:#e74c3c;color:#fff;padding:3px 10px;border-radius:12px;font-size:0.6rem;font-weight:700;z-index:10;animation:blink 1.5s infinite}
+        @keyframes blink{0%,100%{opacity:1}50%{opacity:0.4}}
+        .sale-timer{background:linear-gradient(135deg,#c0392b,#e74c3c);color:#fff;padding:8px 12px;border-radius:8px;text-align:center;margin-top:8px;font-size:0.7rem;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px}
+        .sale-timer i{animation:pulse 1s infinite}@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
         .card-body{padding:12px}.card-body .brand{color:var(--gold);font-size:0.6rem;text-transform:uppercase}
         .card-body h3{margin:4px 0;font-size:0.9rem}.price{color:var(--gold);font-weight:700;font-size:1rem;margin:5px 0}
         .stars{color:var(--gold);font-size:0.7rem}
         .btn-order{width:100%;padding:8px;background:var(--gold);color:#000;border:none;border-radius:18px;font-weight:700;cursor:pointer;margin-top:5px;font-size:0.8rem}
-        
         .detail-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:500;overflow-y:auto}
-        .detail-overlay.show{display:block}
-        .detail-popup{background:#111;max-width:600px;margin:30px auto;border-radius:15px;border:1px solid var(--gold);overflow:hidden}
-        .detail-images{display:flex;width:100%;height:350px}
-        .detail-images img{flex:1;width:50%;height:100%;object-fit:cover}
-        .detail-images img.only-one{width:100%}
-        .detail-body{padding:25px}
-        .detail-body .brand{color:var(--gold);font-size:0.7rem;text-transform:uppercase;margin-bottom:5px}
+        .detail-overlay.show{display:block}.detail-popup{background:#111;max-width:600px;margin:30px auto;border-radius:15px;border:1px solid var(--gold);overflow:hidden}
+        .detail-images{display:flex;width:100%;height:350px}.detail-images img{flex:1;width:50%;height:100%;object-fit:cover}.detail-images img.only-one{width:100%}
+        .detail-body{padding:25px}.detail-body .brand{color:var(--gold);font-size:0.7rem;text-transform:uppercase;margin-bottom:5px}
         .detail-body h2{font-size:1.4rem;color:var(--gold);font-family:'Playfair Display',serif;margin-bottom:8px}
         .detail-body .price{color:var(--gold);font-weight:700;font-size:1.4rem;margin:10px 0}
         .detail-body .desc{color:#bbb;line-height:1.6;margin:10px 0;font-size:0.9rem}
         .detail-body .meta{display:flex;gap:15px;flex-wrap:wrap;margin:10px 0;color:#888;font-size:0.8rem}
         .detail-body .meta span{background:#1a1a1a;padding:4px 10px;border-radius:12px}
+        .detail-body .sale-detail{background:linear-gradient(135deg,#c0392b,#e74c3c);color:#fff;padding:12px;border-radius:8px;text-align:center;margin:15px 0;font-weight:700}
         .detail-close{position:sticky;top:10px;float:right;margin:15px;background:var(--gold);color:#000;border:none;width:40px;height:40px;border-radius:50%;font-size:1.2rem;cursor:pointer;z-index:10}
         .detail-actions{display:flex;gap:10px;margin-top:20px}
         .detail-actions a{flex:1;padding:12px;border-radius:25px;text-align:center;text-decoration:none;font-weight:700;color:#fff;font-size:0.85rem}
         .detail-actions .btn-tg{background:#0088cc}.detail-actions .btn-wa{background:#25D366}.detail-actions .btn-call{background:var(--gold);color:#000}
-        
         .popup-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:300;justify-content:center;align-items:center}
         .popup-overlay.show{display:flex}.popup{background:#111;padding:25px;border-radius:12px;text-align:center;border:1px solid var(--gold);max-width:300px;width:90%}
         .popup h3{color:var(--gold);margin-bottom:15px}.popup a{display:block;padding:10px;margin:6px 0;border-radius:8px;text-decoration:none;font-weight:600;color:#fff}
@@ -83,18 +86,9 @@
 <div class="header"><h1>Our Products</h1><p><a href="index.html">Home</a> / Products</p></div>
 
 <div class="container">
-    <div class="search-row">
-        <input type="text" class="search-box" placeholder="🔍 Search products by name or brand..." id="searchInput" oninput="searchProducts()">
-        <button class="search-clear" id="searchClear" onclick="clearSearch()"><i class="fas fa-times"></i></button>
-    </div>
+    <div class="search-row"><input type="text" class="search-box" placeholder="🔍 Search products by name or brand..." id="searchInput" oninput="searchProducts()"><button class="search-clear" id="searchClear" onclick="clearSearch()"><i class="fas fa-times"></i></button></div>
     <div class="results-count" id="resultsCount"></div>
-    <div class="filters">
-        <button class="active" id="btnAll" onclick="filter('all')">All</button>
-        <button id="btnWomen" onclick="filter('women')">Women</button>
-        <button id="btnMen" onclick="filter('men')">Men</button>
-        <button id="btnGift" onclick="filter('gift')">Gift</button>
-        <button id="btnSale" onclick="filter('sale')">Sale</button>
-    </div>
+    <div class="filters"><button class="active" id="btnAll" onclick="filter('all')">All</button><button id="btnWomen" onclick="filter('women')">Women</button><button id="btnMen" onclick="filter('men')">Men</button><button id="btnGift" onclick="filter('gift')">Gift</button><button id="btnSale" onclick="filter('sale')">🔥 Sale</button></div>
     <div class="grid" id="grid">Loading...</div>
 </div>
 
@@ -107,37 +101,15 @@ function openMenu(){document.getElementById('sideNav').classList.add('show');doc
 function closeMenu(){document.getElementById('sideNav').classList.remove('show');document.getElementById('overlay').classList.remove('show')}
 var all=[],cat="all",searchTerm="",A='https://scent-lovers-api.developeraddis.workers.dev/api';
 fetch(A+'/products').then(r=>r.json()).then(d=>{all=d.products||[];show()});
-
 function filter(c){cat=c;var ids={all:"btnAll",women:"btnWomen",men:"btnMen",gift:"btnGift",sale:"btnSale"};for(var k in ids)document.getElementById(ids[k]).classList.remove("active");document.getElementById(ids[c]).classList.add("active");show()}
-
-function searchProducts(){
-    searchTerm=document.getElementById('searchInput').value.toLowerCase();
-    var clearBtn=document.getElementById('searchClear');
-    if(searchTerm){clearBtn.classList.add('show')}else{clearBtn.classList.remove('show')}
-    show();
-}
+function searchProducts(){searchTerm=document.getElementById('searchInput').value.toLowerCase();var cb=document.getElementById('searchClear');if(searchTerm)cb.classList.add('show');else cb.classList.remove('show');show()}
 function clearSearch(){document.getElementById('searchInput').value='';searchTerm='';document.getElementById('searchClear').classList.remove('show');show()}
-
 function show(){
-    var f=all;
-    if(cat!=="all")f=f.filter(p=>p.category===cat);
-    if(searchTerm)f=f.filter(p=>p.name.toLowerCase().includes(searchTerm)||p.brand.toLowerCase().includes(searchTerm));
+    var f=all;if(cat!=="all")f=f.filter(p=>p.category===cat);if(searchTerm)f=f.filter(p=>p.name.toLowerCase().includes(searchTerm)||p.brand.toLowerCase().includes(searchTerm));
     document.getElementById('resultsCount').textContent=f.length+' product'+(f.length!==1?'s':'')+' found';
-    var g=document.getElementById("grid");
-    if(!f.length){g.innerHTML='<p style="text-align:center;color:#888;grid-column:1/-1;padding:40px">No products found</p>';return}
-    g.innerHTML=f.map(p=>{
-        var h=(p.image2&&p.image2!==''&&p.image2!=='null'),i1=p.image||'https://via.placeholder.com/400x200',i2=h?p.image2:i1;
-        return'<div class="card" onclick="openDetail(\''+p.id+'\')"><div class="card-img"><img src="'+i1+'" alt="'+p.name+'" loading="lazy" onerror="this.src=\'https://via.placeholder.com/400x200\'"'+(h?'':' class="only-one"')+'>'+(h?'<img src="'+i2+'" alt="'+p.name+'" loading="lazy" onerror="this.src=\'https://via.placeholder.com/400x200\'">':'')+(p.tag?'<span class="tag">'+p.tag+'</span>':'')+'</div><div class="card-body"><div class="brand">'+p.brand+'</div><h3>'+p.name+'</h3><div class="stars">★★★★★</div><div class="price">'+p.price+'</div><button class="btn-order" onclick="event.stopPropagation();openPopup(\''+p.brand+'\',\''+p.name+'\')">Order Now</button></div></div>'
-    }).join("")
-}
-
-function openDetail(id){
-    var p=all.find(x=>x.id==id);if(!p)return;
-    var h=(p.image2&&p.image2!==''&&p.image2!=='null'),i1=p.image||'https://via.placeholder.com/400x200',i2=h?p.image2:i1;
-    document.getElementById('detailImages').innerHTML='<img src="'+i1+'" onerror="this.src=\'https://via.placeholder.com/400x200\'"'+(h?'':' class="only-one"')+'>'+(h?'<img src="'+i2+'" onerror="this.src=\'https://via.placeholder.com/400x200\'">':'');
-    document.getElementById('detailBody').innerHTML='<div class="brand">'+p.brand+'</div><h2>'+p.name+'</h2><div class="price">'+p.price+'</div>'+(p.description?'<p class="desc">'+p.description+'</p>':'')+'<div class="meta"><span>📂 '+p.category+'</span>'+(p.tag?'<span>🏷️ '+p.tag+'</span>':'')+'<span>⭐ 4.9</span></div><div class="detail-actions"><a href="https://t.me/Scent19?text='+encodeURIComponent('Hi! '+p.brand+' - '+p.name)+'" class="btn-tg"><i class="fab fa-telegram"></i> Telegram</a><a href="https://wa.me/251910813869?text='+encodeURIComponent('Hi! '+p.brand+' - '+p.name)+'" class="btn-wa"><i class="fab fa-whatsapp"></i> WhatsApp</a><a href="tel:+251910813869" class="btn-call"><i class="fas fa-phone"></i> Call</a></div>';
-    document.getElementById('detailOverlay').classList.add('show');document.body.style.overflow='hidden';
-}
+    var g=document.getElementById("grid");if(!f.length){g.innerHTML='<p style="text-align:center;color:#888;grid-column:1/-1;padding:40px">No products found</p>';return}
+    g.innerHTML=f.map(p=>{var h=(p.image2&&p.image2!==''&&p.image2!=='null'),i1=p.image||'https://via.placeholder.com/400x200',i2=h?p.image2:i1;return'<div class="card" onclick="openDetail(\''+p.id+'\')"><div class="card-img"><img src="'+i1+'" alt="'+p.name+'" loading="lazy" onerror="this.src=\'https://via.placeholder.com/400x200\'"'+(h?'':' class="only-one"')+'>'+(h?'<img src="'+i2+'" alt="'+p.name+'" loading="lazy" onerror="this.src=\'https://via.placeholder.com/400x200\'">':'')+(p.tag?'<span class="tag">'+p.tag+'</span>':'')+(p.category==='sale'?'<span class="sale-badge">🔥 SALE</span>':'')+'</div><div class="card-body"><div class="brand">'+p.brand+'</div><h3>'+p.name+'</h3><div class="stars">★★★★★</div><div class="price">'+p.price+'</div><button class="btn-order" onclick="event.stopPropagation();openPopup(\''+p.brand+'\',\''+p.name+'\')">Order Now</button>'+(p.category==='sale'?'<div class="sale-timer"><i class="fas fa-fire"></i> Limited Offer! Sale Ends Soon!</div>':'')+'</div></div>'}).join("")}
+function openDetail(id){var p=all.find(x=>x.id==id);if(!p)return;var h=(p.image2&&p.image2!==''&&p.image2!=='null'),i1=p.image||'https://via.placeholder.com/400x200',i2=h?p.image2:i1;document.getElementById('detailImages').innerHTML='<img src="'+i1+'" onerror="this.src=\'https://via.placeholder.com/400x200\'"'+(h?'':' class="only-one"')+'>'+(h?'<img src="'+i2+'" onerror="this.src=\'https://via.placeholder.com/400x200\'">':'');document.getElementById('detailBody').innerHTML='<div class="brand">'+p.brand+'</div><h2>'+p.name+'</h2><div class="price">'+p.price+'</div>'+(p.description?'<p class="desc">'+p.description+'</p>':'')+(p.category==='sale'?'<div class="sale-detail">🔥 LIMITED TIME OFFER - Grab this deal before it\'s gone!</div>':'')+'<div class="meta"><span>📂 '+p.category+'</span>'+(p.tag?'<span>🏷️ '+p.tag+'</span>':'')+'<span>⭐ 4.9</span></div><div class="detail-actions"><a href="https://t.me/Scent19?text='+encodeURIComponent('Hi! '+p.brand+' - '+p.name)+'" class="btn-tg"><i class="fab fa-telegram"></i> Telegram</a><a href="https://wa.me/251910813869?text='+encodeURIComponent('Hi! '+p.brand+' - '+p.name)+'" class="btn-wa"><i class="fab fa-whatsapp"></i> WhatsApp</a><a href="tel:+251910813869" class="btn-call"><i class="fas fa-phone"></i> Call</a></div>';document.getElementById('detailOverlay').classList.add('show');document.body.style.overflow='hidden'}
 function closeDetail(e){if(e&&e.target!==document.getElementById('detailOverlay'))return;document.getElementById('detailOverlay').classList.remove('show');document.body.style.overflow=''}
 function openPopup(b,n){var m='Hi! Interested in: '+b+' - '+n;document.getElementById('popupTelegram').href='https://t.me/Scent19?text='+encodeURIComponent(m);document.getElementById('popupWhatsapp').href='https://wa.me/251910813869?text='+encodeURIComponent(m);document.getElementById('popupCall').href='tel:+251910813869';document.getElementById('popupOverlay').classList.add('show')}
 function closePopup(){document.getElementById('popupOverlay').classList.remove('show')}
