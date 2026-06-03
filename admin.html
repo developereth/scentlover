@@ -21,27 +21,22 @@
         h2{color:#D4A853;margin-bottom:15px}
         .row{display:flex;gap:12px;margin-bottom:12px}.row>*{flex:1}
         input,select,textarea{width:100%;padding:12px;background:#1a1a1a;border:1px solid #333;border-radius:8px;color:#fff;font-size:0.95rem;margin-bottom:12px;font-family:inherit}
-        button{padding:12px 24px;border:none;border-radius:8px;cursor:pointer;font-weight:bold;font-size:0.9rem}
+        button{padding:12px 24px;border:none;border-radius:8px;cursor:pointer;font-weight:bold}
         .btn-gold{background:#D4A853;color:#000}.btn-red{background:#c0392b;color:#fff}.btn-blue{background:#3498db;color:#fff}.btn-green{background:#27ae60;color:#fff}
-        
         .upload-row{display:flex;gap:15px;margin-bottom:12px}
-        .upload-box{flex:1;border:2px dashed #D4A853;padding:20px;text-align:center;border-radius:10px;cursor:pointer;transition:0.3s}
+        .upload-box{flex:1;border:2px dashed #D4A853;padding:20px;text-align:center;border-radius:10px;cursor:pointer}
         .upload-box:hover{background:#1a1a1a}
-        .upload-box .icon{font-size:30px;margin-bottom:5px}
-        .upload-box .label{font-size:0.75rem;color:#888}
+        .upload-box .icon{font-size:30px;margin-bottom:5px}.upload-box .label{font-size:0.75rem;color:#888}
         .preview-row{display:flex;gap:15px;margin-bottom:12px}
         .preview-row img{width:100px;height:100px;object-fit:cover;border-radius:8px;display:none;flex:1}
-        .status-row{display:flex;gap:15px;margin-bottom:12px;font-size:0.75rem}
-        .status-row div{flex:1;text-align:center}
-        
+        .status-row{display:flex;gap:15px;margin-bottom:12px;font-size:0.75rem}.status-row div{flex:1;text-align:center}
         .msg{padding:12px;margin:10px 0;border-radius:8px;display:none;text-align:center;font-weight:600}
         .msg.success{background:#27ae60;display:block}.msg.error{background:#c0392b;display:block}
         .item-row{display:flex;align-items:center;gap:15px;padding:12px;background:#1a1a1a;border-radius:8px;margin-bottom:8px;border:1px solid #333}
         .item-row img{width:50px;height:50px;object-fit:cover;border-radius:6px}
         .item-row .info{flex:1}.item-row .info h3{color:#D4A853;font-size:0.9rem}.item-row .info p{color:#888;font-size:0.75rem}
-        .search-box{width:100%;padding:12px;background:#1a1a1a;border:2px solid #D4A853;border-radius:25px;color:#fff;margin-bottom:15px}
         .item-images{display:flex;gap:4px}.item-images img{width:35px;height:35px;object-fit:cover;border-radius:4px}
-        
+        .search-box{width:100%;padding:12px;background:#1a1a1a;border:2px solid #D4A853;border-radius:25px;color:#fff;margin-bottom:15px}
         .edit-form{display:none;background:#1a1a1a;padding:20px;border-radius:8px;margin:10px 0;border:1px solid #D4A853}
         .edit-form.show{display:block}
         @media(max-width:768px){.upload-row{flex-direction:column}.row{flex-direction:column}}
@@ -49,466 +44,81 @@
 </head>
 <body>
 <div class="container">
-    <div id="loginScreen" class="login-box">
-        <h2>🔐 Admin Login</h2>
-        <input type="password" id="pw" placeholder="Enter Password" onkeypress="if(event.key==='Enter')login()">
-        <button class="btn-gold" onclick="login()">Access Admin</button>
-        <p id="loginErr" style="color:#e74c3c;margin-top:10px;display:none">❌ Wrong password</p>
-    </div>
-    
-    <div id="panel" class="hidden">
-        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:20px">
-            <h1 style="margin:0">🛍️ Admin Dashboard</h1>
-            <button class="btn-red" onclick="logout()" style="padding:8px 16px">🚪 Logout</button>
-        </div>
-        
-        <div class="tabs">
-            <button class="active" onclick="switchTab('products')">🛍️ Products</button>
-            <button onclick="switchTab('blog')">📝 Blog</button>
-        </div>
-        
-        <!-- PRODUCTS TAB -->
-        <div class="tab-content show" id="tab-products">
-            <div class="card">
-                <h2>➕ Add Product</h2>
-                
-                <div class="upload-row">
-                    <div class="upload-box" onclick="document.getElementById('fileInput1').click()">
-                        <div class="icon">📷</div><div class="label">Image 1 (Main) *</div>
-                    </div>
-                    <div class="upload-box" onclick="document.getElementById('fileInput2').click()">
-                        <div class="icon">📷</div><div class="label">Image 2 (Optional)</div>
-                    </div>
-                </div>
-                <input type="file" id="fileInput1" accept="image/*" style="display:none" onchange="uploadNewImage(1)">
-                <input type="file" id="fileInput2" accept="image/*" style="display:none" onchange="uploadNewImage(2)">
-                
-                <div class="preview-row">
-                    <img id="preview1" alt="Preview 1">
-                    <img id="preview2" alt="Preview 2">
-                </div>
-                <div class="status-row">
-                    <div id="status1"></div>
-                    <div id="status2"></div>
-                </div>
-                
-                <input type="hidden" id="imgUrl1"><input type="hidden" id="imgUrl2">
-                
-                <div class="row"><input type="text" id="name" placeholder="Product Name *"><input type="text" id="brand" placeholder="Brand *"></div>
-                <div class="row"><input type="text" id="price" placeholder="Price (e.g. 4500 ETB) *">
-                    <select id="category"><option value="women">👩 Women</option><option value="men">👨 Men</option><option value="gift">🎁 Gift</option><option value="sale">🔥 Sale</option></select>
-                </div>
-                <div class="row"><input type="text" id="tag" placeholder="Tag: Bestseller, New..."><input type="text" id="desc" placeholder="Description"></div>
-                <button class="btn-gold" onclick="addProduct()">✅ Add Product</button>
-                <div id="msg" class="msg"></div>
-            </div>
-            
-            <!-- Edit Form -->
-            <div class="edit-form" id="editForm">
-                <h2>✏️ Edit Product</h2>
-                <input type="hidden" id="editId">
-                
-                <div class="upload-row">
-                    <div class="upload-box" onclick="document.getElementById('editFile1').click()"><div class="icon">📷</div><div class="label">Change Image 1</div></div>
-                    <div class="upload-box" onclick="document.getElementById('editFile2').click()"><div class="icon">📷</div><div class="label">Change Image 2</div></div>
-                </div>
-                <input type="file" id="editFile1" accept="image/*" style="display:none" onchange="uploadEditImage(1)">
-                <input type="file" id="editFile2" accept="image/*" style="display:none" onchange="uploadEditImage(2)">
-                
-                <div class="preview-row">
-                    <img id="editPreview1" alt="Preview 1">
-                    <img id="editPreview2" alt="Preview 2">
-                </div>
-                <div class="status-row">
-                    <div id="editStatus1"></div>
-                    <div id="editStatus2"></div>
-                </div>
-                
-                <input type="hidden" id="editImgUrl1"><input type="hidden" id="editImgUrl2">
-                
-                <div class="row"><input type="text" id="editName" placeholder="Name"><input type="text" id="editBrand" placeholder="Brand"></div>
-                <div class="row"><input type="text" id="editPrice" placeholder="Price">
-                    <select id="editCategory"><option value="women">Women</option><option value="men">Men</option><option value="gift">Gift</option><option value="sale">Sale</option></select>
-                </div>
-                <div class="row"><input type="text" id="editTag" placeholder="Tag"><input type="text" id="editDesc" placeholder="Description"></div>
-                <button class="btn-green" onclick="saveEdit()">💾 Save Changes</button>
-                <button class="btn-red" onclick="cancelEdit()">Cancel</button>
-            </div>
-            
-            <div class="card">
-                <h2>📋 Products</h2>
-                <input type="text" class="search-box" placeholder="🔍 Search products..." id="searchProd" oninput="renderProducts()">
-                <div id="productList"><p style="text-align:center;color:#888;padding:30px">Loading products...</p></div>
-            </div>
-        </div>
-        
-        <!-- BLOG TAB -->
-        <div class="tab-content" id="tab-blog">
-            <div class="card">
-                <h2>➕ Add Blog Post</h2>
-                <input type="text" id="blogTitle" placeholder="Post Title *">
-                <textarea id="blogContent" rows="5" placeholder="Post Content *"></textarea>
-                <div class="row"><input type="text" id="blogImage" placeholder="Image URL"><input type="text" id="blogCategory" placeholder="Category (Tips, News...)"></div>
-                <button class="btn-gold" onclick="addBlog()">✅ Add Post</button>
-                <div id="blogMsg" class="msg"></div>
-            </div>
-            <div class="card">
-                <h2>📋 Blog Posts</h2>
-                <div id="blogList"><p style="text-align:center;color:#888;padding:30px">Loading posts...</p></div>
-            </div>
-        </div>
-    </div>
+<div id="loginScreen" class="login-box"><h2>🔐 Admin Login</h2><input type="password" id="pw" placeholder="Enter Password" onkeypress="if(event.key==='Enter')login()"><button class="btn-gold" onclick="login()">Access Admin</button><p id="loginErr" style="color:#e74c3c;margin-top:10px;display:none">❌ Wrong password</p></div>
+
+<div id="panel" class="hidden">
+<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:20px"><h1 style="margin:0">🛍️ Admin Dashboard</h1><button class="btn-red" onclick="logout()" style="padding:8px 16px">🚪 Logout</button></div>
+
+<div class="tabs"><button class="active" onclick="switchTab('products')">🛍️ Products</button><button onclick="switchTab('blog')">📝 Blog</button></div>
+
+<!-- PRODUCTS TAB -->
+<div class="tab-content show" id="tab-products">
+<div class="card">
+<h2>➕ Add Product</h2>
+<div class="upload-row"><div class="upload-box" onclick="document.getElementById('f1').click()"><div class="icon">📷</div><div class="label">Image 1 (Main) *</div></div><div class="upload-box" onclick="document.getElementById('f2').click()"><div class="icon">📷</div><div class="label">Image 2 (Optional)</div></div></div>
+<input type="file" id="f1" accept="image/*" style="display:none" onchange="up(1)"><input type="file" id="f2" accept="image/*" style="display:none" onchange="up(2)">
+<div class="preview-row"><img id="pv1"><img id="pv2"></div>
+<div class="status-row"><div id="st1"></div><div id="st2"></div></div>
+<input type="hidden" id="u1"><input type="hidden" id="u2">
+<div class="row"><input type="text" id="name" placeholder="Product Name *"><input type="text" id="brand" placeholder="Brand *"></div>
+<div class="row"><input type="text" id="price" placeholder="Price *"><select id="category"><option value="women">Women</option><option value="men">Men</option><option value="gift">Gift</option><option value="sale">Sale</option></select></div>
+<div class="row"><input type="text" id="tag" placeholder="Tag"><input type="text" id="desc" placeholder="Description"></div>
+<button class="btn-gold" onclick="addP()">✅ Add Product</button><div id="msg" class="msg"></div>
+</div>
+<div class="edit-form" id="editForm"><h2>✏️ Edit Product</h2><input type="hidden" id="editId">
+<div class="upload-row"><div class="upload-box" onclick="document.getElementById('ef1').click()"><div class="icon">📷</div><div class="label">Change Image 1</div></div><div class="upload-box" onclick="document.getElementById('ef2').click()"><div class="icon">📷</div><div class="label">Change Image 2</div></div></div>
+<input type="file" id="ef1" accept="image/*" style="display:none" onchange="eup(1)"><input type="file" id="ef2" accept="image/*" style="display:none" onchange="eup(2)">
+<div class="preview-row"><img id="ep1"><img id="ep2"></div>
+<div class="status-row"><div id="es1"></div><div id="es2"></div></div>
+<input type="hidden" id="eu1"><input type="hidden" id="eu2">
+<div class="row"><input type="text" id="en"><input type="text" id="eb"></div>
+<div class="row"><input type="text" id="ep"><select id="ec"><option value="women">Women</option><option value="men">Men</option><option value="gift">Gift</option><option value="sale">Sale</option></select></div>
+<div class="row"><input type="text" id="et"><input type="text" id="ed"></div>
+<button class="btn-green" onclick="saveE()">💾 Save</button><button class="btn-red" onclick="cancelE()">Cancel</button></div>
+<div class="card"><h2>📋 Products</h2><input type="text" class="search-box" placeholder="🔍 Search..." id="sp" oninput="rP()"><div id="pList">Loading...</div></div>
 </div>
 
+<!-- BLOG TAB -->
+<div class="tab-content" id="tab-blog">
+<div class="card"><h2>➕ Add Blog Post</h2>
+<input type="text" id="bt" placeholder="Post Title *">
+<textarea id="bc" rows="5" placeholder="Post Content *"></textarea>
+<div class="row"><input type="text" id="bi" placeholder="Image URL"><input type="text" id="bcat" placeholder="Category"></div>
+<button class="btn-gold" onclick="addB()">✅ Add Post</button><div id="bmsg" class="msg"></div>
+</div>
+<div class="card"><h2>📋 Blog Posts</h2><div id="bList">Loading...</div></div>
+</div>
+</div></div>
+
 <script>
-// ============ CONFIG ============
-var API = 'https://scent-lovers-api.developeraddis.workers.dev/api';
-var CLOUD = 'dm6rwo1ox';
-var PRESET = 'scent_lovers_preset';
-var PASSWORD = 'ScentLovers2026';
+var A='https://scent-lovers-api.developeraddis.workers.dev/api',C='dm6rwo1ox',P='scent_lovers_preset',PW='ScentLovers2026',prods=[],posts=[];
+function login(){if(document.getElementById('pw').value===PW){document.getElementById('loginScreen').classList.add('hidden');document.getElementById('panel').classList.remove('hidden');loadAll()}else{document.getElementById('loginErr').style.display='block'}}
+function logout(){document.getElementById('panel').classList.add('hidden');document.getElementById('loginScreen').classList.remove('hidden');document.getElementById('pw').value=''}
+function switchTab(t){document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('show'));document.getElementById('tab-'+t).classList.add('show')}
 
-var products = [];
-var posts = [];
+async function uploadImg(file,pvId,stId,uId){var s=document.getElementById(stId);s.textContent='Uploading...';s.style.color='#D4A853';var fd=new FormData();fd.append('file',file);fd.append('upload_preset',P);var r=await fetch('https://api.cloudinary.com/v1_1/'+C+'/image/upload',{method:'POST',body:fd});var d=await r.json();if(d.secure_url){document.getElementById(uId).value=d.secure_url;document.getElementById(pvId).src=d.secure_url;document.getElementById(pvId).style.display='block';s.textContent='✅ Ready';s.style.color='#27ae60'}else{s.textContent='❌ Failed';s.style.color='#e74c3c'}}
+function up(n){var f=document.getElementById('f'+n).files[0];if(f)uploadImg(f,'pv'+n,'st'+n,'u'+n)}
+function eup(n){var f=document.getElementById('ef'+n).files[0];if(f)uploadImg(f,'ep'+n,'es'+n,'eu'+n)}
 
-// ============ LOGIN ============
-function login() {
-    var pw = document.getElementById('pw').value;
-    if (pw === PASSWORD) {
-        document.getElementById('loginScreen').classList.add('hidden');
-        document.getElementById('panel').classList.remove('hidden');
-        loadAll();
-    } else {
-        document.getElementById('loginErr').style.display = 'block';
-    }
-}
+async function loadP(){var r=await fetch(A+'/products');var d=await r.json();prods=d.products||[];rP()}
+function rP(){var s=(document.getElementById('sp')?.value||'').toLowerCase();var f=s?prods.filter(p=>p.name.toLowerCase().includes(s)||p.brand.toLowerCase().includes(s)):prods;var c=document.getElementById('pList');if(!f.length){c.innerHTML='<p style="text-align:center;color:#888;padding:30px">No products</p>';return}c.innerHTML=f.map(p=>'<div class="item-row"><div class="item-images">'+(p.image?'<img src="'+p.image+'" onerror="this.src=\'https://via.placeholder.com/35\'">':'')+(p.image2?'<img src="'+p.image2+'" onerror="this.src=\'https://via.placeholder.com/35\'">':'')+'</div><div class="info"><h3>'+p.brand+' - '+p.name+'</h3><p>'+p.price+' | '+p.category+' | '+(p.tag||'')+'</p></div><button class="btn-blue" onclick="editP('+p.id+')" style="margin-right:5px">✏️</button><button class="btn-red" onclick="delP('+p.id+')">🗑️</button></div>').join('')}
 
-function logout() {
-    document.getElementById('panel').classList.add('hidden');
-    document.getElementById('loginScreen').classList.remove('hidden');
-    document.getElementById('pw').value = '';
-    document.getElementById('loginErr').style.display = 'none';
-}
+async function addP(){var n=document.getElementById('name').value.trim(),b=document.getElementById('brand').value.trim(),pr=document.getElementById('price').value.trim(),cat=document.getElementById('category').value,i1=document.getElementById('u1').value,i2=document.getElementById('u2').value;if(!n||!b||!pr){msgP('❌ Fill required fields','error');return}if(!i1){msgP('❌ Upload Image 1','error');return}await fetch(A+'/products',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:n,brand:b,price:pr.includes('ETB')?pr:pr+' ETB',category:cat,image:i1,image2:i2,tag:document.getElementById('tag').value,description:document.getElementById('desc').value})});msgP('✅ Added!','success');['name','brand','price','tag','desc'].forEach(id=>document.getElementById(id).value='');document.getElementById('u1').value='';document.getElementById('u2').value='';document.getElementById('pv1').style.display='none';document.getElementById('pv2').style.display='none';document.getElementById('st1').textContent='';document.getElementById('st2').textContent='';document.getElementById('f1').value='';document.getElementById('f2').value='';loadP()}
 
-function switchTab(tab) {
-    document.querySelectorAll('.tabs button').forEach(function(b) { b.classList.remove('active'); });
-    event.target.classList.add('active');
-    document.querySelectorAll('.tab-content').forEach(function(t) { t.classList.remove('show'); });
-    document.getElementById('tab-' + tab).classList.add('show');
-}
+function editP(id){var p=prods.find(x=>x.id==id);if(!p)return;document.getElementById('editId').value=p.id;document.getElementById('en').value=p.name;document.getElementById('eb').value=p.brand;document.getElementById('ep').value=p.price.replace(' ETB','');document.getElementById('ec').value=p.category;document.getElementById('et').value=p.tag||'';document.getElementById('ed').value=p.description||'';document.getElementById('eu1').value=p.image||'';document.getElementById('eu2').value=p.image2||'';if(p.image){document.getElementById('ep1').src=p.image;document.getElementById('ep1').style.display='block'}else{document.getElementById('ep1').style.display='none'}if(p.image2){document.getElementById('ep2').src=p.image2;document.getElementById('ep2').style.display='block'}else{document.getElementById('ep2').style.display='none'}document.getElementById('es1').textContent='';document.getElementById('es2').textContent='';document.getElementById('ef1').value='';document.getElementById('ef2').value='';document.getElementById('editForm').classList.add('show');document.getElementById('editForm').scrollIntoView({behavior:'smooth'})}
+function cancelE(){document.getElementById('editForm').classList.remove('show')}
+async function saveE(){var id=document.getElementById('editId').value;var p={name:document.getElementById('en').value,brand:document.getElementById('eb').value,price:document.getElementById('ep').value,category:document.getElementById('ec').value,image:document.getElementById('eu1').value,image2:document.getElementById('eu2').value,tag:document.getElementById('et').value,description:document.getElementById('ed').value};p.price=p.price.includes('ETB')?p.price:p.price+' ETB';await fetch(A+'/products/'+id,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(p)});msgP('✅ Updated!','success');cancelE();loadP()}
+async function delP(id){if(!confirm('Delete?'))return;await fetch(A+'/products/'+id,{method:'DELETE'});loadP()}
+function msgP(t,type){var m=document.getElementById('msg');m.textContent=t;m.className='msg '+type;setTimeout(function(){m.className='msg'},3000)}
 
-// ============ IMAGE UPLOAD ============
-async function uploadToCloudinary(file, previewId, statusId, urlInputId) {
-    var statusEl = document.getElementById(statusId);
-    statusEl.textContent = 'Uploading...';
-    statusEl.style.color = '#D4A853';
-    
-    var formData = new FormData();
-    formData.append('file', file);
-    formData.append('upload_preset', PRESET);
-    
-    try {
-        var response = await fetch('https://api.cloudinary.com/v1_1/' + CLOUD + '/image/upload', {
-            method: 'POST',
-            body: formData
-        });
-        var data = await response.json();
-        
-        if (data.secure_url) {
-            document.getElementById(urlInputId).value = data.secure_url;
-            document.getElementById(previewId).src = data.secure_url;
-            document.getElementById(previewId).style.display = 'block';
-            statusEl.textContent = 'Ready';
-            statusEl.style.color = '#27ae60';
-        } else {
-            statusEl.textContent = 'Failed';
-            statusEl.style.color = '#e74c3c';
-        }
-    } catch (e) {
-        statusEl.textContent = 'Error';
-        statusEl.style.color = '#e74c3c';
-    }
-}
+// BLOG
+async function loadB(){var r=await fetch(A+'/blog');var d=await r.json();posts=d.posts||[];rB()}
+function rB(){var c=document.getElementById('bList');if(!posts.length){c.innerHTML='<p style="text-align:center;color:#888;padding:30px">No posts</p>';return}c.innerHTML=posts.map(p=>'<div class="item-row"><div class="info"><h3>'+p.title+'</h3><p>'+(p.category||'General')+' | '+new Date(p.created_at).toLocaleDateString()+'</p></div><button class="btn-red" onclick="delB('+p.id+')">🗑️</button></div>').join('')}
+async function addB(){var t=document.getElementById('bt').value.trim(),c=document.getElementById('bc').value.trim();if(!t||!c){msgB('❌ Fill required fields','error');return}await fetch(A+'/blog',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:t,content:c,image:document.getElementById('bi').value,category:document.getElementById('bcat').value})});msgB('✅ Post added!','success');['bt','bc','bi','bcat'].forEach(id=>document.getElementById(id).value='');loadB()}
+async function delB(id){if(!confirm('Delete?'))return;await fetch(A+'/blog/'+id,{method:'DELETE'});loadB()}
+function msgB(t,type){var m=document.getElementById('bmsg');m.textContent=t;m.className='msg '+type;setTimeout(function(){m.className='msg'},3000)}
 
-function uploadNewImage(num) {
-    var fileInput = document.getElementById('fileInput' + num);
-    var file = fileInput.files[0];
-    if (file) {
-        uploadToCloudinary(file, 'preview' + num, 'status' + num, 'imgUrl' + num);
-    }
-}
-
-function uploadEditImage(num) {
-    var fileInput = document.getElementById('editFile' + num);
-    var file = fileInput.files[0];
-    if (file) {
-        uploadToCloudinary(file, 'editPreview' + num, 'editStatus' + num, 'editImgUrl' + num);
-    }
-}
-
-// ============ PRODUCTS ============
-async function loadProducts() {
-    try {
-        var response = await fetch(API + '/products');
-        var data = await response.json();
-        products = data.products || [];
-        renderProducts();
-    } catch (e) {
-        document.getElementById('productList').innerHTML = '<p style="text-align:center;color:#e74c3c;padding:30px">Error loading products</p>';
-    }
-}
-
-function renderProducts() {
-    var search = (document.getElementById('searchProd') && document.getElementById('searchProd').value || '').toLowerCase();
-    var filtered = search ? products.filter(function(p) { return p.name.toLowerCase().includes(search) || p.brand.toLowerCase().includes(search); }) : products;
-    var container = document.getElementById('productList');
-    
-    if (!filtered.length) {
-        container.innerHTML = '<p style="text-align:center;color:#888;padding:30px">No products found</p>';
-        return;
-    }
-    
-    container.innerHTML = filtered.map(function(p) {
-        return '<div class="item-row">' +
-            '<div class="item-images">' +
-                (p.image ? '<img src="' + p.image + '" onerror="this.src=\'https://via.placeholder.com/35\'">' : '') +
-                (p.image2 ? '<img src="' + p.image2 + '" onerror="this.src=\'https://via.placeholder.com/35\'">' : '') +
-            '</div>' +
-            '<div class="info"><h3>' + p.brand + ' - ' + p.name + '</h3><p>' + p.price + ' | ' + p.category + ' | ' + (p.tag || '') + '</p></div>' +
-            '<button class="btn-blue" onclick="editProduct(' + p.id + ')" style="margin-right:5px">✏️</button>' +
-            '<button class="btn-red" onclick="deleteProduct(' + p.id + ')">🗑️</button>' +
-        '</div>';
-    }).join('');
-}
-
-async function addProduct() {
-    var name = document.getElementById('name').value.trim();
-    var brand = document.getElementById('brand').value.trim();
-    var price = document.getElementById('price').value.trim();
-    var category = document.getElementById('category').value;
-    var image1 = document.getElementById('imgUrl1').value;
-    var image2 = document.getElementById('imgUrl2').value;
-    var tag = document.getElementById('tag').value.trim();
-    var desc = document.getElementById('desc').value.trim();
-    
-    if (!name || !brand || !price) {
-        showProductMsg('❌ Please fill in Name, Brand, and Price', 'error');
-        return;
-    }
-    if (!image1) {
-        showProductMsg('❌ Please upload at least Image 1', 'error');
-        return;
-    }
-    
-    var product = {
-        name: name,
-        brand: brand,
-        price: price.includes('ETB') ? price : price + ' ETB',
-        category: category,
-        image: image1,
-        image2: image2,
-        tag: tag,
-        description: desc
-    };
-    
-    try {
-        await fetch(API + '/products', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(product)
-        });
-        
-        showProductMsg('✅ Product added successfully!', 'success');
-        
-        // Clear form
-        document.getElementById('name').value = '';
-        document.getElementById('brand').value = '';
-        document.getElementById('price').value = '';
-        document.getElementById('tag').value = '';
-        document.getElementById('desc').value = '';
-        document.getElementById('imgUrl1').value = '';
-        document.getElementById('imgUrl2').value = '';
-        document.getElementById('preview1').style.display = 'none';
-        document.getElementById('preview2').style.display = 'none';
-        document.getElementById('status1').textContent = '';
-        document.getElementById('status2').textContent = '';
-        document.getElementById('fileInput1').value = '';
-        document.getElementById('fileInput2').value = '';
-        
-        loadProducts();
-    } catch (e) {
-        showProductMsg('❌ Error adding product', 'error');
-    }
-}
-
-function editProduct(id) {
-    var p = products.find(function(x) { return x.id == id; });
-    if (!p) return;
-    
-    document.getElementById('editId').value = p.id;
-    document.getElementById('editName').value = p.name;
-    document.getElementById('editBrand').value = p.brand;
-    document.getElementById('editPrice').value = p.price.replace(' ETB', '');
-    document.getElementById('editCategory').value = p.category;
-    document.getElementById('editTag').value = p.tag || '';
-    document.getElementById('editDesc').value = p.description || '';
-    document.getElementById('editImgUrl1').value = p.image || '';
-    document.getElementById('editImgUrl2').value = p.image2 || '';
-    
-    if (p.image) {
-        document.getElementById('editPreview1').src = p.image;
-        document.getElementById('editPreview1').style.display = 'block';
-    } else {
-        document.getElementById('editPreview1').style.display = 'none';
-    }
-    
-    if (p.image2) {
-        document.getElementById('editPreview2').src = p.image2;
-        document.getElementById('editPreview2').style.display = 'block';
-    } else {
-        document.getElementById('editPreview2').style.display = 'none';
-    }
-    
-    document.getElementById('editStatus1').textContent = '';
-    document.getElementById('editStatus2').textContent = '';
-    document.getElementById('editFile1').value = '';
-    document.getElementById('editFile2').value = '';
-    
-    document.getElementById('editForm').classList.add('show');
-    document.getElementById('editForm').scrollIntoView({ behavior: 'smooth' });
-}
-
-function cancelEdit() {
-    document.getElementById('editForm').classList.remove('show');
-}
-
-async function saveEdit() {
-    var id = document.getElementById('editId').value;
-    var p = {
-        name: document.getElementById('editName').value.trim(),
-        brand: document.getElementById('editBrand').value.trim(),
-        price: document.getElementById('editPrice').value.trim(),
-        category: document.getElementById('editCategory').value,
-        image: document.getElementById('editImgUrl1').value,
-        image2: document.getElementById('editImgUrl2').value,
-        tag: document.getElementById('editTag').value.trim(),
-        description: document.getElementById('editDesc').value.trim()
-    };
-    
-    if (!p.name || !p.brand || !p.price) {
-        showProductMsg('❌ Fill required fields', 'error');
-        return;
-    }
-    
-    p.price = p.price.includes('ETB') ? p.price : p.price + ' ETB';
-    
-    try {
-        await fetch(API + '/products/' + id, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(p)
-        });
-        showProductMsg('✅ Product updated!', 'success');
-        cancelEdit();
-        loadProducts();
-    } catch (e) {
-        showProductMsg('❌ Error updating', 'error');
-    }
-}
-
-async function deleteProduct(id) {
-    if (!confirm('Delete this product permanently?')) return;
-    try {
-        await fetch(API + '/products/' + id, { method: 'DELETE' });
-        loadProducts();
-        showProductMsg('✅ Product deleted', 'success');
-    } catch (e) {
-        showProductMsg('❌ Error deleting', 'error');
-    }
-}
-
-function showProductMsg(text, type) {
-    var m = document.getElementById('msg');
-    m.textContent = text;
-    m.className = 'msg ' + type;
-    setTimeout(function() { m.className = 'msg'; }, 3000);
-}
-
-// ============ BLOG ============
-async function loadBlog() {
-    try {
-        var r = await fetch(API + '/blog');
-        var d = await r.json();
-        posts = d.posts || [];
-        renderBlog();
-    } catch (e) {
-        document.getElementById('blogList').innerHTML = '<p style="text-align:center;color:#e74c3c;padding:30px">Error loading posts</p>';
-    }
-}
-
-function renderBlog() {
-    var c = document.getElementById('blogList');
-    if (!posts.length) {
-        c.innerHTML = '<p style="text-align:center;color:#888;padding:30px">No posts yet</p>';
-        return;
-    }
-    c.innerHTML = posts.map(function(p) {
-        return '<div class="item-row"><div class="info"><h3>' + p.title + '</h3><p>' + (p.category || 'General') + ' | ' + new Date(p.created_at).toLocaleDateString() + '</p></div><button class="btn-red" onclick="deleteBlog(' + p.id + ')">🗑️</button></div>';
-    }).join('');
-}
-
-async function addBlog() {
-    var title = document.getElementById('blogTitle').value.trim();
-    var content = document.getElementById('blogContent').value.trim();
-    
-    if (!title || !content) {
-        showBlogMsg('❌ Fill required fields', 'error');
-        return;
-    }
-    
-    try {
-        await fetch(API + '/blog', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                title: title,
-                content: content,
-                image: document.getElementById('blogImage').value,
-                category: document.getElementById('blogCategory').value
-            })
-        });
-        showBlogMsg('✅ Post added!', 'success');
-        document.getElementById('blogTitle').value = '';
-        document.getElementById('blogContent').value = '';
-        document.getElementById('blogImage').value = '';
-        document.getElementById('blogCategory').value = '';
-        loadBlog();
-    } catch (e) {
-        showBlogMsg('❌ Error', 'error');
-    }
-}
-
-async function deleteBlog(id) {
-    if (!confirm('Delete this post?')) return;
-    try {
-        await fetch(API + '/blog/' + id, { method: 'DELETE' });
-        loadBlog();
-        showBlogMsg('✅ Post deleted', 'success');
-    } catch (e) {
-        showBlogMsg('❌ Error', 'error');
-    }
-}
-
-function showBlogMsg(text, type) {
-    var m = document.getElementById('blogMsg');
-    m.textContent = text;
-    m.className = 'msg ' + type;
-    setTimeout(function() { m.className = 'msg'; }, 3000);
-}
-
-function loadAll() {
-    loadProducts();
-    loadBlog();
-}
+function loadAll(){loadP();loadB()}
 </script>
 </body>
 </html>
