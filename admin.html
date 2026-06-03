@@ -13,101 +13,131 @@
         .login-box input{width:100%;padding:14px;background:#1a1a1a;border:1px solid #333;border-radius:8px;color:#fff;font-size:1rem;text-align:center;margin-bottom:15px}
         .hidden{display:none!important}
         h1{color:#D4A853;margin-bottom:20px;font-size:1.8rem;text-align:center}
-        .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:25px}
-        .stat{background:#111;padding:20px;border-radius:10px;text-align:center;border:1px solid #333}
-        .stat .num{font-size:2rem;font-weight:800;color:#D4A853}
-        .stat .lbl{font-size:0.75rem;color:#888;margin-top:5px}
+        .tabs{display:flex;gap:5px;margin-bottom:25px;justify-content:center}
+        .tabs button{padding:10px 20px;border:1px solid #D4A853;background:transparent;color:#D4A853;border-radius:8px;cursor:pointer;font-weight:600}
+        .tabs button.active{background:#D4A853;color:#000}
+        .tab-content{display:none}.tab-content.show{display:block}
         .card{background:#111;padding:25px;border-radius:12px;margin-bottom:25px;border:1px solid #333}
-        h2{color:#D4A853;margin-bottom:15px;font-size:1.2rem}
-        .row{display:flex;gap:12px;margin-bottom:12px}
-        .row>*{flex:1}
+        h2{color:#D4A853;margin-bottom:15px}
+        .row{display:flex;gap:12px;margin-bottom:12px}.row>*{flex:1}
         input,select,textarea{width:100%;padding:12px;background:#1a1a1a;border:1px solid #333;border-radius:8px;color:#fff;font-size:0.95rem;margin-bottom:12px;font-family:inherit}
-        input:focus,select:focus,textarea:focus{outline:none;border-color:#D4A853}
-        button{padding:12px 24px;border:none;border-radius:8px;cursor:pointer;font-weight:bold;font-size:0.9rem}
-        .btn-gold{background:#D4A853;color:#000}.btn-red{background:#c0392b;color:#fff}
-        .btn-blue{background:#3498db;color:#fff}.btn-green{background:#27ae60;color:#fff}
-        .btn-outline{background:transparent;border:1px solid #D4A853;color:#D4A853}
-        .btn-logout{background:transparent;border:1px solid #c0392b;color:#c0392b}
+        button{padding:12px 24px;border:none;border-radius:8px;cursor:pointer;font-weight:bold}
+        .btn-gold{background:#D4A853;color:#000}.btn-red{background:#c0392b;color:#fff}.btn-blue{background:#3498db;color:#fff}.btn-green{background:#27ae60;color:#fff}
         .upload-box{border:2px dashed #D4A853;padding:25px;text-align:center;border-radius:10px;cursor:pointer;margin-bottom:12px}
-        .upload-box:hover{background:#1a1a1a}
-        #preview,#editPreview{max-width:200px;display:none;margin:10px auto;border-radius:8px}
-        #uploadStatus,#editUploadStatus{text-align:center;font-size:0.85rem;margin-bottom:10px}
+        #preview{max-width:200px;display:none;margin:10px auto;border-radius:8px}
         .msg{padding:12px;margin:10px 0;border-radius:8px;display:none;text-align:center;font-weight:600}
         .msg.success{background:#27ae60;display:block}.msg.error{background:#c0392b;display:block}
-        .product-row{display:flex;align-items:center;gap:15px;padding:15px;background:#1a1a1a;border-radius:8px;margin-bottom:10px;border:1px solid #333}
-        .product-row img{width:60px;height:60px;object-fit:cover;border-radius:8px}
-        .product-row .info{flex:1}
-        .product-row .info h3{color:#D4A853;margin-bottom:3px;font-size:0.95rem}
-        .product-row .info p{color:#888;font-size:0.8rem}
-        .edit-form{display:none;background:#1a1a1a;padding:20px;border-radius:8px;margin:10px 0;border:1px solid #D4A853}
-        .edit-form.show{display:block}
-        .search-box{width:100%;padding:12px 20px;background:#1a1a1a;border:2px solid #D4A853;border-radius:25px;color:#fff;font-size:0.95rem;margin-bottom:20px}
-        .header-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
-        @media(max-width:600px){.stats{grid-template-columns:repeat(2,1fr)}.row{flex-direction:column}}
+        .item-row{display:flex;align-items:center;gap:15px;padding:12px;background:#1a1a1a;border-radius:8px;margin-bottom:8px;border:1px solid #333}
+        .item-row img{width:50px;height:50px;object-fit:cover;border-radius:6px}
+        .item-row .info{flex:1}.item-row .info h3{color:#D4A853;font-size:0.9rem}.item-row .info p{color:#888;font-size:0.75rem}
+        .search-box{width:100%;padding:12px;background:#1a1a1a;border:2px solid #D4A853;border-radius:25px;color:#fff;margin-bottom:15px}
+        @media(max-width:600px){.row{flex-direction:column}}
     </style>
 </head>
 <body>
 <div class="container">
-    <div id="loginScreen" class="login-box">
-        <h2>Admin Login</h2>
-        <input type="password" id="pw" placeholder="Password" onkeypress="if(event.key==='Enter')login()">
-        <button class="btn-gold" onclick="login()">Access</button>
-        <p id="loginErr" style="color:#e74c3c;margin-top:10px;display:none">Wrong password</p>
-    </div>
+    <div id="loginScreen" class="login-box"><h2>Admin Login</h2><input type="password" id="pw" placeholder="Password" onkeypress="if(event.key==='Enter')login()"><button class="btn-gold" onclick="login()">Access</button><p id="loginErr" style="color:#e74c3c;margin-top:10px;display:none">Wrong password</p></div>
+    
     <div id="panel" class="hidden">
-        <div class="header-row"><h1>Admin Dashboard</h1><button class="btn-logout" onclick="logout()">Logout</button></div>
-        <div class="stats">
-            <div class="stat"><div class="num" id="statAll">0</div><div class="lbl">Total</div></div>
-            <div class="stat"><div class="num" id="statWomen">0</div><div class="lbl">Women</div></div>
-            <div class="stat"><div class="num" id="statMen">0</div><div class="lbl">Men</div></div>
-            <div class="stat"><div class="num" id="statOther">0</div><div class="lbl">Gift+Sale</div></div>
+        <h1>Scent Lovers Admin</h1>
+        
+        <div class="tabs">
+            <button class="active" onclick="switchTab('products')">🛍️ Products</button>
+            <button onclick="switchTab('blog')">📝 Blog</button>
         </div>
-        <div class="card">
-            <h2>Add Product</h2>
-            <div class="upload-box" onclick="document.getElementById('fileInput').click()"><div style="font-size:40px">📷</div><div>Click to Upload Image</div></div>
-            <input type="file" id="fileInput" accept="image/*" style="display:none" onchange="uploadNew()">
-            <img id="preview"><div id="upStatus"></div><input type="hidden" id="imgUrl">
-            <div class="row"><input type="text" id="name" placeholder="Name *"><input type="text" id="brand" placeholder="Brand *"></div>
-            <div class="row"><input type="text" id="price" placeholder="Price (e.g. 4500 ETB) *"><select id="category"><option value="women">Women</option><option value="men">Men</option><option value="gift">Gift</option><option value="sale">Sale</option></select></div>
-            <div class="row"><input type="text" id="tag" placeholder="Tag: Bestseller, New..."><input type="text" id="desc" placeholder="Description"></div>
-            <button class="btn-gold" onclick="add()">Add Product</button>
-            <div id="msg" class="msg"></div>
-        </div>
-        <div class="card">
-            <h2>Products</h2>
-            <input type="text" class="search-box" placeholder="Search products..." id="search" oninput="render()">
-            <div id="editForm" class="edit-form">
-                <h3 style="color:#D4A853;margin-bottom:10px">Edit Product</h3>
-                <input type="hidden" id="editId">
-                <div class="upload-box" onclick="document.getElementById('editFile').click()"><div>📷 Change Image</div></div>
-                <input type="file" id="editFile" accept="image/*" style="display:none" onchange="uploadEdit()">
-                <img id="editPreview"><div id="editStatus"></div><input type="hidden" id="editImgUrl">
-                <div class="row"><input type="text" id="editName"><input type="text" id="editBrand"></div>
-                <div class="row"><input type="text" id="editPrice"><select id="editCategory"><option value="women">Women</option><option value="men">Men</option><option value="gift">Gift</option><option value="sale">Sale</option></select></div>
-                <div class="row"><input type="text" id="editTag"><input type="text" id="editDesc"></div>
-                <button class="btn-green" onclick="saveEdit()">Save Changes</button>
-                <button class="btn-red" onclick="document.getElementById('editForm').classList.remove('show')">Cancel</button>
+        
+        <!-- PRODUCTS TAB -->
+        <div class="tab-content show" id="tab-products">
+            <div class="card">
+                <h2>Add Product</h2>
+                <div class="upload-box" onclick="document.getElementById('fileInput').click()"><div style="font-size:40px">📷</div><div>Click to Upload Image</div></div>
+                <input type="file" id="fileInput" accept="image/*" style="display:none" onchange="uploadNew()">
+                <img id="preview"><div id="upStatus"></div><input type="hidden" id="imgUrl">
+                <div class="row"><input type="text" id="name" placeholder="Name *"><input type="text" id="brand" placeholder="Brand *"></div>
+                <div class="row"><input type="text" id="price" placeholder="Price *"><select id="category"><option value="women">Women</option><option value="men">Men</option><option value="gift">Gift</option><option value="sale">Sale</option></select></div>
+                <div class="row"><input type="text" id="tag" placeholder="Tag"><input type="text" id="desc" placeholder="Description"></div>
+                <button class="btn-gold" onclick="addProduct()">Add Product</button>
+                <div id="msg" class="msg"></div>
             </div>
-            <div id="list">Loading...</div>
+            <div class="card">
+                <h2>Products</h2>
+                <input type="text" class="search-box" placeholder="Search..." id="searchProd" oninput="renderProducts()">
+                <div id="productList">Loading...</div>
+            </div>
+        </div>
+        
+        <!-- BLOG TAB -->
+        <div class="tab-content" id="tab-blog">
+            <div class="card">
+                <h2>Add Blog Post</h2>
+                <input type="text" id="blogTitle" placeholder="Post Title *">
+                <textarea id="blogContent" rows="5" placeholder="Post Content *"></textarea>
+                <div class="row"><input type="text" id="blogImage" placeholder="Image URL"><input type="text" id="blogCategory" placeholder="Category (Tips, News, etc.)"></div>
+                <button class="btn-gold" onclick="addBlog()">Add Post</button>
+                <div id="blogMsg" class="msg"></div>
+            </div>
+            <div class="card">
+                <h2>Blog Posts</h2>
+                <div id="blogList">Loading...</div>
+            </div>
         </div>
     </div>
 </div>
+
 <script>
-var API='https://scent-lovers-api.developeraddis.workers.dev/api/products';
+var API='https://scent-lovers-api.developeraddis.workers.dev/api';
 var CLD='dm6rwo1ox',PRESET='scent_lovers_preset',PASS='ScentLovers2026';
-var prods=[];
-function login(){if(document.getElementById('pw').value===PASS){document.getElementById('loginScreen').classList.add('hidden');document.getElementById('panel').classList.remove('hidden');load()}else{document.getElementById('loginErr').style.display='block'}}
-function logout(){document.getElementById('panel').classList.add('hidden');document.getElementById('loginScreen').classList.remove('hidden');document.getElementById('pw').value=''}
-async function up(file,prev,status,url){var s=document.getElementById(status);s.textContent='Uploading...';var f=new FormData();f.append('file',file);f.append('upload_preset',PRESET);var r=await fetch('https://api.cloudinary.com/v1_1/'+CLD+'/image/upload',{method:'POST',body:f});var d=await r.json();if(d.secure_url){document.getElementById(url).value=d.secure_url;document.getElementById(prev).src=d.secure_url;document.getElementById(prev).style.display='block';s.textContent='Ready';s.style.color='#27ae60'}else{s.textContent='Failed';s.style.color='#e74c3c'}}
-function uploadNew(){var f=document.getElementById('fileInput').files[0];if(f)up(f,'preview','upStatus','imgUrl')}
-function uploadEdit(){var f=document.getElementById('editFile').files[0];if(f)up(f,'editPreview','editStatus','editImgUrl')}
-async function load(){var r=await fetch(API);var d=await r.json();prods=d.products||[];document.getElementById('statAll').textContent=prods.length;document.getElementById('statWomen').textContent=prods.filter(function(p){return p.category==='women'}).length;document.getElementById('statMen').textContent=prods.filter(function(p){return p.category==='men'}).length;document.getElementById('statOther').textContent=prods.filter(function(p){return p.category==='gift'||p.category==='sale'}).length;render()}
-function render(){var s=(document.getElementById('search')?.value||'').toLowerCase();var f=s?prods.filter(function(p){return p.name.toLowerCase().includes(s)||p.brand.toLowerCase().includes(s)}):prods;var c=document.getElementById('list');if(!f.length){c.innerHTML='<p style="text-align:center;color:#888;padding:30px">No products</p>';return}c.innerHTML=f.map(function(p){return'<div class="product-row"><img src="'+(p.image||'https://via.placeholder.com/60')+'" onerror="this.src=\'https://via.placeholder.com/60\'"><div class="info"><h3>'+p.brand+' - '+p.name+'</h3><p>'+p.price+' | '+p.category+' | '+(p.tag||'-')+'</p></div><div style="display:flex;gap:8px"><button class="btn-blue" onclick="edit('+p.id+')">Edit</button><button class="btn-red" onclick="del('+p.id+')">Delete</button></div></div>'}).join('')}
-async function add(){var n=document.getElementById('name').value.trim(),b=document.getElementById('brand').value.trim(),pr=document.getElementById('price').value.trim(),cat=document.getElementById('category').value,img=document.getElementById('imgUrl').value;if(!n||!b||!pr){msg('Fill required fields','error');return}if(!img){msg('Upload image','error');return}await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:n,brand:b,price:pr.includes('ETB')?pr:pr+' ETB',category:cat,image:img,tag:document.getElementById('tag').value,description:document.getElementById('desc').value})});msg('Added!','success');['name','brand','price','tag','desc'].forEach(function(id){document.getElementById(id).value=''});document.getElementById('preview').style.display='none';document.getElementById('imgUrl').value='';document.getElementById('upStatus').textContent='';document.getElementById('fileInput').value='';load()}
-function edit(id){var p=prods.find(function(x){return x.id==id});if(!p)return;document.getElementById('editId').value=p.id;document.getElementById('editName').value=p.name;document.getElementById('editBrand').value=p.brand;document.getElementById('editPrice').value=p.price.replace(' ETB','');document.getElementById('editCategory').value=p.category;document.getElementById('editTag').value=p.tag||'';document.getElementById('editDesc').value=p.description||'';document.getElementById('editImgUrl').value=p.image||'';if(p.image){document.getElementById('editPreview').src=p.image;document.getElementById('editPreview').style.display='block'}else{document.getElementById('editPreview').style.display='none'}document.getElementById('editStatus').textContent='';document.getElementById('editFile').value='';document.getElementById('editForm').classList.add('show');document.getElementById('editForm').scrollIntoView({behavior:'smooth'})}
-async function saveEdit(){var id=document.getElementById('editId').value;var p={name:document.getElementById('editName').value,brand:document.getElementById('editBrand').value,price:document.getElementById('editPrice').value,category:document.getElementById('editCategory').value,image:document.getElementById('editImgUrl').value,tag:document.getElementById('editTag').value,description:document.getElementById('editDesc').value};if(!p.name||!p.brand||!p.price){msg('Fill required fields','error');return}p.price=p.price.includes('ETB')?p.price:p.price+' ETB';await fetch(API+'/'+id,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(p)});msg('Updated!','success');document.getElementById('editForm').classList.remove('show');load()}
-async function del(id){if(!confirm('Delete this product?'))return;await fetch(API+'/'+id,{method:'DELETE'});load()}
-function msg(t,type){var m=document.getElementById('msg');m.textContent=t;m.className='msg '+type;setTimeout(function(){m.className='msg'},3000)}
+var products=[],posts=[];
+
+function login(){if(document.getElementById('pw').value===PASS){document.getElementById('loginScreen').classList.add('hidden');document.getElementById('panel').classList.remove('hidden');loadAll()}else{document.getElementById('loginErr').style.display='block'}}
+
+function switchTab(tab){
+    document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
+    event.target.classList.add('active');
+    document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('show'));
+    document.getElementById('tab-'+tab).classList.add('show');
+}
+
+// ============ PRODUCTS ============
+async function uploadNew(){var f=document.getElementById('fileInput').files[0];if(!f)return;var s=document.getElementById('upStatus');s.textContent='Uploading...';var fd=new FormData();fd.append('file',f);fd.append('upload_preset',PRESET);var r=await fetch('https://api.cloudinary.com/v1_1/'+CLD+'/image/upload',{method:'POST',body:fd});var d=await r.json();if(d.secure_url){document.getElementById('imgUrl').value=d.secure_url;document.getElementById('preview').src=d.secure_url;document.getElementById('preview').style.display='block';s.textContent='Ready'}else{s.textContent='Failed'}}
+
+async function loadProducts(){
+    var r=await fetch(API+'/products');var d=await r.json();products=d.products||[];renderProducts();
+}
+function renderProducts(){
+    var s=(document.getElementById('searchProd')?.value||'').toLowerCase();
+    var f=s?products.filter(p=>p.name.toLowerCase().includes(s)||p.brand.toLowerCase().includes(s)):products;
+    var c=document.getElementById('productList');
+    if(!f.length){c.innerHTML='<p style="text-align:center;color:#888;padding:30px">No products</p>';return}
+    c.innerHTML=f.map(p=>'<div class="item-row"><img src="'+(p.image||'https://via.placeholder.com/50')+'" onerror="this.src=\'https://via.placeholder.com/50\'"><div class="info"><h3>'+p.brand+' - '+p.name+'</h3><p>'+p.price+' | '+p.category+'</p></div><button class="btn-red" onclick="delProduct('+p.id+')">Delete</button></div>').join('')
+}
+
+async function addProduct(){
+    var n=document.getElementById('name').value.trim(),b=document.getElementById('brand').value.trim(),pr=document.getElementById('price').value.trim(),cat=document.getElementById('category').value,img=document.getElementById('imgUrl').value;
+    if(!n||!b||!pr){msgP('Fill required fields','error');return}if(!img){msgP('Upload image','error');return}
+    await fetch(API+'/products',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:n,brand:b,price:pr.includes('ETB')?pr:pr+' ETB',category:cat,image:img,tag:document.getElementById('tag').value,description:document.getElementById('desc').value})});
+    msgP('Added!','success');['name','brand','price','tag','desc'].forEach(id=>document.getElementById(id).value='');document.getElementById('preview').style.display='none';document.getElementById('imgUrl').value='';document.getElementById('fileInput').value='';loadProducts();
+}
+async function delProduct(id){if(!confirm('Delete?'))return;await fetch(API+'/products/'+id,{method:'DELETE'});loadProducts()}
+function msgP(t,type){var m=document.getElementById('msg');m.textContent=t;m.className='msg '+type;setTimeout(()=>m.className='msg',3000)}
+
+// ============ BLOG ============
+async function loadBlog(){var r=await fetch(API+'/blog');var d=await r.json();posts=d.posts||[];renderBlog()}
+function renderBlog(){
+    var c=document.getElementById('blogList');
+    if(!posts.length){c.innerHTML='<p style="text-align:center;color:#888;padding:30px">No posts</p>';return}
+    c.innerHTML=posts.map(p=>'<div class="item-row"><div class="info"><h3>'+p.title+'</h3><p>'+(p.category||'General')+' | '+new Date(p.created_at).toLocaleDateString()+'</p></div><button class="btn-red" onclick="delBlog('+p.id+')">Delete</button></div>').join('')
+}
+async function addBlog(){
+    var t=document.getElementById('blogTitle').value.trim(),c=document.getElementById('blogContent').value.trim();
+    if(!t||!c){msgB('Fill required fields','error');return}
+    await fetch(API+'/blog',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:t,content:c,image:document.getElementById('blogImage').value,category:document.getElementById('blogCategory').value})});
+    msgB('Added!','success');['blogTitle','blogContent','blogImage','blogCategory'].forEach(id=>document.getElementById(id).value='');loadBlog();
+}
+async function delBlog(id){if(!confirm('Delete?'))return;await fetch(API+'/blog/'+id,{method:'DELETE'});loadBlog()}
+function msgB(t,type){var m=document.getElementById('blogMsg');m.textContent=t;m.className='msg '+type;setTimeout(()=>m.className='msg',3000)}
+
+function loadAll(){loadProducts();loadBlog()}
 </script>
 </body>
 </html>
