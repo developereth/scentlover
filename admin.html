@@ -24,7 +24,7 @@
         button{padding:12px 24px;border:none;border-radius:8px;cursor:pointer;font-weight:bold}
         .btn-gold{background:#D4A853;color:#000}.btn-red{background:#c0392b;color:#fff}.btn-blue{background:#3498db;color:#fff}.btn-green{background:#27ae60;color:#fff}
         .upload-box{border:2px dashed #D4A853;padding:20px;text-align:center;border-radius:10px;cursor:pointer;margin-bottom:12px}
-        .upload-box:hover{background:#1a1a1a}.upload-box .icon{font-size:28px;margin-bottom:5px}.upload-box .label{font-size:0.75rem;color:#888}
+        .upload-box:hover{background:#1a1a1a}
         .preview-row{display:flex;gap:15px;margin-bottom:12px}
         .preview-row img{width:100px;height:100px;object-fit:cover;border-radius:8px;display:none;flex:1}
         .status-row{display:flex;gap:15px;margin-bottom:12px;font-size:0.75rem}.status-row div{flex:1;text-align:center}
@@ -50,75 +50,116 @@
 <!-- PRODUCTS TAB -->
 <div class="tab-content show" id="tab-products">
 
-<!-- ADD FORM -->
 <div class="card"><h2>➕ Add Product</h2>
-<div class="row"><div class="upload-box" onclick="document.getElementById('f1').click()"><div class="icon">📷</div><div class="label">Image 1 (Main) *</div></div><div class="upload-box" onclick="document.getElementById('f2').click()"><div class="icon">📷</div><div class="label">Image 2 (Optional)</div></div></div>
-<input type="file" id="f1" accept="image/*" style="display:none" onchange="up(1)"><input type="file" id="f2" accept="image/*" style="display:none" onchange="up(2)">
+<div class="row"><div class="upload-box" onclick="document.getElementById('f1').click()"><div style="font-size:28px">📷</div><div style="font-size:0.75rem;color:#888">Image 1 *</div></div><div class="upload-box" onclick="document.getElementById('f2').click()"><div style="font-size:28px">📷</div><div style="font-size:0.75rem;color:#888">Image 2</div></div></div>
+<input type="file" id="f1" accept="image/*" style="display:none" onchange="uploadAdd(1)"><input type="file" id="f2" accept="image/*" style="display:none" onchange="uploadAdd(2)">
 <div class="preview-row"><img id="pv1"><img id="pv2"></div><div class="status-row"><div id="st1"></div><div id="st2"></div></div>
 <input type="hidden" id="u1"><input type="hidden" id="u2">
 <div class="row"><input type="text" id="name" placeholder="Product Name *"><input type="text" id="brand" placeholder="Brand *"></div>
-<div class="row"><input type="text" id="price" placeholder="Price *"><select id="category"><option value="women">👩 Women</option><option value="men">👨 Men</option><option value="gift">🎁 Gift</option><option value="sale">🔥 Sale</option></select></div>
+<div class="row"><input type="text" id="price" placeholder="Price (e.g. 4500 ETB) *"><select id="category"><option value="women">👩 Women</option><option value="men">👨 Men</option><option value="gift">🎁 Gift</option><option value="sale">🔥 Sale</option></select></div>
 <div class="row"><input type="text" id="tag" placeholder="Tag"><input type="text" id="desc" placeholder="Description"></div>
-<button class="btn-gold" onclick="addP()">✅ Add Product</button><div id="msg" class="msg"></div>
+<button class="btn-gold" onclick="addProduct()">✅ Add Product</button><div id="msg" class="msg"></div>
 </div>
 
-<!-- EDIT FORM -->
 <div class="edit-form" id="editForm"><h2>✏️ Edit Product</h2><input type="hidden" id="editId">
-<div class="row"><div class="upload-box" onclick="document.getElementById('ef1').click()"><div class="icon">📷</div><div class="label">Change Image 1</div></div><div class="upload-box" onclick="document.getElementById('ef2').click()"><div class="icon">📷</div><div class="label">Change Image 2</div></div></div>
-<input type="file" id="ef1" accept="image/*" style="display:none" onchange="eup(1)"><input type="file" id="ef2" accept="image/*" style="display:none" onchange="eup(2)">
+<div class="row"><div class="upload-box" onclick="document.getElementById('ef1').click()"><div style="font-size:28px">📷</div><div style="font-size:0.75rem;color:#888">Change Image 1</div></div><div class="upload-box" onclick="document.getElementById('ef2').click()"><div style="font-size:28px">📷</div><div style="font-size:0.75rem;color:#888">Change Image 2</div></div></div>
+<input type="file" id="ef1" accept="image/*" style="display:none" onchange="uploadEdit(1)"><input type="file" id="ef2" accept="image/*" style="display:none" onchange="uploadEdit(2)">
 <div class="preview-row"><img id="ep1"><img id="ep2"></div><div class="status-row"><div id="es1"></div><div id="es2"></div></div>
 <input type="hidden" id="eu1"><input type="hidden" id="eu2">
 <div class="row"><input type="text" id="en" placeholder="Name"><input type="text" id="eb" placeholder="Brand"></div>
 <div class="row"><input type="text" id="epr" placeholder="Price"><select id="ec"><option value="women">Women</option><option value="men">Men</option><option value="gift">Gift</option><option value="sale">Sale</option></select></div>
 <div class="row"><input type="text" id="et" placeholder="Tag"><input type="text" id="ed" placeholder="Description"></div>
-<button class="btn-green" onclick="saveE()">💾 Save Changes</button><button class="btn-red" onclick="cancelE()">Cancel</button></div>
+<button class="btn-green" onclick="saveEdit()">💾 Save Changes</button><button class="btn-red" onclick="cancelEdit()">Cancel</button></div>
 
-<div class="card"><h2>📋 Products</h2><input type="text" class="search-box" placeholder="🔍 Search..." id="sp" oninput="rP()"><div id="pList">Loading...</div></div>
+<div class="card"><h2>📋 Products</h2><input type="text" class="search-box" placeholder="🔍 Search..." id="sp" oninput="renderProducts()"><div id="pList">Loading...</div></div>
 </div>
 
 <!-- BLOG TAB -->
 <div class="tab-content" id="tab-blog">
 <div class="card"><h2>➕ Add Blog Post</h2>
-<div class="upload-box" onclick="document.getElementById('bf').click()"><div class="icon">📷</div><div class="label">Upload Blog Image</div></div>
-<input type="file" id="bf" accept="image/*" style="display:none" onchange="bup()">
+<div class="upload-box" onclick="document.getElementById('bf').click()"><div style="font-size:28px">📷</div><div style="font-size:0.75rem;color:#888">Upload Image</div></div>
+<input type="file" id="bf" accept="image/*" style="display:none" onchange="uploadBlog()">
 <div style="text-align:center;margin-bottom:12px"><img id="bpv" style="max-width:200px;max-height:150px;object-fit:cover;border-radius:8px;display:none"></div>
 <div id="bst" style="text-align:center;font-size:0.75rem;margin-bottom:12px"></div><input type="hidden" id="bu">
 <input type="text" id="bt" placeholder="Post Title *"><textarea id="bc" rows="5" placeholder="Post Content *"></textarea>
 <input type="text" id="bcat" placeholder="Category">
-<button class="btn-gold" onclick="addB()">✅ Add Post</button><div id="bmsg" class="msg"></div>
+<button class="btn-gold" onclick="addBlog()">✅ Add Post</button><div id="bmsg" class="msg"></div>
 </div>
 <div class="card"><h2>📋 Blog Posts</h2><div id="bList">Loading...</div></div>
 </div>
 </div></div>
 
 <script>
-var A='https://scent-lovers-api.developeraddis.workers.dev/api',C='dm6rwo1ox',P='scent_lovers_preset',PW='ScentLovers2026',prods=[],posts=[];
+var A='https://scent-lovers-api.developeraddis.workers.dev/api',C='dm6rwo1ox',PR='scent_lovers_preset',PW='ScentLovers2026',prods=[],posts=[];
+
 function login(){if(document.getElementById('pw').value===PW){document.getElementById('loginScreen').classList.add('hidden');document.getElementById('panel').classList.remove('hidden');loadAll()}else{document.getElementById('loginErr').style.display='block'}}
 function logout(){document.getElementById('panel').classList.add('hidden');document.getElementById('loginScreen').classList.remove('hidden')}
-function switchTab(t){document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('show'));document.getElementById('tab-'+t).classList.add('show')}
+function switchTab(t){document.querySelectorAll('.tabs button').forEach(function(b){b.classList.remove('active')});event.target.classList.add('active');document.querySelectorAll('.tab-content').forEach(function(t){t.classList.remove('show')});document.getElementById('tab-'+t).classList.add('show')}
 
-async function uploadImg(file,pvId,stId,uId){var s=document.getElementById(stId);s.textContent='Uploading...';s.style.color='#D4A853';var fd=new FormData();fd.append('file',file);fd.append('upload_preset',P);var r=await fetch('https://api.cloudinary.com/v1_1/'+C+'/image/upload',{method:'POST',body:fd});var d=await r.json();if(d.secure_url){document.getElementById(uId).value=d.secure_url;document.getElementById(pvId).src=d.secure_url;document.getElementById(pvId).style.display='block';s.textContent='✅ Ready';s.style.color='#27ae60'}else{s.textContent='❌ Failed';s.style.color='#e74c3c'}}
-function up(n){var f=document.getElementById('f'+n).files[0];if(f)uploadImg(f,'pv'+n,'st'+n,'u'+n)}
-function eup(n){var f=document.getElementById('ef'+n).files[0];if(f)uploadImg(f,'ep'+n,'es'+n,'eu'+n)}
-function bup(){var f=document.getElementById('bf').files[0];if(f)uploadImg(f,'bpv','bst','bu')}
+// UPLOAD
+async function cloudUpload(file,pvId,stId,uId){
+    var s=document.getElementById(stId);s.textContent='Uploading...';s.style.color='#D4A853';
+    var fd=new FormData();fd.append('file',file);fd.append('upload_preset',PR);
+    var r=await fetch('https://api.cloudinary.com/v1_1/'+C+'/image/upload',{method:'POST',body:fd});
+    var d=await r.json();
+    if(d.secure_url){document.getElementById(uId).value=d.secure_url;document.getElementById(pvId).src=d.secure_url;document.getElementById(pvId).style.display='block';s.textContent='✅ Ready';s.style.color='#27ae60'}
+    else{s.textContent='❌ Failed';s.style.color='#e74c3c'}
+}
+function uploadAdd(n){var f=document.getElementById('f'+n).files[0];if(f)cloudUpload(f,'pv'+n,'st'+n,'u'+n)}
+function uploadEdit(n){var f=document.getElementById('ef'+n).files[0];if(f)cloudUpload(f,'ep'+n,'es'+n,'eu'+n)}
+function uploadBlog(){var f=document.getElementById('bf').files[0];if(f)cloudUpload(f,'bpv','bst','bu')}
 
-async function loadP(){var r=await fetch(A+'/products');var d=await r.json();prods=d.products||[];rP()}
-function rP(){var s=(document.getElementById('sp')?.value||'').toLowerCase();var f=s?prods.filter(p=>p.name.toLowerCase().includes(s)||p.brand.toLowerCase().includes(s)):prods;var c=document.getElementById('pList');if(!f.length){c.innerHTML='<p style="text-align:center;color:#888;padding:30px">No products</p>';return}c.innerHTML=f.map(p=>'<div class="item-row"><img src="'+(p.image||'https://via.placeholder.com/50')+'" onerror="this.src=\'https://via.placeholder.com/50\'"><div class="info"><h3>'+p.brand+' - '+p.name+'</h3><p>'+p.price+' | '+p.category+' | '+(p.tag||'')+'</p></div><button class="btn-blue" onclick="editP('+p.id+')" style="margin-right:5px">✏️</button><button class="btn-red" onclick="delP('+p.id+')">🗑️</button></div>').join('')}
-async function addP(){var n=document.getElementById('name').value.trim(),b=document.getElementById('brand').value.trim(),pr=document.getElementById('price').value.trim(),cat=document.getElementById('category').value,i1=document.getElementById('u1').value;if(!n||!b||!pr){msgP('❌ Fill required fields','error');return}if(!i1){msgP('❌ Upload Image 1','error');return}await fetch(A+'/products',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:n,brand:b,price:pr.includes('ETB')?pr:pr+' ETB',category:cat,image:i1,image2:document.getElementById('u2').value,tag:document.getElementById('tag').value,description:document.getElementById('desc').value})});msgP('✅ Added!','success');['name','brand','price','tag','desc'].forEach(id=>document.getElementById(id).value='');document.getElementById('u1').value='';document.getElementById('u2').value='';document.getElementById('pv1').style.display='none';document.getElementById('pv2').style.display='none';document.getElementById('st1').textContent='';document.getElementById('st2').textContent='';document.getElementById('f1').value='';document.getElementById('f2').value='';loadP()}
+// PRODUCTS
+async function loadProducts(){var r=await fetch(A+'/products');var d=await r.json();prods=d.products||[];renderProducts()}
+function renderProducts(){var s=(document.getElementById('sp')?.value||'').toLowerCase();var f=s?prods.filter(function(p){return p.name.toLowerCase().includes(s)||p.brand.toLowerCase().includes(s)}):prods;var c=document.getElementById('pList');if(!f.length){c.innerHTML='<p style="text-align:center;color:#888;padding:30px">No products</p>';return}c.innerHTML=f.map(function(p){return'<div class="item-row"><img src="'+(p.image||'https://via.placeholder.com/50')+'" onerror="this.src=\'https://via.placeholder.com/50\'"><div class="info"><h3>'+p.brand+' - '+p.name+'</h3><p>'+p.price+' | '+p.category+' | '+(p.tag||'')+'</p></div><button class="btn-blue" onclick="editProduct('+p.id+')" style="margin-right:5px">✏️</button><button class="btn-red" onclick="deleteProduct('+p.id+')">🗑️</button></div>'}).join('')}
 
-function editP(id){var p=prods.find(x=>x.id==id);if(!p)return;document.getElementById('editId').value=p.id;document.getElementById('en').value=p.name;document.getElementById('eb').value=p.brand;document.getElementById('epr').value=p.price.replace(' ETB','');document.getElementById('ec').value=p.category;document.getElementById('et').value=p.tag||'';document.getElementById('ed').value=p.description||'';document.getElementById('eu1').value=p.image||'';document.getElementById('eu2').value=p.image2||'';if(p.image){document.getElementById('ep1').src=p.image;document.getElementById('ep1').style.display='block'}else{document.getElementById('ep1').style.display='none'}if(p.image2){document.getElementById('ep2').src=p.image2;document.getElementById('ep2').style.display='block'}else{document.getElementById('ep2').style.display='none'}document.getElementById('es1').textContent='';document.getElementById('es2').textContent='';document.getElementById('ef1').value='';document.getElementById('ef2').value='';document.getElementById('editForm').classList.add('show');document.getElementById('editForm').scrollIntoView({behavior:'smooth'})}
-function cancelE(){document.getElementById('editForm').classList.remove('show')}
-async function saveE(){var id=document.getElementById('editId').value;var p={name:document.getElementById('en').value,brand:document.getElementById('eb').value,price:document.getElementById('epr').value,category:document.getElementById('ec').value,image:document.getElementById('eu1').value,image2:document.getElementById('eu2').value,tag:document.getElementById('et').value,description:document.getElementById('ed').value};p.price=p.price.includes('ETB')?p.price:p.price+' ETB';await fetch(A+'/products/'+id,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(p)});msgP('✅ Updated!','success');cancelE();loadP()}
-async function delP(id){if(!confirm('Delete?'))return;await fetch(A+'/products/'+id,{method:'DELETE'});loadP()}
-function msgP(t,type){var m=document.getElementById('msg');m.textContent=t;m.className='msg '+type;setTimeout(function(){m.className='msg'},3000)}
+async function addProduct(){
+    var n=document.getElementById('name').value.trim(),b=document.getElementById('brand').value.trim(),pr=document.getElementById('price').value.trim(),cat=document.getElementById('category').value,i1=document.getElementById('u1').value,i2=document.getElementById('u2').value,tag=document.getElementById('tag').value.trim(),desc=document.getElementById('desc').value.trim();
+    if(!n||!b||!pr){showMsg('msg','❌ Fill Name, Brand, Price','error');return}if(!i1){showMsg('msg','❌ Upload Image 1','error');return}
+    await fetch(A+'/products',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:n,brand:b,price:pr.includes('ETB')?pr:pr+' ETB',category:cat,image:i1,image2:i2,tag:tag,description:desc})});
+    showMsg('msg','✅ Product added!','success');['name','brand','price','tag','desc'].forEach(function(id){document.getElementById(id).value=''});
+    document.getElementById('u1').value='';document.getElementById('u2').value='';document.getElementById('pv1').style.display='none';document.getElementById('pv2').style.display='none';
+    document.getElementById('st1').textContent='';document.getElementById('st2').textContent='';document.getElementById('f1').value='';document.getElementById('f2').value='';loadProducts();
+}
 
-async function loadB(){var r=await fetch(A+'/blog');var d=await r.json();posts=d.posts||[];rB()}
-function rB(){var c=document.getElementById('bList');if(!posts.length){c.innerHTML='<p style="text-align:center;color:#888;padding:30px">No posts</p>';return}c.innerHTML=posts.map(p=>'<div class="item-row">'+(p.image?'<img src="'+p.image+'" onerror="this.src=\'https://via.placeholder.com/50\'">':'')+'<div class="info"><h3>'+p.title+'</h3><p>'+(p.category||'General')+' | '+new Date(p.created_at).toLocaleDateString()+'</p></div><button class="btn-red" onclick="delB('+p.id+')">🗑️</button></div>').join('')}
-async function addB(){var t=document.getElementById('bt').value.trim(),c=document.getElementById('bc').value.trim(),i=document.getElementById('bu').value;if(!t||!c){msgB('❌ Fill fields','error');return}await fetch(A+'/blog',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:t,content:c,image:i,category:document.getElementById('bcat').value})});msgB('✅ Added!','success');['bt','bc','bcat'].forEach(id=>document.getElementById(id).value='');document.getElementById('bu').value='';document.getElementById('bpv').style.display='none';document.getElementById('bst').textContent='';document.getElementById('bf').value='';loadB()}
-async function delB(id){if(!confirm('Delete?'))return;await fetch(A+'/blog/'+id,{method:'DELETE'});loadB()}
-function msgB(t,type){var m=document.getElementById('bmsg');m.textContent=t;m.className='msg '+type;setTimeout(function(){m.className='msg'},3000)}
+function editProduct(id){
+    var p=prods.find(function(x){return x.id==id});if(!p)return;
+    document.getElementById('editId').value=p.id;document.getElementById('en').value=p.name;document.getElementById('eb').value=p.brand;
+    document.getElementById('epr').value=p.price.replace(' ETB','');document.getElementById('ec').value=p.category;
+    document.getElementById('et').value=p.tag||'';document.getElementById('ed').value=p.description||'';
+    document.getElementById('eu1').value=p.image||'';document.getElementById('eu2').value=p.image2||'';
+    if(p.image){document.getElementById('ep1').src=p.image;document.getElementById('ep1').style.display='block'}else{document.getElementById('ep1').style.display='none'}
+    if(p.image2){document.getElementById('ep2').src=p.image2;document.getElementById('ep2').style.display='block'}else{document.getElementById('ep2').style.display='none'}
+    document.getElementById('es1').textContent='';document.getElementById('es2').textContent='';document.getElementById('ef1').value='';document.getElementById('ef2').value='';
+    document.getElementById('editForm').classList.add('show');document.getElementById('editForm').scrollIntoView({behavior:'smooth'});
+}
+function cancelEdit(){document.getElementById('editForm').classList.remove('show')}
 
-function loadAll(){loadP();loadB()}
+async function saveEdit(){
+    var id=document.getElementById('editId').value;
+    var name=document.getElementById('en').value.trim(),brand=document.getElementById('eb').value.trim(),price=document.getElementById('epr').value.trim();
+    var category=document.getElementById('ec').value,image=document.getElementById('eu1').value,image2=document.getElementById('eu2').value;
+    var tag=document.getElementById('et').value.trim(),desc=document.getElementById('ed').value.trim();
+    if(!name||!brand||!price){alert('Please fill Name, Brand, and Price');return}
+    price=price.includes('ETB')?price:price+' ETB';
+    var body={name:name,brand:brand,price:price,category:category,image:image,image2:image2,tag:tag,description:desc};
+    console.log('Saving:',id,body);
+    var r=await fetch(A+'/products/'+id,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+    var d=await r.json();
+    console.log('Response:',d);
+    if(d.success){showMsg('msg','✅ Product updated!','success');cancelEdit();loadProducts()}else{showMsg('msg','❌ Failed: '+(d.error||'Unknown'),'error')}
+}
+
+async function deleteProduct(id){if(!confirm('Delete this product?'))return;await fetch(A+'/products/'+id,{method:'DELETE'});loadProducts()}
+function showMsg(id,t,type){var m=document.getElementById(id);m.textContent=t;m.className='msg '+type;setTimeout(function(){m.className='msg'},3000)}
+
+// BLOG
+async function loadBlog(){var r=await fetch(A+'/blog');var d=await r.json();posts=d.posts||[];renderBlog()}
+function renderBlog(){var c=document.getElementById('bList');if(!posts.length){c.innerHTML='<p style="text-align:center;color:#888;padding:30px">No posts</p>';return}c.innerHTML=posts.map(function(p){return'<div class="item-row">'+(p.image?'<img src="'+p.image+'" onerror="this.src=\'https://via.placeholder.com/50\'">':'')+'<div class="info"><h3>'+p.title+'</h3><p>'+(p.category||'General')+' | '+new Date(p.created_at).toLocaleDateString()+'</p></div><button class="btn-red" onclick="deleteBlog('+p.id+')">🗑️</button></div>'}).join('')}
+async function addBlog(){var t=document.getElementById('bt').value.trim(),c=document.getElementById('bc').value.trim(),i=document.getElementById('bu').value;if(!t||!c){showMsg('bmsg','❌ Fill title and content','error');return}await fetch(A+'/blog',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:t,content:c,image:i,category:document.getElementById('bcat').value})});showMsg('bmsg','✅ Post added!','success');['bt','bc','bcat'].forEach(function(id){document.getElementById(id).value=''});document.getElementById('bu').value='';document.getElementById('bpv').style.display='none';document.getElementById('bst').textContent='';document.getElementById('bf').value='';loadBlog()}
+async function deleteBlog(id){if(!confirm('Delete?'))return;await fetch(A+'/blog/'+id,{method:'DELETE'});loadBlog();showMsg('bmsg','✅ Deleted','success')}
+
+function loadAll(){loadProducts();loadBlog()}
 </script>
 </body>
 </html>
