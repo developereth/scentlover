@@ -3,30 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin | Scent Lovers</title>
+    <title>Admin | Lantica 1960</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:'Segoe UI',sans-serif;background:#0a0a0a;color:#fff;padding:20px}
         .container{max-width:1000px;margin:0 auto}
-        .login-box{background:#111;padding:40px;border-radius:15px;max-width:400px;margin:100px auto;text-align:center;border:1px solid #333}
-        .login-box h2{color:#D4A853;margin-bottom:20px}
+        .login-box{background:#111;padding:40px;border-radius:15px;max-width:400px;margin:100px auto;text-align:center;border:1px solid #C9A96E}
+        .login-box h2{color:#C9A96E;margin-bottom:20px;font-family:'Playfair Display',serif}
         .login-box input{width:100%;padding:14px;background:#1a1a1a;border:1px solid #333;border-radius:8px;color:#fff;font-size:1rem;text-align:center;margin-bottom:15px}
         .hidden{display:none!important}
-        h1{color:#D4A853;margin-bottom:20px;font-size:1.8rem;text-align:center}
-        .tabs{display:flex;gap:5px;margin-bottom:25px;justify-content:center}
-        .tabs button{padding:10px 20px;border:1px solid #D4A853;background:transparent;color:#D4A853;border-radius:8px;cursor:pointer;font-weight:600;transition:0.3s}
-        .tabs button.active,.tabs button:hover{background:#D4A853;color:#000}
+        h1{color:#C9A96E;margin-bottom:20px;font-size:1.8rem;text-align:center;font-family:'Playfair Display',serif}
+        .tabs{display:flex;gap:5px;margin-bottom:25px;justify-content:center;flex-wrap:wrap}
+        .tabs button{padding:10px 20px;border:1px solid #C9A96E;background:transparent;color:#C9A96E;border-radius:8px;cursor:pointer;font-weight:600;transition:0.3s}
+        .tabs button.active,.tabs button:hover{background:#C9A96E;color:#000}
         .tab-content{display:none}.tab-content.show{display:block}
         .card{background:#111;padding:25px;border-radius:12px;margin-bottom:25px;border:1px solid #333}
-        h2{color:#D4A853;margin-bottom:15px}
+        h2{color:#C9A96E;margin-bottom:15px}
         .row{display:flex;gap:12px;margin-bottom:12px}.row>*{flex:1}
         input,select,textarea{width:100%;padding:12px;background:#1a1a1a;border:1px solid #333;border-radius:8px;color:#fff;font-size:0.95rem;margin-bottom:12px;font-family:inherit;transition:0.3s}
-        input:focus,select:focus,textarea:focus{outline:none;border-color:#D4A853}
+        input:focus,select:focus,textarea:focus{outline:none;border-color:#C9A96E}
         button{padding:12px 24px;border:none;border-radius:8px;cursor:pointer;font-weight:bold;transition:0.3s}
-        .btn-gold{background:#D4A853;color:#000}.btn-gold:hover{background:#b8933f}
+        .btn-gold{background:#C9A96E;color:#000}.btn-gold:hover{background:#b8933f}
         .btn-red{background:#c0392b;color:#fff}.btn-red:hover{background:#e74c3c}
         .btn-blue{background:#3498db;color:#fff}.btn-green{background:#27ae60;color:#fff}
-        .upload-box{border:2px dashed #D4A853;padding:20px;text-align:center;border-radius:10px;cursor:pointer;margin-bottom:8px;transition:0.3s}
+        .btn-outline{background:transparent;border:1px solid #C9A96E;color:#C9A96E}
+        .upload-box{border:2px dashed #C9A96E;padding:20px;text-align:center;border-radius:10px;cursor:pointer;margin-bottom:8px;transition:0.3s}
         .upload-box:hover{background:#1a1a1a;border-color:#fff}
         .preview-row{display:flex;gap:15px;margin-bottom:12px}
         .preview-row img{width:100px;height:100px;object-fit:cover;border-radius:8px;display:none;flex:1}
@@ -34,148 +35,287 @@
         .msg{padding:12px;margin:10px 0;border-radius:8px;display:none;text-align:center;font-weight:600;animation:fadeIn 0.3s}
         .msg.success{background:#27ae60;display:block}.msg.error{background:#c0392b;display:block}
         @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-        .item-row{display:flex;align-items:center;gap:15px;padding:12px;background:#1a1a1a;border-radius:8px;margin-bottom:8px;border:1px solid #333;transition:0.3s}
+        .item-row{display:flex;align-items:center;gap:15px;padding:12px;background:#1a1a1a;border-radius:8px;margin-bottom:8px;border:1px solid #333;transition:0.3s;flex-wrap:wrap}
         .item-row:hover{background:#222}
         .item-row img{width:50px;height:50px;object-fit:cover;border-radius:6px}
-        .item-row .info{flex:1}.item-row .info h3{color:#D4A853;font-size:0.9rem}.item-row .info p{color:#888;font-size:0.75rem}
-        .search-box{width:100%;padding:12px;background:#1a1a1a;border:2px solid #D4A853;border-radius:25px;color:#fff;margin-bottom:15px}
-        .edit-form{display:none;background:#1a1a1a;padding:20px;border-radius:8px;margin:10px 0;border:1px solid #D4A853;animation:slideDown 0.3s}
+        .item-row .info{flex:1;min-width:150px}.item-row .info h3{color:#C9A96E;font-size:0.9rem}.item-row .info p{color:#888;font-size:0.75rem}
+        .search-box{width:100%;padding:12px;background:#1a1a1a;border:2px solid #C9A96E;border-radius:25px;color:#fff;margin-bottom:15px}
+        .edit-form{display:none;background:#1a1a1a;padding:20px;border-radius:8px;margin:10px 0;border:1px solid #C9A96E;animation:slideDown 0.3s}
         .edit-form.show{display:block}
         @keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
         .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
         .stat{background:#111;padding:15px;border-radius:8px;text-align:center;border:1px solid #333}
-        .stat .num{font-size:1.5rem;font-weight:700;color:#D4A853}.stat .lbl{font-size:0.7rem;color:#888;margin-top:3px}
+        .stat .num{font-size:1.5rem;font-weight:700;color:#C9A96E}.stat .lbl{font-size:0.7rem;color:#888;margin-top:3px}
+        .badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:0.6rem;font-weight:700}
+        .badge-cloud{background:rgba(52,72,197,0.3);color:#6B8AFF}
+        .badge-github{background:rgba(201,169,110,0.3);color:#C9A96E}
+        .cat-select{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:15px}
+        .cat-select button{padding:6px 14px;border:1px solid #C9A96E;background:transparent;color:#C9A96E;border-radius:18px;cursor:pointer;font-size:0.75rem}
+        .cat-select button.active{background:#C9A96E;color:#000}
+        .actions-row{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
         @media(max-width:768px){.row{flex-direction:column}.stats{grid-template-columns:repeat(2,1fr)}}
     </style>
 </head>
 <body>
 <div class="container">
-<div id="loginScreen" class="login-box"><h2>🔐 Admin Login</h2><input type="password" id="pw" placeholder="Enter Password" onkeypress="if(event.key==='Enter')login()"><button class="btn-gold" onclick="login()">Access Admin</button><p id="loginErr" style="color:#e74c3c;margin-top:10px;display:none">❌ Wrong password</p></div>
+<div id="loginScreen" class="login-box"><h2>🔐 Lantica Admin</h2><input type="password" id="pw" placeholder="Enter Password" onkeypress="if(event.key==='Enter')login()"><button class="btn-gold" onclick="login()">Access Admin</button><p id="loginErr" style="color:#e74c3c;margin-top:10px;display:none">❌ Wrong password</p></div>
 
 <div id="panel" class="hidden">
-<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:20px"><h1 style="margin:0">🛍️ Admin Dashboard</h1><button class="btn-red" onclick="logout()" style="padding:8px 16px">🚪 Logout</button></div>
-<div class="tabs"><button class="active" onclick="switchTab('products')">🛍️ Products</button><button onclick="switchTab('blog')">📝 Blog</button></div>
+<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:20px"><h1 style="margin:0">🍽️ Lantica 1960</h1><div style="display:flex;gap:10px"><button class="btn-outline" onclick="pushToRedis()">💾 Save to Redis</button><button class="btn-red" onclick="logout()" style="padding:8px 16px">🚪 Logout</button></div></div>
+<div class="tabs"><button class="active" onclick="switchTab('menu')">🍽️ Menu</button><button onclick="switchTab('heritage')">🏛️ Heritage</button></div>
 
-<!-- PRODUCTS TAB -->
-<div class="tab-content show" id="tab-products">
-
+<!-- MENU TAB -->
+<div class="tab-content show" id="tab-menu">
 <div class="stats">
-    <div class="stat"><div class="num" id="statAll">0</div><div class="lbl">Total</div></div>
-    <div class="stat"><div class="num" id="statWomen">0</div><div class="lbl">👩 Women</div></div>
-    <div class="stat"><div class="num" id="statMen">0</div><div class="lbl">👨 Men</div></div>
-    <div class="stat"><div class="num" id="statOther">0</div><div class="lbl">Other</div></div>
+    <div class="stat"><div class="num" id="statAll">0</div><div class="lbl">Total Items</div></div>
+    <div class="stat"><div class="num" id="statCat">0</div><div class="lbl">Categories</div></div>
+    <div class="stat"><div class="num" id="statImg">0</div><div class="lbl">With Images</div></div>
+    <div class="stat"><div class="num" id="statAvg">0</div><div class="lbl">Avg Price (ETB)</div></div>
 </div>
 
-<div class="card"><h2>➕ Add Product</h2>
-<div class="row"><div class="upload-box" onclick="document.getElementById('f1').click()"><div style="font-size:28px">📷</div><div style="font-size:0.7rem;color:#888">Image 1 *</div></div><div class="upload-box" onclick="document.getElementById('f2').click()"><div style="font-size:28px">📷</div><div style="font-size:0.7rem;color:#888">Image 2</div></div></div>
-<input type="file" id="f1" accept="image/*" style="display:none" onchange="addImg(1)"><input type="file" id="f2" accept="image/*" style="display:none" onchange="addImg(2)">
-<div class="preview-row"><img id="pv1"><img id="pv2"></div><div class="status-row"><div id="st1"></div><div id="st2"></div></div>
-<input type="hidden" id="u1"><input type="hidden" id="u2">
-<div class="row"><input type="text" id="name" placeholder="Product Name *"><input type="text" id="brand" placeholder="Brand *"></div>
-<div class="row"><input type="text" id="price" placeholder="Price (e.g. 4500 ETB) *">
-    <select id="category">
-        <option value="women">👩 Women's Perfumes</option>
-        <option value="men">👨 Men's Colognes</option>
-        <option value="unisex">🧑 Unisex</option>
-        <option value="new">✨ New Arrivals</option>
-        <option value="hair">💇 Human Hair</option>
-        <option value="gift">🎁 Gift Sets</option>
-        <option value="sale">🔥 Sale / Offers</option>
-    </select>
-</div>
-<div class="row"><input type="text" id="tag" placeholder="Tag: Bestseller, New..."><input type="text" id="desc" placeholder="Description"></div>
-<button class="btn-gold" onclick="addProduct()">✅ Add Product</button><div id="msg" class="msg"></div>
+<div class="card"><h2>➕ Add Menu Item</h2>
+<div class="upload-box" onclick="document.getElementById('f1').click()"><div style="font-size:28px">📷</div><div style="font-size:0.7rem;color:#888">Upload Image (or leave empty)</div></div>
+<input type="file" id="f1" accept="image/*" style="display:none" onchange="addImg()">
+<div class="preview-row"><img id="pv1"></div><div class="status-row"><div id="st1"></div></div>
+<input type="hidden" id="u1">
+<div class="row"><input type="text" id="name" placeholder="Item Name *"><input type="number" id="price" placeholder="Price (ETB) *"></div>
+<div class="row"><select id="category"><option value="">Select Category</option></select><input type="text" id="imageUrl" placeholder="Or paste image URL directly"></div>
+<button class="btn-gold" onclick="addItem()">✅ Add Item</button><div id="msg" class="msg"></div>
 </div>
 
-<div class="edit-form" id="editForm"><h2>✏️ Edit Product</h2><input type="hidden" id="editId">
-<div class="row"><div class="upload-box" onclick="document.getElementById('ef1').click()"><div style="font-size:28px">📷</div><div style="font-size:0.7rem;color:#888">Change Image 1</div></div><div class="upload-box" onclick="document.getElementById('ef2').click()"><div style="font-size:28px">📷</div><div style="font-size:0.7rem;color:#888">Change Image 2</div></div></div>
-<input type="file" id="ef1" accept="image/*" style="display:none" onchange="editImg(1)"><input type="file" id="ef2" accept="image/*" style="display:none" onchange="editImg(2)">
-<div class="preview-row"><img id="ep1"><img id="ep2"></div><div class="status-row"><div id="es1"></div><div id="es2"></div></div>
-<input type="hidden" id="eu1"><input type="hidden" id="eu2">
-<div class="row"><input type="text" id="en" placeholder="Name"><input type="text" id="eb" placeholder="Brand"></div>
-<div class="row"><input type="text" id="epr" placeholder="Price">
-    <select id="ec">
-        <option value="women">👩 Women's Perfumes</option>
-        <option value="men">👨 Men's Colognes</option>
-        <option value="unisex">🧑 Unisex</option>
-        <option value="new">✨ New Arrivals</option>
-        <option value="hair">💇 Human Hair</option>
-        <option value="gift">🎁 Gift Sets</option>
-        <option value="sale">🔥 Sale / Offers</option>
-    </select>
-</div>
-<div class="row"><input type="text" id="et" placeholder="Tag"><input type="text" id="ed" placeholder="Description"></div>
+<div class="edit-form" id="editForm"><h2>✏️ Edit Item</h2><input type="hidden" id="editId"><input type="hidden" id="editOrigCat">
+<div class="upload-box" onclick="document.getElementById('ef1').click()"><div style="font-size:28px">📷</div><div style="font-size:0.7rem;color:#888">Change Image</div></div>
+<input type="file" id="ef1" accept="image/*" style="display:none" onchange="editImg()">
+<div class="preview-row"><img id="ep1"></div><div class="status-row"><div id="es1"></div></div>
+<input type="hidden" id="eu1">
+<div class="row"><input type="text" id="en" placeholder="Name"><input type="number" id="epr" placeholder="Price"></div>
+<div class="row"><select id="ec"><option value="">Select Category</option></select><input type="text" id="eurl" placeholder="Or paste image URL"></div>
 <button class="btn-green" id="saveEditBtn" onclick="saveEdit()">💾 Save Changes</button><button class="btn-red" onclick="cancelEdit()">Cancel</button></div>
 
-<div class="card"><h2>📋 Products</h2><input type="text" class="search-box" placeholder="🔍 Search products..." id="sp" oninput="renderProducts()"><div id="pList">Loading...</div></div>
+<div class="card"><h2>➕ Add Category</h2><div class="row"><input type="text" id="newCat" placeholder="Category name (e.g. 🍕 Pizza)"><button class="btn-gold" onclick="addCategory()">Add</button></div></div>
+
+<div class="card"><h2>📋 Menu Items</h2>
+<input type="text" class="search-box" placeholder="🔍 Search items..." id="sp" oninput="renderItems()">
+<div class="cat-select" id="catFilter"></div>
+<div id="pList">Loading...</div></div>
 </div>
 
-<!-- BLOG TAB -->
-<div class="tab-content" id="tab-blog">
-<div class="card"><h2>➕ Add Blog Post</h2>
-<div class="upload-box" onclick="document.getElementById('bf').click()"><div style="font-size:28px">📷</div><div style="font-size:0.7rem;color:#888">Upload Image</div></div>
-<input type="file" id="bf" accept="image/*" style="display:none" onchange="blogImg()">
-<div style="text-align:center;margin-bottom:12px"><img id="bpv" style="max-width:200px;max-height:150px;object-fit:cover;border-radius:8px;display:none"></div>
-<div id="bst" style="text-align:center;font-size:0.75rem;margin-bottom:12px"></div><input type="hidden" id="bu">
-<input type="text" id="bt" placeholder="Post Title *"><textarea id="bc" rows="5" placeholder="Post Content *"></textarea>
-<input type="text" id="bcat" placeholder="Category (News, Tips...)">
-<button class="btn-gold" onclick="addBlog()">✅ Add Post</button><div id="bmsg" class="msg"></div>
+<!-- HERITAGE TAB -->
+<div class="tab-content" id="tab-heritage">
+<div class="card"><h2>🏛️ Heritage Page Content</h2>
+<input type="text" id="hHeroTitle" placeholder="Hero Title"><textarea id="hHeroDesc" rows="2" placeholder="Hero Description"></textarea>
+<input type="text" id="hQuote" placeholder="Quote"><input type="text" id="hStoryTitle" placeholder="Story Title">
+<textarea id="hStoryContent" rows="4" placeholder="Story Content (double newline for paragraphs)"></textarea>
+<button class="btn-gold" onclick="saveHeritageContent()">💾 Save Content</button><div id="hcmsg" class="msg"></div>
 </div>
-<div class="card"><h2>📋 Blog Posts</h2><div id="bList">Loading...</div></div>
+
+<div class="card"><h2>➕ Add Heritage Item</h2>
+<div class="upload-box" onclick="document.getElementById('hf').click()"><div style="font-size:28px">📷</div><div style="font-size:0.7rem;color:#888">Upload Image</div></div>
+<input type="file" id="hf" accept="image/*" style="display:none" onchange="heritageImg()">
+<div style="text-align:center;margin-bottom:12px"><img id="hpv" style="max-width:200px;max-height:150px;object-fit:cover;border-radius:8px;display:none"></div>
+<div id="hst" style="text-align:center;font-size:0.75rem;margin-bottom:12px"></div><input type="hidden" id="hu">
+<input type="text" id="hTitle" placeholder="Item Title *"><input type="text" id="hBadge" placeholder="Badge (e.g. Historical, Rare)">
+<input type="text" id="hImageUrl" placeholder="Or paste image URL"><textarea id="hStory" rows="3" placeholder="Story *"></textarea>
+<textarea id="hMemory" rows="2" placeholder="Memory / Personal Note"></textarea>
+<button class="btn-gold" onclick="addHeritageItem()">✅ Add Heritage Item</button><div id="hmsg" class="msg"></div>
+</div>
+
+<div class="edit-form" id="heritageEditForm"><h2>✏️ Edit Heritage Item</h2><input type="hidden" id="heditId">
+<div class="upload-box" onclick="document.getElementById('hef').click()"><div style="font-size:28px">📷</div><div style="font-size:0.7rem;color:#888">Change Image</div></div>
+<input type="file" id="hef" accept="image/*" style="display:none" onchange="heritageEditImg()">
+<div style="text-align:center;margin-bottom:12px"><img id="hepv" style="max-width:200px;max-height:150px;object-fit:cover;border-radius:8px;display:none"></div>
+<div id="hest" style="text-align:center;font-size:0.75rem;margin-bottom:12px"></div><input type="hidden" id="heu">
+<input type="text" id="heTitle" placeholder="Title"><input type="text" id="heBadge" placeholder="Badge">
+<input type="text" id="heImageUrl" placeholder="Or paste image URL"><textarea id="heStory" rows="3" placeholder="Story"></textarea>
+<textarea id="heMemory" rows="2" placeholder="Memory"></textarea>
+<button class="btn-green" onclick="saveHeritageEdit()">💾 Save</button><button class="btn-red" onclick="cancelHeritageEdit()">Cancel</button></div>
+
+<div class="card"><h2>📋 Heritage Items</h2><div id="hList">Loading...</div></div>
 </div>
 </div></div>
 
 <script>
-var A='https://scent-lovers-api.developeraddis.workers.dev/api',C='dm6rwo1ox',PR='scent_lovers_preset',PW='ScentLovers2026',prods=[],posts=[];
+var A='https://proper-sunbeam-108020.upstash.io',T='gQAAAAAAAaX0AAIgcDE3NThjODZkOGE0ZDg0ZGRiYjY2YWU4Nzc5M2MzZGU1Yw',C='dnxxxpbm9',PR='lantica_upload',PW='Lantica1960',menuData={},heritageItems=[],heritageContent={},menuCat='all';
 
 function login(){if(document.getElementById('pw').value===PW){document.getElementById('loginScreen').classList.add('hidden');document.getElementById('panel').classList.remove('hidden');loadAll()}else{document.getElementById('loginErr').style.display='block'}}
 function logout(){document.getElementById('panel').classList.add('hidden');document.getElementById('loginScreen').classList.remove('hidden')}
 function switchTab(t){document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('show'));document.getElementById('tab-'+t).classList.add('show')}
 
 async function cloudUpload(file,pvId,stId,uId){
-    var s=document.getElementById(stId);s.textContent='Uploading...';s.style.color='#D4A853';
-    var fd=new FormData();fd.append('file',file);fd.append('upload_preset',PR);
+    var s=document.getElementById(stId);s.textContent='Uploading...';s.style.color='#C9A96E';
+    var fd=new FormData();fd.append('file',file);fd.append('upload_preset',PR);fd.append('folder','lantica-menu');
     try{var r=await fetch('https://api.cloudinary.com/v1_1/'+C+'/image/upload',{method:'POST',body:fd});var d=await r.json();
     if(d.secure_url){document.getElementById(uId).value=d.secure_url;document.getElementById(pvId).src=d.secure_url;document.getElementById(pvId).style.display='block';s.textContent='✅ Ready';s.style.color='#27ae60'}else{s.textContent='❌ Failed';s.style.color='#e74c3c'}}catch(e){s.textContent='❌ Error';s.style.color='#e74c3c'}
 }
-function addImg(n){var f=document.getElementById('f'+n).files[0];if(f)cloudUpload(f,'pv'+n,'st'+n,'u'+n)}
-function editImg(n){var f=document.getElementById('ef'+n).files[0];if(f)cloudUpload(f,'ep'+n,'es'+n,'eu'+n)}
-function blogImg(){var f=document.getElementById('bf').files[0];if(f)cloudUpload(f,'bpv','bst','bu')}
+function addImg(){var f=document.getElementById('f1').files[0];if(f)cloudUpload(f,'pv1','st1','u1')}
+function editImg(){var f=document.getElementById('ef1').files[0];if(f)cloudUpload(f,'ep1','es1','eu1')}
+function heritageImg(){var f=document.getElementById('hf').files[0];if(f)cloudUpload(f,'hpv','hst','hu')}
+function heritageEditImg(){var f=document.getElementById('hef').files[0];if(f)cloudUpload(f,'hepv','hest','heu')}
 
-async function loadProducts(){var r=await fetch(A+'/products');var d=await r.json();prods=d.products||[];updateStats();renderProducts()}
-function updateStats(){document.getElementById('statAll').textContent=prods.length;document.getElementById('statWomen').textContent=prods.filter(p=>p.category==='women').length;document.getElementById('statMen').textContent=prods.filter(p=>p.category==='men').length;document.getElementById('statOther').textContent=prods.filter(p=>!['women','men'].includes(p.category)).length}
-function renderProducts(){var s=(document.getElementById('sp')?.value||'').toLowerCase();var f=s?prods.filter(p=>p.name.toLowerCase().includes(s)||p.brand.toLowerCase().includes(s)):prods;var c=document.getElementById('pList');if(!f.length){c.innerHTML='<p style="text-align:center;color:#888;padding:30px">No products</p>';return}c.innerHTML=f.map(p=>'<div class="item-row"><img src="'+(p.image||'https://via.placeholder.com/50')+'" onerror="this.src=\'https://via.placeholder.com/50\'"><div class="info"><h3>'+p.brand+' - '+p.name+'</h3><p>'+p.price+' | '+p.category+' | '+(p.tag||'')+'</p></div><button class="btn-blue" onclick="editProduct('+p.id+')" style="margin-right:5px">✏️</button><button class="btn-red" onclick="deleteProduct('+p.id+')">🗑️</button></div>').join('')}
-
-async function addProduct(){
-    var n=document.getElementById('name').value.trim(),b=document.getElementById('brand').value.trim(),pr=document.getElementById('price').value.trim(),cat=document.getElementById('category').value,i1=document.getElementById('u1').value,i2=document.getElementById('u2').value,tag=document.getElementById('tag').value.trim(),desc=document.getElementById('desc').value.trim();
-    if(!n||!b||!pr){showMsg('msg','❌ Fill Name, Brand, Price','error');return}if(!i1){showMsg('msg','❌ Upload Image 1','error');return}
-    await fetch(A+'/products',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:n,brand:b,price:pr.includes('ETB')?pr:pr+' ETB',category:cat,image:i1,image2:i2,tag:tag,description:desc})});
-    showMsg('msg','✅ Product added!','success');['name','brand','price','tag','desc'].forEach(id=>document.getElementById(id).value='');
-    document.getElementById('u1').value='';document.getElementById('u2').value='';document.getElementById('pv1').style.display='none';document.getElementById('pv2').style.display='none';
-    document.getElementById('st1').textContent='';document.getElementById('st2').textContent='';document.getElementById('f1').value='';document.getElementById('f2').value='';loadProducts();
+// REDIS
+async function redisCmd(cmd,key,val){
+    var url=A+'/'+cmd+'/'+key;if(val)url+='/'+encodeURIComponent(val);
+    var r=await fetch(url,{headers:{'Authorization':'Bearer '+T}});var d=await r.json();return d.result;
+}
+async function pushToRedis(){
+    try{
+        await redisCmd('set','lantica:menu',JSON.stringify(menuData));
+        await redisCmd('set','lantica:heritage',JSON.stringify(heritageItems));
+        await redisCmd('set','lantica:heritage_content',JSON.stringify(heritageContent));
+        showMsg('msg','✅ Saved to Redis!','success');
+    }catch(e){showMsg('msg','❌ Redis save failed: '+e.message,'error');}
+}
+async function loadAll(){
+    try{
+        var m=await redisCmd('get','lantica:menu');if(m)menuData=JSON.parse(decodeURIComponent(m));
+        var h=await redisCmd('get','lantica:heritage');if(h)heritageItems=JSON.parse(decodeURIComponent(h));
+        var hc=await redisCmd('get','lantica:heritage_content');if(hc)heritageContent=JSON.parse(decodeURIComponent(hc));
+    }catch(e){console.log('Using local data')}
+    if(!Object.keys(menuData).length)menuData={"☀️ Breakfast":[{name:"Combo Fasting",price:250,image:""},{name:"Egg w/ meat",price:250,image:""}],"🔥 Traditional Food":[{name:"Lamb Tibs",price:680,image:""}]};
+    if(!heritageItems.length)heritageItems=[{title:"Vintage Item",image:"",story:"A story",memory:"A memory",badge:"Historical"}];
+    if(!Object.keys(heritageContent).length)heritageContent={heroTitle:"Heritage Gallery",heroDesc:"Step into memory",quote:"Every artifact tells a story",storyTitle:"The Memory",storyContent:"Our story here"};
+    loadHeritageContent();renderAll();updateStats();
 }
 
-function editProduct(id){var p=prods.find(x=>x.id==id);if(!p)return;document.getElementById('editId').value=p.id;document.getElementById('en').value=p.name;document.getElementById('eb').value=p.brand;document.getElementById('epr').value=p.price.replace(' ETB','');document.getElementById('ec').value=p.category;document.getElementById('et').value=p.tag||'';document.getElementById('ed').value=p.description||'';document.getElementById('eu1').value=p.image||'';document.getElementById('eu2').value=p.image2||'';if(p.image){document.getElementById('ep1').src=p.image;document.getElementById('ep1').style.display='block'}else{document.getElementById('ep1').style.display='none'}if(p.image2){document.getElementById('ep2').src=p.image2;document.getElementById('ep2').style.display='block'}else{document.getElementById('ep2').style.display='none'}document.getElementById('es1').textContent='';document.getElementById('es2').textContent='';document.getElementById('ef1').value='';document.getElementById('ef2').value='';document.getElementById('editForm').classList.add('show');document.getElementById('editForm').scrollIntoView({behavior:'smooth'})}
+// MENU
+function getCats(){return Object.keys(menuData)}
+function updateStats(){
+    var items=[];for(var k in menuData)items=items.concat(menuData[k]);
+    document.getElementById('statAll').textContent=items.length;
+    document.getElementById('statCat').textContent=getCats().length;
+    document.getElementById('statImg').textContent=items.filter(i=>i.image&&i.image.trim()).length;
+    var avg=items.length?Math.round(items.reduce((s,i)=>s+i.price,0)/items.length):0;
+    document.getElementById('statAvg').textContent=avg;
+}
+function renderAll(){
+    renderItems();renderHeritageItems();renderCatFilter();
+    var s=document.getElementById('category');s.innerHTML='<option value="">Select Category</option>'+getCats().map(c=>'<option value="'+esc(c)+'">'+c+'</option>').join('');
+    var e=document.getElementById('ec');e.innerHTML='<option value="">Select Category</option>'+getCats().map(c=>'<option value="'+esc(c)+'">'+c+'</option>').join('');
+}
+function renderCatFilter(){
+    var h='<button class="'+(menuCat=='all'?'active':'')+'" onclick="filterCat(\'all\')">All</button>';
+    getCats().forEach(c=>h+='<button class="'+(menuCat==c?'active':'')+'" onclick="filterCat(\''+esc(c)+'\')">'+c+'</button>');
+    document.getElementById('catFilter').innerHTML=h;
+}
+function filterCat(c){menuCat=c;renderCatFilter();renderItems()}
+
+function getAllItems(){
+    var items=[];for(var k in menuData)menuData[k].forEach((item,i)=>items.push({...item,category:k,idx:i}));
+    return items;
+}
+function renderItems(){
+    var s=(document.getElementById('sp')?.value||'').toLowerCase();
+    var items=getAllItems();if(menuCat!='all')items=items.filter(i=>i.category==menuCat);
+    if(s)items=items.filter(i=>i.name.toLowerCase().includes(s));
+    var c=document.getElementById('pList');
+    if(!items.length){c.innerHTML='<p style="text-align:center;color:#888;padding:30px">No items</p>';return}
+    c.innerHTML=items.map(p=>{
+        var img=p.image?(p.image.startsWith('http')?p.image:'https://raw.githubusercontent.com/developereth/Lantica/main/'+p.image):'https://placehold.co/50/1A1A1A/C9A96E';
+        var badge=p.image?(p.image.startsWith('http')?'<span class="badge badge-cloud">☁️</span>':'<span class="badge badge-github">GH</span>'):'';
+        return '<div class="item-row"><img src="'+img+'" onerror="this.src=\'https://placehold.co/50/1A1A1A/C9A96E\'"><div class="info"><h3>'+esc(p.name)+' '+badge+'</h3><p>'+esc(p.category)+' | '+p.price+' ETB</p></div><button class="btn-blue" onclick="editItem(\''+esc(p.category)+'\','+p.idx+')" style="margin-right:5px">✏️</button><button class="btn-red" onclick="deleteItem(\''+esc(p.category)+'\','+p.idx+')">🗑️</button></div>'
+    }).join('');
+}
+
+function addItem(){
+    var n=document.getElementById('name').value.trim(),pr=parseInt(document.getElementById('price').value)||0,cat=document.getElementById('category').value;
+    var img=document.getElementById('u1').value||document.getElementById('imageUrl').value.trim();
+    if(!n||!pr||!cat){showMsg('msg','❌ Fill name, price, category','error');return}
+    if(!menuData[cat])menuData[cat]=[];
+    menuData[cat].push({name:n,price:pr,image:img});
+    document.getElementById('name').value='';document.getElementById('price').value='';document.getElementById('imageUrl').value='';
+    document.getElementById('u1').value='';document.getElementById('pv1').style.display='none';document.getElementById('st1').textContent='';document.getElementById('f1').value='';
+    updateStats();renderAll();showMsg('msg','✅ Item added!','success');
+}
+
+function editItem(cat,idx){
+    var p=menuData[cat][idx];document.getElementById('editId').value=idx;document.getElementById('editOrigCat').value=cat;
+    document.getElementById('en').value=p.name;document.getElementById('epr').value=p.price;document.getElementById('ec').value=cat;
+    document.getElementById('eurl').value=p.image||'';document.getElementById('eu1').value=p.image||'';
+    if(p.image){document.getElementById('ep1').src=p.image.startsWith('http')?p.image:'https://raw.githubusercontent.com/developereth/Lantica/main/'+p.image;document.getElementById('ep1').style.display='block'}
+    else document.getElementById('ep1').style.display='none';
+    document.getElementById('es1').textContent='';document.getElementById('ef1').value='';document.getElementById('hef').value='';
+    document.getElementById('editForm').classList.add('show');document.getElementById('editForm').scrollIntoView({behavior:'smooth'});
+}
 function cancelEdit(){document.getElementById('editForm').classList.remove('show')}
 
 function saveEdit(){
-    var id=document.getElementById('editId').value,n=document.getElementById('en').value.trim(),b=document.getElementById('eb').value.trim(),pr=document.getElementById('epr').value.trim(),cat=document.getElementById('ec').value,img=document.getElementById('eu1').value,img2=document.getElementById('eu2').value,tag=document.getElementById('et').value.trim(),desc=document.getElementById('ed').value.trim();
-    if(!n||!b||!pr){alert('Fill all required fields');return}pr=pr.includes('ETB')?pr:pr+' ETB';
-    var btn=document.getElementById('saveEditBtn');btn.textContent='Saving...';btn.disabled=true;
-    fetch(A+'/products/'+id,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:n,brand:b,price:pr,category:cat,image:img,image2:img2,tag:tag,description:desc})})
-    .then(r=>r.json()).then(d=>{btn.textContent='💾 Save Changes';btn.disabled=false;if(d.success){showMsg('msg','✅ Updated!','success');cancelEdit();loadProducts()}else{showMsg('msg','❌ Failed: '+(d.error||'Unknown'),'error')}})
-    .catch(e=>{btn.textContent='💾 Save Changes';btn.disabled=false;showMsg('msg','❌ Error: '+e.message,'error')});
+    var idx=parseInt(document.getElementById('editId').value),ocat=document.getElementById('editOrigCat').value;
+    var n=document.getElementById('en').value.trim(),pr=parseInt(document.getElementById('epr').value)||0,cat=document.getElementById('ec').value;
+    var img=document.getElementById('eu1').value||document.getElementById('eurl').value.trim();
+    if(!n||!pr||!cat){alert('Fill all fields');return}
+    if(ocat===cat){menuData[cat][idx]={name:n,price:pr,image:img}}
+    else{menuData[ocat].splice(idx,1);if(!menuData[cat])menuData[cat]=[];menuData[cat].push({name:n,price:pr,image:img});if(!menuData[ocat].length)delete menuData[ocat]}
+    cancelEdit();updateStats();renderAll();showMsg('msg','✅ Updated!','success');
 }
 
-async function deleteProduct(id){if(!confirm('Delete?'))return;await fetch(A+'/products/'+id,{method:'DELETE'});loadProducts()}
+function deleteItem(cat,idx){if(!confirm('Delete?'))return;menuData[cat].splice(idx,1);if(!menuData[cat].length)delete menuData[cat];updateStats();renderAll();showMsg('msg','🗑️ Deleted','success')}
+
+function addCategory(){
+    var n=document.getElementById('newCat').value.trim();if(!n)return;if(menuData[n]){showMsg('msg','Already exists!','error');return}
+    menuData[n]=[];document.getElementById('newCat').value='';renderAll();showMsg('msg','✅ Category added!','success');
+}
+
+// HERITAGE
+function loadHeritageContent(){
+    document.getElementById('hHeroTitle').value=heritageContent.heroTitle||'';
+    document.getElementById('hHeroDesc').value=heritageContent.heroDesc||'';
+    document.getElementById('hQuote').value=heritageContent.quote||'';
+    document.getElementById('hStoryTitle').value=heritageContent.storyTitle||'';
+    document.getElementById('hStoryContent').value=heritageContent.storyContent||'';
+}
+function saveHeritageContent(){
+    heritageContent.heroTitle=document.getElementById('hHeroTitle').value;
+    heritageContent.heroDesc=document.getElementById('hHeroDesc').value;
+    heritageContent.quote=document.getElementById('hQuote').value;
+    heritageContent.storyTitle=document.getElementById('hStoryTitle').value;
+    heritageContent.storyContent=document.getElementById('hStoryContent').value;
+    showMsg('hcmsg','✅ Content saved!','success');
+}
+
+function renderHeritageItems(){
+    var c=document.getElementById('hList');
+    if(!heritageItems.length){c.innerHTML='<p style="text-align:center;color:#888;padding:30px">No items</p>';return}
+    c.innerHTML=heritageItems.map((p,i)=>{
+        var img=p.image?(p.image.startsWith('http')?p.image:'https://raw.githubusercontent.com/developereth/Lantica/main/'+p.image):'https://placehold.co/50/1A1A1A/C9A96E';
+        return '<div class="item-row"><img src="'+img+'" onerror="this.src=\'https://placehold.co/50/1A1A1A/C9A96E\'"><div class="info"><h3>'+esc(p.title)+'</h3><p>'+(p.badge||'')+' | '+esc((p.story||'').substring(0,50))+'...</p></div><button class="btn-blue" onclick="editHeritageItem('+i+')" style="margin-right:5px">✏️</button><button class="btn-red" onclick="deleteHeritageItem('+i+')">🗑️</button></div>'
+    }).join('');
+}
+
+function addHeritageItem(){
+    var t=document.getElementById('hTitle').value.trim(),s=document.getElementById('hStory').value.trim();
+    var img=document.getElementById('hu').value||document.getElementById('hImageUrl').value.trim();
+    if(!t||!s||!img){showMsg('hmsg','❌ Fill title, story, image','error');return}
+    heritageItems.push({title:t,image:img,story:s,memory:document.getElementById('hMemory').value.trim(),badge:document.getElementById('hBadge').value.trim()});
+    ['hTitle','hBadge','hImageUrl','hStory','hMemory'].forEach(id=>document.getElementById(id).value='');
+    document.getElementById('hu').value='';document.getElementById('hpv').style.display='none';document.getElementById('hst').textContent='';document.getElementById('hf').value='';
+    renderHeritageItems();showMsg('hmsg','✅ Heritage item added!','success');
+}
+
+function editHeritageItem(i){
+    var p=heritageItems[i];document.getElementById('heditId').value=i;
+    document.getElementById('heTitle').value=p.title;document.getElementById('heBadge').value=p.badge||'';
+    document.getElementById('heImageUrl').value=p.image||'';document.getElementById('heStory').value=p.story||'';
+    document.getElementById('heMemory').value=p.memory||'';document.getElementById('heu').value=p.image||'';
+    if(p.image){document.getElementById('hepv').src=p.image.startsWith('http')?p.image:'https://raw.githubusercontent.com/developereth/Lantica/main/'+p.image;document.getElementById('hepv').style.display='block'}
+    else document.getElementById('hepv').style.display='none';
+    document.getElementById('hest').textContent='';document.getElementById('hef').value='';
+    document.getElementById('heritageEditForm').classList.add('show');document.getElementById('heritageEditForm').scrollIntoView({behavior:'smooth'});
+}
+function cancelHeritageEdit(){document.getElementById('heritageEditForm').classList.remove('show')}
+
+function saveHeritageEdit(){
+    var i=parseInt(document.getElementById('heditId').value);
+    var t=document.getElementById('heTitle').value.trim(),s=document.getElementById('heStory').value.trim();
+    var img=document.getElementById('heu').value||document.getElementById('heImageUrl').value.trim();
+    if(!t||!s||!img){alert('Fill required fields');return}
+    heritageItems[i]={title:t,image:img,story:s,memory:document.getElementById('heMemory').value.trim(),badge:document.getElementById('heBadge').value.trim()};
+    cancelHeritageEdit();renderHeritageItems();showMsg('hmsg','✅ Updated!','success');
+}
+
+function deleteHeritageItem(i){if(!confirm('Delete?'))return;heritageItems.splice(i,1);renderHeritageItems();showMsg('hmsg','🗑️ Deleted','success')}
+
 function showMsg(id,t,type){var m=document.getElementById(id);m.textContent=t;m.className='msg '+type;setTimeout(()=>m.className='msg',3000)}
-
-async function loadBlog(){var r=await fetch(A+'/blog');var d=await r.json();posts=d.posts||[];renderBlog()}
-function renderBlog(){var c=document.getElementById('bList');if(!posts.length){c.innerHTML='<p style="text-align:center;color:#888;padding:30px">No posts</p>';return}c.innerHTML=posts.map(p=>'<div class="item-row">'+(p.image?'<img src="'+p.image+'" onerror="this.src=\'https://via.placeholder.com/50\'">':'')+'<div class="info"><h3>'+p.title+'</h3><p>'+(p.category||'General')+' | '+new Date(p.created_at).toLocaleDateString()+'</p></div><button class="btn-red" onclick="deleteBlog('+p.id+')">🗑️</button></div>').join('')}
-async function addBlog(){var t=document.getElementById('bt').value.trim(),c=document.getElementById('bc').value.trim(),i=document.getElementById('bu').value;if(!t||!c){showMsg('bmsg','❌ Fill fields','error');return}await fetch(A+'/blog',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:t,content:c,image:i,category:document.getElementById('bcat').value})});showMsg('bmsg','✅ Post added!','success');['bt','bc','bcat'].forEach(id=>document.getElementById(id).value='');document.getElementById('bu').value='';document.getElementById('bpv').style.display='none';document.getElementById('bst').textContent='';document.getElementById('bf').value='';loadBlog()}
-async function deleteBlog(id){if(!confirm('Delete?'))return;await fetch(A+'/blog/'+id,{method:'DELETE'});loadBlog();showMsg('bmsg','✅ Deleted','success')}
-
-function loadAll(){loadProducts();loadBlog()}
+function esc(s){if(!s)return'';return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 </script>
 </body>
 </html>
